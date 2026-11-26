@@ -9,7 +9,7 @@
    COLOUR white or night ground, bold blue header band, ten bright category colours, gold stars
    TYPE Nunito 900 for names and symbols, Nunito 600 for text (Latin, Turkish and Cyrillic)
    LAYOUT laptop or tablet: header band, then the table across the full width, legend below; phone: the table scrolls sideways in its own box */
-:root{color-scheme:light dark;--bg:light-dark(#ffffff,#11131f);--ink:light-dark(#1b1d33,#f1f2fa);--soft:light-dark(#f2f4fc,#1c1f32);--line:light-dark(#d9deef,#30355a);--mute:light-dark(#555a78,#aab0d0);--brand:#3550f0;--star:#ffb300;--tink:#1b1d33}
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#11131f);--ink:light-dark(#1b1d33,#f1f2fa);--soft:light-dark(#f2f4fc,#1c1f32);--line:light-dark(#d9deef,#30355a);--mute:light-dark(#555a78,#aab0d0);--brand:#3550f0;--star:#ffb300;--tink:#1b1d33;--sya:light-dark(#1d5fd0,#7cb4ff);--syb:light-dark(#d02f63,#ff8fb1)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 html,body{margin:0}
@@ -37,7 +37,7 @@ h1{margin:0;font-size:clamp(28px,4vw,44px);font-weight:900;line-height:1.05;lett
 .settings .vnote{color:#a35200;font-size:14px}
 main{padding:18px max(4vw,16px,env(safe-area-inset-right,0px)) 32px max(4vw,16px,env(safe-area-inset-left,0px))}
 .quiz{background:var(--soft);border:2px solid var(--line);border-radius:22px;padding:14px 20px;margin-bottom:16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px}
-.quiz .qp{color:var(--mute);font-weight:800}
+.qp{color:var(--mute);font-weight:800}
 .qword{font-size:clamp(34px,6vw,60px);font-weight:900;line-height:1.05;letter-spacing:-.01em}
 .qbtns{display:flex;gap:10px;margin-left:auto}
 .pill{background:var(--brand);color:#fff;border-radius:14px;padding:10px 18px;font-weight:800;min-height:44px}
@@ -82,14 +82,29 @@ main{padding:18px max(4vw,16px,env(safe-area-inset-right,0px)) 32px max(4vw,16px
 .vhint{position:absolute;top:12px;left:16px;color:#aab3e8;font-size:14px;pointer-events:none}
 .nogl{position:absolute;inset:0;display:grid;place-items:center;color:#fff;text-align:center;padding:24px}
 .namecard{display:flex;gap:18px;align-items:center}
-.bigtile{flex:none;width:112px;height:124px;border-radius:20px;background:var(--c);color:var(--tink);display:grid;place-items:center;position:relative;box-shadow:inset 0 -5px 0 rgba(0,0,0,.14)}
+.bigtile{flex:none;width:112px;height:124px;border-radius:20px;background:var(--c,var(--soft));color:var(--tink);display:grid;place-items:center;position:relative;box-shadow:inset 0 -5px 0 rgba(0,0,0,.14)}
 .bigtile small{position:absolute;top:8px;left:12px;font-size:18px;font-weight:900}
 .bigtile b{font-size:56px;font-weight:900}
 .name{font-size:clamp(38px,5.6vw,64px);font-weight:900;line-height:1.05;letter-spacing:-.01em;overflow-wrap:anywhere}
-.name span{transition:color .1s}
-.name span.lit{color:var(--brand)}
-:root[data-theme=dark] .name span.lit{color:#8ea0ff}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .name span.lit{color:#8ea0ff}}
+.name span{border-radius:10px;transition:background .1s}
+.name span.lit{background:color-mix(in srgb,var(--star) 55%,transparent)}
+.sy .s:nth-child(odd){color:var(--sya)}
+.sy .s:nth-child(even){color:var(--syb)}
+.build h2{margin:0;font-size:clamp(30px,4vw,44px);font-weight:900;line-height:1.05}
+.goal{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;background:var(--soft);border-radius:20px;padding:12px 16px;margin:14px 0}
+.goal .qword{font-size:clamp(30px,4.4vw,46px)}
+.goal .pill{margin-left:auto}
+.steps{display:grid;gap:10px}
+.step{display:grid;grid-template-columns:minmax(0,1fr) 64px 76px 64px;align-items:center;gap:8px;border:2px solid var(--line);border-radius:18px;padding:8px 10px 8px 16px;font-weight:800;font-size:19px}
+.step button{height:60px;border-radius:16px;font-size:34px;font-weight:900;background:var(--c);color:#fff;line-height:1}
+.step b{font-size:32px;font-weight:900;text-align:center;font-variant-numeric:tabular-nums}
+.step.p{--c:#e03131}.step.n{--c:#6b7689}.step.e{--c:#1c7ed6}
+.made{display:flex;gap:16px;align-items:center;margin-top:16px}
+.bstat{color:var(--mute);font-weight:700;margin-top:4px}
+.bmsg{margin-top:12px;font-size:20px;font-weight:800;min-height:30px}
+.bmsg.ok{color:#2b8a3e}
+.stats .wide{grid-column:1/-1}
+.stats .wide b{white-space:normal;font-size:21px}
 .cat{display:inline-block;margin-top:6px;background:var(--c);color:var(--tink);border-radius:999px;padding:3px 12px;font-weight:800;font-size:15px}
 .readrow{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
 .listen,.iread{position:relative;overflow:hidden;display:flex;align-items:center;gap:10px;border-radius:18px;padding:12px 20px;min-height:58px;font-size:20px;font-weight:900}
@@ -140,7 +155,7 @@ h3{margin:22px 0 8px;font-size:20px;font-weight:900}
         <button data-l="en">English</button><button data-l="ru">Русский</button><button data-l="tr">Türkçe</button>
       </div>
       <div class="seg" id="modes" role="group">
-        <button data-m="table" id="t-table">Table</button><button data-m="quiz" id="t-quiz">Find it!</button>
+        <button data-m="table" id="t-table">Table</button><button data-m="quiz" id="t-quiz">Find it!</button><button data-m="build" id="t-build">Build</button>
       </div>
       <div class="stars" aria-live="polite"><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7.5.6-5.7 4.9 1.8 7.4L12 18l-6.6 3.9 1.8-7.4L1.5 9.6 9 9z"/></svg><b id="starN">0</b></div>
       <button class="gear" id="gearBtn" aria-label="Settings" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M19.4 13a7.5 7.5 0 000-2l2.1-1.6-2-3.5-2.5 1a7 7 0 00-1.7-1L15 3.3h-4l-.4 2.6a7 7 0 00-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 000 2l-2.1 1.6 2 3.5 2.5-1a7 7 0 001.7 1l.4 2.6h4l.4-2.6a7 7 0 001.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z" transform="translate(-1 0)"/></svg></button>
@@ -150,6 +165,8 @@ h3{margin:22px 0 8px;font-size:20px;font-weight:900}
     <h2 id="t-settings">For grown-ups</h2>
     <label><input type="checkbox" id="optRF" checked> <span id="t-rf"></span></label>
     <label><input type="checkbox" id="optSlow"> <span id="t-slow"></span></label>
+    <label><input type="checkbox" id="optSyl"> <span id="t-syl"></span></label>
+    <label><input type="checkbox" id="optSci"> <span id="t-sci"></span></label>
     <div class="vnote" id="vnote1"></div>
     <button class="rst" id="resetBtn"></button>
   </div>
@@ -173,7 +190,7 @@ h3{margin:22px 0 8px;font-size:20px;font-weight:900}
   <div class="sbar">
     <button class="pill alt" id="back">← <span id="t-back">Table</span></button>
     <div class="seg sl" id="langs2" role="group" aria-label="Language"><button data-l="en">EN</button><button data-l="ru">RU</button><button data-l="tr">TR</button></div>
-    <div class="nav"><button id="prev" aria-label="Previous">‹</button><button id="next" aria-label="Next">›</button></div>
+    <div class="nav" id="nav"><button id="prev" aria-label="Previous">‹</button><button id="next" aria-label="Next">›</button></div>
   </div>
   <div class="dgrid">
     <div class="view" id="view">
@@ -181,7 +198,7 @@ h3{margin:22px 0 8px;font-size:20px;font-weight:900}
       <div class="nogl" id="nogl" hidden></div>
       <div class="vcap"><b id="vtitle"></b><span id="vsub"></span></div>
     </div>
-    <div class="info">
+    <div class="info" id="info">
       <div class="namecard">
         <div class="bigtile" id="bigtile"><small id="btN"></small><b id="btS"></b></div>
         <div><div class="name" id="ename"></div><span class="cat" id="ecat"></span></div>
@@ -199,6 +216,17 @@ h3{margin:22px 0 8px;font-size:20px;font-weight:900}
       <h3 id="t-shells"></h3><div class="shells" id="shells"></div>
       <h3 id="t-mols"></h3><div class="mols" id="mols"></div>
       <div class="fact moldesc" id="moldesc" hidden><div class="words" id="molWords"></div></div>
+    </div>
+    <div class="build" id="build" hidden>
+      <h2 id="b-title"></h2>
+      <div class="goal"><span class="qp" id="b-goalL"></span><span class="qword" id="b-goal"></span><button class="pill alt" id="b-new"></button></div>
+      <div class="steps">
+        <div class="step p"><span id="b-lp"></span><button data-k="p" data-d="-1" aria-label="−">−</button><b id="b-p">1</b><button data-k="p" data-d="1" aria-label="+">+</button></div>
+        <div class="step n"><span id="b-ln"></span><button data-k="n" data-d="-1" aria-label="−">−</button><b id="b-n">0</b><button data-k="n" data-d="1" aria-label="+">+</button></div>
+        <div class="step e"><span id="b-le"></span><button data-k="e" data-d="-1" aria-label="−">−</button><b id="b-e">1</b><button data-k="e" data-d="1" aria-label="+">+</button></div>
+      </div>
+      <div class="made"><div class="bigtile" id="b-tile"><small id="b-tN"></small><b id="b-tS"></b></div><div><div class="name" id="b-name"></div><div class="bstat" id="b-stat"></div></div></div>
+      <div class="bmsg" id="b-msg" aria-live="polite"></div>
     </div>
   </div>
 </section>
@@ -237,12 +265,31 @@ function pos(z){
   if(z<=88)return[7,z-86]; if(z<=103)return[10,z-86]; return[7,z-100];
 }
 const ORDER=[[1,2],[2,2],[2,6],[3,2],[3,6],[4,2],[3,10],[4,6],[5,2],[4,10],[5,6],[6,2],[4,14],[5,10],[6,6],[7,2],[5,14],[6,10],[7,6]];
-const MOVE={24:[4,3,1],29:[4,3,1],41:[5,4,1],42:[5,4,1],44:[5,4,1],45:[5,4,1],46:[5,4,2],47:[5,4,1],57:[4,5,1],58:[4,5,1],64:[4,5,1],78:[6,5,1],79:[6,5,1],89:[5,6,1],90:[5,6,2],91:[5,6,1],92:[5,6,1],93:[5,6,1],96:[5,6,1],103:[6,7,1]};
-function shellsOf(z){
-  const s=[0,0,0,0,0,0,0];let e=z;
-  for(const[n,c]of ORDER){if(e<=0)break;const k=Math.min(c,e);s[n-1]+=k;e-=k}
-  const m=MOVE[z]; if(m){s[m[0]-1]-=m[2];s[m[1]-1]+=m[2]}
-  while(s.length&&!s[s.length-1])s.pop(); return s;
+const sd=(a,b,k)=>[a,b,k];
+const MOVE={24:sd('4s','3d',1),29:sd('4s','3d',1),41:sd('5s','4d',1),42:sd('5s','4d',1),44:sd('5s','4d',1),45:sd('5s','4d',1),46:sd('5s','4d',2),47:sd('5s','4d',1),57:sd('4f','5d',1),58:sd('4f','5d',1),64:sd('4f','5d',1),78:sd('6s','5d',1),79:sd('6s','5d',1),89:sd('5f','6d',1),90:sd('5f','6d',2),91:sd('5f','6d',1),92:sd('5f','6d',1),93:sd('5f','6d',1),96:sd('5f','6d',1),103:sd('6d','7p',1)};
+function configOf(z){
+  const c=ORDER.map(([n,cap])=>({n,l:'spdf'[(cap-2)/4],cap,k:0}));let e=z;
+  for(const x of c){if(e<=0)break;x.k=Math.min(x.cap,e);e-=x.k}
+  const m=MOVE[z];if(m){c.find(x=>x.n+x.l===m[0]).k-=m[2];c.find(x=>x.n+x.l===m[1]).k+=m[2]}
+  return c.filter(x=>x.k>0);
+}
+function shellsOf(z){const s=[];configOf(z).forEach(x=>{s[x.n-1]=(s[x.n-1]||0)+x.k});return Array.from(s,v=>v||0)}
+const SUP=d=>String(d).replace(/\d/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[c]);
+function configText(z){const ng=[86,54,36,18,10,2].find(g=>g<z),all=configOf(z),f=x=>x.n+x.l+SUP(x.k);
+  return ng?`[${SYM[ng-1]}] `+all.slice(configOf(ng).length).map(f).join(' '):all.map(f).join(' ')}
+/* syllables: Turkish rule (one consonant before a vowel starts the syllable); Russian school rule (open syllables, sonorant or й closes, ь/ъ stay left) */
+const VOW={ru:'аеёиоуыэюяАЕЁИОУЫЭЮЯ',tr:'aeıioöuüâîûAEIİOÖUÜÂÎÛ'};
+function syllables(w,lang){
+  const V=VOW[lang];if(!V)return[w];
+  const vi=[];for(let i=0;i<w.length;i++)if(V.includes(w[i]))vi.push(i);
+  if(vi.length<2)return[w];
+  const cuts=vi.slice(0,-1).map((a,j)=>{const b=vi[j+1],lo=w.slice(a+1,b).toLowerCase(),n=lo.length;let k=0;
+    if(lang==='tr')k=n?n-1:0;
+    else{if(lo[0]==='й')k=1;
+      else if('рлмн'.includes(lo[0])&&n>1){let i=1;while(i<n&&'ьъ'.includes(lo[i]))i++;if(i<n&&!'рлмнй'.includes(lo[i]))k=i}
+      const sg=Math.max(lo.lastIndexOf('ь'),lo.lastIndexOf('ъ'));if(sg>=0&&sg+1<n)k=Math.max(k,sg+1)}
+    return a+1+k});
+  const out=[];let p=0;cuts.forEach(c=>{out.push(w.slice(p,c));p=c});out.push(w.slice(p));return out.filter(Boolean);
 }
 const CAT={
   en:{alk:['alkali metal','Alkali metals'],ae:['alkaline earth metal','Alkaline earth metals'],tm:['transition metal','Transition metals'],ptm:['post-transition metal','Post-transition metals'],mtl:['metalloid','Metalloids'],nm:['nonmetal','Nonmetals'],hal:['halogen','Halogens'],ng:['noble gas','Noble gases'],lan:['lanthanide','Lanthanides'],act:['actinide','Actinides']},
@@ -334,11 +381,14 @@ ru:{title:'Мир элементов',table:'Таблица',quiz:'Найди!',
  gen:(nm,c,st)=>`${nm} — ${CAT.ru[c][0]}.`+(st==='u'?'':` При комнатной температуре это ${{s:'твёрдое вещество',l:'жидкость',g:'газ'}[st]}.`)},
 tr:{title:'Element Kâşifi',table:'Tablo',quiz:'Bul!',back:'Tablo',listen:'Dinle',wait:'Önce kendin oku…',iread:'Okudum!',again:'Tekrar',noteFirst:'Adını önce kendin okumayı dene. Sonra kontrol etmek için “Okudum!” düğmesine dokun.',noteDone:'Bu çıkartma artık senin! Duymak için herhangi bir kelimeye dokun.',along:'Birlikte oku',shells:'Elektron katmanları',mols:'Yer aldığı moleküller',noNg:'Soy gazlar yalnız kalmayı sever, neredeyse hiç molekül oluşturmazlar.',noMol:'Bunun için henüz basit bir molekül yok. Atomu döndür!',atom:'Atom',n:'Atom numarası',mass:'Atom kütlesi',p:'Proton',ne:'Nötron',e:'Elektron',st:'Oda sıcaklığında',S:{s:'Katı',l:'Sıvı',g:'Gaz',u:'Bilinmiyor'},prompt:'Bu elementi tabloda bul:',hint:'Dinle',skip:'Sonraki',yes:['Evet! Harika okudun!','Doğru! Buldun!','Süper! Aferin!'],no:'Bu değil. Adını bir daha oku!',prog:'118 çıkartmadan {n} tanesi',drag:'Döndürmek için sürükle · iki parmakla yakınlaştır',settings:'Yetişkinler için',rf:'Önce oku: “Dinle” birkaç saniye sonra açılır',slow:'Yavaş ve net ses',reset:'Yıldızları ve çıkartmaları sıfırla',sure:'Sıfırlamak için tekrar dokunun',noVoice:'Bu cihazda Türkçe ses yok. Cihaz ayarlarından eklenebilir.',noSpeech:'Bu tarayıcı sesli okuyamıyor.',atomSub:'Ortada {p} proton ve {ne} nötron, çevresinde {e} elektron',molSub:'{n} atom',synth:'Bilim insanları onu laboratuvarlarda üretir.',sticker:'Yeni çıkartma!',noGL:'3D görünüm için WebGL ve internet gerekir.',ph:'aşağıda',
  gen:(nm,c,st)=>`${nm}, ${CAT.tr[c][1].toLocaleLowerCase('tr')} grubundadır.`+(st==='u'?'':` Oda sıcaklığında ${{s:'katıdır',l:'sıvıdır',g:'gazdır'}[st]}.`)}};
+Object.assign(T.en,{build:'Build',buildTitle:'Build an atom',goalL:'Build this atom:',newGoal:'Another one',none:'Add a proton to start!',neutral:'neutral atom',ion:'ion, charge {c}',massNo:'Mass number',goalDone:'You built it! Protons and electrons match.',goalHint:'Right element! Now make the electrons equal the protons.',syl:'Split words into syllables (Russian, Turkish)',sci:'More science (for older kids)',cfg:'Electron configuration',grp:'Group',per:'Period',outer:'Outer electrons',qSym:'Find the element with this symbol:',qP:'Find the element with this many protons:'});
+Object.assign(T.ru,{build:'Собери',buildTitle:'Собери атом',goalL:'Собери этот атом:',newGoal:'Другой',none:'Добавь протон, чтобы начать!',neutral:'нейтральный атом',ion:'ион, заряд {c}',massNo:'Массовое число',goalDone:'Получилось! Протонов и электронов поровну.',goalHint:'Элемент верный! Теперь пусть электронов будет столько же, сколько протонов.',syl:'Делить слова на слоги (русский, турецкий)',sci:'Больше науки (для детей постарше)',cfg:'Электронная конфигурация',grp:'Группа',per:'Период',outer:'Внешние электроны',qSym:'Найди элемент с этим символом:',qP:'Найди элемент, у которого столько протонов:'});
+Object.assign(T.tr,{build:'Yap',buildTitle:'Atom yap',goalL:'Bu atomu yap:',newGoal:'Başka görev',none:'Başlamak için bir proton ekle!',neutral:'nötr atom',ion:'iyon, yük {c}',massNo:'Kütle numarası',goalDone:'Başardın! Proton ve elektron sayısı eşit.',goalHint:'Element doğru! Şimdi elektron sayısını proton sayısına eşitle.',syl:'Kelimeleri hecelere ayır (Rusça, Türkçe)',sci:'Daha çok bilim (büyük çocuklar için)',cfg:'Elektron dizilimi',grp:'Grup',per:'Periyot',outer:'Dış elektronlar',qSym:'Bu sembolü taşıyan elementi bul:',qP:'Bu kadar protonu olan elementi bul:'});
 const LOC={en:'en-US',ru:'ru-RU',tr:'tr-TR'};
 const fill=(s,o)=>s.replace(/\{(\w+)\}/g,(_,k)=>o[k]);
 
 /* ---------- state ---------- */
-let S={lang:'en',stars:0,read:[],rf:true,slow:false};
+let S={lang:'en',stars:0,read:[],rf:true,slow:false,syl:true,sci:false};
 try{const s=JSON.parse(localStorage.getItem('elx')||'null');if(s)S=Object.assign(S,s)}catch(e){}
 const hd=window.claude?.hot?.data; if(hd&&hd.lang)S=Object.assign(S,hd);
 if(!S._set&&!hd){const nl=(navigator.language||'en').slice(0,2);if(LOC[nl])S.lang=nl}
@@ -346,6 +396,9 @@ const save=()=>{S._set=1;try{localStorage.setItem('elx',JSON.stringify(S))}catch
 window.claude?.hot?.snapshot?.(()=>S);
 let mode='table',cur=0,quiz={z:0,tries:0},rfTimer=0;
 const L=()=>T[S.lang], nm=z=>NAMES[S.lang][z-1];
+const useSyl=()=>S.syl&&S.lang!=='en';
+const sylHTML=w=>syllables(w,S.lang).map(x=>`<span class="s">${esc(x)}</span>`).join('');
+function setWord(el,w){el.classList.toggle('sy',useSyl());el.innerHTML=useSyl()?sylHTML(w):esc(w)}
 
 /* ---------- speech ---------- */
 let voices=[];
@@ -375,13 +428,13 @@ function speak(text,{start,word,end}={}){
 }
 function karaoke(el,text){
   const spans=[...el.children];spans.forEach(s=>s.classList.remove('lit'));
-  let t0=0,iv=0;
-  speak(text,{start:()=>{t0=performance.now();const per=(S.slow?150:110);let i=0;clearInterval(iv);iv=setInterval(()=>{if(i<spans.length)spans[i++].classList.add('lit');else clearInterval(iv)},per)},
-    end:()=>{clearInterval(iv);spans.forEach(s=>s.classList.add('lit'));setTimeout(()=>spans.forEach(s=>s.classList.remove('lit')),700)}});
+  const tm=[];
+  speak(text,{start:()=>{const per=S.slow?150:110;let acc=0;spans.forEach(s=>{tm.push(setTimeout(()=>s.classList.add('lit'),acc));acc+=per*s.textContent.length})},
+    end:()=>{tm.forEach(clearTimeout);spans.forEach(s=>s.classList.add('lit'));setTimeout(()=>spans.forEach(s=>s.classList.remove('lit')),700)}});
 }
 function renderWords(box,text){
   const ws=[...text.matchAll(/\S+/g)];
-  box.innerHTML=ws.map((m,i)=>`<button data-i="${m.index}">${esc(m[0])}</button>`).join(' ');
+  const y=useSyl();box.innerHTML=ws.map(m=>`<button data-i="${m.index}"${y?' class="sy"':''}>${y?sylHTML(m[0]):esc(m[0])}</button>`).join(' ');
   box.dataset.text=text;
 }
 document.addEventListener('click',e=>{
@@ -422,8 +475,11 @@ $('#ptable').addEventListener('click',e=>{
 
 /* ---------- quiz ---------- */
 const POOL=[...Array(36)].map((_,i)=>i+1).concat([47,50,53,78,79,80,82,92]);
-function newQ(){let z;do z=POOL[Math.floor(Math.random()*POOL.length)];while(z===quiz.z);quiz={z,tries:0};
-  $('#q-word').textContent=nm(z);$('#q-msg').textContent='';$('#q-msg').className='qmsg';$('#q-hint').hidden=true}
+function newQ(){const pool=S.sci?SYM.map((_,i)=>i+1):POOL;let z;do z=pool[Math.floor(Math.random()*pool.length)];while(z===quiz.z);
+  quiz={z,tries:0,type:S.sci?['name','sym','p'][Math.floor(Math.random()*3)]:'name'};
+  showQ();$('#q-msg').textContent='';$('#q-msg').className='qmsg';$('#q-hint').hidden=true}
+function showQ(){const t=L(),q=quiz,w=$('#q-word');$('#q-prompt').textContent=q.type==='sym'?t.qSym:q.type==='p'?t.qP:t.prompt;
+  if(q.type==='name')setWord(w,nm(q.z));else{w.classList.remove('sy');w.textContent=q.type==='sym'?SYM[q.z-1]:q.z}}
 function answer(z,b){
   const m=$('#q-msg');
   if(z===quiz.z){b.classList.add('right');S.stars+=quiz.tries?1:2;save();progress();
@@ -434,25 +490,30 @@ function answer(z,b){
 $('#q-hint').onclick=()=>speak(nm(quiz.z));
 $('#q-skip').onclick=newQ;
 function setMode(m){mode=m;$('#quiz').hidden=m!=='quiz';document.querySelectorAll('#modes button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));if(m==='quiz'){newQ();$('#quiz').scrollIntoView({block:'nearest'})}}
-$('#modes').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setMode(b.dataset.m)});
+const markModes=m=>document.querySelectorAll('#modes button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
+$('#modes').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.m==='build'){location.hash='build';return}setMode(b.dataset.m)});
 
 /* ---------- language & settings ---------- */
 function applyLang(){
   const t=L();document.documentElement.lang=S.lang;
   document.querySelectorAll('#langs button,#langs2 button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===S.lang));
-  $('#t-title').textContent=t.title;$('#t-table').textContent=t.table;$('#t-quiz').textContent=t.quiz;$('#t-back').textContent=t.back;
+  $('#t-title').textContent=t.title;$('#t-table').textContent=t.table;$('#t-quiz').textContent=t.quiz;$('#t-build').textContent=t.build;$('#t-syl').textContent=t.syl;$('#t-sci').textContent=t.sci;
+  $('#b-title').textContent=t.buildTitle;$('#b-goalL').textContent=t.goalL;$('#b-new').textContent=t.newGoal;$('#b-lp').textContent=t.p;$('#b-ln').textContent=t.ne;$('#b-le').textContent=t.e;$('#t-back').textContent=t.back;
   $('#t-settings').textContent=t.settings;$('#t-rf').textContent=t.rf;$('#t-slow').textContent=t.slow;$('#resetBtn').textContent=t.reset;
   $('#q-prompt').textContent=t.prompt;$('#q-hint').textContent=t.hint;$('#q-skip').textContent=t.skip;
   $('#t-shells').textContent=t.shells;$('#t-mols').textContent=t.mols;$('#alongL').textContent=t.along;$('#vhint').textContent=t.drag;
   renderTable();voiceNotes();
-  if(quiz.z)$('#q-word').textContent=nm(quiz.z);
-  if(cur&&!$('#sheet').hidden)openEl(cur,true);
+  if(quiz.z)showQ();
+  if(!$('#sheet').hidden){if(!$('#build').hidden){setWord($('#b-goal'),nm(B.goal));renderBuild()}else if(cur)openEl(cur,true)}
 }
 ['#langs','#langs2'].forEach(id=>$(id).addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;S.lang=b.dataset.l;save();applyLang()}));
 $('#gearBtn').onclick=()=>{const s=$('#settings');s.hidden=!s.hidden;$('#gearBtn').setAttribute('aria-expanded',!s.hidden)};
 $('#optRF').checked=S.rf;$('#optSlow').checked=S.slow;
 $('#optRF').onchange=e=>{S.rf=e.target.checked;save()};
 $('#optSlow').onchange=e=>{S.slow=e.target.checked;save()};
+$('#optSyl').checked=S.syl;$('#optSci').checked=S.sci;
+$('#optSyl').onchange=e=>{S.syl=e.target.checked;save();applyLang()};
+$('#optSci').onchange=e=>{S.sci=e.target.checked;save();if(mode==='quiz')newQ();applyLang()};
 let sure=0;
 $('#resetBtn').onclick=e=>{if(!sure){sure=1;e.target.textContent=L().sure;setTimeout(()=>{sure=0;e.target.textContent=L().reset},3000);return}
   sure=0;S.stars=0;S.read=[];save();renderTable();e.target.textContent=L().reset};
@@ -462,14 +523,15 @@ function toast(t){const d=document.createElement('div');d.className='toast';d.te
 function openEl(z,keep){
   cur=z;const t=L(),c=catOf(z),st=stateOf(z),sh=shellsOf(z),mass=MASS[z-1],ne=Math.round(+mass)-z,name=nm(z),got=S.read.includes(z);
   const sheet=$('#sheet');sheet.hidden=false;document.body.style.overflow='hidden';
+  $('#info').hidden=false;$('#build').hidden=true;$('#nav').hidden=false;
   ['#bigtile','#ecat'].forEach(s=>$(s).className=$(s).className.replace(/ ?c-\w+/g,'')+' c-'+c);
   $('#btN').textContent=z;$('#btS').textContent=SYM[z-1];
-  $('#ename').innerHTML=[...name].map(ch=>`<span>${esc(ch)}</span>`).join('');
+  $('#ename').classList.toggle('sy',useSyl());$('#ename').innerHTML=useSyl()?sylHTML(name):[...name].map(ch=>`<span>${esc(ch)}</span>`).join('');
   $('#ecat').textContent=CAT[S.lang][c][0];
   const fi={en:0,ru:1,tr:2}[S.lang];
   let fact=FACT[z]?FACT[z][fi]:t.gen(name,c,st);if(z>=93&&!FACT[z])fact+=' '+t.synth;
   renderWords($('#factWords'),fact);
-  $('#stats').innerHTML=[[t.n,z],[t.mass,(z>=93||[43,61,84,85,86,87,88,89].includes(z))?`≈ ${mass}`:mass],[t.p,z,'p'],[t.ne,'≈ '+ne],[t.e,z,'e'],[t.st,t.S[st]]].map(([k,v,cl])=>`<div class="${cl||''}"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('');
+  $('#stats').innerHTML=[[t.n,z],[t.mass,(z>=93||[43,61,84,85,86,87,88,89].includes(z))?`≈ ${mass}`:mass],[t.p,z,'p'],[t.ne,'≈ '+ne],[t.e,z,'e'],[t.st,t.S[st]]].concat(S.sci?(([r,cc])=>[[t.grp,r>8?'f':cc],[t.per,r>8?r-3:r],[t.outer,sh[sh.length-1]],[t.cfg,configText(z),'wide']])(pos(z)):[]).map(([k,v,cl])=>`<div class="${cl||''}"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('');
   $('#shells').innerHTML=sh.map(n=>`<span>${n}</span>`).join('');
   const ms=molsFor(z);
   $('#mols').innerHTML=`<button data-m="-1" aria-pressed="true"><b>${esc(t.atom)}</b><span>${SYM[z-1]}</span></button>`+
@@ -506,13 +568,13 @@ $('#mols').addEventListener('click',e=>{
   if(i<0){showAtom();if(molsFor(cur).length)$('#moldesc').hidden=true;return}
   const m=MOLS[i];showMol(m);$('#moldesc').hidden=false;renderWords($('#molWords'),`${m.n[S.lang]}. ${m.d[S.lang]}`);
 });
-function closeEl(){$('#sheet').hidden=true;document.body.style.overflow='';V.on=false;clearTimeout(rfTimer);try{speechSynthesis.cancel()}catch(e){}
+function closeEl(){$('#sheet').hidden=true;markModes(mode);document.body.style.overflow='';V.on=false;clearTimeout(rfTimer);try{speechSynthesis.cancel()}catch(e){}
   const b=document.querySelector(`.el[data-z="${cur}"]`);b&&b.focus({preventScroll:false})}
 $('#back').onclick=()=>{location.hash='table'};
 $('#prev').onclick=()=>{location.hash='el-'+(cur>1?cur-1:118)};
 $('#next').onclick=()=>{location.hash='el-'+(cur<118?cur+1:1)};
 document.addEventListener('keydown',e=>{if($('#sheet').hidden)return;if(e.key==='Escape')$('#back').click();if(e.key==='ArrowRight')$('#next').click();if(e.key==='ArrowLeft')$('#prev').click()});
-function route(){const m=/^#el-(\d{1,3})$/.exec(location.hash);const z=m?+m[1]:0;if(z>=1&&z<=118)openEl(z);else if(!$('#sheet').hidden)closeEl()}
+function route(){if(location.hash==='#build')return openBuild();const m=/^#el-(\d{1,3})$/.exec(location.hash);const z=m?+m[1]:0;if(z>=1&&z<=118)openEl(z);else if(!$('#sheet').hidden)closeEl()}
 window.addEventListener('hashchange',route);
 
 /* ---------- 3D viewer ---------- */
@@ -549,13 +611,14 @@ function initV(){
 }
 function fit(){if(!V.r)return;const b=$('#view'),w=b.clientWidth,h=b.clientHeight;if(!w||!h)return;V.r.setSize(w,h,false);V.cam.aspect=w/h;V.cam.updateProjectionMatrix();place()}
 function place(){const a=V.cam.aspect||1;let d=V.size/Math.tan(20*Math.PI/180)*1.08;if(a<1)d/=a;V.cam.position.set(0,0,d/V.zoom);V.cam.lookAt(0,0,0)}
-function clearV(){V.spins=[];V.group.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material){if(o.material.map)o.material.map.dispose();o.material.dispose()}});V.group.clear();V.group.rotation.set(.35,-.4,0);V.zoom=1}
+function clearV(keep){V.spins=[];V.group.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material){if(o.material.map)o.material.map.dispose();o.material.dispose()}});V.group.clear();if(!keep){V.group.rotation.set(.35,-.4,0);V.zoom=1}}
 const mat=(c,em)=>new THREE.MeshStandardMaterial({color:c,roughness:.35,metalness:.05,emissive:em||0x000000,emissiveIntensity:em?.6:0});
-function showAtom(){
-  const z=cur,t=L(),sh=shellsOf(z),A=Math.max(z,Math.round(+MASS[z-1]));
-  $('#vtitle').textContent=`${t.atom}: ${nm(z)}`;$('#vsub').textContent=fill(t.atomSub,{p:z,ne:A-z,e:z});
-  if(!initV())return;V.on=true;clearV();
-  const rn=.16,R=A===1?0:rn*1.25*Math.cbrt(A);
+function showAtom(){const z=cur,A=Math.max(z,Math.round(+MASS[z-1]));drawAtom(z,A-z,z,`${L().atom}: ${nm(z)}`,fill(L().atomSub,{p:z,ne:A-z,e:z}))}
+function drawAtom(z,nn,ne,title,sub,keep){
+  const sh=shellsOf(ne),A=z+nn;
+  $('#vtitle').textContent=title;$('#vsub').textContent=sub;
+  if(!initV())return;V.on=true;clearV(keep);
+  const rn=.16,R=A<=1?0:rn*1.25*Math.cbrt(A);
   const g=new THREE.SphereGeometry(rn,16,12),pm=mat(0xff4d4d),nmt=mat(0xb7c0cc);
   for(let i=0;i<A;i++){const r=R*Math.cbrt((i+.5)/A),y=1-2*(i+.5)/A,rr=Math.sqrt(1-y*y),th=i*2.39996;
     const isP=Math.floor((i+1)*z/A)>Math.floor(i*z/A);
@@ -593,6 +656,27 @@ function showMol(m){
       cyl.position.copy(a).add(b).multiplyScalar(.5).add(off);cyl.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir);V.group.add(cyl)}});
   V.size=Math.max(1.6,rmax);fit();
 }
+
+/* ---------- build an atom ---------- */
+const B={p:1,n:0,e:1,goal:0,done:false,drawn:false};
+function openBuild(){
+  $('#sheet').hidden=false;document.body.style.overflow='hidden';cur=0;clearTimeout(rfTimer);
+  $('#info').hidden=true;$('#build').hidden=false;$('#nav').hidden=true;markModes('build');
+  B.drawn=false;if(!B.goal)newGoal();else renderBuild();$('#sheet').scrollTop=0;
+}
+function newGoal(){const max=S.sci?36:10;let g;do g=1+Math.floor(Math.random()*max);while(g===B.goal);B.goal=g;B.done=false;setWord($('#b-goal'),nm(g));renderBuild()}
+function renderBuild(){
+  const t=L(),z=B.p,tile=$('#b-tile'),m=$('#b-msg');
+  $('#b-p').textContent=B.p;$('#b-n').textContent=B.n;$('#b-e').textContent=B.e;
+  if(z){tile.className='bigtile c-'+catOf(z);$('#b-tN').textContent=z;$('#b-tS').textContent=SYM[z-1];$('#b-name').className='name';setWord($('#b-name'),nm(z));
+    const ch=B.p-B.e;$('#b-stat').textContent=`${t.massNo}: ${B.p+B.n} · ${ch?fill(t.ion,{c:(ch>0?'+':'−')+Math.abs(ch)}):t.neutral}`}
+  else{tile.className='bigtile';$('#b-tN').textContent='';$('#b-tS').textContent='?';$('#b-name').className='name';$('#b-name').textContent='';$('#b-stat').textContent=t.none}
+  if(z===B.goal&&B.e===z){m.textContent=t.goalDone;m.className='bmsg ok';if(!B.done){B.done=true;S.stars+=2;save();progress();toast('★ +2');speak(nm(z))}}
+  else{m.textContent=z===B.goal?t.goalHint:'';m.className='bmsg'}
+  drawAtom(B.p,B.n,B.e,z?`${t.atom}: ${nm(z)}`:t.buildTitle,fill(t.atomSub,{p:B.p,ne:B.n,e:B.e}),B.drawn);B.drawn=true;
+}
+$('#build').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k,lim={p:118,n:180,e:118}[k];B[k]=Math.max(0,Math.min(lim,B[k]+(+b.dataset.d)));renderBuild()});
+$('#b-new').onclick=newGoal;
 
 /* ---------- boot ---------- */
 applyLang();setMode('table');route();
