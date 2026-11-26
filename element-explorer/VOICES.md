@@ -62,6 +62,9 @@ because the page can't use the microphone.
 
 ## Use it offline on the iPad
 
-Host the `element-explorer` folder anywhere with HTTPS (for example GitHub Pages),
-open it in Safari, then Share → Add to Home Screen. The app caches itself, and
+The app is published by GitHub Pages at
+**https://obulat.github.io/obulat/element-explorer/** (the workflow in
+`.github/workflows/pages.yml` republishes it on every push to `master`).
+Open it in Safari, then Share → Add to Home Screen. The app caches itself, and
 Grown-ups → "Save voices for offline use" downloads the whole voice pack.
+After generating a voice pack, commit the `audio/` folder so the site serves it.
