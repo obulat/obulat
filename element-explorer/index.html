@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#3550f0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Elements">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
 </head>
 <body>
 <title>Element Explorer</title>
@@ -36,12 +43,12 @@ h1{margin:0;font-size:clamp(28px,4vw,44px);font-weight:900;line-height:1.05;lett
 .stars svg{width:26px;height:26px;fill:var(--star)}
 .gear{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center}
 .gear svg{width:22px;height:22px;fill:#fff}
-.settings{margin-top:12px;background:#fff;color:var(--tink);border-radius:18px;padding:16px 18px;display:grid;gap:10px;max-width:560px;margin-left:auto}
-.settings h2{margin:0;font-size:18px}
-.settings label{display:flex;gap:10px;align-items:center}
-.settings input{width:22px;height:22px}
-.settings .rst{justify-self:start;background:#ffe3e3;color:#a11;padding:8px 14px;border-radius:12px;font-weight:800}
-.settings .vnote{color:#a35200;font-size:14px}
+.settings-old{margin-top:12px;background:#fff;color:var(--tink);border-radius:18px;padding:16px 18px;display:grid;gap:10px;max-width:560px;margin-left:auto}
+.settings-old h2{margin:0;font-size:18px}
+.settings-old label{display:flex;gap:10px;align-items:center}
+.settings-old input{width:22px;height:22px}
+.rst{justify-self:start;background:#ffe3e3;color:#a11;padding:8px 14px;border-radius:12px;font-weight:800}
+.vnote{color:#a35200;font-size:14px}
 main{padding:18px max(4vw,16px,env(safe-area-inset-right,0px)) 32px max(4vw,16px,env(safe-area-inset-left,0px))}
 .quiz{background:var(--soft);border:2px solid var(--line);border-radius:22px;padding:14px 20px;margin-bottom:16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px}
 .qp{color:var(--mute);font-weight:800}
@@ -147,6 +154,53 @@ h3{margin:22px 0 8px;font-size:20px;font-weight:900}
 .mols button span{font-size:14px;color:var(--mute)}
 .mols button[aria-pressed=true]{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 12%,transparent)}
 .moldesc{margin-top:10px}
+.shelf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.game{display:flex;align-items:center;gap:12px;border-radius:20px;padding:14px 16px;background:var(--g);color:var(--tink);text-align:left;font-weight:900;font-size:clamp(17px,1.8vw,21px);line-height:1.15;min-height:76px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.14)}
+.game span:first-child{font-size:34px;line-height:1}
+.g1{--g:#ffd43b}.g2{--g:#63e6be}.g3{--g:#ffa94d}.g4{--g:#b197fc}
+@media(max-width:760px){.shelf{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.sheet.noview .dgrid{grid-template-columns:minmax(0,1fr);max-width:1000px;margin:0 auto}
+.sheet.noview .view{display:none}
+.panel h2{margin:0;font-size:clamp(30px,4vw,44px);font-weight:900;line-height:1.05}
+.palette{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.atomb{width:86px;height:86px;border-radius:50%;background:var(--c);display:grid;place-content:center;justify-items:center;font-weight:900;font-size:28px;line-height:1;box-shadow:inset -6px -8px 0 rgba(0,0,0,.18),0 0 0 2px var(--line)}
+.atomb small{font-size:12px;font-weight:800;margin-top:4px;max-width:76px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tray{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;min-height:52px;align-items:center}
+.tray button{display:flex;align-items:center;gap:6px;border:2px solid var(--line);border-radius:999px;padding:6px 14px;font-weight:900;font-size:19px;min-height:44px}
+.tray i{width:20px;height:20px;border-radius:50%;background:var(--c);display:inline-block;box-shadow:0 0 0 2px var(--line)}
+.homegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-top:14px}
+.hcard{border:2px solid var(--line);border-radius:20px;padding:14px;display:grid;gap:8px;align-content:start}
+.hcard .em{font-size:52px;line-height:1}
+.hcard .it{font-size:24px;font-weight:900;line-height:1.15;text-align:left}
+.hcard .els{display:flex;flex-wrap:wrap;gap:6px}
+.hcard .els button{background:var(--c);color:var(--tink);border-radius:999px;padding:2px 10px;font-weight:800;font-size:14px;min-height:32px}
+.hcard.found{border-color:#51cf66;background:color-mix(in srgb,#51cf66 14%,transparent)}
+.hcard .fb{justify-self:start}
+.homes{display:flex;flex-wrap:wrap;gap:8px}
+.homes button{border:2px solid var(--line);border-radius:14px;padding:6px 12px;font-weight:800;font-size:17px;min-height:44px}
+.scale{width:100%;max-width:640px;height:auto;display:block;margin:10px auto 0}
+.hpick{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:6px}
+.hpick button{border-radius:22px;padding:14px;background:var(--c);color:var(--tink);display:grid;justify-items:center;gap:2px;box-shadow:inset 0 -5px 0 rgba(0,0,0,.14)}
+.hpick b{font-size:48px;font-weight:900;line-height:1}
+.hpick span{font-size:20px;font-weight:900;overflow-wrap:anywhere}
+.hpick small{font-size:15px;font-weight:800;min-height:21px}
+.grown section{border:2px solid var(--line);border-radius:20px;padding:16px 18px;margin-top:14px;display:grid;gap:10px}
+.grown h3{margin:0}
+.grown label{display:flex;gap:10px;align-items:center}
+.grown input[type=checkbox]{width:22px;height:22px;flex:none}
+.grown select{font:inherit;font-size:16px;padding:8px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.vrow{display:grid;grid-template-columns:84px minmax(0,1fr) auto;gap:10px;align-items:center}
+.rep{display:grid;grid-template-columns:repeat(auto-fit,minmax(9em,1fr));gap:10px}
+.rep div{background:var(--soft);border-radius:14px;padding:10px 12px}
+.rep span{display:block;color:var(--mute);font-size:14px;font-weight:700}
+.rep b{display:block;font-size:26px;font-weight:900}
+.tricky{display:flex;flex-wrap:wrap;gap:8px}
+.tricky span{background:var(--soft);border-radius:999px;padding:4px 12px;font-weight:800}
+.recrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;padding:12px;border:2px dashed var(--line);border-radius:16px;align-items:center}
+.recrow button{border:2px solid var(--line);border-radius:12px;padding:8px 14px;font-weight:800;min-height:44px}
+.recrow button.on{background:#e03131;color:#fff;border-color:#e03131}
+.help{color:var(--mute);font-size:15px;margin:0}
+.help b{color:var(--ink)}
 .toast{position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--star);color:var(--tink);font-weight:900;font-size:22px;padding:12px 24px;border-radius:999px;z-index:40;box-shadow:0 6px 18px rgba(0,0,0,.2);animation:up .3s}
 @keyframes up{from{transform:translate(-50%,20px);opacity:0}}
 @media(max-width:899px){.dgrid{grid-template-columns:minmax(0,1fr)}.view{position:relative;top:0;height:46svh;min-height:300px}}
@@ -162,24 +216,21 @@ h3{margin:22px 0 8px;font-size:20px;font-weight:900}
         <button data-l="en">English</button><button data-l="ru">Русский</button><button data-l="tr">Türkçe</button>
       </div>
       <div class="seg" id="modes" role="group">
-        <button data-m="table" id="t-table">Table</button><button data-m="quiz" id="t-quiz">Find it!</button><button data-m="build" id="t-build">Build</button>
+        <button data-m="table" id="t-table">Table</button><button data-m="quiz" id="t-quiz">Find it!</button>
       </div>
       <div class="stars" aria-live="polite"><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7.5.6-5.7 4.9 1.8 7.4L12 18l-6.6 3.9 1.8-7.4L1.5 9.6 9 9z"/></svg><b id="starN">0</b></div>
-      <button class="gear" id="gearBtn" aria-label="Settings" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M19.4 13a7.5 7.5 0 000-2l2.1-1.6-2-3.5-2.5 1a7 7 0 00-1.7-1L15 3.3h-4l-.4 2.6a7 7 0 00-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 000 2l-2.1 1.6 2 3.5 2.5-1a7 7 0 001.7 1l.4 2.6h4l.4-2.6a7 7 0 001.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z" transform="translate(-1 0)"/></svg></button>
+      <button class="gear" id="gearBtn" aria-label="Settings"><svg viewBox="0 0 24 24"><path d="M19.4 13a7.5 7.5 0 000-2l2.1-1.6-2-3.5-2.5 1a7 7 0 00-1.7-1L15 3.3h-4l-.4 2.6a7 7 0 00-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 000 2l-2.1 1.6 2 3.5 2.5-1a7 7 0 001.7 1l.4 2.6h4l.4-2.6a7 7 0 001.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z" transform="translate(-1 0)"/></svg></button>
     </div>
-  </div>
-  <div class="settings" id="settings" hidden>
-    <h2 id="t-settings">For grown-ups</h2>
-    <label><input type="checkbox" id="optRF" checked> <span id="t-rf"></span></label>
-    <label><input type="checkbox" id="optSlow"> <span id="t-slow"></span></label>
-    <label><input type="checkbox" id="optSyl"> <span id="t-syl"></span></label>
-    <label><input type="checkbox" id="optSci"> <span id="t-sci"></span></label>
-    <div class="vnote" id="vnote1"></div>
-    <button class="rst" id="resetBtn"></button>
   </div>
 </header>
 
 <main>
+  <nav class="shelf" id="shelf">
+    <button class="game g1" data-go="build"><span>⚛️</span><span id="gs1"></span></button>
+    <button class="game g2" data-go="molecule"><span>🧪</span><span id="gs2"></span></button>
+    <button class="game g3" data-go="home"><span>🏠</span><span id="gs3"></span></button>
+    <button class="game g4" data-go="heavy"><span>⚖️</span><span id="gs4"></span></button>
+  </nav>
   <section class="quiz" id="quiz" hidden aria-live="polite">
     <span class="qp" id="q-prompt"></span>
     <div class="qword" id="q-word"></div>
@@ -219,10 +270,13 @@ h3{margin:22px 0 8px;font-size:20px;font-weight:900}
         <div class="words" id="factWords"></div>
         <button class="along" id="along"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span id="alongL"></span></button>
       </div>
+      <div class="fact" id="sciBox" hidden><span class="qp" id="t-sciL"></span><div class="words" id="sciWords"></div><button class="along" id="along2"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span id="along2L"></span></button></div>
       <div class="stats" id="stats"></div>
       <h3 id="t-shells"></h3><div class="shells" id="shells"></div>
       <h3 id="t-mols"></h3><div class="mols" id="mols"></div>
       <div class="fact moldesc" id="moldesc" hidden><div class="words" id="molWords"></div></div>
+      <h3 id="t-home2"></h3><div class="homes" id="homes"></div>
+      <div class="recrow" id="recrow" hidden><b id="t-recL"></b><button id="recName"></button><button id="recFact"></button><button id="recDel"></button></div>
     </div>
     <div class="build" id="build" hidden>
       <h2 id="b-title"></h2>
@@ -235,14 +289,56 @@ h3{margin:22px 0 8px;font-size:20px;font-weight:900}
       <div class="made"><div class="bigtile" id="b-tile"><small id="b-tN"></small><b id="b-tS"></b></div><div><div class="name" id="b-name"></div><div class="bstat" id="b-stat"></div></div></div>
       <div class="bmsg" id="b-msg" aria-live="polite"></div>
     </div>
+    <div class="panel" id="mbuild" hidden>
+      <h2 id="m-title"></h2>
+      <div class="goal"><span class="qp" id="m-goalL"></span><span class="qword" id="m-goal"></span><button class="pill alt" id="m-formula"></button><button class="pill alt" id="m-new"></button></div>
+      <div class="palette" id="m-pal"></div>
+      <div class="tray" id="m-tray"></div>
+      <div class="bmsg" id="m-msg" aria-live="polite"></div>
+      <div class="fact" id="m-desc" hidden><div class="words" id="m-words"></div></div>
+    </div>
+    <div class="panel" id="home" hidden>
+      <h2 id="h-title"></h2><p class="note" id="h-note"></p>
+      <div class="homegrid" id="h-grid"></div>
+      <p style="margin-top:14px"><button class="pill alt" id="h-new"></button></p>
+    </div>
+    <div class="panel" id="heavy" hidden>
+      <h2 id="w-title"></h2>
+      <svg class="scale" id="w-svg" viewBox="0 0 600 270" role="img"></svg>
+      <div class="hpick" id="w-pick"></div>
+      <div class="bmsg" id="w-msg" aria-live="polite"></div>
+      <button class="pill" id="w-next"></button>
+    </div>
+    <div class="panel grown" id="grown" hidden>
+      <h2 id="t-settings"></h2>
+      <section><h3 id="t-repH"></h3><div class="rep" id="rep"></div><p class="help" id="trickyL"></p><div class="tricky" id="tricky"></div></section>
+      <section><h3 id="t-readH"></h3>
+        <label><input type="checkbox" id="optRF"> <span id="t-rf"></span></label>
+        <label><input type="checkbox" id="optSyl"> <span id="t-syl"></span></label>
+        <label><input type="checkbox" id="optSci"> <span id="t-sci"></span></label>
+      </section>
+      <section><h3 id="t-voiceH"></h3>
+        <label><input type="checkbox" id="optSlow"> <span id="t-slow"></span></label>
+        <div id="vpick" style="display:grid;gap:8px"></div>
+        <div class="vnote" id="vnote1"></div>
+        <p class="help" id="voiceHelp"></p>
+        <label id="claudeRow" hidden><input type="checkbox" id="optClaude"> <span id="t-claude"></span></label>
+        <p class="help" id="packNote"></p>
+        <p><button class="pill alt" id="packSave" hidden></button></p>
+        <label><input type="checkbox" id="optRec"> <span id="t-recMode"></span></label>
+        <p class="help" id="recNote"></p>
+      </section>
+      <section><button class="rst" id="resetBtn"></button></section>
+    </div>
   </div>
 </section>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="vendor/three.min.js"></script>
 <script>
 {
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/*DATA*/
 
 /* ---------- element data ---------- */
 const SYM="H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr Rb Sr Y Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe Cs Ba La Ce Pr Nd Pm Sm Eu Gd Tb Dy Ho Er Tm Yb Lu Hf Ta W Re Os Ir Pt Au Hg Tl Pb Bi Po At Rn Fr Ra Ac Th Pa U Np Pu Am Cm Bk Cf Es Fm Md No Lr Rf Db Sg Bh Hs Mt Ds Rg Cn Nh Fl Mc Lv Ts Og".split(' ');
@@ -294,6 +390,7 @@ function syllables(w,lang){
     if(lang==='tr')k=n?n-1:0;
     else{if(lo[0]==='й')k=1;
       else if('рлмн'.includes(lo[0])&&n>1){let i=1;while(i<n&&'ьъ'.includes(lo[i]))i++;if(i<n&&!'рлмнй'.includes(lo[i]))k=i}
+      for(let i=0;i<n-1;i++)if(lo[i]===lo[i+1]&&!'ьъй'.includes(lo[i])){k=i+1;break}
       const sg=Math.max(lo.lastIndexOf('ь'),lo.lastIndexOf('ъ'));if(sg>=0&&sg+1<n)k=Math.max(k,sg+1)}
     return a+1+k});
   const out=[];let p=0;cuts.forEach(c=>{out.push(w.slice(p,c));p=c});out.push(w.slice(p));return out.filter(Boolean);
@@ -339,6 +436,109 @@ const FACT={
 82:["Lead is a very heavy metal. Pencil lead has no lead in it at all. It is carbon!","Свинец — очень тяжёлый и мягкий металл.","Kurşun çok ağır bir metaldir. Kurşun kalemin içinde kurşun yoktur, karbon vardır!"],
 92:["Uranium is used to make electricity in nuclear power plants.","Уран используют на атомных электростанциях, чтобы получать электричество.","Uranyum, nükleer santrallerde elektrik üretmek için kullanılır."],
 101:["Mendelevium is named after Dmitri Mendeleev, who made the first periodic table.","Менделевий назван в честь Дмитрия Менделеева, создателя периодической таблицы.","Mendelevyum, periyodik tabloyu oluşturan Dmitri Mendeleyev'in adını taşır."]};
+
+/*FACTS-EXTRA*/
+const FACT_MORE={
+4:["Beryllium is very light but very stiff. Mirrors for space telescopes are made from it.","Бериллий очень лёгкий и очень твёрдый. Из него делают зеркала для космических телескопов.","Berilyum çok hafif ama çok serttir. Uzay teleskoplarının aynaları ondan yapılır."],
+5:["Boron helps make glass that does not crack in a hot oven. Most of the world's boron is in Turkey.","Бор помогает делать стекло, которое не трескается в горячей духовке. Больше всего бора в мире — в Турции.","Bor, sıcak fırında çatlamayan cam yapmaya yardım eder. Dünyadaki borun çoğu Türkiye'dedir."],
+21:["Scandium makes aluminum stronger. It is used in some bicycles and baseball bats.","Скандий делает алюминий крепче. Его добавляют в некоторые велосипеды и бейсбольные биты.","Skandiyum alüminyumu daha güçlü yapar. Bazı bisikletlerde ve beyzbol sopalarında kullanılır."],
+23:["Vanadium makes steel tough. Strong tools like wrenches are often made with it.","Ванадий делает сталь прочной. Из такой стали делают крепкие инструменты.","Vanadyum çeliği sağlam yapar. Sağlam aletler çoğu zaman bu çelikten yapılır."],
+24:["Chromium makes steel shiny and stops it from rusting. Steel spoons and forks have chromium in them.","Хром делает сталь блестящей и защищает её от ржавчины. Он есть в ложках и вилках.","Krom çeliği parlak yapar ve paslanmasını önler. Paslanmaz çelik kaşık ve çatallarda krom vardır."],
+25:["Manganese is inside many batteries. Your body also needs a tiny bit of it.","Марганец есть во многих батарейках. Нашему телу тоже нужно чуть-чуть марганца.","Manganez birçok pilin içinde vardır. Vücudumuza da çok az manganez gerekir."],
+27:["Cobalt makes a deep blue color. People have painted blue tiles and plates with it for hundreds of years.","Кобальт даёт яркий синий цвет. Синие узоры на посуде часто рисуют кобальтом.","Kobalt koyu mavi bir renk verir. Mavi çiniler ve tabaklar yüzlerce yıldır onunla boyanır."],
+31:["Gallium is a metal that melts on a hot summer day. It melts at just 30 degrees.","Галлий — металл, который тает в жаркий летний день. Он плавится всего при 30 градусах.","Galyum, sıcak bir yaz gününde eriyen bir metaldir. Sadece 30 derecede erir."],
+32:["Some of the very first transistors were made of germanium. Transistors are the tiny parts inside computers.","Из германия сделали одни из первых транзисторов. Это крошечные детали внутри компьютеров.","İlk transistörlerin bazıları germanyumdan yapıldı. Transistörler, bilgisayarların içindeki minik parçalardır."],
+33:["Arsenic is a poison. But a tiny bit of it helps make computer chips and LED lights.","Мышьяк — яд. Но чуть-чуть мышьяка помогает делать компьютерные чипы и светодиоды.","Arsenik bir zehirdir. Ama azıcık arsenik, bilgisayar çipleri ve LED ışıklar yapmaya yardım eder."],
+34:["Selenium is found in Brazil nuts. Your body needs a tiny bit of it.","Селен есть в бразильских орехах. Нашему телу нужно чуть-чуть селена.","Selenyum Brezilya cevizinde bulunur. Vücudumuzun ona çok az ihtiyacı vardır."],
+36:["Krypton is a real gas, not just Superman's home planet! It glows in some lamps.","Криптон — настоящий газ, а не только планета Супермена! Он светится в некоторых лампах.","Kripton gerçek bir gazdır, sadece Süpermen'in gezegeni değil! Bazı lambaların içinde parlar."],
+37:["Rubidium is a soft metal that catches fire by itself in air. It is used in very exact clocks.","Рубидий — мягкий металл. На воздухе он сам загорается. Его используют в очень точных часах.","Rubidyum yumuşak bir metaldir ve havada kendi kendine yanar. Çok hassas saatlerde kullanılır."],
+38:["Strontium makes fireworks glow bright red.","Стронций окрашивает салют в ярко-красный цвет.","Stronsiyum havai fişeklere parlak kırmızı rengini verir."],
+39:["Yttrium is named after Ytterby, a tiny village in Sweden. It helps make white LED lights.","Иттрий назван в честь деревни Иттербю в Швеции. Он помогает делать белые светодиоды.","İtriyum, adını İsveç'teki Ytterby adlı küçük bir köyden alır. Beyaz LED ışıklarda kullanılır."],
+40:["Zirconium is used to make sparkly stones that look like diamonds.","Из циркония делают фианиты. Эти камушки блестят, как алмазы.","Zirkonyumdan elmasa benzeyen parlak taşlar yapılır."],
+41:["Niobium is in the super strong magnets of hospital MRI machines. They help doctors see inside the body.","Ниобий есть в сильных магнитах больничных аппаратов МРТ. Они помогают врачам заглянуть внутрь тела.","Niyobyum, hastanelerdeki MR makinelerinin güçlü mıknatıslarında kullanılır. Bu makineler vücudun içini gösterir."],
+42:["Molybdenum can handle great heat. Plants need a tiny bit of it to grow.","Молибден не боится сильного жара. Растениям нужно чуть-чуть молибдена, чтобы расти.","Molibden çok yüksek sıcaklığa dayanır. Bitkilerin büyümek için ona azıcık ihtiyacı vardır."],
+43:["Technetium was the first element made by people. Doctors use it to take pictures inside the body.","Технеций — первый элемент, который сделали люди. С его помощью врачи видят, что внутри тела.","Teknesyum, insanların yaptığı ilk elementtir. Doktorlar onunla vücudun içinin resmini çeker."],
+44:["Ruthenium is named after Russia. It was discovered in the city of Kazan.","Рутений назван в честь России. Его открыли в городе Казани.","Rutenyum, adını Rusya'nın eski Latince adından alır. Kazan şehrinde bulundu."],
+45:["Rhodium is one of the most expensive metals. It helps clean the smoke that comes out of cars.","Родий — один из самых дорогих металлов. Он помогает очищать выхлоп машин.","Rodyum en pahalı metallerden biridir. Arabaların egzoz dumanını temizlemeye yardım eder."],
+46:["Palladium soaks up hydrogen gas like a sponge. It is named after the asteroid Pallas.","Палладий впитывает водород, как губка. Он назван в честь астероида Паллада.","Paladyum hidrojen gazını sünger gibi emer. Adını Pallas adlı bir asteroitten alır."],
+48:["Cadmium makes bright yellow and red paints for artists. It is poisonous, so people use it carefully.","Кадмий даёт яркие жёлтые и красные краски для художников. Он ядовит, поэтому с ним обращаются осторожно.","Kadmiyum, ressamlar için parlak sarı ve kırmızı boyalar yapar. Zehirli olduğu için dikkatle kullanılır."],
+49:["Indium helps touch screens work. When a bar of indium is bent, it squeaks!","Индий помогает работать сенсорным экранам. Если согнуть брусок индия, он скрипит!","İndiyum dokunmatik ekranların çalışmasına yardım eder. Bir indiyum çubuğu bükülünce gıcırdar!"],
+51:["Long ago, Egyptians used a rock with antimony as black eye makeup. Today it helps stop plastics from burning.","В Древнем Египте камень с сурьмой был чёрной краской для глаз. Сегодня сурьма помогает пластику не гореть.","Eski Mısır'da antimonlu bir taş, siyah göz boyası olarak kullanılırdı. Bugün plastiklerin kolay yanmasını önler."],
+52:["Tellurium is named after the Earth. In Latin, Tellus means Earth.","Теллур назван в честь Земли. По-латыни Земля — «Теллус».","Tellür, adını Dünya'dan alır. Latincede Tellus, Dünya demektir."],
+54:["Xenon makes very bright light in some car headlights. Some spaceships fly using xenon gas.","Ксенон ярко светится в фарах машин. Некоторые космические корабли летают на ксеноне.","Ksenon, bazı araba farlarında çok parlak ışık verir. Bazı uzay araçları ksenon gazıyla uçar."],
+55:["Cesium is used in atomic clocks, which are super exact. It melts on a hot day.","Цезий работает в атомных часах. Они очень-очень точные. А ещё цезий тает в жаркий день.","Sezyum atom saatlerinde kullanılır. Bu saatler çok çok doğrudur. Sezyum sıcak bir günde erir."],
+56:["Barium makes fireworks glow green. Doctors give a special barium drink so X-rays can show the tummy.","Барий окрашивает салют в зелёный цвет. Врачи дают особый напиток с барием, чтобы увидеть живот на рентгене.","Baryum havai fişeklere yeşil rengini verir. Doktorlar, röntgende mideyi görmek için baryumlu özel bir içecek verir."],
+60:["Neodymium makes the strongest magnets. They are in headphones and electric cars.","Неодим делает самые сильные магниты. Они есть в наушниках и электромобилях.","Neodim en güçlü mıknatısları yapar. Bu mıknatıslar kulaklıklarda ve elektrikli arabalarda bulunur."],
+63:["Europium is named after Europe. It glows on euro banknotes under special light, which helps spot fake money.","Европий назван в честь Европы. Он светится на банкнотах евро под особой лампой и помогает найти фальшивые деньги.","Evropiyum, adını Avrupa'dan alır. Özel bir ışık altında euro banknotlarında parlar ve sahte paraları bulmaya yardım eder."],
+64:["Gadolinium helps doctors get clearer MRI pictures of the inside of the body.","Гадолиний помогает врачам делать более чёткие снимки на МРТ.","Gadolinyum, doktorların MR'da vücudun içinin daha net resmini çekmesine yardım eder."],
+76:["Osmium is the densest element. A ball of osmium is heavier than the same size ball of gold.","Осмий — самый плотный элемент. Шарик из осмия тяжелее такого же шарика из золота.","Osmiyum en yoğun elementtir. Osmiyumdan bir bilye, aynı boy altın bilyeden daha ağırdır."],
+77:["Iridium's name means rainbow. A thin layer of it in rocks came from the asteroid that ended the dinosaurs.","Название иридия значит «радуга». Тонкий слой иридия в камнях остался от астероида, из-за которого вымерли динозавры.","İridyumun adı gökkuşağı demektir. Kayalardaki ince bir iridyum katmanı, dinozorların sonunu getiren asteroitten kaldı."],
+83:["Bismuth makes rainbow-colored crystals shaped like little stairs. It is also in some tummy medicine.","Висмут образует радужные кристаллы, похожие на лесенки. Он есть в некоторых лекарствах для живота.","Bizmut, küçük merdivenlere benzeyen gökkuşağı renkli kristaller yapar. Bazı mide ilaçlarında da vardır."],
+84:["Polonium is named after Poland, the home country of Marie Curie, who discovered it.","Полоний назван в честь Польши. Это родина Марии Кюри, которая его открыла.","Polonyum, adını Polonya'dan alır. Polonya, onu bulan Marie Curie'nin ülkesidir."],
+86:["Radon is an invisible gas that can seep up from the ground. People test homes to keep the air safe.","Радон — невидимый газ, который выходит из земли. Дома проверяют, чтобы воздух был безопасным.","Radon, topraktan çıkabilen görünmez bir gazdır. Havanın güvenli olması için evler ölçülür."],
+88:["Radium glows faintly in the dark. Long ago it was used on clock hands, until people learned it was dangerous.","Радий слабо светится в темноте. Раньше им красили стрелки часов, пока не узнали, что он опасен.","Radyum karanlıkta hafifçe parlar. Eskiden saat ibrelerinde kullanılırdı, sonra tehlikeli olduğu anlaşıldı."],
+90:["Thorium is named after Thor, the Norse god of thunder.","Торий назван в честь Тора, скандинавского бога грома.","Toryum, adını İskandinav gök gürültüsü tanrısı Thor'dan alır."],
+94:["Plutonium is named after the dwarf planet Pluto. It powers some space probes far from the Sun.","Плутоний назван в честь карликовой планеты Плутон. Он даёт энергию космическим аппаратам вдали от Солнца.","Plütonyum, adını cüce gezegen Plüton'dan alır. Güneş'ten çok uzaktaki bazı uzay araçlarına enerji verir."],
+95:["Americium is named after America. A tiny bit of it is inside many smoke alarms.","Америций назван в честь Америки. Крупинка америция есть во многих датчиках дыма.","Amerikyum, adını Amerika'dan alır. Birçok duman alarmının içinde çok az amerikyum vardır."],
+98:["Californium is named after California, where it was first made in a lab.","Калифорний назван в честь Калифорнии. Там его впервые сделали в лаборатории.","Kaliforniyum, adını Kaliforniya'dan alır. İlk kez orada bir laboratuvarda yapıldı."],
+99:["Einsteinium is named after Albert Einstein. Scientists have made only tiny specks of it.","Эйнштейний назван в честь Альберта Эйнштейна. Учёные сделали его совсем-совсем мало.","Aynştaynyum, adını Albert Einstein'dan alır. Bilim insanları ondan sadece minicik parçalar yapabildi."],
+102:["Nobelium is named after Alfred Nobel, the man behind the Nobel Prize. It lasts only a short time.","Нобелий назван в честь Альфреда Нобеля, в честь которого названа Нобелевская премия. Он быстро распадается.","Nobelyum, adını Nobel Ödülü'nü kuran Alfred Nobel'den alır. Çok kısa süre dayanır."],
+104:["Rutherfordium is named after Ernest Rutherford, who found the center of the atom. It lasts only a short time.","Резерфордий назван в честь Эрнеста Резерфорда. Он открыл ядро атома. Резерфордий быстро распадается.","Rutherfordiyum, adını atomun çekirdeğini bulan Ernest Rutherford'dan alır. Çok kısa süre dayanır."],
+118:["Oganesson is the heaviest element ever made. It is named after Yuri Oganessian, a scientist who helped make it.","Оганесон — самый тяжёлый элемент, который сделали люди. Он назван в честь учёного Юрия Оганесяна.","Oganesson, insanların yaptığı en ağır elementtir. Adını, onu yapan bilim insanlarından Yuri Oganessian'dan alır."]
+};
+const FACT_SCI={
+1:["Hydrogen is the most common element in the universe. In the Sun's core, hydrogen nuclei fuse into helium, releasing the energy that becomes sunlight.","Водород — самый распространённый элемент во Вселенной. В ядре Солнца ядра водорода сливаются в гелий, и выделяется энергия, которая становится солнечным светом.","Hidrojen evrendeki en yaygın elementtir. Güneş'in merkezinde hidrojen çekirdekleri birleşip helyuma dönüşür ve güneş ışığına dönüşen enerji açığa çıkar."],
+2:["Helium was discovered in the Sun's spectrum in 1868, before it was found on Earth. Liquid helium, at minus 269 °C, cools the magnets in MRI scanners.","Гелий открыли в спектре Солнца в 1868 году, раньше, чем нашли на Земле. Жидкий гелий при минус 269 °C охлаждает магниты в аппаратах МРТ.","Helyum 1868'de, Dünya'da bulunmadan önce Güneş'in ışık tayfında keşfedildi. Eksi 269 °C'deki sıvı helyum, MR cihazlarının mıknatıslarını soğutur."],
+3:["Lithium is the lightest metal and even floats on oil. In lithium-ion batteries, lithium ions move between electrodes to store energy for phones and electric cars.","Литий — самый лёгкий металл, он плавает даже в масле. В литий-ионных аккумуляторах ионы лития переходят между электродами и запасают энергию для телефонов и электромобилей.","Lityum en hafif metaldir ve yağda bile yüzer. Lityum iyon pillerde lityum iyonları elektrotlar arasında gidip gelerek telefonlar ve elektrikli arabalar için enerji depolar."],
+6:["A carbon atom can form four bonds, so carbon builds huge molecules like DNA. Diamond and graphite are both pure carbon; only the arrangement of their atoms differs.","Атом углерода образует четыре связи, поэтому из углерода строятся огромные молекулы, например ДНК. Алмаз и графит — чистый углерод, они отличаются только расположением атомов.","Karbon atomu dört bağ yapabilir, bu yüzden DNA gibi dev moleküller kurar. Elmas ve grafit ikisi de saf karbondur; sadece atomlarının dizilişi farklıdır."],
+7:["Nitrogen makes up about 78% of the air. The Haber process turns nitrogen from the air into ammonia for fertilizer, which helps feed billions of people.","Азот составляет около 78% воздуха. Процесс Габера превращает азот из воздуха в аммиак для удобрений, и это помогает кормить миллиарды людей.","Azot havanın yaklaşık %78'ini oluşturur. Haber yöntemi havadaki azotu gübre için amonyağa çevirir ve bu, milyarlarca insanın beslenmesine yardım eder."],
+8:["Almost all the oxygen in our air was made by photosynthesis. Ozone (O3), a molecule of three oxygen atoms, blocks harmful ultraviolet light high in the atmosphere.","Почти весь кислород в воздухе появился благодаря фотосинтезу. Озон (O3), молекула из трёх атомов кислорода, высоко в атмосфере задерживает опасные ультрафиолетовые лучи.","Havadaki oksijenin neredeyse tamamı fotosentezle oluştu. Üç oksijen atomlu ozon (O3), atmosferin yükseklerinde zararlı morötesi ışınları engeller."],
+9:["Fluorine is the most reactive element and pulls electrons from almost anything. Fluoride in toothpaste makes tooth enamel stronger and more resistant to decay.","Фтор — самый активный элемент: он отнимает электроны почти у любого вещества. Фторид в зубной пасте делает эмаль зубов крепче и защищает её от кариеса.","Flor en tepkin elementtir ve neredeyse her maddeden elektron koparır. Diş macunundaki florür, diş minesini güçlendirir ve çürümeye karşı korur."],
+10:["Neon is a noble gas that forms no stable compounds. In a neon sign, electricity excites neon atoms, and they give off their own red-orange light.","Неон — благородный газ, он не образует устойчивых соединений. В неоновой вывеске электричество возбуждает атомы неона, и они испускают красно-оранжевый свет.","Neon soy bir gazdır ve kararlı bileşik oluşturmaz. Neon tabelalarda elektrik neon atomlarını uyarır ve atomlar kırmızı-turuncu ışık yayar."],
+11:["Sodium reacts so violently with water that it can explode. Yet combined with chlorine, a toxic gas, it forms harmless table salt, sodium chloride.","Натрий так бурно реагирует с водой, что может взорваться. А вместе с ядовитым газом хлором он образует безопасную поваренную соль — хлорид натрия.","Sodyum suyla o kadar şiddetli tepkimeye girer ki patlayabilir. Zehirli bir gaz olan klorla birleşince ise zararsız sofra tuzunu, yani sodyum klorürü oluşturur."],
+12:["Magnesium burns with a dazzling white light and was used in early camera flashes. In plants, a magnesium atom sits at the center of every chlorophyll molecule.","Магний горит ослепительно белым пламенем, его использовали в первых фотовспышках. В растениях атом магния находится в центре каждой молекулы хлорофилла.","Magnezyum göz kamaştırıcı beyaz bir ışıkla yanar ve ilk fotoğraf flaşlarında kullanıldı. Bitkilerde her klorofil molekülünün merkezinde bir magnezyum atomu bulunur."],
+13:["Aluminium is the most common metal in Earth's crust, yet it was once more precious than gold. An electrolysis process invented in 1886 finally made it cheap.","Алюминий — самый распространённый металл в земной коре, но когда-то он ценился дороже золота. Дешёвым его сделал способ получения электролизом, изобретённый в 1886 году.","Alüminyum yer kabuğunda en çok bulunan metaldir ama bir zamanlar altından değerliydi. 1886'da bulunan bir elektroliz yöntemi onu sonunda ucuzlattı."],
+14:["Silicon is a semiconductor: adding tiny amounts of other elements controls how it conducts electricity. Billions of silicon transistors fit on a single computer chip.","Кремний — полупроводник: крошечные добавки других элементов управляют тем, как он проводит ток. На одном компьютерном чипе помещаются миллиарды кремниевых транзисторов.","Silisyum bir yarı iletkendir: içine çok az başka element katılarak elektriği nasıl ileteceği ayarlanır. Tek bir bilgisayar çipine milyarlarca silisyum transistör sığar."],
+15:["Phosphorus was discovered in 1669 by Hennig Brand, who boiled down urine. White phosphorus glows in the dark because it slowly reacts with oxygen in the air.","Фосфор открыл в 1669 году Хенниг Бранд, выпаривая мочу. Белый фосфор светится в темноте, потому что медленно реагирует с кислородом воздуха.","Fosforu 1669'da Hennig Brand, idrarı kaynatarak keşfetti. Beyaz fosfor, havadaki oksijenle yavaşça tepkimeye girdiği için karanlıkta parlar."],
+16:["Sulfur compounds give rotten eggs and skunks their smell. Sulfuric acid is one of the most produced chemicals in the world and is used to make fertilizers.","Соединения серы дают запах тухлым яйцам и скунсам. Серная кислота — одно из самых производимых химических веществ в мире, из неё делают удобрения.","Çürük yumurta ve kokarca kokusu kükürt bileşiklerinden gelir. Sülfürik asit dünyada en çok üretilen kimyasallardan biridir ve gübre yapımında kullanılır."],
+17:["Chlorine is added to drinking water and swimming pools to kill germs. Your stomach makes hydrochloric acid, HCl, to help digest food.","Хлор добавляют в питьевую воду и бассейны, чтобы убивать микробы. Желудок вырабатывает соляную кислоту, HCl, чтобы переваривать пищу.","Mikropları öldürmek için içme suyuna ve havuzlara klor eklenir. Midemiz, yiyecekleri sindirmek için hidroklorik asit (HCl) üretir."],
+18:["Argon makes up almost 1% of air, and most of it came from the decay of radioactive potassium-40 in rocks. Its name means lazy in Greek, because it hardly reacts.","Аргон составляет почти 1% воздуха, и большая его часть появилась при распаде радиоактивного калия-40 в горных породах. По-гречески его название значит «ленивый»: он почти не вступает в реакции.","Argon havanın yaklaşık %1'ini oluşturur ve çoğu kayalardaki radyoaktif potasyum-40'ın bozunmasından gelir. Adı Yunancada tembel demektir, çünkü neredeyse hiç tepkimeye girmez."],
+19:["Nerve cells send signals by moving potassium and sodium ions across their membranes. Bananas are rich in potassium, including a tiny share of naturally radioactive potassium-40.","Нервные клетки передают сигналы, перемещая ионы калия и натрия через свою оболочку. В бананах много калия, включая крошечную долю природного радиоактивного калия-40.","Sinir hücreleri, zarlarından potasyum ve sodyum iyonlarını geçirerek sinyal gönderir. Muz potasyumca zengindir; bunun çok küçük bir kısmı doğal radyoaktif potasyum-40'tır."],
+20:["About 99% of the calcium in your body is in bones and teeth, as calcium phosphate. Seashells, natural chalk and marble are made of calcium carbonate.","Около 99% кальция в организме находится в костях и зубах в виде фосфата кальция. Ракушки, природный мел и мрамор состоят из карбоната кальция.","Vücudumuzdaki kalsiyumun yaklaşık %99'u kemik ve dişlerde, kalsiyum fosfat olarak bulunur. Deniz kabukları, doğal tebeşir ve mermer kalsiyum karbonattan oluşur."],
+22:["Titanium is as strong as many steels but about 45% lighter. It bonds well with bone, so it is used for artificial hip joints and dental implants.","Титан прочен, как многие стали, но примерно на 45% легче. Он хорошо срастается с костью, поэтому из него делают искусственные суставы и зубные импланты.","Titanyum birçok çelik kadar güçlüdür ama yaklaşık %45 daha hafiftir. Kemikle iyi kaynaştığı için yapay kalça eklemleri ve diş implantları yapımında kullanılır."],
+24:["Stainless steel contains at least 10.5% chromium, which forms an invisible oxide layer that stops rust. Chromium ions also give rubies their red color.","Нержавеющая сталь содержит не меньше 10,5% хрома: он образует невидимую оксидную плёнку, которая защищает от ржавчины. Ионы хрома придают рубинам красный цвет.","Paslanmaz çelikte en az %10,5 krom bulunur; krom, pası durduran görünmez bir oksit tabakası oluşturur. Yakutların kırmızı rengi de krom iyonlarından gelir."],
+26:["Earth's core is made mostly of iron and nickel. In your blood, the iron in hemoglobin carries oxygen from your lungs to every cell.","Ядро Земли состоит в основном из железа и никеля. В крови железо в составе гемоглобина переносит кислород от лёгких ко всем клеткам.","Dünya'nın çekirdeği çoğunlukla demir ve nikelden oluşur. Kanımızda hemoglobindeki demir, oksijeni akciğerlerden bütün hücrelere taşır."],
+28:["Iron meteorites are an alloy of iron and nickel. Today nickel is also a key metal in many electric car batteries.","Железные метеориты — это сплав железа и никеля. Сегодня никель также важен для аккумуляторов многих электромобилей.","Demir göktaşları, demir ve nikel alaşımıdır. Bugün nikel, birçok elektrikli araba bataryası için de önemli bir metaldir."],
+29:["Copper conducts electricity better than any metal except silver, so it is used in wires. The Statue of Liberty is green because its copper surface reacted with the air.","Медь проводит ток лучше всех металлов, кроме серебра, поэтому из неё делают провода. Статуя Свободы зелёная, потому что её медная поверхность прореагировала с воздухом.","Bakır, gümüş dışındaki tüm metallerden daha iyi elektrik iletir; bu yüzden kablolarda kullanılır. Özgürlük Heykeli, bakır yüzeyi havayla tepkimeye girdiği için yeşildir."],
+30:["A zinc coating protects steel from rust even when scratched, because the zinc corrodes first. This process is called galvanizing.","Слой цинка защищает сталь от ржавчины даже с царапинами, потому что первым разрушается цинк. Такой процесс называется цинкованием.","Çeliğin üzerine kaplanan çinko, çizilse bile onu pastan korur, çünkü önce çinko aşınır. Bu işleme galvanizleme denir."],
+33:["Arsenic was a famous poison in history. Today gallium arsenide is a semiconductor used in LEDs, lasers and the solar panels of satellites.","Мышьяк был знаменитым ядом в истории. Сегодня арсенид галлия — полупроводник, из которого делают светодиоды, лазеры и солнечные батареи спутников.","Arsenik tarihte ünlü bir zehirdi. Bugün galyum arsenür, LED'lerde, lazerlerde ve uyduların güneş panellerinde kullanılan bir yarı iletkendir."],
+35:["Bromine is one of only two elements that are liquid at room temperature; the other is mercury. Its name comes from the Greek word for stench.","Бром — один из двух элементов, жидких при комнатной температуре; второй — ртуть. Его название происходит от греческого слова «зловоние».","Brom, oda sıcaklığında sıvı olan iki elementten biridir; diğeri cıvadır. Adı, Yunancada pis koku anlamına gelen kelimeden gelir."],
+36:["From 1960 to 1983, the meter was officially defined using the orange light of krypton-86. Krypton was discovered in 1898 by separating liquefied air.","С 1960 по 1983 год метр официально определяли через оранжевый свет криптона-86. Криптон открыли в 1898 году, разделяя сжиженный воздух.","1960'tan 1983'e kadar metre, kripton-86'nın turuncu ışığıyla tanımlandı. Kripton 1898'de sıvılaştırılmış havanın ayrıştırılmasıyla keşfedildi."],
+47:["Silver conducts electricity and heat better than any other metal. Silver ions kill bacteria, so silver is used in some wound dressings.","Серебро лучше всех металлов проводит электричество и тепло. Ионы серебра убивают бактерии, поэтому серебро добавляют в некоторые повязки.","Gümüş, elektriği ve ısıyı en iyi ileten metaldir. Gümüş iyonları bakterileri öldürür, bu yüzden bazı yara örtülerinde kullanılır."],
+50:["Mixing tin with copper makes bronze, which gave the Bronze Age its name. Below about 13 °C, tin can slowly crumble into grey powder, called tin pest.","Сплав олова с медью — бронза, в честь неё назван бронзовый век. Ниже 13 °C олово может медленно рассыпаться в серый порошок — это «оловянная чума».","Kalay bakırla karıştırılınca tunç (bronz) olur; Tunç Çağı adını bundan alır. Kalay yaklaşık 13 °C'nin altında yavaşça gri bir toza dönüşebilir; buna kalay vebası denir."],
+53:["Your thyroid gland uses iodine to make hormones that control growth, so iodine is added to table salt. Iodine turns starch dark blue-black, a classic lab test.","Щитовидная железа использует йод, чтобы делать гормоны, управляющие ростом, поэтому йод добавляют в соль. Йод окрашивает крахмал в тёмно-синий цвет — это известный опыт.","Tiroit bezi, büyümeyi düzenleyen hormonları yapmak için iyot kullanır; bu yüzden sofra tuzuna iyot eklenir. İyot nişastayı koyu mavi-siyaha boyar; bu, bilinen bir laboratuvar deneyidir."],
+54:["Xenon was long thought to be totally unreactive, but in 1962 Neil Bartlett made the first noble gas compound with it. Xenon ion engines push spacecraft such as NASA's Dawn.","Ксенон долго считали совсем инертным, но в 1962 году Нил Бартлетт получил с ним первое соединение благородного газа. Ксеноновые ионные двигатели разгоняют космические аппараты, например «Dawn».","Ksenonun hiç tepkimeye girmediği sanılıyordu, ama 1962'de Neil Bartlett onunla ilk soy gaz bileşiğini yaptı. Ksenonlu iyon motorları, NASA'nın Dawn aracı gibi uzay araçlarını iter."],
+55:["The second is defined using cesium-133 atoms: one second is exactly 9,192,631,770 cycles of the microwave radiation they absorb and emit.","Секунда определяется через атомы цезия-133: это ровно 9 192 631 770 колебаний микроволнового излучения, которое они поглощают и испускают.","Saniye, sezyum-133 atomlarıyla tanımlanır: bir saniye, bu atomların soğurduğu ve yaydığı mikrodalga ışınımın tam 9.192.631.770 titreşimidir."],
+74:["Tungsten has the highest melting point of all metals, 3422 °C, so it was used for light bulb filaments. Its symbol W comes from its other name, wolfram.","У вольфрама самая высокая температура плавления среди металлов — 3422 °C, поэтому из него делали нити ламп накаливания. Его символ W — от латинского названия Wolframium.","Tungsten, 3422 °C ile metaller arasında en yüksek erime noktasına sahiptir; bu yüzden ampul tellerinde kullanıldı. W simgesi, diğer adı olan volframdan gelir."],
+78:["Platinum is a catalyst: it speeds up chemical reactions without being used up. In car catalytic converters, it helps turn toxic exhaust gases into less harmful ones.","Платина — катализатор: она ускоряет химические реакции, а сама не расходуется. В автомобильных катализаторах она помогает превращать ядовитые газы в менее вредные.","Platin bir katalizördür: kimyasal tepkimeleri hızlandırır ama kendisi harcanmaz. Arabaların katalitik dönüştürücülerinde zehirli egzoz gazlarını daha az zararlı gazlara çevirmeye yardım eder."],
+79:["Gold forms in extreme cosmic events such as collisions of neutron stars. It is so malleable that one gram can be hammered into a sheet about one square meter in size.","Золото рождается при мощных космических событиях, например при столкновении нейтронных звёзд. Оно такое ковкое, что из одного грамма можно выковать лист площадью около квадратного метра.","Altın, nötron yıldızlarının çarpışması gibi çok güçlü kozmik olaylarda oluşur. O kadar dövülebilir ki bir gram altından yaklaşık bir metrekarelik yaprak yapılabilir."],
+80:["Mercury is the only metal that is liquid at room temperature. Its vapor is toxic, so mercury thermometers have mostly been replaced by digital ones.","Ртуть — единственный металл, жидкий при комнатной температуре. Её пары ядовиты, поэтому ртутные градусники в основном заменили электронными.","Cıva, oda sıcaklığında sıvı olan tek metaldir. Buharı zehirli olduğu için cıvalı termometrelerin yerini çoğunlukla dijital termometreler aldı."],
+82:["Lead is dense and absorbs X-rays, so patients wear lead aprons for dental X-rays. Lead was removed from paint and petrol in most countries because it harms the brain.","Свинец плотный и задерживает рентгеновские лучи, поэтому при снимке зубов надевают свинцовый фартук. Почти во всех странах свинец убрали из красок и бензина, потому что он вредит мозгу.","Kurşun yoğundur ve röntgen ışınlarını tutar; bu yüzden diş röntgeninde kurşunlu önlük giyilir. Beyne zarar verdiği için çoğu ülkede boya ve benzinden çıkarıldı."],
+86:["Radon is a radioactive noble gas produced when uranium in rocks decays. It can build up in basements, so many countries test homes for it.","Радон — радиоактивный благородный газ, который образуется при распаде урана в горных породах. Он может скапливаться в подвалах, поэтому во многих странах дома проверяют на радон.","Radon, kayalardaki uranyum bozunduğunda oluşan radyoaktif bir soy gazdır. Bodrumlarda birikebileceği için birçok ülkede evlerde radon ölçülür."],
+88:["Marie and Pierre Curie discovered radium in 1898, and Marie later processed tonnes of uranium ore to isolate it. She became the first person to win two Nobel Prizes.","Мария и Пьер Кюри открыли радий в 1898 году, а потом Мария переработала тонны урановой руды, чтобы его выделить. Она первой в мире получила две Нобелевские премии.","Marie ve Pierre Curie radyumu 1898'de keşfetti; Marie daha sonra onu ayırmak için tonlarca uranyum cevheri işledi. İki Nobel Ödülü kazanan ilk insan oldu."],
+92:["Uranium was named after the planet Uranus. Splitting the nuclei in 1 kg of uranium-235 releases about as much energy as burning 3,000 tonnes of coal.","Уран назван в честь планеты Уран. Деление ядер в 1 кг урана-235 даёт примерно столько же энергии, сколько сжигание 3000 тонн угля.","Uranyum, adını Uranüs gezegeninden alır. 1 kg uranyum-235'in çekirdekleri bölündüğünde, yaklaşık 3000 ton kömür yakmak kadar enerji açığa çıkar."],
+94:["Plutonium-238 stays hot from its own radioactive decay. Generators that turn this heat into electricity power the Voyager probes and the Perseverance rover on Mars.","Плутоний-238 нагревается от собственного радиоактивного распада. Генераторы, превращающие это тепло в электричество, питают зонды «Вояджер» и марсоход «Персеверанс».","Plütonyum-238 kendi radyoaktif bozunmasıyla ısınır. Bu ısıyı elektriğe çeviren jeneratörler, Voyager sondalarına ve Mars'taki Perseverance aracına güç verir."],
+43:["Technetium, discovered in 1937, was the first element made artificially; its name comes from the Greek for artificial. Technetium-99m is used in tens of millions of medical scans each year.","Технеций, открытый в 1937 году, — первый искусственно полученный элемент; его название по-гречески значит «искусственный». Технеций-99m используют в десятках миллионов медицинских обследований в год.","1937'de keşfedilen teknesyum, yapay olarak üretilen ilk elementtir; adı Yunancada yapay demektir. Teknesyum-99m her yıl on milyonlarca tıbbi taramada kullanılır."],
+61:["Promethium has no stable isotopes, so almost none exists naturally on Earth. It is named after Prometheus, who in Greek myth stole fire from the gods.","У прометия нет стабильных изотопов, поэтому в природе его почти нет. Он назван в честь Прометея, который, по греческому мифу, украл огонь у богов.","Prometyumun kararlı izotopu yoktur, bu yüzden Dünya'da doğal olarak neredeyse hiç bulunmaz. Adını, Yunan mitolojisinde tanrılardan ateşi çalan Prometheus'tan alır."],
+99:["Einsteinium was first found in 1952 in debris from the first hydrogen bomb test. Scientists have only ever made tiny amounts, far less than a gram.","Эйнштейний впервые нашли в 1952 году в остатках после испытания первой водородной бомбы. Учёные получали его лишь в крошечных количествах, гораздо меньше грамма.","Aynştaynyum ilk kez 1952'de, ilk hidrojen bombası denemesinin kalıntılarında bulundu. Bilim insanları ondan bugüne kadar bir gramdan çok daha az üretebildi."],
+101:["Mendelevium is named after Dmitri Mendeleev, who created the periodic table in 1869. When it was first made in 1955, scientists produced only about 17 atoms.","Менделевий назван в честь Дмитрия Менделеева, создавшего периодическую таблицу в 1869 году. Когда его впервые получили в 1955 году, учёные сделали всего около 17 атомов.","Mendelevyum, 1869'da periyodik tabloyu oluşturan Dmitri Mendeleyev'in adını taşır. 1955'te ilk kez üretildiğinde bilim insanları yalnızca yaklaşık 17 atom elde etti."],
+104:["Rutherfordium is the first element after the actinides. Soviet and American teams argued for years over its name, until IUPAC settled it in 1997.","Резерфордий — первый элемент после актиноидов. Советские и американские учёные долго спорили о его названии (в СССР его называли курчатовием), пока ИЮПАК не решил вопрос в 1997 году.","Rutherfordiyum, aktinitlerden sonraki ilk elementtir. Sovyet ve Amerikan ekipleri adı konusunda yıllarca tartıştı; IUPAC konuyu 1997'de çözdü."],
+111:["Roentgenium is named after Wilhelm Röntgen, who discovered X-rays. It was first made in Germany in 1994 by firing nickel nuclei at bismuth.","Рентгений назван в честь Вильгельма Рентгена, открывшего рентгеновские лучи. Его впервые получили в Германии в 1994 году, обстреливая висмут ядрами никеля.","Röntgenyum, X ışınlarını keşfeden Wilhelm Röntgen'in adını taşır. İlk kez 1994'te Almanya'da bizmut, nikel çekirdekleriyle bombardıman edilerek üretildi."],
+113:["Nihonium was the first element discovered in Asia, by Japanese scientists at RIKEN. Its name comes from Nihon, one of the Japanese names for Japan.","Нихоний — первый элемент, открытый в Азии, его нашли японские учёные из института RIKEN. Название происходит от слова «Нихон» — так японцы называют Японию.","Nihonyum, Asya'da keşfedilen ilk elementtir; onu RIKEN'deki Japon bilim insanları buldu. Adı, Japoncada Japonya anlamına gelen Nihon kelimesinden gelir."],
+117:["Tennessine was made in 2010 in Dubna, Russia, by firing calcium-48 nuclei at berkelium produced in the USA. It is named after Tennessee, home of Oak Ridge National Laboratory.","Теннессин получили в 2010 году в Дубне, обстреливая ядрами кальция-48 берклий, сделанный в США. Он назван в честь штата Теннесси, где находится Ок-Риджская национальная лаборатория.","Tennessin 2010'da Rusya'nın Dubna şehrinde, ABD'de üretilen berkelyumun kalsiyum-48 çekirdekleriyle bombardıman edilmesiyle yapıldı. Adını Oak Ridge Ulusal Laboratuvarı'nın bulunduğu Tennessee eyaletinden alır."],
+118:["Oganesson sits in the noble gas column, but calculations suggest it may be a solid and more reactive than other noble gases. Only about five of its atoms have ever been detected.","Оганесон стоит в столбце благородных газов, но расчёты показывают, что он может быть твёрдым и более активным, чем другие благородные газы. Всего удалось зарегистрировать около пяти его атомов.","Oganesson soy gazlar sütunundadır, ama hesaplamalar onun katı ve diğer soy gazlardan daha tepkin olabileceğini gösteriyor. Şimdiye kadar yalnızca yaklaşık beş atomu tespit edildi."]
+};
+/*FACTS-EXTRA-END*/
 
 /* molecules: atoms [symbol,x,y,z] in ångström, bonds [i,j,order]; order 0 = ionic */
 const t4=(d,s)=>[[1,1,1],[-1,-1,1],[-1,1,-1],[1,-1,-1]].map(v=>v.map(c=>c*d*s/Math.sqrt(3)));
@@ -393,9 +593,34 @@ Object.assign(T.ru,{build:'Собери',buildTitle:'Собери атом',goal
 Object.assign(T.tr,{build:'Yap',buildTitle:'Atom yap',goalL:'Bu atomu yap:',newGoal:'Başka görev',none:'Başlamak için bir proton ekle!',neutral:'nötr atom',ion:'iyon, yük {c}',massNo:'Kütle numarası',goalDone:'Başardın! Proton ve elektron sayısı eşit.',goalHint:'Element doğru! Şimdi elektron sayısını proton sayısına eşitle.',syl:'Kelimeleri hecelere ayır (Rusça, Türkçe)',sci:'Daha çok bilim (büyük çocuklar için)',cfg:'Elektron dizilimi',grp:'Grup',per:'Periyot',outer:'Dış elektronlar',qSym:'Bu sembolü taşıyan elementi bul:',qP:'Bu kadar protonu olan elementi bul:'});
 const LOC={en:'en-US',ru:'ru-RU',tr:'tr-TR'};
 const fill=(s,o)=>s.replace(/\{(\w+)\}/g,(_,k)=>o[k]);
+Object.assign(T.en,{gBuild:'Build an atom',gMol:'Build a molecule',gHome:'Find it at home',gHeavy:'Which is heavier?',molT:'Build a molecule',molGoal:'Make:',showF:'Show formula',trayEmpty:'Tap the atoms to add them here.',tooMany:'Oops, too much {x}!',homeT:'Elements at home',homeNote:'Find these things at home. Each one has an element inside!',foundIt:'Found it!',found:'Found',newHunt:'New hunt',atHome:'At home',heavyQ:'Which atom is heavier?',heavyNo:'Not quite. Look at the scale!',surprise:'Surprise! It has fewer protons, but more neutrons.',sciL:'For explorers',repH:'Progress',readH:'Reading',voiceH:'Voices',claude:'Use the Claude voice (when available)',recMode:'Recording mode: record names and facts in your own voice',recName:'Record name',recFact:'Record fact',recStop:'Stop',recRedo:'Record again',recDel:'Delete recordings',recL:'Grown-up:',recNo:'Recording works in the standalone app (opened from its web address or as a file) with microphone permission.',recOk:'Recordings stay on this device. Turn on, open an element, tap Record, speak, tap Stop.',test:'Test',noVoiceShort:'No voice installed',packN:'Voice pack: {n} clips loaded.',packNone:'No voice pack loaded, so the device voice is used.',packSave:'Save voices for offline use',packSaved:'Saved for offline use.',rStickers:'Stickers',rWeek:'Read this week',rStars:'Stars',rQuiz:'Find it! accuracy',rMols:'Molecules built',rHome:'Home finds',rHeavy:'Heavier: right',rTricky:'Tricky names (wrong answers, hints, listening before reading):',rNone:'No tricky names yet.',voiceHelp:'<b>Better voices.</b> The most natural sound comes from a voice pack of pre-made recordings (see VOICES.md in the project). Without one, the device voice is used: on iPad go to Settings → Accessibility → Spoken Content → Voices, open Russian (Milena, Yuri) or Turkish (Yelda, Cem), download the Enhanced version, then reload this page. On a computer, Microsoft Edge has natural Russian and Turkish voices (Svetlana, Dmitry, Emel, Ahmet).'});
+Object.assign(T.ru,{gBuild:'Собери атом',gMol:'Собери молекулу',gHome:'Найди дома',gHeavy:'Что тяжелее?',molT:'Собери молекулу',molGoal:'Сделай:',showF:'Показать формулу',trayEmpty:'Нажимай на атомы, чтобы добавить их сюда.',tooMany:'Ой, слишком много: {x}!',homeT:'Элементы дома',homeNote:'Найди эти вещи дома. В каждой прячется элемент!',foundIt:'Нашлось!',found:'Найдено',newHunt:'Новые поиски',atHome:'Дома',heavyQ:'Какой атом тяжелее?',heavyNo:'Не совсем. Посмотри на весы!',surprise:'Сюрприз! Протонов у него меньше, зато нейтронов больше.',sciL:'Для исследователей',repH:'Успехи',readH:'Чтение',voiceH:'Голоса',claude:'Голос Claude (если доступен)',recMode:'Режим записи: запишите названия и факты своим голосом',recName:'Записать название',recFact:'Записать факт',recStop:'Стоп',recRedo:'Перезаписать',recDel:'Удалить записи',recL:'Для взрослых:',recNo:'Запись работает в отдельной версии приложения (по веб-адресу или из файла) с доступом к микрофону.',recOk:'Записи хранятся на этом устройстве. Включите, откройте элемент, нажмите «Записать», говорите, нажмите «Стоп».',test:'Проверить',noVoiceShort:'Голос не установлен',packN:'Голосовой пакет: записей — {n}.',packNone:'Голосовой пакет не загружен, используется голос устройства.',packSave:'Сохранить голоса для работы без интернета',packSaved:'Сохранено для работы без интернета.',rStickers:'Наклейки',rWeek:'Прочитано за неделю',rStars:'Звёзды',rQuiz:'Точность в «Найди!»',rMols:'Собрано молекул',rHome:'Найдено дома',rHeavy:'Весы: верно',rTricky:'Трудные названия (ошибки, подсказки, прослушивание до чтения):',rNone:'Трудных названий пока нет.',voiceHelp:'<b>Голоса получше.</b> Естественнее всего звучит голосовой пакет с готовыми записями (см. VOICES.md в проекте). Без него используется голос устройства: на iPad откройте «Настройки → Универсальный доступ → Устный контент → Голоса», выберите русский (Milena, Yuri) или турецкий (Yelda, Cem), скачайте улучшенную версию и перезагрузите страницу. На компьютере в Microsoft Edge есть естественные русские и турецкие голоса (Svetlana, Dmitry, Emel, Ahmet).'});
+Object.assign(T.tr,{gBuild:'Atom yap',gMol:'Molekül yap',gHome:'Evde bul',gHeavy:'Hangisi ağır?',molT:'Molekül yap',molGoal:'Yap:',showF:'Formülü göster',trayEmpty:'Atomları buraya eklemek için onlara dokun.',tooMany:'Eyvah, fazla {x} var!',homeT:'Evdeki elementler',homeNote:'Bunları evde bul. Her birinin içinde bir element var!',foundIt:'Buldum!',found:'Bulundu',newHunt:'Yeni av',atHome:'Evde',heavyQ:'Hangi atom daha ağır?',heavyNo:'Tam değil. Teraziye bak!',surprise:'Sürpriz! Protonu daha az ama nötronu daha fazla.',sciL:'Kâşifler için',repH:'İlerleme',readH:'Okuma',voiceH:'Sesler',claude:'Claude sesini kullan (varsa)',recMode:'Kayıt modu: adları ve bilgileri kendi sesinizle kaydedin',recName:'Adı kaydet',recFact:'Bilgiyi kaydet',recStop:'Dur',recRedo:'Yeniden kaydet',recDel:'Kayıtları sil',recL:'Yetişkin:',recNo:'Kayıt, mikrofon izniyle ayrı uygulamada (web adresinden veya dosyadan açıldığında) çalışır.',recOk:'Kayıtlar bu cihazda kalır. Açın, bir element seçin, Kaydet’e dokunun, konuşun, Dur’a dokunun.',test:'Dene',noVoiceShort:'Ses yüklü değil',packN:'Ses paketi: {n} kayıt yüklendi.',packNone:'Ses paketi yok, cihazın sesi kullanılıyor.',packSave:'Sesleri çevrimdışı kullanım için kaydet',packSaved:'Çevrimdışı kullanım için kaydedildi.',rStickers:'Çıkartmalar',rWeek:'Bu hafta okunan',rStars:'Yıldızlar',rQuiz:'“Bul!” başarısı',rMols:'Yapılan moleküller',rHome:'Evde bulunanlar',rHeavy:'Terazi: doğru',rTricky:'Zor adlar (yanlışlar, ipuçları, okumadan önce dinleme):',rNone:'Henüz zor ad yok.',voiceHelp:'<b>Daha iyi sesler.</b> En doğal ses, hazır kayıtlardan oluşan ses paketiyle gelir (projedeki VOICES.md dosyasına bakın). Paket yoksa cihazın sesi kullanılır: iPad’de Ayarlar → Erişilebilirlik → Sesli İçerik → Sesler’e gidin, Rusça (Milena, Yuri) veya Türkçe (Yelda, Cem) seçip Geliştirilmiş sürümü indirin, sonra sayfayı yenileyin. Bilgisayarda Microsoft Edge’de doğal Rusça ve Türkçe sesler vardır (Svetlana, Dmitry, Emel, Ahmet).'});
+const H=(z,e,en,ru,tr)=>({z,e,n:{en,ru,tr}});
+const HOME=[
+H([1,8],'💧','Water','Вода','Su'),H([2],'🎈','Balloon','Воздушный шарик','Balon'),H([3],'🔋','Battery','Батарейка','Pil'),
+H([6],'✏️','Pencil','Карандаш','Kurşun kalem'),H([7,8,18],'🌬️','Air','Воздух','Hava'),H([8,6],'🪴','House plant','Комнатное растение','Saksı bitkisi'),
+H([9],'🪥','Toothpaste','Зубная паста','Diş macunu'),H([11,17,53],'🧂','Salt','Соль','Tuz'),H([13],'🥤','Drink can','Банка от напитка','İçecek kutusu'),
+H([14],'🏖️','Sand','Песок','Kum'),H([14,29],'💻','Computer','Компьютер','Bilgisayar'),H([16],'🥚','Egg','Яйцо','Yumurta'),
+H([19],'🍌','Banana','Банан','Muz'),H([20],'🥛','Milk','Молоко','Süt'),H([26],'🍳','Frying pan','Сковородка','Tava'),
+H([26],'🧲','Fridge magnet','Магнит на холодильнике','Buzdolabı mıknatısı'),H([28,29],'🪙','Coin','Монета','Madeni para'),
+H([29],'🔌','Electric cable','Провод','Elektrik kablosu'),H([24],'🚰','Shiny tap','Блестящий кран','Parlak musluk'),
+H([30,22],'🧴','Sunscreen','Солнцезащитный крем','Güneş kremi'),H([47,13],'🪞','Mirror','Зеркало','Ayna'),H([50,26],'🥫','Tin can','Консервная банка','Konserve kutusu'),
+H([74,18],'💡','Old light bulb','Старая лампочка','Eski ampul'),H([79],'💍','Gold ring','Золотое кольцо','Altın yüzük'),H([12],'🥬','Spinach','Шпинат','Ispanak'),
+H([20,6],'🐚','Seashell','Ракушка','Deniz kabuğu'),H([95],'🚨','Smoke detector','Датчик дыма','Duman dedektörü'),H([22],'🎨','White paint','Белая краска','Beyaz boya'),
+H([6],'🍞','Bread','Хлеб','Ekmek'),H([15,20],'🦷','Teeth','Зубы','Dişler')];
+function factText(z,l){const fi={en:0,ru:1,tr:2}[l],t=T[l],F=FACT[z]||FACT_MORE[z];if(F)return F[fi];let f=t.gen(NAMES[l][z-1],catOf(z),stateOf(z));if(z>=93)f+=' '+t.synth;return f}
+/* every text that can be pre-recorded, keyed the way the app looks clips up */
+function allTexts(){const out={};
+  for(const l of ['en','ru','tr']){const fi={en:0,ru:1,tr:2}[l];
+    for(let z=1;z<=118;z++){out[`name/${l}/${z}`]=NAMES[l][z-1];out[`fact/${l}/${z}`]=factText(z,l);if(FACT_SCI[z])out[`sci/${l}/${z}`]=FACT_SCI[z][fi]}
+    MOLS.forEach(m=>{out[`mol/${l}/${m.f}`]=`${m.n[l]}. ${m.d[l]}`});
+    HOME.forEach((h,i)=>{out[`home/${l}/${i}`]=h.n[l]})}
+  return out}
+/*ENDDATA*/
 
 /* ---------- state ---------- */
-let S={lang:'en',stars:0,read:[],rf:true,slow:false,syl:true,sci:false};
+let S={lang:'en',stars:0,read:[],rf:true,slow:false,syl:true,sci:false,voice:{},claude:false,rec:false,found:[],mols:[],heavy:[0,0],log:{}};
 try{const s=JSON.parse(localStorage.getItem('elx')||'null');if(s)S=Object.assign(S,s)}catch(e){}
 const hd=window.claude?.hot?.data; if(hd&&hd.lang)S=Object.assign(S,hd);
 if(!S._set&&!hd){const nl=(navigator.language||'en').slice(0,2);if(LOC[nl])S.lang=nl}
@@ -405,14 +630,18 @@ let mode='table',cur=0,quiz={z:0,tries:0},rfTimer=0;
 const L=()=>T[S.lang], nm=z=>NAMES[S.lang][z-1];
 const useSyl=()=>S.syl&&S.lang!=='en';
 const sylHTML=w=>syllables(w,S.lang).map(x=>`<span class="s">${esc(x)}</span>`).join('');
-function setWord(el,w){el.classList.toggle('sy',useSyl());el.innerHTML=useSyl()?sylHTML(w):esc(w)}
+const sylText=w=>w.split(/(\s+)/).map(p=>/\s/.test(p)?p:sylHTML(p)).join('');
+function setWord(el,w){el.classList.toggle('sy',useSyl());el.innerHTML=useSyl()?sylText(w):esc(w)}
+const logEv=(z,i)=>{const v=S.log[z]||(S.log[z]=[0,0,0,0,0]);if(i===4)v[4]=Date.now();else v[i]++;save()};
 
 /* ---------- speech ---------- */
 let voices=[];
 const hasTTS='speechSynthesis' in window;
 function loadVoices(){try{voices=speechSynthesis.getVoices()||[]}catch(e){voices=[]}voiceNotes()}
 if(hasTTS){loadVoices();try{speechSynthesis.addEventListener('voiceschanged',loadVoices)}catch(e){}}
-const voiceFor=l=>voices.find(v=>v.lang.toLowerCase().replace('_','-').startsWith(l));
+const vScore=v=>/premium|enhanced|natural|neural|siri/i.test(v.name)?3:/google|microsoft/i.test(v.name)?2:v.localService?1:0;
+const voicesFor=l=>voices.filter(v=>v.lang.toLowerCase().replace('_','-').startsWith(l)).sort((a,b)=>vScore(b)-vScore(a));
+const voiceFor=l=>{const vs=voicesFor(l);return vs.find(v=>v.voiceURI===S.voice[l])||vs[0]};
 function voiceNotes(){
   const msg=!hasTTS?L().noSpeech:(voices.length&&!voiceFor(S.lang))?L().noVoice:'';
   $('#vnote1').textContent=msg; return msg;
@@ -433,10 +662,10 @@ function speak(text,{start,word,end}={}){
   u.onend=u.onerror=()=>{clearInterval(spkTimer);end&&end()};
   speechSynthesis.speak(u);
 }
-function karaoke(el,text){
+function karaoke(el,text,key){
   const spans=[...el.children];spans.forEach(s=>s.classList.remove('lit'));
-  const tm=[];
-  speak(text,{start:()=>{const per=S.slow?150:110;let acc=0;spans.forEach(s=>{tm.push(setTimeout(()=>s.classList.add('lit'),acc));acc+=per*s.textContent.length})},
+  const tm=[],total=spans.reduce((a,s)=>a+s.textContent.length,0)||1;
+  say(key,text,{start:dur=>{const ms=dur?dur*.85:(S.slow?150:110)*total;let acc=0;spans.forEach(s=>{tm.push(setTimeout(()=>s.classList.add('lit'),acc));acc+=ms*s.textContent.length/total})},
     end:()=>{tm.forEach(clearTimeout);spans.forEach(s=>s.classList.add('lit'));setTimeout(()=>spans.forEach(s=>s.classList.remove('lit')),700)}});
 }
 function renderWords(box,text){
@@ -449,9 +678,30 @@ document.addEventListener('click',e=>{
   b.parentNode.querySelectorAll('.on').forEach(x=>x.classList.remove('on'));b.classList.add('on');
   speak(b.textContent.replace(/[.,!?:;«»“”—()]/g,''),{end:()=>b.classList.remove('on')});
 });
-function readAlong(box){
-  const bs=[...box.children];
-  speak(box.dataset.text,{word:ci=>{let k=0;bs.forEach((b,i)=>{if(+b.dataset.i<=ci)k=i});bs.forEach((b,i)=>b.classList.toggle('on',i===k))},end:()=>bs.forEach(b=>b.classList.remove('on'))});
+function readAlong(box,key){
+  const bs=[...box.children],txt=box.dataset.text,tm=[],hl=k=>bs.forEach((b,i)=>b.classList.toggle('on',i===k));
+  say(key,txt,{start:dur=>{if(dur)bs.forEach((b,i)=>tm.push(setTimeout(()=>hl(i),dur*(+b.dataset.i)/txt.length)))},
+    word:ci=>{let k=0;bs.forEach((b,i)=>{if(+b.dataset.i<=ci)k=i});hl(k)},end:()=>{tm.forEach(clearTimeout);hl(-1)}});
+}
+/* ---------- audio: own recording > voice pack > Claude voice > device voice ---------- */
+let PACK={},TTS=null,curAudio=null;const packBase='audio/';
+fetch(packBase+'manifest.json').then(r=>r.ok?r.json():{}).then(j=>{PACK=j&&typeof j==='object'?j:{};if(panel==='grown')renderGrown()}).catch(()=>{});
+(async()=>{try{TTS=await window.claude?.use?.('tts')}catch(e){TTS=null}if(TTS)$('#claudeRow').hidden=false})();
+const IDB={};
+function idb(){return new Promise((res,rej)=>{if(IDB.db)return res(IDB.db);let q;try{q=indexedDB.open('elx-audio',1)}catch(e){return rej(e)}q.onupgradeneeded=()=>q.result.createObjectStore('clips');q.onsuccess=()=>res(IDB.db=q.result);q.onerror=()=>rej(q.error)})}
+async function idbGet(k){try{const db=await idb();return await new Promise(r=>{const q=db.transaction('clips').objectStore('clips').get(k);q.onsuccess=()=>r(q.result||null);q.onerror=()=>r(null)})}catch(e){return null}}
+async function idbSet(k,v){const db=await idb();return new Promise((r,j)=>{const tx=db.transaction('clips','readwrite'),st=tx.objectStore('clips');v?st.put(v,k):st.delete(k);tx.oncomplete=r;tx.onerror=()=>j(tx.error)})}
+function stopAll(){try{speechSynthesis.cancel()}catch(e){}if(curAudio){curAudio.onended=curAudio.onerror=null;curAudio.pause();curAudio=null}try{TTS&&TTS.stop()}catch(e){}}
+async function say(key,text,cb={}){
+  stopAll();
+  const recd=key?await idbGet(key):null;
+  const src=recd?URL.createObjectURL(recd):(key&&PACK[key]?packBase+PACK[key]:null);
+  if(src){const a=new Audio(src);curAudio=a;let st=false;
+    a.onplaying=()=>{if(st)return;st=true;cb.start&&cb.start(isFinite(a.duration)?a.duration*1000:0)};
+    a.onended=()=>{curAudio=null;cb.end&&cb.end()};
+    try{await a.play();return}catch(e){a.onended=null;if(curAudio===a)curAudio=null}}
+  if(S.claude&&TTS){cb.start&&cb.start(0);try{await TTS.speak(text,{language:S.lang,rate:S.slow?.75:.9})}catch(e){if(e&&e.code==='not_granted'){S.claude=false;save()}}cb.end&&cb.end();return}
+  speak(text,cb);
 }
 
 /* ---------- table ---------- */
@@ -491,10 +741,10 @@ function answer(z,b){
   const m=$('#q-msg');
   if(z===quiz.z){b.classList.add('right');S.stars+=quiz.tries?1:2;save();progress();
     const y=L().yes;m.textContent=y[Math.floor(Math.random()*y.length)];m.className='qmsg ok';
-    speak(nm(z));setTimeout(()=>{b.classList.remove('right');if(mode==='quiz')newQ()},1800)}
-  else{quiz.tries++;b.classList.remove('wrong');void b.offsetWidth;b.classList.add('wrong');m.textContent=L().no;m.className='qmsg bad';$('#q-hint').hidden=false}
+    logEv(z,3);say(`name/${S.lang}/${z}`,nm(z));setTimeout(()=>{b.classList.remove('right');if(mode==='quiz')newQ()},1800)}
+  else{quiz.tries++;logEv(quiz.z,1);b.classList.remove('wrong');void b.offsetWidth;b.classList.add('wrong');m.textContent=L().no;m.className='qmsg bad';$('#q-hint').hidden=false}
 }
-$('#q-hint').onclick=()=>speak(nm(quiz.z));
+$('#q-hint').onclick=()=>{logEv(quiz.z,2);say(`name/${S.lang}/${quiz.z}`,nm(quiz.z))};
 $('#q-skip').onclick=newQ;
 function setMode(m){mode=m;$('#quiz').hidden=m!=='quiz';document.querySelectorAll('#modes button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));if(m==='quiz'){newQ();$('#quiz').scrollIntoView({block:'nearest'})}}
 const markModes=m=>document.querySelectorAll('#modes button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
@@ -504,40 +754,47 @@ $('#modes').addEventListener('click',e=>{const b=e.target.closest('button');if(!
 function applyLang(){
   const t=L();document.documentElement.lang=S.lang;
   document.querySelectorAll('#langs button,#langs2 button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===S.lang));
-  $('#t-title').textContent=t.title;$('#t-table').textContent=t.table;$('#t-quiz').textContent=t.quiz;$('#t-build').textContent=t.build;$('#t-syl').textContent=t.syl;$('#t-sci').textContent=t.sci;
+  $('#t-title').textContent=t.title;$('#t-table').textContent=t.table;$('#t-quiz').textContent=t.quiz;$('#t-syl').textContent=t.syl;$('#t-sci').textContent=t.sci;
+  const TX={gs1:'gBuild',gs2:'gMol',gs3:'gHome',gs4:'gHeavy','m-title':'molT','m-goalL':'molGoal','m-new':'newGoal','h-title':'homeT','h-note':'homeNote','h-new':'newHunt','w-title':'heavyQ','w-next':'skip','t-sciL':'sciL','along2L':'along','t-home2':'atHome','t-repH':'repH','t-readH':'readH','t-voiceH':'voiceH','t-claude':'claude','t-recMode':'recMode','t-recL':'recL','packSave':'packSave'};
+  Object.entries(TX).forEach(([id,k])=>{const el=document.getElementById(id);if(el)el.textContent=t[k]});
   $('#b-title').textContent=t.buildTitle;$('#b-goalL').textContent=t.goalL;$('#b-new').textContent=t.newGoal;$('#b-lp').textContent=t.p;$('#b-ln').textContent=t.ne;$('#b-le').textContent=t.e;$('#t-back').textContent=t.back;
   $('#t-settings').textContent=t.settings;$('#t-rf').textContent=t.rf;$('#t-slow').textContent=t.slow;$('#resetBtn').textContent=t.reset;
   $('#q-prompt').textContent=t.prompt;$('#q-hint').textContent=t.hint;$('#q-skip').textContent=t.skip;
   $('#t-shells').textContent=t.shells;$('#t-mols').textContent=t.mols;$('#alongL').textContent=t.along;$('#vhint').textContent=t.drag;
   renderTable();voiceNotes();
   if(quiz.z)showQ();
-  if(!$('#sheet').hidden){if(!$('#build').hidden){setWord($('#b-goal'),nm(B.goal));renderBuild()}else if(cur)openEl(cur,true)}
+  if(!$('#sheet').hidden){if(panel==='build'){setWord($('#b-goal'),nm(B.goal));renderBuild()}else if(panel==='info'&&cur)openEl(cur,true);else if(panel==='mbuild')renderMB();else if(panel==='home')renderHome();else if(panel==='heavy')renderHeavy();else if(panel==='grown')renderGrown()}
 }
 ['#langs','#langs2'].forEach(id=>$(id).addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;S.lang=b.dataset.l;save();applyLang()}));
-$('#gearBtn').onclick=()=>{const s=$('#settings');s.hidden=!s.hidden;$('#gearBtn').setAttribute('aria-expanded',!s.hidden)};
+$('#gearBtn').onclick=()=>{location.hash='grown'};
 $('#optRF').checked=S.rf;$('#optSlow').checked=S.slow;
 $('#optRF').onchange=e=>{S.rf=e.target.checked;save()};
 $('#optSlow').onchange=e=>{S.slow=e.target.checked;save()};
+$('#optClaude').checked=S.claude;$('#optRec').checked=S.rec;
+$('#optClaude').onchange=e=>{S.claude=e.target.checked;save()};
+$('#optRec').onchange=e=>{S.rec=e.target.checked;save();renderGrown()};
 $('#optSyl').checked=S.syl;$('#optSci').checked=S.sci;
 $('#optSyl').onchange=e=>{S.syl=e.target.checked;save();applyLang()};
 $('#optSci').onchange=e=>{S.sci=e.target.checked;save();if(mode==='quiz')newQ();applyLang()};
 let sure=0;
 $('#resetBtn').onclick=e=>{if(!sure){sure=1;e.target.textContent=L().sure;setTimeout(()=>{sure=0;e.target.textContent=L().reset},3000);return}
-  sure=0;S.stars=0;S.read=[];save();renderTable();e.target.textContent=L().reset};
+  sure=0;S.stars=0;S.read=[];S.found=[];S.mols=[];S.log={};S.heavy=[0,0];save();if(panel==='grown')renderGrown();renderTable();e.target.textContent=L().reset};
 function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1800)}
 
 /* ---------- element sheet ---------- */
 function openEl(z,keep){
   cur=z;const t=L(),c=catOf(z),st=stateOf(z),sh=shellsOf(z),mass=MASS[z-1],ne=Math.round(+mass)-z,name=nm(z),got=S.read.includes(z);
-  const sheet=$('#sheet');sheet.hidden=false;document.body.style.overflow='hidden';
-  $('#info').hidden=false;$('#build').hidden=true;$('#nav').hidden=false;
+  const sheet=$('#sheet');showPanel('info',true);
   ['#bigtile','#ecat'].forEach(s=>$(s).className=$(s).className.replace(/ ?c-\w+/g,'')+' c-'+c);
   $('#btN').textContent=z;$('#btS').textContent=SYM[z-1];
   $('#ename').classList.toggle('sy',useSyl());$('#ename').innerHTML=useSyl()?sylHTML(name):[...name].map(ch=>`<span>${esc(ch)}</span>`).join('');
   $('#ecat').textContent=CAT[S.lang][c][0];
   const fi={en:0,ru:1,tr:2}[S.lang];
-  let fact=FACT[z]?FACT[z][fi]:t.gen(name,c,st);if(z>=93&&!FACT[z])fact+=' '+t.synth;
-  renderWords($('#factWords'),fact);
+  renderWords($('#factWords'),factText(z,S.lang));
+  const sf=S.sci&&FACT_SCI[z];$('#sciBox').hidden=!sf;if(sf)renderWords($('#sciWords'),FACT_SCI[z][fi]);
+  const hs=HOME.map((h,i)=>[h,i]).filter(([h])=>h.z.includes(z));$('#t-home2').hidden=$('#homes').hidden=!hs.length;
+  $('#homes').innerHTML=hs.map(([h,i])=>`<button data-h="${i}">${h.e} ${esc(h.n[S.lang])}</button>`).join('');
+  $('#recrow').hidden=!S.rec;if(S.rec)updRec();
   $('#stats').innerHTML=[[t.n,z],[t.mass,(z>=93||[43,61,84,85,86,87,88,89].includes(z))?`≈ ${mass}`:mass],[t.p,z,'p'],[t.ne,'≈ '+ne],[t.e,z,'e'],[t.st,t.S[st]]].concat(S.sci?(([r,cc])=>[[t.grp,r>8?'f':cc],[t.per,r>8?r-3:r],[t.outer,sh[sh.length-1]],[t.cfg,configText(z),'wide']])(pos(z)):[]).map(([k,v,cl])=>`<div class="${cl||''}"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('');
   $('#shells').innerHTML=sh.map(n=>`<span>${n}</span>`).join('');
   const ms=molsFor(z);
@@ -561,13 +818,15 @@ function setRead(got,keep){
   else if(!(keep&&lb.disabled)){lb.disabled=false;$('#listenL').textContent=t.listen}
   else $('#listenL').textContent=t.wait;
 }
-$('#listen').onclick=()=>karaoke($('#ename'),nm(cur));
+$('#listen').onclick=()=>{if(!S.read.includes(cur))logEv(cur,0);karaoke($('#ename'),nm(cur),`name/${S.lang}/${cur}`)};
 $('#iread').onclick=()=>{
-  if(!S.read.includes(cur)){S.read.push(cur);S.stars+=1;save();toast('★ '+L().sticker);renderTable()}
+  if(!S.read.includes(cur)){S.read.push(cur);S.stars+=1;logEv(cur,4);toast('★ '+L().sticker);renderTable()}
   setRead(true,true);clearTimeout(rfTimer);$('#listen').disabled=false;$('#listenL').textContent=L().listen;
-  karaoke($('#ename'),nm(cur));
+  karaoke($('#ename'),nm(cur),`name/${S.lang}/${cur}`);
 };
-$('#along').onclick=()=>readAlong($('#factWords'));
+$('#along').onclick=()=>readAlong($('#factWords'),`fact/${S.lang}/${cur}`);
+$('#along2').onclick=()=>readAlong($('#sciWords'),`sci/${S.lang}/${cur}`);
+$('#homes').addEventListener('click',e=>{const b=e.target.closest('[data-h]');if(b)say(`home/${S.lang}/${b.dataset.h}`,HOME[b.dataset.h].n[S.lang])});
 $('#mols').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
   $('#mols').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
@@ -575,13 +834,13 @@ $('#mols').addEventListener('click',e=>{
   if(i<0){showAtom();if(molsFor(cur).length)$('#moldesc').hidden=true;return}
   const m=MOLS[i];showMol(m);$('#moldesc').hidden=false;renderWords($('#molWords'),`${m.n[S.lang]}. ${m.d[S.lang]}`);
 });
-function closeEl(){$('#sheet').hidden=true;markModes(mode);document.body.style.overflow='';V.on=false;clearTimeout(rfTimer);try{speechSynthesis.cancel()}catch(e){}
+function closeEl(){$('#sheet').hidden=true;panel='';markModes(mode);if(rec)rec.stop();stopAll();document.body.style.overflow='';V.on=false;clearTimeout(rfTimer);try{speechSynthesis.cancel()}catch(e){}
   const b=document.querySelector(`.el[data-z="${cur}"]`);b&&b.focus({preventScroll:false})}
 $('#back').onclick=()=>{location.hash='table'};
 $('#prev').onclick=()=>{location.hash='el-'+(cur>1?cur-1:118)};
 $('#next').onclick=()=>{location.hash='el-'+(cur<118?cur+1:1)};
 document.addEventListener('keydown',e=>{if($('#sheet').hidden)return;if(e.key==='Escape')$('#back').click();if(e.key==='ArrowRight')$('#next').click();if(e.key==='ArrowLeft')$('#prev').click()});
-function route(){if(location.hash==='#build')return openBuild();const m=/^#el-(\d{1,3})$/.exec(location.hash);const z=m?+m[1]:0;if(z>=1&&z<=118)openEl(z);else if(!$('#sheet').hidden)closeEl()}
+function route(){const P={build:openBuild,molecule:openMB,home:openHome,heavy:openHeavy,grown:openGrown}[location.hash.slice(1)];if(P)return P();const m=/^#el-(\d{1,3})$/.exec(location.hash);const z=m?+m[1]:0;if(z>=1&&z<=118)openEl(z);else if(!$('#sheet').hidden)closeEl()}
 window.addEventListener('hashchange',route);
 
 /* ---------- 3D viewer ---------- */
@@ -667,8 +926,7 @@ function showMol(m){
 /* ---------- build an atom ---------- */
 const B={p:1,n:0,e:1,goal:0,done:false,drawn:false};
 function openBuild(){
-  $('#sheet').hidden=false;document.body.style.overflow='hidden';cur=0;clearTimeout(rfTimer);
-  $('#info').hidden=true;$('#build').hidden=false;$('#nav').hidden=true;markModes('build');
+  showPanel('build',true);cur=0;clearTimeout(rfTimer);
   B.drawn=false;if(!B.goal)newGoal();else renderBuild();$('#sheet').scrollTop=0;
 }
 function newGoal(){const max=S.sci?36:10;let g;do g=1+Math.floor(Math.random()*max);while(g===B.goal);B.goal=g;B.done=false;setWord($('#b-goal'),nm(g));renderBuild()}
@@ -678,12 +936,133 @@ function renderBuild(){
   if(z){tile.className='bigtile c-'+catOf(z);$('#b-tN').textContent=z;$('#b-tS').textContent=SYM[z-1];$('#b-name').className='name';setWord($('#b-name'),nm(z));
     const ch=B.p-B.e;$('#b-stat').textContent=`${t.massNo}: ${B.p+B.n} · ${ch?fill(t.ion,{c:(ch>0?'+':'−')+Math.abs(ch)}):t.neutral}`}
   else{tile.className='bigtile';$('#b-tN').textContent='';$('#b-tS').textContent='?';$('#b-name').className='name';$('#b-name').textContent='';$('#b-stat').textContent=t.none}
-  if(z===B.goal&&B.e===z){m.textContent=t.goalDone;m.className='bmsg ok';if(!B.done){B.done=true;S.stars+=2;save();progress();toast('★ +2');speak(nm(z))}}
+  if(z===B.goal&&B.e===z){m.textContent=t.goalDone;m.className='bmsg ok';if(!B.done){B.done=true;S.stars+=2;save();progress();toast('★ +2');say(`name/${S.lang}/${z}`,nm(z))}}
   else{m.textContent=z===B.goal?t.goalHint:'';m.className='bmsg'}
   drawAtom(B.p,B.n,B.e,z?`${t.atom}: ${nm(z)}`:t.buildTitle,fill(t.atomSub,{p:B.p,ne:B.n,e:B.e}),B.drawn);B.drawn=true;
 }
 $('#build').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k,lim={p:118,n:180,e:118}[k];B[k]=Math.max(0,Math.min(lim,B[k]+(+b.dataset.d)));renderBuild()});
 $('#b-new').onclick=newGoal;
+
+/* ---------- sheet panels ---------- */
+let panel='';
+function showPanel(name,view){panel=name;const sh=$('#sheet');sh.hidden=false;document.body.style.overflow='hidden';sh.classList.toggle('noview',!view);
+  ['info','build','mbuild','home','heavy','grown'].forEach(p=>{$('#'+p).hidden=p!==name});$('#nav').hidden=name!=='info';if(!view)V.on=false;
+  markModes(name==='info'?mode:'');sh.scrollTop=0}
+$('#shelf').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)location.hash=b.dataset.go});
+const zOf=e=>SYM.indexOf(e)+1;
+const hex=e=>'#'+(CPK[e]??0xff5fa2).toString(16).padStart(6,'0');
+const inkOn=e=>{const c=CPK[e]??0xff5fa2,l=.299*(c>>16)+.587*((c>>8)&255)+.114*(c&255);return l<140?'#fff':'#14162a'};
+
+/* ---------- build a molecule ---------- */
+const MB_EASY=['H2O','CO2','CH4','NH3','O2','H2','N2','HCl','NaCl','CO','H2S','O3','HF','Cl2','H2O2','C2H2'];
+const MB_SCI=['C2H5OH','H2SO4','C6H6','SF6','BF3','SiH4','P4','KCl','MgO','CaO','LiF','Br2','I2'];
+const parseF=f=>{const c={};for(const[,e,n]of f.matchAll(/([A-Z][a-z]?)(\d*)/g))c[e]=(c[e]||0)+(+n||1);return c};
+const fmtF=f=>f.replace(/(\d+)/g,'<sub>$1</sub>')+' = '+Object.entries(parseF(f)).map(([e,n])=>`${n} ${e}`).join(' + ');
+const MB={goal:null,tray:{},done:false,showF:false,pal:[]};
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function openMB(){showPanel('mbuild',true);if(!MB.goal)newMB();else renderMB()}
+function newMB(){const pool=S.sci?MB_EASY.concat(MB_SCI):MB_EASY;let f;do f=pool[Math.floor(Math.random()*pool.length)];while(MB.goal&&f===MB.goal.f);
+  MB.goal=MOLS.find(m=>m.f===f);MB.tray={};MB.done=false;MB.showF=false;
+  const need=Object.keys(parseF(f)),extra=shuffle(['H','C','N','O','Cl','Na','S'].filter(e=>!need.includes(e))).slice(0,Math.max(2,5-need.length));
+  MB.pal=shuffle(need.concat(extra));renderMB()}
+function renderMB(){
+  const t=L(),g=MB.goal,need=parseF(g.f),m=$('#m-msg');
+  setWord($('#m-goal'),g.n[S.lang]);
+  $('#m-formula').innerHTML=MB.showF?fmtF(g.f):esc(t.showF);
+  $('#m-pal').innerHTML=MB.pal.map(e=>`<button class="atomb" data-a="${e}" style="--c:${hex(e)};color:${inkOn(e)}">${e}<small>${esc(nm(zOf(e)))}</small></button>`).join('');
+  const tr=Object.entries(MB.tray).filter(([,n])=>n>0);
+  $('#m-tray').innerHTML=tr.length?tr.map(([e,n])=>`<button data-r="${e}"><i style="--c:${hex(e)}"></i>${e} × ${n} <span aria-hidden="true">−</span></button>`).join(''):`<span class="help">${esc(t.trayEmpty)}</span>`;
+  const ok=Object.keys(need).every(e=>MB.tray[e]===need[e])&&tr.every(([e])=>need[e]);
+  if(ok){m.textContent=t.goalDone.split(/[!.]/)[0]+'!';m.className='bmsg ok';
+    const txt=`${g.n[S.lang]}. ${g.d[S.lang]}`;$('#m-desc').hidden=false;renderWords($('#m-words'),txt);showMol(g);
+    if(!MB.done){MB.done=true;S.stars+=2;if(!S.mols.includes(g.f))S.mols.push(g.f);save();progress();toast('★ +2');say(`mol/${S.lang}/${g.f}`,txt)}}
+  else{$('#m-desc').hidden=true;const over=tr.find(([e,n])=>!need[e]||n>need[e]);m.textContent=over?fill(t.tooMany,{x:nm(zOf(over[0]))}):'';m.className='bmsg';drawLoose()}
+}
+function drawLoose(){
+  const list=[];Object.entries(MB.tray).forEach(([e,n])=>{for(let i=0;i<n;i++)list.push(e)});
+  $('#vtitle').textContent=MB.goal.n[S.lang]+' ?';$('#vsub').textContent=fill(L().molSub,{n:list.length});
+  if(!initV())return;V.on=true;clearV(true);
+  const R=list.length>1?1.1+list.length*.09:0;
+  list.forEach((e,i)=>{const r=RAD[e]||(BIG.includes(e)?.55:.42),a=i/Math.max(1,list.length)*Math.PI*2;
+    const s=new THREE.Mesh(new THREE.SphereGeometry(r,28,20),mat(CPK[e]||0xff5fa2));s.position.set(R*Math.cos(a),R*Math.sin(a)*.7,R*Math.sin(a)*.5);V.group.add(s);
+    const l=label(e);l.position.copy(s.position);V.group.add(l)});
+  V.size=2.4;fit();
+}
+$('#m-pal').addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b||MB.done)return;const a=b.dataset.a;if((MB.tray[a]||0)<12){MB.tray[a]=(MB.tray[a]||0)+1;renderMB()}});
+$('#m-tray').addEventListener('click',e=>{const b=e.target.closest('[data-r]');if(!b||MB.done)return;MB.tray[b.dataset.r]--;renderMB()});
+$('#m-formula').onclick=()=>{MB.showF=!MB.showF;renderMB()};
+$('#m-new').onclick=newMB;
+
+/* ---------- find it at home ---------- */
+const HM={list:null};
+function openHome(){showPanel('home',false);if(!HM.list)newHunt();else renderHome()}
+function newHunt(){const idx=shuffle(HOME.map((_,i)=>i)),nf=idx.filter(i=>!S.found.includes(i));HM.list=(nf.length>=6?nf:idx).slice(0,6);renderHome()}
+function renderHome(){const t=L();
+  $('#h-grid').innerHTML=HM.list.map(i=>{const h=HOME[i],f=S.found.includes(i),w=h.n[S.lang];
+    return `<div class="hcard${f?' found':''}"><div class="em" aria-hidden="true">${h.e}</div><button class="it${useSyl()?' sy':''}" data-hs="${i}">${useSyl()?sylText(w):esc(w)}</button><div class="els">${h.z.map(z=>`<button class="c-${catOf(z)}" data-el="${z}">${SYM[z-1]} · ${esc(nm(z))}</button>`).join('')}</div><button class="pill fb${f?' alt':''}" data-f="${i}">${f?'★ '+esc(t.found):esc(t.foundIt)}</button></div>`}).join('')}
+$('#h-grid').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.el){location.hash='el-'+b.dataset.el;return}
+  if(b.dataset.hs){say(`home/${S.lang}/${b.dataset.hs}`,HOME[b.dataset.hs].n[S.lang]);return}
+  const i=+b.dataset.f;if(!S.found.includes(i)){S.found.push(i);S.stars+=1;save();progress();toast('★ +1');renderHome()}});
+$('#h-new').onclick=newHunt;
+
+/* ---------- which is heavier ---------- */
+const HV={a:0,b:0,ans:0,th:0};
+function openHeavy(){showPanel('heavy',false);if(!HV.a)newHeavy();else renderHeavy()}
+function newHeavy(){let a,b;const pool=S.sci?SYM.map((_,i)=>i+1):POOL;
+  if(S.sci&&Math.random()<.3)[a,b]=[[18,19],[27,28],[52,53],[90,91]][Math.floor(Math.random()*4)];
+  else do{a=pool[Math.floor(Math.random()*pool.length)];b=pool[Math.floor(Math.random()*pool.length)]}while(Math.abs(MASS[a-1]-MASS[b-1])<.5);
+  if(Math.random()<.5)[a,b]=[b,a];Object.assign(HV,{a,b,ans:0,th:0});$('#w-msg').textContent='';$('#w-msg').className='bmsg';renderHeavy()}
+function scaleSVG(th){
+  const cx=300,cy=60,Lb=200,E=[-1,1].map(k=>[cx+k*Lb*Math.cos(th),cy+k*Lb*Math.sin(th)]);
+  const pan=([x,y],z)=>`<path d="M${x} ${y}L${x-60} ${y+105}M${x} ${y}L${x+60} ${y+105}" stroke="var(--mute)" stroke-width="3"/><g class="c-${catOf(z)}"><rect x="${x-36}" y="${y+33}" width="72" height="72" rx="14" style="fill:var(--c)"/><text x="${x}" y="${y+82}" text-anchor="middle" font-size="34" font-weight="900" fill="#1b1d33">${SYM[z-1]}</text></g><path d="M${x-80} ${y+105}h160a80 24 0 0 1-160 0z" style="fill:var(--line)"/>`;
+  return `<path d="M300 60L262 262H338Z" style="fill:var(--line)"/><line x1="${E[0][0]}" y1="${E[0][1]}" x2="${E[1][0]}" y2="${E[1][1]}" style="stroke:var(--ink)" stroke-width="10" stroke-linecap="round"/><circle cx="300" cy="60" r="13" style="fill:var(--star)"/>`+pan(E[0],HV.a)+pan(E[1],HV.b);
+}
+function renderHeavy(){const t=L(),svg=$('#w-svg');svg.innerHTML=scaleSVG(HV.th);svg.setAttribute('aria-label',t.heavyQ);
+  $('#w-pick').innerHTML=[HV.a,HV.b].map(z=>`<button class="c-${catOf(z)}" data-w="${z}"><b>${SYM[z-1]}</b><span>${useSyl()?`<span class="sy">${sylText(nm(z))}</span>`:esc(nm(z))}</span><small>${HV.ans?esc(MASS[z-1]):''}</small></button>`).join('')}
+function tilt(to){const from=HV.th,t0=performance.now();const step=t=>{const k=Math.min(1,(t-t0)/700),e=1-Math.pow(1-k,3);HV.th=from+(to-from)*e;$('#w-svg').innerHTML=scaleSVG(HV.th);if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
+$('#w-pick').addEventListener('click',e=>{const b=e.target.closest('[data-w]');if(!b||HV.ans)return;const z=+b.dataset.w,o=z===HV.a?HV.b:HV.a,t=L(),m=$('#w-msg');
+  const heavy=+MASS[z-1]>+MASS[o-1];HV.ans=z;S.heavy[heavy?0:1]++;
+  if(heavy){S.stars+=1;const y=t.yes;m.textContent=y[Math.floor(Math.random()*y.length)]+(z<o?' '+t.surprise:'');m.className='bmsg ok';progress()}
+  else{m.textContent=t.heavyNo+(o<z?' '+t.surprise:'');m.className='bmsg'}
+  save();renderHeavy();tilt(+MASS[HV.b-1]>+MASS[HV.a-1]?.17:-.17)});
+$('#w-next').onclick=newHeavy;
+
+/* ---------- grown-ups: report, voices, recording ---------- */
+function openGrown(){showPanel('grown',false);renderGrown()}
+function renderGrown(){const t=L(),lg=S.log,vals=Object.values(lg),wk=Date.now()-7*864e5;
+  const qr=vals.reduce((a,v)=>a+v[3],0),qw=vals.reduce((a,v)=>a+v[1],0);
+  $('#rep').innerHTML=[[t.rStickers,S.read.length+' / 118'],[t.rWeek,vals.filter(v=>v[4]>wk).length],[t.rStars,S.stars],[t.rQuiz,qr+qw?Math.round(qr/(qr+qw)*100)+'%':'—'],[t.rMols,S.mols.length],[t.rHome,S.found.length+' / '+HOME.length],[t.rHeavy,S.heavy[0]+' / '+(S.heavy[0]+S.heavy[1])]].map(([k,v])=>`<div><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('');
+  const tr=Object.entries(lg).map(([z,v])=>[+z,v[0]+2*v[1]+2*v[2]]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]).slice(0,12);
+  $('#trickyL').textContent=tr.length?t.rTricky:t.rNone;$('#tricky').innerHTML=tr.map(([z])=>`<span>${esc(nm(z))}</span>`).join('');
+  $('#vpick').innerHTML=['en','ru','tr'].map(l=>{const vs=voicesFor(l),cv=voiceFor(l);return `<div class="vrow"><b>${{en:'English',ru:'Русский',tr:'Türkçe'}[l]}</b>${vs.length?`<select data-l="${l}" aria-label="${l}">${vs.map(v=>`<option value="${esc(v.voiceURI)}"${v===cv?' selected':''}>${esc(v.name)}</option>`).join('')}</select>`:`<span class="help">${esc(t.noVoiceShort)}</span>`}<button class="pill alt" data-test="${l}">${esc(t.test)}</button></div>`}).join('');
+  $('#voiceHelp').innerHTML=t.voiceHelp;
+  const n=Object.keys(PACK).length;$('#packNote').textContent=n?fill(t.packN,{n}):t.packNone;$('#packSave').hidden=!(n&&'caches' in window&&document.querySelector('link[rel=manifest]'));
+  $('#recNote').textContent=S.rec?(navigator.mediaDevices&&window.MediaRecorder?t.recOk:t.recNo):'';
+  voiceNotes();
+}
+$('#vpick').addEventListener('change',e=>{const s=e.target.closest('select');if(s){S.voice[s.dataset.l]=s.value;save()}});
+$('#vpick').addEventListener('click',e=>{const b=e.target.closest('[data-test]');if(!b)return;const l=b.dataset.test,old=S.lang;S.lang=l;speak(NAMES[l][7]+'. '+factText(8,l));S.lang=old});
+$('#packSave').onclick=async()=>{try{const c=await caches.open('elx-voices');await c.addAll(Object.values(PACK).map(p=>packBase+p));$('#packNote').textContent=L().packSaved}catch(e){$('#packNote').textContent=String(e.message||e)}};
+let rec=null;
+async function updRec(){const t=L(),kn=`name/${S.lang}/${cur}`,kf=`fact/${S.lang}/${cur}`;
+  if(!rec){$('#recName').textContent=(await idbGet(kn))?t.recRedo+' · '+t.recName.split(' ').pop():t.recName;$('#recFact').textContent=(await idbGet(kf))?t.recRedo+' · '+t.recFact.split(' ').pop():t.recFact}
+  $('#recDel').textContent=t.recDel}
+async function recToggle(kind,btn){
+  if(rec){rec.stop();return}
+  const key=`${kind}/${S.lang}/${cur}`;let st;
+  try{st=await navigator.mediaDevices.getUserMedia({audio:true})}catch(e){toast(L().recNo);return}
+  const mt=['audio/mp4','audio/webm;codecs=opus','audio/webm'].find(m=>window.MediaRecorder&&MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m));
+  let r;try{r=new MediaRecorder(st,mt?{mimeType:mt}:{})}catch(e){st.getTracks().forEach(x=>x.stop());toast(L().recNo);return}
+  const ch=[];r.ondataavailable=e=>{if(e.data&&e.data.size)ch.push(e.data)};
+  r.onstop=async()=>{st.getTracks().forEach(x=>x.stop());rec=null;btn.classList.remove('on');const blob=new Blob(ch,{type:r.mimeType||mt||'audio/webm'});
+    if(blob.size>1500){try{await idbSet(key,blob);say(key,'')}catch(e){toast(String(e.message||e))}}updRec()};
+  rec=r;stopAll();btn.classList.add('on');btn.textContent=L().recStop;r.start();
+}
+$('#recName').onclick=e=>recToggle('name',e.currentTarget);
+$('#recFact').onclick=e=>recToggle('fact',e.currentTarget);
+$('#recDel').onclick=async()=>{for(const k of ['name','fact'])try{await idbSet(`${k}/${S.lang}/${cur}`,null)}catch(e){}updRec()};
+if(document.querySelector('link[rel=manifest]')&&'serviceWorker' in navigator){try{navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}}
 
 /* ---------- boot ---------- */
 applyLang();setMode('table');route();
