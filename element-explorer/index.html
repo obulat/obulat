@@ -187,9 +187,9 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
 .homegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--s3)}
 .hcard{box-shadow:inset 0 0 0 1.5px var(--line);border-radius:var(--r3);padding:var(--s4);display:grid;gap:var(--s3);grid-template-rows:auto auto 1fr auto;align-content:start}
 .hcard .em{font-size:48px;line-height:1}
-.hcard .it{font-family:var(--read);font-size:25px;font-weight:700;line-height:1.15;text-align:left}
+.hcard .it{font-family:var(--read);font-size:25px;font-weight:700;line-height:1.15;text-align:left;min-height:44px}
 .hcard .els{display:flex;flex-wrap:wrap;gap:var(--s1);align-content:start}
-.hcard .els button{display:flex;align-items:center;gap:6px;border-radius:var(--r1);padding:2px var(--s2);font-weight:600;font-size:14px;min-height:30px;box-shadow:inset 0 0 0 1px var(--line)}
+.hcard .els button{display:flex;align-items:center;gap:6px;border-radius:var(--r1);padding:2px var(--s2);font-weight:600;font-size:14px;min-height:40px;box-shadow:inset 0 0 0 1px var(--line)}
 .hcard .els button::before{content:"";width:10px;height:10px;border-radius:2px;background:var(--c);box-shadow:inset 0 0 0 1px var(--edge)}
 .hcard.found{box-shadow:inset 0 0 0 2px #51cf66;background:color-mix(in srgb,#51cf66 10%,transparent)}
 .hcard .fb{justify-self:stretch}
@@ -220,6 +220,18 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
 @media(max-width:899px){.dgrid{grid-template-columns:minmax(0,1fr);gap:var(--s5)}.view{position:relative;top:0;height:46svh;min-height:300px}}
 @media(max-width:760px){.shelf{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.under{grid-template-columns:minmax(0,1fr)}.bigtile{width:84px;height:94px}.bigtile b{font-size:40px}.namecard{gap:var(--s4)}.quiz,.goal{grid-template-columns:minmax(0,1fr);padding:var(--s3) var(--s4)}.qbtns,.gb{grid-column:1;grid-row:auto;justify-content:flex-start;margin-top:var(--s2)}.fact{padding:var(--s4)}.grown section{padding:var(--s4)}.vrow{grid-template-columns:minmax(0,1fr) auto}.vrow b{grid-column:1/-1}}
+/* phones: in the building games the 3D model stays pinned at the top while the controls scroll under it */
+@media(max-width:899px){.sheet[data-p=build] .view,.sheet[data-p=mbuild] .view{position:sticky;top:69px;z-index:1;height:30svh;min-height:200px;box-shadow:0 6px 0 var(--bg)}.sheet[data-p=build] .vhint,.sheet[data-p=mbuild] .vhint{display:none}}
+@media(max-width:640px){.build .made,.build .bmsg{order:1}.build .steps{order:2}.build .bigtile,.made .bigtile{width:64px;height:72px}.made .bigtile b{font-size:30px}.made .bigtile small{font-size:13px;top:4px;left:6px}.made .name{font-size:34px}
+  .panel h2{font-size:26px}.step{grid-template-columns:minmax(0,1fr) 56px 56px 56px;padding-left:var(--s3)}.step button{height:52px}.step b{font-size:26px}
+  .atomb{width:66px;height:66px;font-size:22px}.atomb small{font-size:11px;max-width:58px}.palette{gap:var(--s2)}
+  }
+@media(max-width:640px){#mbuild h2,#mbuild .goal{order:-2}#mbuild .mmsg{order:-1}#mbuild .bmsg:empty{display:none}}
+@media(max-width:640px){.sheet[data-p=build] .vcap span,.sheet[data-p=mbuild] .vcap span{display:none}.sheet[data-p=build] .vcap b,.sheet[data-p=mbuild] .vcap b{font-size:17px}.sheet[data-p=build] .vcap,.sheet[data-p=mbuild] .vcap{bottom:var(--s2);left:var(--s3)}
+  .sheet[data-p=build] .panel h2,.sheet[data-p=mbuild] .panel h2{display:none}.build .bmsg:empty{display:none}
+  .build .goal,.quiz{grid-template-columns:minmax(0,1fr) auto}.build .gb,.quiz .qbtns{grid-column:2;grid-row:1/3;margin-top:0;flex-direction:column;align-items:stretch}
+  .quiz{position:sticky;top:0;z-index:5;box-shadow:0 0 0 1px var(--line),0 6px 12px rgba(0,0,0,.08)}.quiz .qword{font-size:34px}}
+@media(max-width:420px){#t-back{display:none}#back{width:44px;padding:0}.sl button{padding:0 10px}.sbar{gap:6px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
@@ -309,7 +321,7 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
       <div class="goal"><span class="qp" id="m-goalL"></span><span class="qword" id="m-goal"></span><span class="gb"><button class="pill alt" id="m-formula"></button><button class="pill alt" id="m-new"></button></span></div>
       <div class="palette" id="m-pal"></div>
       <div class="tray" id="m-tray"></div>
-      <div class="bmsg" id="m-msg" aria-live="polite"></div>
+      <div class="bmsg mmsg" id="m-msg" aria-live="polite"></div>
       <div class="fact" id="m-desc" hidden><div class="words" id="m-words"></div></div>
     </div>
     <div class="panel" id="home" hidden>
@@ -960,7 +972,7 @@ $('#b-new').onclick=newGoal;
 
 /* ---------- sheet panels ---------- */
 let panel='';
-function showPanel(name,view){panel=name;const sh=$('#sheet');sh.hidden=false;document.body.style.overflow='hidden';sh.classList.toggle('noview',!view);
+function showPanel(name,view){panel=name;const sh=$('#sheet');sh.dataset.p=name;sh.hidden=false;document.body.style.overflow='hidden';sh.classList.toggle('noview',!view);
   ['info','build','mbuild','home','heavy','grown'].forEach(p=>{$('#'+p).hidden=p!==name});$('#nav').hidden=name!=='info';if(!view)V.on=false;
   markModes(name==='info'?mode:'');sh.scrollTop=0}
 $('#shelf').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)location.hash=b.dataset.go});
