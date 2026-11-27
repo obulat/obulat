@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2b8a3e">
+<title>Cell Explorer</title>
+<link rel="icon" href="../element-explorer/icons/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Onest:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE occasion: the same child's science kit as Element Explorer, now for living things
+   IDEA a school biology wall chart that you can poke: every part of the cell answers when tapped
+   PICTURE a large hand-drawn animal cell and plant cell, each organelle drawn in its textbook shape and colour
+   COLOUR white ground, leaf-green header band, warm cytoplasm for the animal cell, pale green for the plant cell
+   TYPE Onest for interface, Andika for every word the child reads (same as Element Explorer)
+   LAYOUT tablet: the cell picture left, the info card right; phone: picture on top, card below */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#10121c);--ink:light-dark(#171a2e,#eef0f8);--soft:light-dark(#f3f4f8,#1a1d2b);--line:light-dark(#d6d9e4,#2e3247);--mute:light-dark(#545a72,#a7adc6);--brand:#2b8a3e;--blue:#2f4be0;--star:#ffb300;--tink:#171a2e;--sya:light-dark(#1d5fd0,#7cb4ff);--syb:light-dark(#d02f63,#ff8fb1);
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--r1:3px;--r2:6px;--r3:10px;--ui:Onest,system-ui,sans-serif;--read:Andika,Onest,system-ui,sans-serif}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:500 16px/1.5 var(--ui);overflow-x:clip;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;touch-action:manipulation}
+button:focus-visible{outline:3px solid var(--star);outline-offset:2px}
+.ic{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.top{background:var(--brand);color:#fff;padding:calc(env(safe-area-inset-top,0px) + var(--s3)) max(4vw,16px,env(safe-area-inset-right,0px)) var(--s3) max(4vw,16px,env(safe-area-inset-left,0px));display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s5);justify-content:space-between}
+h1{margin:0;font-size:clamp(24px,3vw,34px);font-weight:800;line-height:1.05;letter-spacing:-.02em}
+.ctrls{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center}
+.seg{display:flex;gap:2px;background:rgba(255,255,255,.16);border-radius:var(--r2);padding:3px}
+.seg button{padding:0 var(--s3);border-radius:4px;font-weight:700;font-size:15px;min-height:36px;white-space:nowrap}
+.seg button[aria-pressed=true]{background:#fff;color:var(--brand)}
+.toel{display:flex;align-items:center;gap:var(--s2);color:#fff;text-decoration:none;font-weight:700;background:rgba(255,255,255,.16);border-radius:var(--r2);padding:0 var(--s3);min-height:42px}
+.stars{display:flex;align-items:center;gap:var(--s2);background:#fff;color:var(--tink);border-radius:var(--r2);padding:0 var(--s3);min-height:42px;font-weight:800;font-size:18px}
+.stars .ic{fill:var(--star);stroke:none;width:20px;height:20px}
+main{padding:var(--s5) max(4vw,16px,env(safe-area-inset-right,0px)) var(--s6) max(4vw,16px,env(safe-area-inset-left,0px));display:grid;gap:var(--s5)}
+.modes{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.modes button{display:flex;align-items:center;gap:var(--s2);border-radius:var(--r2);padding:0 var(--s4);min-height:46px;font-weight:700;box-shadow:inset 0 0 0 1.5px var(--line)}
+.modes button[aria-pressed=true]{background:var(--brand);color:#fff;box-shadow:none}
+.stage{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:var(--s5);align-items:start}
+.fig{position:relative;background:var(--soft);border-radius:var(--r3);padding:var(--s3)}
+.fig svg{display:block;width:100%;height:auto;max-height:calc(100svh - 190px)}
+.figs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s3)}
+.figs .cap{text-align:center;font-weight:700;margin-top:var(--s1)}
+.org{cursor:pointer;transition:opacity .2s}
+.org:hover{filter:brightness(1.06)}
+svg.focus .org:not(.sel):not(.base){opacity:.35}
+.org.sel{filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 4px var(--blue))}
+.org.flash{animation:flash .6s 2}
+@keyframes flash{50%{opacity:.25}}
+.lbl{font:700 16px var(--read);fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:5px;pointer-events:none}
+.card{display:grid;gap:var(--s4);align-content:start}
+.prompt{background:var(--soft);border-radius:var(--r3);padding:var(--s4) var(--s5);display:grid;gap:var(--s2)}
+.qp{color:var(--mute);font-weight:600;font-size:15px}
+.word{font-family:var(--read);font-size:clamp(34px,4.6vw,54px);font-weight:700;line-height:1.1;overflow-wrap:anywhere}
+.sy .s:nth-child(odd){color:var(--sya)}
+.sy .s:nth-child(even){color:var(--syb)}
+.word span.lit{background:color-mix(in srgb,var(--star) 55%,transparent);border-radius:var(--r1)}
+.job{display:flex;align-items:center;gap:var(--s3);font-weight:700}
+.job .ic{width:28px;height:28px;color:var(--brand)}
+.job b{font-family:var(--read);font-size:22px}
+.where{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--mute)}
+.where::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c,#888)}
+.w-both{--c:#7048e8}.w-plant{--c:#2f9e44}.w-animal{--c:#e8590c}
+.row{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center}
+.pill{display:inline-flex;align-items:center;gap:var(--s2);background:var(--blue);color:#fff;border-radius:var(--r2);padding:0 var(--s4);font-weight:700;min-height:44px;white-space:nowrap}
+.pill.alt{background:var(--bg);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.pill .ic{width:20px;height:20px}
+.fact{background:var(--soft);border-radius:var(--r3);padding:var(--s4) var(--s5);display:grid;gap:var(--s3);justify-items:start}
+.fact>b{font-size:18px}
+.words{font-family:var(--read);font-size:clamp(21px,2.3vw,25px);line-height:1.5}
+.words button{padding:0 2px;border-radius:var(--r1)}
+.words button.on{background:var(--star);color:var(--tink)}
+.list{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.list button{border-radius:var(--r2);padding:0 var(--s3);min-height:40px;font-weight:600;box-shadow:inset 0 0 0 1.5px var(--line)}
+.list button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--blue);background:color-mix(in srgb,var(--blue) 9%,transparent)}
+.msg{font-size:20px;font-weight:700;min-height:30px}
+.msg.ok{color:#2b8a3e}.msg.bad{color:#c92a2a}
+.choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2)}
+.choices button{min-height:56px;border-radius:var(--r2);font-weight:700;font-size:18px;box-shadow:inset 0 0 0 1.5px var(--line)}
+.choices button.right{box-shadow:inset 0 0 0 4px #2b8a3e}
+.choices button.no{box-shadow:inset 0 0 0 4px #c92a2a}
+table.cmp{border-collapse:collapse;width:100%;font-size:16px}
+.cmp th,.cmp td{padding:var(--s2) var(--s3);border-bottom:1px solid var(--line);text-align:left}
+.cmp td.c{text-align:center;font-weight:800;font-size:18px}
+.cmp .y{color:#2b8a3e}.cmp .n{color:#c92a2a}.cmp .m{color:var(--mute);font-size:14px;font-weight:600}
+.intro{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:var(--s4)}
+.toast{position:fixed;left:50%;bottom:calc(var(--s6) + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--star);color:var(--tink);font-weight:800;font-size:21px;padding:var(--s3) var(--s5);border-radius:var(--r2);z-index:40;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.note{color:var(--mute);font-size:15px;margin:0}
+@media(max-width:899px){.stage{grid-template-columns:minmax(0,1fr)}.fig svg{max-height:62svh}}
+@media(max-width:600px){.top{display:grid;grid-template-columns:minmax(0,1fr) auto}.ctrls{display:contents}.stars{grid-column:2;grid-row:1}#langs{grid-row:2}.toel{grid-row:2;justify-self:start}.figs{grid-template-columns:minmax(0,1fr)}.choices button{font-size:16px}.top{gap:var(--s2)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-atom" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1" /> <path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z" /> <path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z" /></symbol><symbol id="i-brick-wall" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M12 9v6" /> <path d="M16 15v6" /> <path d="M16 3v6" /> <path d="M3 15h18" /> <path d="M3 9h18" /> <path d="M8 15v6" /> <path d="M8 3v6" /></symbol><symbol id="i-door-open" viewBox="0 0 24 24"><path d="M13 4h3a2 2 0 0 1 2 2v14" /> <path d="M2 20h3" /> <path d="M13 20h9" /> <path d="M10 12v.01" /> <path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z" /></symbol><symbol id="i-droplets" viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" /> <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" /></symbol><symbol id="i-factory" viewBox="0 0 24 24"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" /> <path d="M17 18h1" /> <path d="M12 18h1" /> <path d="M7 18h1" /></symbol><symbol id="i-glass-water" viewBox="0 0 24 24"><path d="M5.116 4.104A1 1 0 0 1 6.11 3h11.78a1 1 0 0 1 .994 1.105L17.19 20.21A2 2 0 0 1 15.2 22H8.8a2 2 0 0 1-2-1.79z" /> <path d="M6 12a5 5 0 0 1 6 0 5 5 0 0 0 6 0" /></symbol><symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" /> <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" /></symbol><symbol id="i-library" viewBox="0 0 24 24"><path d="m16 6 4 14" /> <path d="M12 6v14" /> <path d="M8 8v12" /> <path d="M4 4v16" /></symbol><symbol id="i-microscope" viewBox="0 0 24 24"><path d="M6 18h8" /> <path d="M3 22h18" /> <path d="M14 22a7 7 0 1 0 0-14h-1" /> <path d="M9 14h2" /> <path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z" /> <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3" /></symbol><symbol id="i-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" /> <path d="M12 22V12" /> <path d="m3.3 7 7.703 4.734a2 2 0 0 0 1.994 0L20.7 7" /> <path d="m7.5 4.27 9 5.15" /></symbol><symbol id="i-paw-print" viewBox="0 0 24 24"><circle cx="11" cy="4" r="2" /> <circle cx="18" cy="8" r="2" /> <circle cx="20" cy="16" r="2" /> <path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z" /></symbol><symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3" /></symbol><symbol id="i-recycle" viewBox="0 0 24 24"><path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5" /> <path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12" /> <path d="m14 16-3 3 3 3" /> <path d="M8.293 13.596 7.196 9.5 3.1 10.598" /> <path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843" /> <path d="m13.378 9.633 4.096 1.098 1.097-4.096" /></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3" /> <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" /> <circle cx="18" cy="5" r="3" /></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /></symbol><symbol id="i-split" viewBox="0 0 24 24"><path d="M16 3h5v5" /> <path d="M8 3H3v5" /> <path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3" /> <path d="m15 9 6-6" /></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" /></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /> <path d="M12 2v2" /> <path d="M12 20v2" /> <path d="m4.93 4.93 1.41 1.41" /> <path d="m17.66 17.66 1.41 1.41" /> <path d="M2 12h2" /> <path d="M20 12h2" /> <path d="m6.34 17.66-1.41 1.41" /> <path d="m19.07 4.93-1.41 1.41" /></symbol><symbol id="i-volume-2" viewBox="0 0 24 24"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" /> <path d="M16 9a5 5 0 0 1 0 6" /> <path d="M19.364 18.364a9 9 0 0 0 0-12.728" /></symbol><symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" /></symbol></svg>
+<!-- Icons: Lucide (ISC licence, lucide.dev) -->
+<header class="top">
+  <h1 id="t-title">Cell Explorer</h1>
+  <div class="ctrls">
+    <div class="seg" id="langs" role="group" aria-label="Language"><button data-l="en">EN</button><button data-l="ru">RU</button><button data-l="tr">TR</button></div>
+    <a class="toel" href="../element-explorer/"><svg class="ic" aria-hidden="true"><use href="#i-atom"/></svg><span id="t-toel"></span></a>
+    <div class="stars" aria-live="polite"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg><b id="starN">0</b></div>
+  </div>
+</header>
+<main>
+  <nav class="modes" id="modes">
+    <button data-v="animal"><svg class="ic" aria-hidden="true"><use href="#i-paw-print"/></svg><span id="m-animal"></span></button>
+    <button data-v="plant"><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg><span id="m-plant"></span></button>
+    <button data-v="compare"><svg class="ic" aria-hidden="true"><use href="#i-split"/></svg><span id="m-compare"></span></button>
+    <button data-v="find"><svg class="ic" aria-hidden="true"><use href="#i-microscope"/></svg><span id="m-find"></span></button>
+    <button data-v="sort"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg><span id="m-sort"></span></button>
+  </nav>
+  <section class="stage">
+    <div class="fig" id="fig"></div>
+    <div class="card" id="card"></div>
+  </section>
+  <section class="intro" id="intro"></section>
+</main>
+<script>
+/*TEXT*/
+const ORGT={
+membrane:{name:["Cell membrane","Клеточная мембрана","Hücre zarı"],job:["The gate","Ворота","Kapı"],
+easy:["A thin skin around the cell. It lets good things in and sends waste out.","Тонкая плёнка вокруг клетки. Она впускает нужное и выпускает лишнее.","Hücreyi saran ince bir zar. İyi şeyleri içeri alır, atıkları dışarı atar."],
+sci:["A double layer of lipids with proteins in it. It is selectively permeable: it chooses which substances may enter or leave.","Двойной слой липидов с белками. Мембрана избирательно проницаема: она решает, какие вещества впустить, а какие выпустить.","Proteinler içeren çift katlı bir yağ (lipit) tabakasıdır. Seçici geçirgendir: hangi maddelerin girip çıkacağını seçer."]},
+wall:{name:["Cell wall","Клеточная стенка","Hücre duvarı"],job:["Strong wall","Крепкая стена","Sağlam duvar"],
+easy:["A strong box around a plant cell. It helps plants stand up tall.","Крепкая коробка вокруг клетки растения. Она помогает растению стоять прямо.","Bitki hücresini saran sağlam bir kutu. Bitkinin dik durmasına yardım eder."],
+sci:["Found in plant cells, outside the membrane. It is made of cellulose and gives the cell shape, support and protection.","Есть у клеток растений, снаружи от мембраны. Она состоит из целлюлозы и придаёт клетке форму, прочность и защиту.","Bitki hücrelerinde, hücre zarının dışında bulunur. Selülozdan yapılmıştır; hücreye şekil, destek ve koruma sağlar."]},
+cytoplasm:{name:["Cytoplasm","Цитоплазма","Sitoplazma"],job:["The jelly","Желе","Jöle"],
+easy:["A soft jelly that fills the cell. All the parts float in it.","Мягкое желе внутри клетки. В нём плавают все части клетки.","Hücreyi dolduran yumuşak bir jöle. Bütün parçalar onun içinde yüzer."],
+sci:["A watery gel between the membrane and the nucleus. Many chemical reactions happen here, and a network of protein fibers (the cytoskeleton) holds organelles in place.","Водянистый гель между мембраной и ядром. Здесь идут многие химические реакции, а органоиды держатся на сети белковых нитей (цитоскелете).","Hücre zarı ile çekirdek arasındaki sulu, jöle kıvamında maddedir. Birçok kimyasal tepkime burada olur; organeller hücre iskeleti denen protein ağıyla yerinde tutulur."]},
+nucleus:{name:["Nucleus","Ядро","Çekirdek"],job:["The boss","Начальник","Yönetici"],
+easy:["The boss of the cell. It keeps the instructions that tell the cell what to do.","Главная часть клетки. В ядре хранятся инструкции, что клетке делать.","Hücrenin yöneticisi. Hücreye ne yapacağını söyleyen talimatları saklar."],
+sci:["Holds the DNA, the cell's genetic instructions, inside a double membrane called the nuclear envelope. It controls the cell's activity and growth.","Хранит ДНК — наследственную информацию клетки. Ядро окружено двойной оболочкой и управляет жизнью и ростом клетки.","Hücrenin kalıtım bilgisi olan DNA'yı çift katlı çekirdek zarının içinde saklar. Hücrenin faaliyetlerini ve büyümesini yönetir."]},
+mito:{name:["Mitochondria","Митохондрии","Mitokondri"],job:["Power station","Электростанция","Enerji santrali"],
+easy:["The power stations. They turn food into energy so the cell can work.","Электростанции клетки. Они превращают пищу в энергию для работы.","Hücrenin enerji santrali. Besinleri hücrenin kullanacağı enerjiye çevirir."],
+sci:["In cellular respiration, mitochondria use glucose and oxygen to make ATP, the cell's energy currency. They even have their own DNA.","При клеточном дыхании митохондрии используют глюкозу и кислород и получают АТФ — главный источник энергии клетки. У них есть своя ДНК.","Hücresel solunumda glikoz ve oksijeni kullanarak hücrenin enerji kaynağı olan ATP'yi üretir. Kendine ait DNA'sı da vardır."]},
+ribo:{name:["Ribosomes","Рибосомы","Ribozom"],job:["Tiny factories","Крошечные фабрики","Minik fabrikalar"],
+easy:["Tiny factories. They build proteins, the building blocks the cell needs.","Крошечные фабрики. Они делают белки — детали, из которых строится клетка.","Minik fabrikalar. Hücrenin ihtiyaç duyduğu proteinleri üretir."],
+sci:["Ribosomes read mRNA, a copy of a gene, and link amino acids together into proteins. Some float freely; others sit on the rough ER.","Рибосомы читают мРНК — копию гена — и соединяют аминокислоты в белок. Одни плавают свободно, другие сидят на шероховатой ЭПС.","Ribozomlar bir genin kopyası olan mRNA'yı okur ve amino asitleri birleştirerek protein yapar. Bazıları serbestçe yüzer, bazıları granüllü ER'nin üzerinde bulunur."]},
+er:{name:["Endoplasmic reticulum","Эндоплазматическая сеть","Endoplazmik retikulum"],job:["Roads","Дороги","Yollar"],
+easy:["A maze of roads inside the cell. Things move along it from place to place.","Сеть дорожек внутри клетки. По ней вещества перемещаются с места на место.","Hücrenin içindeki yollar ağı. Maddeler bu yollarda bir yerden bir yere taşınır."],
+sci:["A network of folded membranes. Rough ER is covered with ribosomes and makes proteins; smooth ER makes lipids and helps remove harmful substances.","Сеть мембранных каналов. Шероховатая ЭПС покрыта рибосомами и делает белки, а гладкая ЭПС делает липиды и обезвреживает вредные вещества.","Zarlardan oluşan bir kanal ağıdır. Granüllü ER ribozomlarla kaplıdır ve protein üretir; granülsüz ER yağ (lipit) üretir ve zararlı maddeleri temizlemeye yardım eder."]},
+golgi:{name:["Golgi apparatus","Аппарат Гольджи","Golgi cisimciği"],job:["Post office","Почта","Postane"],
+easy:["The post office. It packs things into little bags and sends them out.","Почта клетки. Она упаковывает вещества в маленькие пузырьки и отправляет их.","Hücrenin postanesi. Maddeleri küçük keseciklere paketler ve gönderir."],
+sci:["Receives proteins from the ER, then modifies, sorts and packages them into vesicles that carry them around the cell or out of it.","Получает белки из ЭПС, дорабатывает, сортирует и упаковывает их в пузырьки, которые везут их по клетке или наружу.","ER'den gelen proteinleri alır, değiştirir, sınıflandırır ve keseciklere paketler. Kesecikler bu maddeleri hücrenin içine ya da dışına taşır."]},
+lyso:{name:["Lysosomes","Лизосомы","Lizozom"],job:["Cleaners","Уборщики","Temizlikçiler"],
+easy:["The cleaners. They break down old parts and trash so they can be used again.","Уборщики клетки. Они разбирают старые части и мусор, чтобы всё пошло в дело.","Hücrenin temizlikçileri. Eski parçaları ve atıkları parçalayıp geri dönüştürür."],
+sci:["Small sacs filled with digestive enzymes. They break down worn-out organelles, food particles and germs. They are found mainly in animal cells.","Маленькие пузырьки с пищеварительными ферментами. Они расщепляют старые органоиды, частицы пищи и микробов. Есть в основном в клетках животных.","Sindirim enzimleriyle dolu küçük keseciklerdir. Yıpranmış organelleri, besin parçacıklarını ve mikropları parçalar. Daha çok hayvan hücrelerinde bulunur."]},
+vacuole:{name:["Vacuole","Вакуоль","Koful"],job:["Storage tank","Хранилище","Depo"],
+easy:["A storage tank. Plant cells have one big one full of water.","Хранилище клетки. У растений есть одна большая вакуоль с водой.","Hücrenin deposu. Bitki hücrelerinde suyla dolu büyük bir koful vardır."],
+sci:["Stores water, food and waste. A plant cell's large central vacuole pushes on the wall and keeps the cell firm (turgor). Animal cells have small vacuoles.","Запасает воду, питательные вещества и отходы. Большая центральная вакуоль растений давит на стенку и делает клетку упругой (тургор). У животных вакуоли маленькие.","Su, besin ve atık maddeleri depolar. Bitki hücresindeki büyük koful, hücre duvarına baskı yaparak hücreyi diri tutar (turgor basıncı). Hayvan hücrelerinde kofullar küçüktür."]},
+chloro:{name:["Chloroplasts","Хлоропласты","Kloroplast"],job:["Solar kitchen","Солнечная кухня","Güneş mutfağı"],
+easy:["Green solar kitchens. They use sunlight, water and air to make sugar for the plant.","Зелёные солнечные кухни. С помощью света, воды и воздуха они готовят сахар для растения.","Yeşil güneş mutfakları. Güneş ışığı, su ve havayı kullanarak bitki için şeker yapar."],
+sci:["Contain green chlorophyll and carry out photosynthesis: using light energy, they turn carbon dioxide and water into glucose and oxygen. Found in plants and algae.","Содержат зелёный хлорофилл и проводят фотосинтез: с помощью энергии света превращают углекислый газ и воду в глюкозу и кислород. Есть у растений и водорослей.","Yeşil renkli klorofil içerir ve fotosentez yapar: ışık enerjisiyle karbondioksit ve suyu glikoz ve oksijene dönüştürür. Bitki ve alg hücrelerinde bulunur."]},
+centri:{name:["Centrioles","Центриоли","Sentrozom"],job:["Splitting helpers","Помощники деления","Bölünme yardımcıları"],
+easy:["Little helpers. When the cell splits in two, they help share the instructions fairly.","Маленькие помощники. Когда клетка делится надвое, они помогают поровну разделить инструкции.","Küçük yardımcılar. Hücre ikiye bölünürken talimatları eşit paylaştırmaya yardım eder."],
+sci:["A pair of tube-shaped structures near the nucleus in animal cells. During cell division they organize the spindle fibers that pull chromosomes apart.","Пара трубчатых телец возле ядра в клетках животных. При делении клетки они помогают построить веретено деления, которое растаскивает хромосомы.","Hayvan hücrelerinde çekirdeğin yanında bulunur ve iki silindir biçimli sentriolden oluşur. Hücre bölünmesinde kromozomları ayıran iğ ipliklerini düzenler."]}
+};
+const CELLT={
+whatT:["What is a cell?","Что такое клетка?","Hücre nedir?"],
+what:["Every living thing is made of cells. Cells are so tiny that you need a microscope to see them. Your body has trillions of them, and each one is like a tiny busy city.","Всё живое состоит из клеток. Клетки такие крошечные, что их видно только в микроскоп. В твоём теле триллионы клеток, и каждая похожа на маленький город, где все заняты делом.","Bütün canlılar hücrelerden oluşur. Hücreler o kadar küçüktür ki onları ancak mikroskopla görebiliriz. Vücudunda trilyonlarca hücre var ve her biri küçük, hareketli bir şehir gibidir."],
+diffT:["Plant cell or animal cell?","Клетка растения или животного?","Bitki hücresi mi, hayvan hücresi mi?"],
+diff:["Both have a membrane, cytoplasm, a nucleus and mitochondria. Plant cells also have a strong cell wall, green chloroplasts that make food from sunlight, and one big vacuole full of water. Animal cells are rounder and softer, and they have centrioles and lysosomes.","У обеих есть мембрана, цитоплазма, ядро и митохондрии. А у клетки растения есть ещё крепкая клеточная стенка, зелёные хлоропласты, которые делают пищу из солнечного света, и одна большая вакуоль с водой. Клетки животных круглее и мягче, в них есть центриоли и лизосомы.","İkisinde de hücre zarı, sitoplazma, çekirdek ve mitokondri bulunur. Bitki hücresinde ayrıca sağlam bir hücre duvarı, güneş ışığıyla besin yapan yeşil kloroplastlar ve suyla dolu büyük bir koful vardır. Hayvan hücreleri daha yuvarlak ve yumuşaktır; sentrozom ve lizozom içerir."],
+lookT:["How do we see cells?","Как увидеть клетки?","Hücreleri nasıl görürüz?"],
+look:["We look at cells with a microscope, which makes tiny things look much bigger. Try a thin piece of onion skin or a gentle scrape from inside your cheek!","Клетки рассматривают в микроскоп: он делает крошечное большим. Попробуй посмотреть на тонкую кожицу лука или на клетки с внутренней стороны щеки!","Hücreleri, küçük şeyleri çok büyük gösteren mikroskopla inceleriz. İnce bir soğan zarına ya da yanağının iç yüzeyinden alınan hücrelere bakmayı dene!"]
+};
+/*TEXT-END*/
+</script>
+<script>
+{
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fill=(s,o)=>s.replace(/\{(\w+)\}/g,(_,k)=>o[k]);
+const LI={en:0,ru:1,tr:2},LOC={en:'en-US',ru:'ru-RU',tr:'tr-TR'};
+
+/* settings and stars are shared with Element Explorer (same site, same storage key) */
+let S={lang:'en',stars:0,syl:true,sci:false,slow:false,voice:{}};
+try{S=Object.assign(S,JSON.parse(localStorage.getItem('elx')||'{}'))}catch(e){}
+if(!S._set){const nl=(navigator.language||'en').slice(0,2);if(LOC[nl])S.lang=nl}
+S.cells=S.cells||{found:[],sorted:0};
+const save=()=>{S._set=1;try{const cur=JSON.parse(localStorage.getItem('elx')||'{}');localStorage.setItem('elx',JSON.stringify(Object.assign(cur,{lang:S.lang,stars:S.stars,cells:S.cells,_set:1})))}catch(e){}};
+
+/* which parts each cell has; 'm' = has it, but small or few */
+const ORGS=[
+ {id:'membrane',ic:'door-open',where:'both'},{id:'wall',ic:'brick-wall',where:'plant'},{id:'cytoplasm',ic:'droplets',where:'both'},
+ {id:'nucleus',ic:'library',where:'both'},{id:'mito',ic:'zap',where:'both'},{id:'ribo',ic:'factory',where:'both'},
+ {id:'er',ic:'route',where:'both'},{id:'golgi',ic:'package',where:'both'},{id:'lyso',ic:'recycle',where:'animal'},
+ {id:'vacuole',ic:'glass-water',where:'both'},{id:'chloro',ic:'sun',where:'plant'},{id:'centri',ic:'split',where:'animal'}];
+const IN={animal:['membrane','cytoplasm','nucleus','mito','ribo','er','golgi','lyso','vacuole','centri'],plant:['wall','membrane','cytoplasm','nucleus','mito','ribo','er','golgi','vacuole','chloro']};
+const CMP={membrane:['y','y'],wall:['n','y'],cytoplasm:['y','y'],nucleus:['y','y'],mito:['y','y'],ribo:['y','y'],er:['y','y'],golgi:['y','y'],lyso:['y','m'],vacuole:['m','y'],chloro:['n','y'],centri:['y','n']};
+
+const T={
+en:{title:'Cell Explorer',toel:'Elements',animal:'Animal cell',plant:'Plant cell',compare:'Compare',find:'Find it!',sort:'Plant or animal?',tap:'Tap a part of the cell.',listen:'Listen',along:'Read along',job:'Its job',sci:'For explorers',
+ both:'In plant and animal cells',onlyPlant:'Only in plant cells',onlyAnimal:'Mostly in animal cells',findP:'Find this part:',yes:['Yes! Great reading!','Correct! You found it!','Super!'],no:'That is the {x}. Try again!',next:'Next',
+ sortP:'Where do we find it?',sPlant:'Plant',sAnimal:'Animal',sBoth:'Both',sortOk:'Right!',sortNo:'Not quite: {x}.',part:'Part',cmpM:'small',cmpT:'Plant and animal cells side by side'},
+ru:{title:'Мир клетки',toel:'Элементы',animal:'Клетка животного',plant:'Клетка растения',compare:'Сравнить',find:'Найди!',sort:'Растение или животное?',tap:'Нажми на часть клетки.',listen:'Послушать',along:'Читать вместе',job:'Его работа',sci:'Для исследователей',
+ both:'Есть у растений и животных',onlyPlant:'Только у растений',onlyAnimal:'В основном у животных',findP:'Найди эту часть:',yes:['Да! Отлично прочитано!','Верно! Нашлось!','Супер!'],no:'Это «{x}». Попробуй ещё!',next:'Дальше',
+ sortP:'Где это бывает?',sPlant:'Растение',sAnimal:'Животное',sBoth:'У обоих',sortOk:'Верно!',sortNo:'Не совсем: {x}.',part:'Часть',cmpM:'маленькие',cmpT:'Клетки растения и животного рядом'},
+tr:{title:'Hücre Kâşifi',toel:'Elementler',animal:'Hayvan hücresi',plant:'Bitki hücresi',compare:'Karşılaştır',find:'Bul!',sort:'Bitki mi, hayvan mı?',tap:'Hücrenin bir bölümüne dokun.',listen:'Dinle',along:'Birlikte oku',job:'Görevi',sci:'Kâşifler için',
+ both:'Bitki ve hayvan hücrelerinde',onlyPlant:'Sadece bitki hücrelerinde',onlyAnimal:'Çoğunlukla hayvan hücrelerinde',findP:'Bu bölümü bul:',yes:['Evet! Harika okudun!','Doğru! Buldun!','Süper!'],no:'Bu {x}. Tekrar dene!',next:'Sonraki',
+ sortP:'Nerede bulunur?',sPlant:'Bitki',sAnimal:'Hayvan',sBoth:'İkisinde de',sortOk:'Doğru!',sortNo:'Tam değil: {x}.',part:'Bölüm',cmpM:'küçük',cmpT:'Bitki ve hayvan hücreleri yan yana'}};
+const L=()=>T[S.lang],li=()=>LI[S.lang];
+const tx=(id,f)=>{const o=ORGT[id];return o&&o[f]?o[f][li()]:id};
+
+/* syllables (same rules as Element Explorer) */
+const VOW={ru:'аеёиоуыэюяАЕЁИОУЫЭЮЯ',tr:'aeıioöuüâîûAEIİOÖUÜÂÎÛ'};
+function syllables(w,lang){const V=VOW[lang];if(!V)return[w];const vi=[];for(let i=0;i<w.length;i++)if(V.includes(w[i]))vi.push(i);if(vi.length<2)return[w];
+  const cuts=vi.slice(0,-1).map((a,j)=>{const b=vi[j+1],n=b-a-1;let k=0;
+    if(lang==='tr')k=n?n-1:0;else{const us=[];for(const ch of w.slice(a+1,b)){if('ьъЬЪ'.includes(ch)&&us.length)us[us.length-1]+=ch;else us.push(ch)}k=us.length>1?us.slice(0,-1).join('').length:0}
+    return a+1+k});
+  const out=[];let p=0;cuts.forEach(c=>{out.push(w.slice(p,c));p=c});out.push(w.slice(p));return out.filter(Boolean)}
+const useSyl=()=>S.syl&&S.lang!=='en';
+const sylHTML=w=>syllables(w,S.lang).map(x=>`<span class="s">${esc(x)}</span>`).join('');
+const sylText=w=>w.split(/(\s+)/).map(p=>/\s/.test(p)?p:sylHTML(p)).join('');
+const wordHTML=w=>useSyl()?sylText(w):esc(w);
+
+/* speech (device voices; the same voice choice as Element Explorer) */
+let voices=[];const hasTTS='speechSynthesis' in window;
+const loadV=()=>{try{voices=speechSynthesis.getVoices()||[]}catch(e){}};if(hasTTS){loadV();try{speechSynthesis.addEventListener('voiceschanged',loadV)}catch(e){}}
+const vScore=v=>/premium|enhanced|natural|neural|siri/i.test(v.name)?3:/google|microsoft/i.test(v.name)?2:v.localService?1:0;
+const voiceFor=l=>{const vs=voices.filter(v=>v.lang.toLowerCase().replace('_','-').startsWith(l)).sort((a,b)=>vScore(b)-vScore(a));return vs.find(v=>v.voiceURI===(S.voice||{})[l])||vs[0]};
+let spT=0;
+function speak(text,{word,end}={}){clearInterval(spT);if(!hasTTS){end&&end();return}try{speechSynthesis.cancel()}catch(e){}
+  const u=new SpeechSynthesisUtterance(text);u.lang=LOC[S.lang];const v=voiceFor(S.lang);if(v)u.voice=v;u.rate=S.slow?.62:.85;let gotB=false;
+  u.onstart=()=>{if(word){const ws=[...text.matchAll(/\S+/g)];let i=0;spT=setInterval(()=>{if(gotB||i>=ws.length){clearInterval(spT);return}word(ws[i++].index)},S.slow?560:420)}};
+  u.onboundary=e=>{if(e.name&&e.name!=='word')return;gotB=true;word&&word(e.charIndex)};
+  u.onend=u.onerror=()=>{clearInterval(spT);end&&end()};speechSynthesis.speak(u)}
+function words(text){return [...text.matchAll(/\S+/g)].map(m=>`<button data-i="${m.index}"${useSyl()?' class="sy"':''}>${useSyl()?sylHTML(m[0]):esc(m[0])}</button>`).join(' ')}
+function readAlong(box){const bs=[...box.querySelectorAll('button')],txt=box.dataset.text;
+  speak(txt,{word:ci=>{let k=0;bs.forEach((b,i)=>{if(+b.dataset.i<=ci)k=i});bs.forEach((b,i)=>b.classList.toggle('on',i===k))},end:()=>bs.forEach(b=>b.classList.remove('on'))})}
+document.addEventListener('click',e=>{const b=e.target.closest('.words button');if(b){speak(b.textContent.replace(/[.,!?:;«»“”—()]/g,''));return}
+  const a=e.target.closest('[data-along]');if(a){readAlong(document.getElementById(a.dataset.along));return}
+  const n=e.target.closest('[data-say]');if(n)speak(n.dataset.say)});
+const factBox=(id,title,text)=>`<div class="fact">${title?`<b>${esc(title)}</b>`:''}<div class="words" id="${id}" data-text="${esc(text)}">${words(text)}</div><button class="pill alt" data-along="${id}"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>${esc(L().along)}</button></div>`;
+function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1700)}
+const star=n=>{S.stars+=n;save();$('#starN').textContent=S.stars;toast('★ +'+n)};
+
+/* ---------- drawing the cells ---------- */
+let seed=7;const rnd=()=>(seed=seed*16807%2147483647)/2147483647;
+const g=(id,inner,extra='')=>`<g class="org" data-o="${id}" ${extra}>${inner}</g>`;
+function mito(x,y,a,s=1){const w=46*s,h=22*s;let cr='';for(let i=-3;i<=3;i++)cr+=`${i===-3?'M':'L'}${x+i*w/4.2} ${y+(i%2?-h*.55:h*.55)}`;
+  return `<g transform="rotate(${a} ${x} ${y})"><ellipse cx="${x}" cy="${y}" rx="${w}" ry="${h}" fill="#ff8787" stroke="#c92a2a" stroke-width="3"/><path d="${cr}" fill="none" stroke="#c92a2a" stroke-width="2.5" stroke-linejoin="round"/></g>`}
+function chloro(x,y,a){let st='';for(let i=-2;i<=2;i++)st+=`<rect x="${x+i*14-5}" y="${y-8}" width="10" height="16" rx="2" fill="#2b8a3e"/>`;
+  return `<g transform="rotate(${a} ${x} ${y})"><ellipse cx="${x}" cy="${y}" rx="42" ry="22" fill="#8ce99a" stroke="#2b8a3e" stroke-width="3"/>${st}<path d="M${x-30} ${y}H${x+30}" stroke="#2b8a3e" stroke-width="1.5"/></g>`}
+function golgi(x,y){let p='';for(let i=0;i<4;i++){const r=60-i*9,yy=y+i*13;p+=`<path d="M${x-r} ${yy}Q${x} ${yy-26} ${x+r} ${yy}" fill="none" stroke="#f08c00" stroke-width="9" stroke-linecap="round"/>`}
+  return p+`<circle cx="${x+66}" cy="${y+8}" r="6" fill="#ffc078" stroke="#f08c00" stroke-width="2"/><circle cx="${x-64}" cy="${y+30}" r="5" fill="#ffc078" stroke="#f08c00" stroke-width="2"/><circle cx="${x+58}" cy="${y+42}" r="5" fill="#ffc078" stroke="#f08c00" stroke-width="2"/>`}
+function er(cx,cy,r0,a0,a1){let p='';for(let i=0;i<3;i++){const r=r0+i*20,x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
+    p+=`<path d="M${x0} ${y0}A${r} ${r} 0 0 1 ${x1} ${y1}" fill="none" stroke="#f783ac" stroke-width="10" stroke-linecap="round"/>`;
+    for(let k=0;k<=8;k++){const a=a0+(a1-a0)*k/8;p+=`<circle cx="${cx+(r+7)*Math.cos(a)}" cy="${cy+(r+7)*Math.sin(a)}" r="2.6" fill="#495057"/>`}}return p}
+function nucleus(x,y,r){return `<circle cx="${x}" cy="${y}" r="${r}" fill="#d0bfff" stroke="#7048e8" stroke-width="5"/><circle cx="${x}" cy="${y}" r="${r-6}" fill="none" stroke="#9775fa" stroke-width="1.5" stroke-dasharray="4 6"/>
+  <path d="M${x-r*.5} ${y+r*.2}c10-20 25 10 35-8s20 12 30-4M${x-r*.4} ${y-r*.35}c12 8 20-12 34-2" fill="none" stroke="#7048e8" stroke-width="2"/><circle cx="${x+r*.22}" cy="${y-r*.05}" r="${r*.28}" fill="#7048e8"/>`}
+const ribos=(n,box,avoid)=>{let p='';for(let i=0;i<n;i++){let x,y,t=0;do{x=box[0]+rnd()*(box[2]-box[0]);y=box[1]+rnd()*(box[3]-box[1]);t++}while(avoid(x,y)&&t<30);p+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.2" fill="#495057"/>`}return p};
+function animalSVG(){seed=11;
+  const blob='M300 60C430 60 540 150 545 285C550 420 470 545 320 548C170 552 62 470 58 320C54 170 160 60 300 60Z';
+  return `<svg viewBox="0 0 600 600" role="img" data-cell="animal">
+  ${g('cytoplasm',`<path d="${blob}" fill="#ffe3d6"/>`,'data-base="1"')}
+  ${g('ribo',ribos(34,[110,110,500,500],(x,y)=>Math.hypot(x-280,y-290)<150||Math.hypot(x-300,y-305)>215))}
+  ${g('er',er(280,290,104,-1.25,.55))}
+  ${g('nucleus',nucleus(280,290,82))}
+  ${g('mito',mito(165,430,-25)+mito(430,175,30)+mito(170,185,60,.9))}
+  ${g('golgi',golgi(410,410))}
+  ${g('lyso',[[210,350],[470,300],[360,500]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="14" fill="#b2f2bb" stroke="#2f9e44" stroke-width="3"/><circle cx="${x-4}" cy="${y-3}" r="2.5" fill="#2f9e44"/><circle cx="${x+4}" cy="${y+4}" r="2.5" fill="#2f9e44"/>`).join(''))}
+  ${g('vacuole',`<circle cx="250" cy="495" r="20" fill="#d0ebff" stroke="#4dabf7" stroke-width="3"/><circle cx="480" cy="380" r="15" fill="#d0ebff" stroke="#4dabf7" stroke-width="3"/>`)}
+  ${g('centri',`<g transform="rotate(-20 330 140)"><rect x="300" y="128" width="44" height="18" rx="4" fill="#ffe066" stroke="#e67700" stroke-width="3"/><path d="M311 128v18M322 128v18M333 128v18" stroke="#e67700" stroke-width="2"/><rect x="346" y="112" width="18" height="44" rx="4" fill="#ffe066" stroke="#e67700" stroke-width="3"/><path d="M346 123h18M346 134h18M346 145h18" stroke="#e67700" stroke-width="2"/></g>`)}
+  ${g('membrane',`<path d="${blob}" fill="none" stroke="#e8590c" stroke-width="9"/><path d="${blob}" fill="none" stroke="#ffa94d" stroke-width="3" stroke-dasharray="2 7"/>`,'style="pointer-events:stroke"')}
+  <g id="lbls"></g></svg>`}
+function plantSVG(){seed=23;
+  return `<svg viewBox="0 0 600 600" role="img" data-cell="plant">
+  ${g('cytoplasm',`<rect x="84" y="84" width="432" height="432" rx="26" fill="#ebfbee"/>`,'data-base="1"')}
+  ${g('vacuole',`<path d="M150 180C190 140 330 150 360 200S380 360 330 420 170 450 140 390 110 220 150 180Z" fill="#d0ebff" stroke="#339af0" stroke-width="4"/>`)}
+  ${g('ribo',ribos(30,[100,100,500,500],(x,y)=>(x>120&&x<380&&y>140&&y<450)||Math.hypot(x-430,y-170)<75))}
+  ${g('er',er(430,170,66,1.6,3.2))}
+  ${g('nucleus',nucleus(430,170,58))}
+  ${g('chloro',chloro(135,130,-10)+chloro(455,300,80)+chloro(440,440,20)+chloro(280,470,-5)+chloro(125,470,30)+chloro(300,115,5))}
+  ${g('mito',mito(450,370,-60,.8)+mito(200,470,15,.8))}
+  ${g('golgi',golgi(390,500).replace(/stroke-width="9"/g,'stroke-width="7"'))}
+  ${g('membrane',`<rect x="84" y="84" width="432" height="432" rx="26" fill="none" stroke="#69db7c" stroke-width="5"/>`,'style="pointer-events:stroke"')}
+  ${g('wall',`<rect x="66" y="66" width="468" height="468" rx="34" fill="none" stroke="#2f9e44" stroke-width="22"/><rect x="66" y="66" width="468" height="468" rx="34" fill="none" stroke="#8ce99a" stroke-width="3" stroke-dasharray="14 10"/>`,'style="pointer-events:stroke"')}
+  <g id="lbls"></g></svg>`}
+
+/* ---------- views ---------- */
+const V={view:'animal',sel:'',cell:'animal',find:null,tries:0,sortQ:null};
+/* label spots next to one example of each part */
+const LBL={animal:{membrane:[300,46],cytoplasm:[150,265],nucleus:[280,345],er:[440,240],mito:[165,475],golgi:[410,458],lyso:[210,385],vacuole:[250,535],centri:[330,103],ribo:[118,325]},
+  plant:{wall:[300,50],membrane:[300,106],cytoplasm:[265,508],vacuole:[245,300],nucleus:[430,248],er:[325,215],chloro:[135,168],mito:[452,408],golgi:[390,478],ribo:[385,318]}};
+function setLabels(svg,show){const lb=svg.querySelector('#lbls');if(!lb)return;lb.innerHTML='';if(!show)return;
+  const m=LBL[svg.dataset.cell]||{};
+  Object.entries(m).forEach(([id,[x,y]])=>lb.insertAdjacentHTML('beforeend',`<text class="lbl" x="${x}" y="${y}" text-anchor="middle">${esc(tx(id,'name'))}</text>`))}
+function markSel(){document.querySelectorAll('#fig svg').forEach(svg=>{svg.classList.toggle('focus',!!V.sel&&V.view!=='find');svg.querySelectorAll('.org').forEach(o=>o.classList.toggle('sel',o.dataset.o===V.sel&&V.view!=='find'))})}
+function renderFig(){
+  const f=$('#fig'),t=L();
+  if(V.view==='compare'){f.innerHTML=`<div class="figs"><div>${animalSVG()}<div class="cap">${esc(t.animal)}</div></div><div>${plantSVG()}<div class="cap">${esc(t.plant)}</div></div></div>`}
+  else{const cell=V.view==='plant'||(V.view!=='animal'&&V.cell==='plant')?'plant':'animal';V.cell=cell;f.innerHTML=cell==='plant'?plantSVG():animalSVG()}
+  markSel();
+}
+function whereTxt(w){const t=L();return w==='both'?t.both:w==='plant'?t.onlyPlant:t.onlyAnimal}
+function renderCard(){
+  const t=L(),c=$('#card');
+  if(V.view==='find'){const q=V.find;c.innerHTML=`<div class="prompt"><span class="qp">${esc(t.findP)}</span><div class="word${useSyl()?' sy':''}">${wordHTML(tx(q,'name'))}</div></div><div class="msg" id="fmsg"></div><div class="row"><button class="pill alt" id="fnext">${esc(t.next)}</button></div>`;return}
+  if(V.view==='sort'){const q=V.sortQ;c.innerHTML=`<div class="prompt"><span class="qp">${esc(t.sortP)}</span><div class="word${useSyl()?' sy':''}">${wordHTML(tx(q,'name'))}</div></div><div class="choices" id="sch"><button data-s="plant">${esc(t.sPlant)}</button><button data-s="animal">${esc(t.sAnimal)}</button><button data-s="both">${esc(t.sBoth)}</button></div><div class="msg" id="smsg"></div><div class="row"><button class="pill alt" id="snext">${esc(t.next)}</button></div>`;return}
+  if(V.view==='compare'){c.innerHTML=`<div class="fact"><b>${esc(t.cmpT)}</b><div style="overflow-x:auto;width:100%"><table class="cmp"><thead><tr><th>${esc(t.part)}</th><th>${esc(t.animal)}</th><th>${esc(t.plant)}</th></tr></thead><tbody>${ORGS.map(o=>`<tr><td><button class="lk" data-sel="${o.id}">${esc(tx(o.id,'name'))}</button></td>${CMP[o.id].map(v=>`<td class="c ${v}">${v==='y'?'✓':v==='n'?'✗':`<span class="m">✓ ${esc(t.cmpM)}</span>`}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>`+(CELLT.diff?factBox('fdiff',CELLT.diffT[li()],CELLT.diff[li()]):'');return}
+  if(!V.sel){c.innerHTML=`<div class="prompt"><div class="word" style="font-size:clamp(26px,3vw,34px)">${esc(t.tap)}</div></div><div class="list">${IN[V.cell].map(id=>`<button data-sel="${id}">${esc(tx(id,'name'))}</button>`).join('')}</div>`;return}
+  const o=ORGS.find(x=>x.id===V.sel),nm=tx(o.id,'name');
+  c.innerHTML=`<div class="prompt"><div class="word${useSyl()?' sy':''}" id="oname">${wordHTML(nm)}</div><span class="where w-${o.where}">${esc(whereTxt(o.where))}</span>
+    <div class="job"><svg class="ic" aria-hidden="true"><use href="#i-${o.ic}"/></svg><span class="qp">${esc(t.job)}:</span><b>${esc(tx(o.id,'job'))}</b></div>
+    <div class="row"><button class="pill" data-say="${esc(nm)}"><svg class="ic" aria-hidden="true"><use href="#i-volume-2"/></svg>${esc(t.listen)}</button></div></div>
+    ${factBox('feasy','',tx(o.id,'easy'))}${S.sci?factBox('fsci',t.sci,tx(o.id,'sci')):''}
+    <div class="list">${IN[V.cell].map(id=>`<button data-sel="${id}" aria-pressed="${id===V.sel}">${esc(tx(id,'name'))}</button>`).join('')}</div>`;
+}
+function renderIntro(){const i=li();$('#intro').innerHTML=CELLT.what?factBox('iwhat',CELLT.whatT[i],CELLT.what[i])+factBox('ilook',CELLT.lookT[i],CELLT.look[i]):''}
+function render(){const t=L();document.documentElement.lang=S.lang;$('#t-title').textContent=t.title;document.title=t.title;$('#t-toel').textContent=t.toel;
+  ['animal','plant','compare','find','sort'].forEach(k=>$('#m-'+k).textContent=t[k]);
+  document.querySelectorAll('#langs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===S.lang));
+  document.querySelectorAll('#modes button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===V.view));
+  $('#starN').textContent=S.stars;renderFig();renderCard();renderIntro();
+  const svg=$('#fig svg');if(svg&&V.view!=='find'&&V.view!=='compare')requestAnimationFrame(()=>setLabels(svg,!V.sel))}
+function newFind(){const pool=IN[V.cell];let q;do q=pool[Math.floor(Math.random()*pool.length)];while(q===V.find&&pool.length>1);V.find=q;V.tries=0}
+function newSort(){let q;do q=ORGS[Math.floor(Math.random()*ORGS.length)].id;while(q===V.sortQ);V.sortQ=q}
+
+/* ---------- events ---------- */
+$('#langs').addEventListener('click',e=>{const b=e.target.closest('button');if(b){S.lang=b.dataset.l;save();render()}});
+$('#modes').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;V.view=b.dataset.v;
+  if(V.view==='animal'||V.view==='plant'){V.cell=V.view;V.sel=''}
+  if(V.view==='find'){newFind()}if(V.view==='sort'){newSort()}render()});
+$('#fig').addEventListener('click',e=>{const o=e.target.closest('.org');if(!o)return;const id=o.dataset.o;
+  if(V.view==='find'){const m=$('#fmsg'),t=L();if(id===V.find){if(!S.cells.found.includes(id))S.cells.found.push(id);star(1);m.textContent=t.yes[Math.floor(Math.random()*t.yes.length)];m.className='msg ok';o.classList.add('flash');speak(tx(id,'name'));setTimeout(()=>{newFind();render()},1600)}
+    else{V.tries++;m.textContent=fill(t.no,{x:tx(id,'name')});m.className='msg bad';o.classList.add('flash');setTimeout(()=>o.classList.remove('flash'),1300)}return}
+  if(V.view==='sort')return;
+  if(V.view==='compare'){V.cell=o.closest('svg').dataset.cell;V.view=V.cell}
+  V.sel=id;render();speak(tx(id,'name'))});
+$('#card').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.sel){if(V.view==='compare'){V.view=CMP[b.dataset.sel][0]==='n'?'plant':V.cell;V.cell=V.view}V.sel=b.dataset.sel;if(!IN[V.cell].includes(V.sel)){V.cell=V.cell==='plant'?'animal':'plant';V.view=V.cell}render();return}
+  if(b.id==='fnext'){newFind();render();return}
+  if(b.id==='snext'){newSort();render();return}
+  if(b.dataset.s){const ans=ORGS.find(o=>o.id===V.sortQ).where,t=L(),m=$('#smsg');document.querySelectorAll('#sch button').forEach(x=>{x.disabled=true;x.classList.toggle('right',x.dataset.s===ans)});
+    if(b.dataset.s===ans){m.textContent=t.sortOk;m.className='msg ok';S.cells.sorted++;star(1)}else{b.classList.add('no');m.textContent=fill(t.sortNo,{x:whereTxt(ans)});m.className='msg bad'}
+    setTimeout(()=>{newSort();render()},1900)}});
+render();
+}
+</script>
+</body>
+</html>

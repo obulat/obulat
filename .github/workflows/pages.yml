@@ -1,11 +1,12 @@
-# Publishes Element Explorer to GitHub Pages:
+# Publishes the kids' science apps to GitHub Pages:
 #   https://obulat.github.io/obulat/element-explorer/
-name: Publish Element Explorer
+#   https://obulat.github.io/obulat/cell-explorer/
+name: Publish science apps
 
 on:
   push:
     branches: [master]
-    paths: ['element-explorer/**', '.github/workflows/pages.yml']
+    paths: ['element-explorer/**', 'cell-explorer/**', '.github/workflows/pages.yml']
   workflow_dispatch:
 
 permissions:
@@ -26,8 +27,8 @@ jobs:
         run: |
           mkdir -p _site/element-explorer
           rsync -a --exclude tools --exclude .gitignore --exclude app.html element-explorer/ _site/element-explorer/
-          # The site root forwards to the app
-          printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=element-explorer/"><title>Element Explorer</title><a href="element-explorer/">Element Explorer</a>\n' > _site/index.html
+          mkdir -p _site/cell-explorer && cp cell-explorer/index.html _site/cell-explorer/
+          cp site-index.html _site/index.html
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
