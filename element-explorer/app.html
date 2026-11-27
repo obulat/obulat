@@ -1721,7 +1721,7 @@ $('#optSyl').onchange=e=>{S.syl=e.target.checked;save();applyLang()};
 $('#optSci').onchange=e=>{S.sci=e.target.checked;save();if(mode==='quiz')newQ();applyLang()};
 let sure=0;
 $('#resetBtn').onclick=e=>{if(!sure){sure=1;e.target.textContent=L().sure;setTimeout(()=>{sure=0;e.target.textContent=L().reset},3000);return}
-  sure=0;S.stars=0;S.read=[];S.found=[];S.mols=[];S.lab=[];S.log={};S.heavy=[0,0];save();if(panel==='grown')renderGrown();renderTable();e.target.textContent=L().reset};
+  sure=0;S.stars=0;S.read=[];S.found=[];S.mols=[];S.mbBag=[];S.lab=[];S.log={};S.heavy=[0,0];save();if(panel==='grown')renderGrown();renderTable();e.target.textContent=L().reset};
 function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1800)}
 
 /* ---------- element sheet ---------- */
@@ -2740,13 +2740,19 @@ const fmtF=f=>f.replace(/(\d+)/g,'<sub>$1</sub>')+' = '+Object.entries(parseF(f)
 const MB={goal:null,tray:{},done:false,showF:false,pal:[]};
 const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 function openMB(){showPanel('mbuild',true);if(!MB.goal)newMB();else renderMB()}
-function newMB(){const pool=S.sci?MB_EASY.concat(MB_SCI):MB_EASY;let f;do f=pool[Math.floor(Math.random()*pool.length)];while(MB.goal&&f===MB.goal.f);
+/* a shuffled bag: every molecule comes once before any repeats, unbuilt ones first; the bag is kept across visits */
+function newMB(){const pool=S.sci?MB_EASY.concat(MB_SCI):MB_EASY;
+  let bag=(S.mbBag||[]).filter(f=>pool.includes(f));
+  if(!bag.length){const built=S.mols||[],todo=shuffle(pool.filter(f=>!built.includes(f))),rest=shuffle(pool.filter(f=>built.includes(f)));bag=todo.concat(rest);
+    if(MB.goal&&bag.length>1&&bag[0]===MB.goal.f)bag.push(bag.shift())}
+  const f=bag.shift();S.mbBag=bag;save();
   MB.goal=MOLS.find(m=>m.f===f);MB.tray={};MB.done=false;MB.showF=false;
   const need=Object.keys(parseF(f)),extra=shuffle(['H','C','N','O','Cl','Na','S'].filter(e=>!need.includes(e))).slice(0,Math.max(2,5-need.length));
   MB.pal=shuffle(need.concat(extra));renderMB()}
 function renderMB(){
   const t=L(),g=MB.goal,need=parseF(g.f),m=$('#m-msg');
   setWord($('#m-goal'),g.n[S.lang]);
+  {const pool=S.sci?MB_EASY.concat(MB_SCI):MB_EASY;$('#m-goalL').textContent=t.molGoal+' · '+pool.filter(f=>(S.mols||[]).includes(f)).length+'/'+pool.length}
   $('#m-formula').innerHTML=MB.showF?fmtF(g.f):esc(t.showF);
   $('#m-pal').innerHTML=MB.pal.map(e=>`<button class="atomb" data-a="${e}" style="--c:${hex(e)};color:${inkOn(e)}">${e}<small>${esc(nm(zOf(e)))}</small></button>`).join('');
   const tr=Object.entries(MB.tray).filter(([,n])=>n>0);
