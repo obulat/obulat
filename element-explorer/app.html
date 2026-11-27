@@ -286,6 +286,65 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
 #tp-cells .cintro{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:var(--s4)}
 @media(max-width:899px){#tp-cells .cstage{grid-template-columns:minmax(0,1fr)}#tp-cells .cfig svg{max-height:62svh}}
 @media(max-width:600px){#tp-cells .cfigs{grid-template-columns:minmax(0,1fr)}#tp-cells .choices button{font-size:16px}}
+
+.tp .th{margin:0;font-size:clamp(26px,3.2vw,38px);font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.tp .tmodes{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.tp .tmodes button{display:flex;align-items:center;gap:var(--s2);border-radius:var(--r2);padding:0 var(--s4);min-height:46px;font-weight:700;box-shadow:inset 0 0 0 1.5px var(--line)}
+.tp .tmodes button[aria-pressed=true]{background:var(--brand);color:#fff;box-shadow:none}
+.tstage{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:var(--s5);align-items:start}
+.tfig{background:var(--soft);border-radius:var(--r3);padding:var(--s3);display:grid;gap:var(--s3);justify-items:center}
+.tfig>svg{display:block;width:100%;height:auto;max-height:calc(100svh - 220px)}
+.tp .pill{display:inline-flex;align-items:center;gap:var(--s2)}
+.tp .pill .ic{width:20px;height:20px}
+.tp .stats b{font-size:19px;white-space:normal}
+.tcard{display:grid;gap:var(--s4);align-content:start}
+.tp .prompt{background:var(--soft);border-radius:var(--r3);padding:var(--s4) var(--s5);display:grid;gap:var(--s2)}
+.tp .word{font-family:var(--read);font-size:clamp(32px,4.4vw,52px);font-weight:700;line-height:1.1;overflow-wrap:anywhere}
+.tp .job{display:flex;align-items:center;gap:var(--s3);font-weight:700}
+.tp .job b{font-family:var(--read);font-size:22px}
+.tp .row{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center}
+.tp .list{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.tp .list button{border-radius:var(--r2);padding:0 var(--s3);min-height:40px;font-weight:600;box-shadow:inset 0 0 0 1.5px var(--line)}
+.tp .list button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--brand);background:color-mix(in srgb,var(--brand) 9%,transparent)}
+.tp .msg{font-size:20px;font-weight:700;min-height:30px}
+.tp .msg.ok{color:#2b8a3e}.tp .msg.bad{color:#c92a2a}
+.tp .choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2)}
+.tp .choices button{min-height:56px;border-radius:var(--r2);font-family:var(--read);font-weight:700;font-size:19px;box-shadow:inset 0 0 0 1.5px var(--line)}
+.tp .choices button.right{box-shadow:inset 0 0 0 4px #2b8a3e}.tp .choices button.no{box-shadow:inset 0 0 0 4px #c92a2a}
+.tp .fact{justify-items:start}
+.tp .org{cursor:pointer}
+.tp svg.focus .org:not(.sel){opacity:.35}
+.tp .org.sel{filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 4px var(--brand))}
+.tp .lbl{font:700 15px var(--read);fill:#fff;paint-order:stroke;stroke:#0b0e22;stroke-width:4px;pointer-events:none}
+.tp .pl.done{opacity:.4}
+.zfig{padding:var(--s4)}
+.zart{max-width:360px;aspect-ratio:1}
+.zart.zin{animation:zin .45s ease-out}.zart.zout{animation:zout .45s ease-out}
+@keyframes zin{from{transform:scale(.25);opacity:.2}}@keyframes zout{from{transform:scale(3);opacity:.2}}
+.zctrl{display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap;justify-content:center}
+.zexp{font-size:24px;font-weight:800;font-variant-numeric:tabular-nums;min-width:5em;text-align:center}
+.zbig{font-size:18px;font-weight:600;color:var(--mute)}
+.zlad{list-style:none;margin:0;padding:0;display:grid;gap:3px}
+.zlad button{width:100%;display:grid;grid-template-columns:minmax(0,10em) minmax(0,1fr);align-items:center;gap:var(--s2);text-align:left;padding:2px var(--s2);border-radius:var(--r1);font-size:14px;font-weight:600;min-height:32px}
+.zlad button[aria-pressed=true]{background:var(--soft);font-weight:800}
+.zlad i{display:block;height:8px;border-radius:2px;background:var(--brand);opacity:.6}
+.mbox{position:relative;width:100%;display:grid;grid-template-columns:minmax(0,1fr) 54px;gap:var(--s3)}
+#m-cv{width:100%;aspect-ratio:4/3;background:linear-gradient(#f8fbff,#e7f5ff);border-radius:var(--r2);box-shadow:inset 0 0 0 2px var(--line)}
+.mtherm{display:grid;justify-items:center;gap:var(--s2);align-content:end}
+.mt{width:18px;height:100%;min-height:200px;border-radius:9px;background:var(--line);position:relative;overflow:hidden}
+.mt i{position:absolute;left:0;right:0;bottom:0;background:#e03131;border-radius:9px;transition:height .3s}
+.mrow{width:100%;justify-content:center}
+#m-temp{flex:1;min-width:120px;accent-color:#e03131;height:32px}
+.mex{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.mex span{font-family:var(--read);font-size:18px;font-weight:700;background:var(--bg);border-radius:var(--r1);padding:2px var(--s3)}
+.mchange{background:#fff3bf}
+.msq{min-height:220px;display:grid;place-items:center;width:100%}
+.msq .word{font-size:clamp(40px,6vw,64px)}
+.bfig svg{max-width:340px}
+.spinx{transform-box:fill-box;transform-origin:50% 50%;animation:spinx 8s linear infinite}
+@keyframes spinx{from{transform:translateX(-40px)}to{transform:translateX(40px)}}
+@media(max-width:899px){.tstage{grid-template-columns:minmax(0,1fr)}.tfig>svg{max-height:60svh}}
+@media(max-width:600px){.tp .choices button{font-size:16px}.zlad button{grid-template-columns:minmax(0,8em) minmax(0,1fr)}}
 :root.schoolfont:not([lang=ru]){--read:SchoolFont,Andika,Onest,system-ui,sans-serif}
 .filebtn{display:inline-flex;align-items:center;cursor:pointer}
 .arbtn{right:calc(var(--s2) + 52px);font-weight:800;font-size:15px}
@@ -895,6 +954,223 @@ const NAT={
 118:{occ:"synthetic",shape:"unknown",t:["Oganesson is not found in nature. Scientists in Dubna made only about five atoms. Each broke apart in under a thousandth of a second.","Оганесон в природе не встречается. Учёные в Дубне получили всего около пяти атомов, и каждый распался меньше чем за тысячную долю секунды.","Oganesson doğada bulunmaz. Dubna'daki bilim insanları yalnızca beş kadar atom üretti; her biri saniyenin binde birinden kısa sürede bozundu."]}
 };
 /*NATURE-END*/
+/*TOPICS*/
+const ZOOM=[
+{id:"galaxy",m:1e21,topic:"space",name:["Milky Way galaxy","Галактика Млечный Путь","Samanyolu Galaksisi"],big:["Light takes 100,000 years to cross it","Свету нужно 100 000 лет, чтобы её пересечь","Işık onu 100.000 yılda geçer"],easy:["Our galaxy is a giant spiral of over 100 billion stars. The Sun is just one of them.","Наша галактика — огромная спираль из более чем 100 миллиардов звёзд. Солнце — лишь одна из них.","Evimiz olan galaksi, 100 milyardan fazla yıldızdan oluşan dev bir sarmal. Güneş bunlardan sadece biri."]},
+{id:"solar",m:1.2e13,topic:"space",name:["Solar System","Солнечная система","Güneş Sistemi"],big:["Sunlight takes about 4 hours to reach Neptune","Свет Солнца летит до Нептуна около 4 часов","Güneş'in ışığı Neptün'e yaklaşık 4 saatte varır"],easy:["The Sun and the eight planets that circle around it. Earth is the third planet from the Sun.","Солнце и восемь планет, которые кружат вокруг него. Земля — третья планета от Солнца.","Güneş ve etrafında dönen sekiz gezegen. Dünya, Güneş'e en yakın üçüncü gezegendir."]},
+{id:"earth",m:1.27e7,topic:"space",name:["Planet Earth","Планета Земля","Dünya gezegeni"],big:["A plane would fly around it in about 2 days","Самолёт облетел бы её примерно за 2 дня","Bir uçak onun etrafını yaklaşık 2 günde dolaşır"],easy:["Our home planet. It is the only place we know with oceans, air to breathe and life.","Наш родной дом. Это единственная известная нам планета с океанами, воздухом и жизнью.","Bizim evimiz. Okyanusları, havası ve canlıları olduğunu bildiğimiz tek gezegen."]},
+{id:"child",m:1.2,topic:"body",name:["A child","Ребёнок","Bir çocuk"],big:["About as tall as 12 hands stacked up","Ростом примерно с 12 ладошек, одна над другой","Boyu üst üste yaklaşık 12 el kadar"],easy:["That is you! Your body is made of trillions of tiny cells that work together.","Это ты! Твоё тело состоит из триллионов крошечных клеток, которые работают вместе.","Bu sensin! Vücudun birlikte çalışan trilyonlarca minik hücreden oluşur."]},
+{id:"hand",m:0.1,topic:"body",name:["A hand","Ладошка","Bir el"],big:["About as wide as an orange","Шириной примерно с апельсин","Yaklaşık bir portakal genişliğinde"],easy:["Your hand and wrist have 27 bones. Your fingers can feel a bump thinner than a hair!","В кисти руки 27 косточек. Пальцы чувствуют бугорок тоньше волоска!","Elinde ve bileğinde 27 kemik var. Parmakların saç telinden ince bir çıkıntıyı bile hisseder!"]},
+{id:"hair",m:7e-5,topic:"cells",name:["Width of a hair","Толщина волоса","Saç telinin kalınlığı"],big:["About as thick as a sheet of paper","Тонкий, почти как лист бумаги","Yaklaşık bir kâğıt yaprağı kadar ince"],easy:["A hair is thin, but you can still see it. To see smaller things, you need a microscope!","Волос тонкий, но его ещё видно глазом. Всё, что меньше, видно только в микроскоп!","Saç teli incedir ama gözle görülür. Daha küçük şeyleri görmek için mikroskop gerekir!"]},
+{id:"cell",m:2e-5,topic:"cells",name:["A cell","Клетка","Bir hücre"],big:["About 50 fit in a row across a pinhead","Около 50 клеток поместятся в ряд на булавочной головке","Bir toplu iğnenin başına yan yana yaklaşık 50 tane sığar"],easy:["Cells are the tiny building blocks of all living things. Each one is alive!","Клетки — крошечные кирпичики всего живого. Каждая клетка живая!","Hücreler tüm canlıların minik yapı taşlarıdır. Her biri canlıdır!"]},
+{id:"bacteria",m:2e-6,topic:"cells",name:["A bacterium","Бактерия","Bir bakteri"],big:["About 10 fit in a row across one of your cells","Около 10 бактерий поместятся в ряд поперёк одной клетки","Bir hücrenin genişliğine yan yana yaklaşık 10 tane sığar"],easy:["A living thing made of just one cell. Trillions live in your tummy and help you digest food.","Живое существо всего из одной клетки. Триллионы бактерий живут у тебя в животе и помогают переваривать еду.","Tek bir hücreden oluşan bir canlı. Karnında trilyonlarcası yaşar ve yemeği sindirmene yardım eder."]},
+{id:"dna",m:2e-9,topic:"body",name:["DNA","ДНК","DNA"],big:["A hair is 35,000 times thicker","Волос в 35 000 раз толще","Bir saç teli bundan 35.000 kat kalındır"],easy:["A twisted ladder inside your cells. It holds the instructions for building you!","Закрученная лесенка внутри твоих клеток. В ней записано, как построить тебя!","Hücrelerinin içinde kıvrık bir merdiven. Seni yapmanın tarifi onun içinde yazılı!"]},
+{id:"molecule",m:3e-10,topic:"matter",name:["A water molecule","Молекула воды","Su molekülü"],big:["One drop of water has more molecules than the Milky Way has stars","В одной капле воды молекул больше, чем звёзд в Млечном Пути","Bir damla suda Samanyolu'ndaki yıldızlardan daha çok molekül vardır"],easy:["Two hydrogen atoms hold hands with one oxygen atom. That is H₂O, water!","Два атома водорода держатся за руки с одним атомом кислорода. Это H₂O, вода!","İki hidrojen atomu bir oksijen atomuyla el ele tutuşur. İşte H₂O, yani su!"]},
+{id:"atom",m:1e-10,topic:"elements",name:["An atom","Атом","Bir atom"],big:["A million in a row are as wide as a hair","Миллион атомов в ряд — как толщина волоса","Yan yana bir milyon atom, bir saç teli kalınlığındadır"],easy:["Everything is made of atoms: you, the air and the stars. There are 118 kinds, called elements.","Всё на свете состоит из атомов: ты, воздух и звёзды. Есть 118 видов атомов, это химические элементы.","Her şey atomlardan oluşur: sen, hava ve yıldızlar. 118 çeşit atom vardır, bunlara element denir."]},
+{id:"nucleus",m:1e-14,topic:"elements",name:["Atomic nucleus","Атомное ядро","Atom çekirdeği"],big:["If an atom were a stadium, the nucleus would be a pea","Если атом — стадион, то ядро — горошина в центре","Atom bir stadyum olsaydı, çekirdek ortasındaki bir bezelye olurdu"],easy:["The tiny center of an atom. Almost all of the atom's weight is packed inside it!","Крошечный центр атома. В нём спрятан почти весь вес атома!","Atomun minik merkezi. Atomun neredeyse bütün ağırlığı onun içindedir!"]}
+];
+const ZOOMT={title:["Zoom from a galaxy to an atom","От галактики до атома","Galaksiden atoma yolculuk"],hint:["Tap + to zoom in, − to zoom out. Each step makes things smaller, often 10 times or more.","Нажми +, чтобы приблизить, и −, чтобы отдалить. С каждым шагом всё меньше, часто в 10 раз и больше.","Yakınlaştırmak için +, uzaklaştırmak için − düğmesine dokun. Her adımda her şey küçülür, çoğu zaman 10 kat ya da daha fazla."]};
+const SPACE={
+sun:{
+name:["Sun","Солнце","Güneş"],
+nick:["Our star","Наша звезда","Yıldızımız"],
+easy:["The Sun is a star. It gives us light and keeps us warm.","Солнце — это звезда. Оно даёт нам свет и тепло.","Güneş bir yıldızdır. Bize ışık ve sıcaklık verir."],
+sci:["The Sun is a huge ball of hot gas. About 109 Earths could fit side by side across it, and its light reaches us in about 8 minutes.","Солнце — огромный шар из горячего газа. Поперёк него в ряд поместились бы 109 Земель, а его свет долетает до нас примерно за 8 минут.","Güneş, sıcak gazdan oluşan dev bir küredir. Çapı boyunca yan yana 109 Dünya sığar ve ışığı bize yaklaşık 8 dakikada ulaşır."],
+d:1392700,au:0,day:609.1,year:0,moons:0,temp:5500,col:"#ffb300"},
+mercury:{
+name:["Mercury","Меркурий","Merkür"],
+nick:["Fastest planet","Самая быстрая планета","En hızlı gezegen"],
+easy:["Mercury is the smallest planet and the closest to the Sun.","Меркурий — самая маленькая планета и самая близкая к Солнцу.","Merkür en küçük gezegendir ve Güneş'e en yakın olanıdır."],
+sci:["Mercury races around the Sun in just 88 days. It has almost no air, so days are very hot and nights are freezing cold.","Меркурий облетает Солнце всего за 88 дней. Воздуха там почти нет, поэтому днём очень жарко, а ночью ужасно холодно.","Merkür, Güneş'in etrafındaki turunu sadece 88 günde tamamlar. Neredeyse hiç havası yoktur, bu yüzden gündüzleri çok sıcak, geceleri ise dondurucu soğuktur."],
+d:4879,au:0.39,day:1407.6,year:88,moons:0,temp:167,col:"#9e9e9e"},
+venus:{
+name:["Venus","Венера","Venüs"],
+nick:["Hottest planet","Самая горячая планета","En sıcak gezegen"],
+easy:["Venus is covered in thick clouds. It is the hottest planet of all.","Венера укрыта толстыми облаками. Это самая горячая планета.","Venüs kalın bulutlarla kaplıdır. En sıcak gezegen odur."],
+sci:["Thick air on Venus traps heat like a blanket, so it is hotter than Mercury. Venus also spins very slowly and backwards.","Плотный воздух Венеры держит тепло, как одеяло, поэтому там жарче, чем на Меркурии. А ещё Венера вращается очень медленно и в обратную сторону.","Venüs'ün yoğun havası ısıyı bir battaniye gibi tutar, bu yüzden Merkür'den bile sıcaktır. Venüs ayrıca çok yavaş ve ters yönde döner."],
+d:12104,au:0.72,day:5832.5,year:224.7,moons:0,temp:464,col:"#e8c27a"},
+earth:{
+name:["Earth","Земля","Dünya"],
+nick:["Our home","Наш дом","Evimiz"],
+easy:["Earth is our home. It has air, water and lots of life.","Земля — наш дом. Здесь есть воздух, вода и много жизни.","Dünya bizim evimizdir. Havası, suyu ve pek çok canlısı vardır."],
+sci:["Earth is the only planet we know with life. Oceans of liquid water cover about 71 percent of its surface.","Земля — единственная известная нам планета, где есть жизнь. Океаны жидкой воды покрывают около 71 процента её поверхности.","Dünya, canlı yaşamı olduğunu bildiğimiz tek gezegendir. Yüzeyinin yaklaşık yüzde 71'i sıvı su okyanuslarıyla kaplıdır."],
+d:12756,au:1.00,day:23.9,year:365.25,moons:1,temp:15,col:"#2e86de"},
+moon:{
+name:["Moon","Луна","Ay"],
+nick:["Earth's friend","Подруга Земли","Dünya'nın arkadaşı"],
+easy:["The Moon goes around the Earth. People have walked on it!","Луна летает вокруг Земли. Люди уже гуляли по ней!","Ay, Dünya'nın etrafında döner. İnsanlar onun üstünde yürüdü!"],
+sci:["The Moon circles Earth in about 27 days and always shows us the same side. Twelve astronauts walked on it between 1969 and 1972.","Луна облетает Землю примерно за 27 дней и всегда повёрнута к нам одной стороной. С 1969 по 1972 год по ней ходили двенадцать астронавтов.","Ay, Dünya'nın etrafını yaklaşık 27 günde dolaşır ve bize hep aynı yüzünü gösterir. 1969 ile 1972 arasında on iki astronot Ay'da yürüdü."],
+d:3475,au:1,day:655.7,year:27.3,moons:0,temp:-20,col:"#c8c8c8"},
+mars:{
+name:["Mars","Марс","Mars"],
+nick:["Red planet","Красная планета","Kızıl gezegen"],
+easy:["Mars is red because of rusty dust. Robots drive around on it.","Марс красный из-за ржавой пыли. По нему ездят роботы.","Mars, paslı tozu yüzünden kırmızıdır. Üstünde robotlar dolaşır."],
+sci:["Mars has the tallest volcano in the solar system, Olympus Mons. It is cold and dry, with two tiny moons.","На Марсе стоит самый высокий вулкан Солнечной системы — гора Олимп. Там холодно и сухо, а спутников у него два, и оба крошечные.","Güneş Sistemi'nin en yüksek yanardağı Olympus Mons, Mars'tadır. Mars soğuk ve kurudur, iki küçük uydusu vardır."],
+d:6792,au:1.52,day:24.6,year:687,moons:2,temp:-65,col:"#d84315"},
+jupiter:{
+name:["Jupiter","Юпитер","Jüpiter"],
+nick:["Giant planet","Планета-великан","Dev gezegen"],
+easy:["Jupiter is the biggest planet. It is a giant ball of gas.","Юпитер — самая большая планета. Это огромный шар из газа.","Jüpiter en büyük gezegendir. Dev bir gaz küresidir."],
+sci:["More than 1,300 Earths could fit inside Jupiter. Its Great Red Spot is a storm wider than our whole planet.","Внутри Юпитера поместилось бы больше 1300 Земель. Его Большое красное пятно — это буря шире всей нашей планеты.","Jüpiter'in içine 1.300'den fazla Dünya sığabilir. Büyük Kırmızı Leke denen fırtınası, bütün gezegenimizden daha geniştir."],
+d:142984,au:5.20,day:9.9,year:4331,moons:95,temp:-110,col:"#d9a066"},
+saturn:{
+name:["Saturn","Сатурн","Satürn"],
+nick:["Planet with rings","Планета с кольцами","Halkalı gezegen"],
+easy:["Saturn has big, bright rings. They are made of ice and rock.","У Сатурна большие яркие кольца. Они сделаны из льда и камней.","Satürn'ün büyük ve parlak halkaları vardır. Halkalar buz ve kayadan oluşur."],
+sci:["Saturn's rings are billions of pieces of ice and rock, some as small as dust and some as big as houses. Saturn has more known moons than any other planet.","Кольца Сатурна — это миллиарды кусочков льда и камня: одни мельче пылинки, другие размером с дом. У Сатурна больше известных спутников, чем у любой другой планеты.","Satürn'ün halkaları, bazıları toz kadar küçük, bazıları ev kadar büyük milyarlarca buz ve kaya parçasıdır. Satürn, bilinen en çok uyduya sahip gezegendir."],
+d:120536,au:9.54,day:10.7,year:10747,moons:274,temp:-140,col:"#e3c77e"},
+uranus:{
+name:["Uranus","Уран","Uranüs"],
+nick:["Sideways planet","Планета на боку","Yan yatmış gezegen"],
+easy:["Uranus is tipped over on its side. It rolls around the Sun like a ball.","Уран лежит на боку. Он катится вокруг Солнца, как мячик.","Uranüs yan yatmıştır. Güneş'in etrafında bir top gibi yuvarlanır."],
+sci:["Uranus is tilted by about 98 degrees, probably after a giant crash long ago. Methane gas gives it a blue-green colour.","Уран наклонён почти на 98 градусов, наверное, из-за огромного столкновения давным-давно. Сине-зелёный цвет ему придаёт газ метан.","Uranüs yaklaşık 98 derece eğiktir; bunun nedeni muhtemelen çok eskiden olan dev bir çarpışmadır. Mavi yeşil rengini metan gazından alır."],
+d:51118,au:19.19,day:17.2,year:30589,moons:29,temp:-195,col:"#7fd3e0"},
+neptune:{
+name:["Neptune","Нептун","Neptün"],
+nick:["Windy blue planet","Ветреная синяя планета","Rüzgârlı mavi gezegen"],
+easy:["Neptune is the farthest planet from the Sun. It is dark, cold and very windy.","Нептун — самая далёкая от Солнца планета. Там темно, холодно и очень ветрено.","Neptün, Güneş'e en uzak gezegendir. Karanlık, soğuk ve çok rüzgârlıdır."],
+sci:["Neptune has the fastest winds in the solar system, up to about 2,000 kilometres per hour. One trip around the Sun takes it about 165 years.","На Нептуне самые быстрые ветры в Солнечной системе, до 2000 километров в час. Один оборот вокруг Солнца занимает у него около 165 лет.","Neptün'de Güneş Sistemi'nin en hızlı rüzgârları eser, saatte yaklaşık 2.000 kilometreye kadar. Güneş'in etrafındaki bir turu yaklaşık 165 yıl sürer."],
+d:49528,au:30.07,day:16.1,year:59800,moons:16,temp:-200,col:"#3f6fd8"}
+};
+const SPACET={
+sysT:["The solar system","Солнечная система","Güneş Sistemi"],
+sys:["The solar system is the Sun and everything that goes around it. Eight planets travel around the Sun on paths called orbits. Many moons, asteroids and comets are part of it too.","Солнечная система — это Солнце и всё, что вокруг него летает. Восемь планет движутся вокруг Солнца по своим путям — орбитам. А ещё в ней много спутников, астероидов и комет.","Güneş Sistemi, Güneş ve onun etrafında dolanan her şeydir. Sekiz gezegen, yörünge denen yollarda Güneş'in etrafında döner. Pek çok uydu, asteroit ve kuyrukluyıldız da Güneş Sistemi'ndedir."],
+dayT:["Why do day and night happen?","Почему бывают день и ночь?","Gece ve gündüz neden olur?"],
+day:["Earth spins like a top, once in about 24 hours. The side facing the Sun has day. The side facing away from the Sun has night.","Земля крутится, как юла, и делает один оборот примерно за 24 часа. На той стороне, что повёрнута к Солнцу, день. На другой стороне ночь.","Dünya bir topaç gibi kendi etrafında döner ve bir turu yaklaşık 24 saatte tamamlar. Güneş'e bakan tarafta gündüz olur. Güneş'e arkasını dönen tarafta ise gece olur."],
+seasonT:["Why do we have seasons?","Почему меняются времена года?","Mevsimler neden olur?"],
+season:["Seasons happen because Earth is tilted, not because it gets closer to the Sun. When your half of Earth leans toward the Sun, sunlight is stronger and days are longer, so it is summer. When it leans away, it is winter.","Времена года бывают потому, что Земля наклонена, а не потому, что она подлетает ближе к Солнцу. Когда твоя половина Земли наклонена к Солнцу, лучи греют сильнее и дни длиннее, и наступает лето. Когда она наклонена от Солнца, наступает зима.","Mevsimler, Dünya Güneş'e yaklaştığı için değil, Dünya'nın ekseni eğik olduğu için olur. Yaşadığın yarım küre Güneş'e doğru eğildiğinde ışınlar daha güçlü gelir ve günler uzar, yani yaz olur. Güneş'ten uzağa eğildiğinde kış olur."],
+moonT:["Why does the Moon change shape?","Почему Луна меняет форму?","Ay neden şekil değiştirir?"],
+moon:["The Moon does not glow by itself. Sunlight lights up half of it, and as it goes around Earth we see more or less of that bright half. The whole cycle takes about 29.5 days.","Луна сама не светится. Солнце освещает её половину, а пока Луна летает вокруг Земли, мы видим то больше, то меньше этой светлой половины. Весь круг занимает около 29,5 дня.","Ay kendi kendine ışık saçmaz. Güneş Ay'ın yarısını aydınlatır; Ay, Dünya'nın etrafında dolanırken bu aydınlık yarının bazen çoğunu, bazen azını görürüz. Ay'ın evrelerinin tamamı yaklaşık 29,5 gün sürer."],
+phases:[
+["New moon","Waxing crescent","First quarter","Waxing gibbous","Full moon","Waning gibbous","Last quarter","Waning crescent"],
+["Новолуние","Растущий серп","Первая четверть","Растущая Луна","Полнолуние","Убывающая Луна","Последняя четверть","Убывающий серп"],
+["Yeni Ay","Hilal","İlk Dördün","Şişkin Ay","Dolunay","Şişkin Ay","Son Dördün","Hilal"]
+]
+};
+const MATTER={
+solid:{
+name:["Solid","Твёрдое тело","Katı"],
+easy:["A solid keeps its own shape. You can hold it in your hand.","Твёрдое тело сохраняет свою форму. Его можно взять в руку.","Katı kendi şeklini korur. Onu elinde tutabilirsin."],
+sci:["A solid has a fixed shape and a fixed volume, because its particles are packed tightly and only wiggle in place.","У твёрдого тела есть своя форма и свой объём: его частицы плотно упакованы и только дрожат на месте.","Katının belirli bir şekli ve hacmi vardır, çünkü tanecikleri sıkıca dizilmiştir ve yalnızca yerinde titreşir."],
+ex:[["ice","stone","spoon"],["лёд","камень","ложка"],["buz","taş","kaşık"]]
+},
+liquid:{
+name:["Liquid","Жидкость","Sıvı"],
+easy:["A liquid flows and takes the shape of its cup. You can pour it.","Жидкость течёт и принимает форму сосуда. Её можно налить.","Sıvı akar ve kabının şeklini alır. Onu dökebilirsin."],
+sci:["A liquid has a fixed volume but no fixed shape. Its particles stay close together but can slide past each other.","У жидкости есть свой объём, но нет своей формы. Её частицы находятся близко, но могут скользить друг мимо друга.","Sıvının belirli bir hacmi vardır ama belirli bir şekli yoktur. Tanecikleri birbirine yakındır ama birbirinin üzerinden kayabilir."],
+ex:[["water","milk","juice"],["вода","молоко","сок"],["su","süt","meyve suyu"]]
+},
+gas:{
+name:["Gas","Газ","Gaz"],
+easy:["A gas spreads out to fill any space. Most gases, like air, are invisible.","Газ расходится и заполняет всё место. Многие газы, как воздух, невидимы.","Gaz yayılır ve her yeri doldurur. Hava gibi çoğu gaz görünmez."],
+sci:["A gas has no fixed shape or volume. Its particles are far apart and fly around fast, so a gas can be squeezed.","У газа нет ни своей формы, ни своего объёма. Его частицы далеко друг от друга и быстро летают, поэтому газ можно сжать.","Gazın belirli bir şekli ve hacmi yoktur. Tanecikleri birbirinden uzaktır ve hızla hareket eder, bu yüzden gaz sıkıştırılabilir."],
+ex:[["air","water vapour","air in a balloon"],["воздух","водяной пар","воздух в шарике"],["hava","su buharı","balondaki hava"]]
+}
+};
+const CHANGE={
+melt:{name:["Melting","Плавление","Erime"],from:"solid",to:"liquid",
+easy:["When ice gets warm, it melts and turns into water.","Когда лёд нагревается, он тает и становится водой.","Buz ısınınca erir ve suya dönüşür."],
+sci:["Melting is when a solid turns into a liquid as it is heated. Pure ice melts at 0 °C.","Плавление: твёрдое тело при нагревании становится жидкостью. Чистый лёд плавится при 0 °C.","Erime, katının ısı alarak sıvıya dönüşmesidir. Saf buz 0 °C sıcaklıkta erir."]},
+freeze:{name:["Freezing","Замерзание","Donma"],from:"liquid",to:"solid",
+easy:["When water gets very cold, it freezes and turns into ice.","Когда вода сильно остывает, она замерзает и становится льдом.","Su çok soğuyunca donar ve buza dönüşür."],
+sci:["Freezing is when a liquid turns into a solid as it cools. Pure water freezes at 0 °C, and ice takes up more space than the water did.","Замерзание: жидкость при охлаждении становится твёрдым телом. Чистая вода замерзает при 0 °C, а лёд занимает больше места, чем вода.","Donma, sıvının ısı vererek katıya dönüşmesidir. Saf su 0 °C sıcaklıkta donar ve buz, suyun kapladığından daha fazla yer kaplar."]},
+evap:{name:["Evaporation","Испарение","Buharlaşma"],from:"liquid",to:"gas",
+easy:["A wet puddle slowly dries up. The water turns into invisible vapour in the air.","Лужа медленно высыхает. Вода превращается в невидимый пар в воздухе.","Islak bir su birikintisi yavaşça kurur. Su, havada görünmez buhara dönüşür."],
+sci:["Evaporation happens at the surface of a liquid at any temperature. The fastest particles escape into the air. Warmth and wind make it quicker.","Испарение идёт с поверхности жидкости при любой температуре: самые быстрые частицы улетают в воздух. Тепло и ветер его ускоряют.","Buharlaşma, sıvının yüzeyinde her sıcaklıkta olur. En hızlı tanecikler havaya kaçar. Sıcaklık ve rüzgâr buharlaşmayı hızlandırır."]},
+boil:{name:["Boiling","Кипение","Kaynama"],from:"liquid",to:"gas",
+easy:["Very hot water boils. Big bubbles of vapour rise up inside it.","Очень горячая вода кипит. Внутри неё поднимаются большие пузыри пара.","Çok sıcak su kaynar. İçinde büyük buhar kabarcıkları yükselir."],
+sci:["Boiling is fast evaporation inside the whole liquid, with bubbles of vapour. At sea level pure water boils at 100 °C.","Кипение: бурное парообразование во всей жидкости, с пузырями пара. На уровне моря чистая вода кипит при 100 °C.","Kaynama, sıvının her yerinde buhar kabarcıklarıyla olan hızlı buharlaşmadır. Deniz seviyesinde saf su 100 °C sıcaklıkta kaynar."]},
+cond:{name:["Condensation","Конденсация","Yoğuşma"],from:"gas",to:"liquid",
+easy:["Vapour touches a cold glass and turns back into tiny water drops.","Пар касается холодного стакана и снова становится капельками воды.","Buhar soğuk bir bardağa değince yeniden küçük su damlacıklarına dönüşür."],
+sci:["Condensation is when a gas cools and turns into a liquid. Steam itself is invisible; the white cloud above a kettle is tiny droplets.","Конденсация: газ остывает и становится жидкостью. Сам пар невидим, а белое облачко над чайником состоит из крошечных капелек.","Yoğuşma, gazın soğuyarak sıvıya dönüşmesidir. Su buharının kendisi görünmez; çaydanlığın üstündeki beyaz bulut minicik damlacıklardır."]},
+subl:{name:["Sublimation","Сублимация","Süblimleşme"],from:"solid",to:"gas",
+easy:["Some solids turn straight into gas, without melting first. Dry ice does this.","Некоторые твёрдые тела сразу становятся газом, не тая. Так делает сухой лёд.","Bazı katılar önce erimeden doğrudan gaza dönüşür. Kuru buz böyle yapar."],
+sci:["Sublimation is when a solid turns straight into a gas, skipping the liquid. Dry ice does it, and snow slowly sublimes on cold, dry, sunny days.","Сублимация: твёрдое тело сразу становится газом, минуя жидкость. Так ведёт себя сухой лёд, и снег тоже понемногу испаряется в морозный сухой день.","Süblimleşme, katının sıvı olmadan doğrudan gaza dönüşmesidir. Kuru buz böyle davranır; kar da soğuk, kuru ve güneşli günlerde yavaşça süblimleşir."]},
+depo:{name:["Deposition","Десублимация","Kırağılaşma"],from:"gas",to:"solid",
+easy:["On a frosty night, vapour turns straight into ice. We call it frost.","Морозной ночью пар сразу становится льдом. Это иней.","Soğuk bir gecede buhar doğrudan buza dönüşür. Buna kırağı denir."],
+sci:["Deposition is when a gas turns straight into a solid. Frost on windows and grass forms when water vapour freezes into ice crystals.","Десублимация: газ сразу становится твёрдым телом. Иней на окнах и траве появляется, когда водяной пар превращается в кристаллики льда.","Kırağılaşma, gazın doğrudan katıya dönüşmesidir. Camlarda ve otlarda kırağı, su buharı buz kristallerine dönüşünce oluşur."]}
+};
+const CYCLE={
+evap:{name:["Evaporation","Испарение","Buharlaşma"],
+easy:["The Sun warms seas, lakes and puddles. Water rises into the air as invisible vapour.","Солнце греет моря, озёра и лужи. Вода поднимается в воздух невидимым паром.","Güneş denizleri, gölleri ve su birikintilerini ısıtır. Su, görünmez buhar olarak havaya yükselir."]},
+cond:{name:["Condensation: clouds form","Конденсация: появляются облака","Yoğuşma: bulutlar oluşur"],
+easy:["High in the sky it is cold. Vapour turns into tiny drops, and they make clouds.","Высоко в небе холодно. Пар становится крошечными капельками, и из них получаются облака.","Gökyüzünde yukarılar soğuktur. Buhar minicik damlacıklara dönüşür ve bulutları oluşturur."]},
+prec:{name:["Precipitation","Осадки","Yağış"],
+easy:["Drops join and get heavy. They fall as rain, or as snow when it is cold.","Капли сливаются и тяжелеют. Они падают дождём, а в холод снегом.","Damlacıklar birleşip ağırlaşır. Yağmur olarak, soğukta da kar olarak düşer."]},
+coll:{name:["Collection","Сбор воды","Toplanma"],
+easy:["Water gathers in rivers, lakes and seas, and soaks into the ground. Then it starts again.","Вода собирается в реках, озёрах и морях и уходит под землю. И всё начинается снова.","Su nehirlerde, göllerde, denizlerde toplanır ve toprağın altına sızar. Sonra her şey yeniden başlar."]}
+};
+const MATTERT={
+whatT:["What is everything made of?","Из чего всё состоит?","Her şey neyden yapılmıştır?"],
+what:["Everything around us is made of tiny particles called atoms and molecules. They are far too small to see, even with a magnifying glass, and they never stop moving.","Всё вокруг состоит из крошечных частиц: атомов и молекул. Они такие маленькие, что их не видно даже в лупу, и они всё время движутся.","Çevremizdeki her şey atom ve molekül denen minicik taneciklerden oluşur. Bunlar büyüteçle bile görülemeyecek kadar küçüktür ve hiç durmadan hareket eder."],
+partT:["How do particles behave?","Как ведут себя частицы?","Tanecikler nasıl davranır?"],
+part:["In a solid, particles sit close together and wiggle in place. In a liquid, they stay close but slide past each other. In a gas, they are far apart and fly around fast.","В твёрдом теле частицы плотно прижаты и дрожат на месте. В жидкости они близко, но скользят друг мимо друга. В газе они далеко друг от друга и быстро летают.","Katıda tanecikler birbirine çok yakındır ve yerinde titreşir. Sıvıda yakındırlar ama birbirinin üzerinden kayarlar. Gazda birbirinden uzaktırlar ve hızla hareket ederler."],
+heatT:["Heating and cooling","Нагревание и охлаждение","Isınma ve soğuma"],
+heat:["Heating makes particles move faster, so a solid can melt and a liquid can turn into gas. Cooling slows them down, so a gas can turn into liquid and a liquid can freeze.","Нагревание заставляет частицы двигаться быстрее: твёрдое тело может расплавиться, а жидкость стать газом. Охлаждение замедляет их: газ может стать жидкостью, а жидкость замёрзнуть.","Isıtınca tanecikler daha hızlı hareket eder; katı eriyebilir, sıvı gaza dönüşebilir. Soğutunca yavaşlarlar; gaz sıvıya dönüşebilir, sıvı donabilir."],
+cycleT:["The water cycle","Круговорот воды","Su döngüsü"],
+cycle:["Water evaporates, forms clouds, falls as rain or snow and collects in rivers and seas. The same water has gone round and round like this for billions of years, so you may drink water a dinosaur once drank!","Вода испаряется, собирается в облака, выпадает дождём или снегом и стекает в реки и моря. Одна и та же вода ходит по этому кругу миллиарды лет, так что, может быть, ты пьёшь воду, которую когда-то пил динозавр!","Su buharlaşır, bulut olur, yağmur ya da kar olarak yağar ve nehirlerde, denizlerde toplanır. Aynı su milyarlarca yıldır bu döngüde dolaşıyor; belki de bir zamanlar bir dinozorun içtiği suyu içiyorsun!"]}
+;
+const BODY={
+brain:{name:["Brain","Мозг","Beyin"],job:["The boss","Главный командир","Komutan"],
+easy:["Your brain is inside your head. It thinks, remembers and tells your body what to do.","Мозг живёт в голове. Он думает, помнит и говорит телу, что делать.","Beynin başının içindedir. Düşünür, hatırlar ve vücuduna ne yapacağını söyler."],
+sci:["The brain has about 86 billion nerve cells called neurons. They send tiny electric signals, and all parts of the brain work every day.","В мозге около 86 миллиардов нервных клеток, их называют нейронами. Они передают крошечные электрические сигналы, и все части мозга работают каждый день.","Beyinde nöron denen yaklaşık 86 milyar sinir hücresi vardır. Nöronlar küçük elektrik sinyalleri gönderir ve beynin bütün bölümleri her gün çalışır."]},
+heart:{name:["Heart","Сердце","Kalp"],job:["The pump","Насос","Pompa"],
+easy:["Your heart is a strong muscle. It pumps blood all around your body, day and night.","Сердце — сильная мышца. Оно качает кровь по всему телу днём и ночью.","Kalbin güçlü bir kastır. Gece gündüz kanı bütün vücuduna pompalar."],
+sci:["An adult heart beats about 60 to 100 times a minute at rest, and a child's beats faster. Blood is always red, darker red in veins.","Сердце взрослого в покое бьётся примерно 60–100 раз в минуту, а у детей чаще. Кровь всегда красная, в венах она темнее.","Yetişkin kalbi dinlenirken dakikada yaklaşık 60 ile 100 kez atar, çocuklarınki daha hızlı atar. Kan her zaman kırmızıdır, toplardamarlarda daha koyu kırmızıdır."]},
+lungs:{name:["Lungs","Лёгкие","Akciğerler"],job:["Air balloons","Воздушные шарики","Hava balonları"],
+easy:["You have two lungs in your chest. They fill with air like balloons when you breathe in.","В груди у тебя два лёгких. Когда ты вдыхаешь, они наполняются воздухом, как шарики.","Göğsünde iki akciğer var. Nefes aldığında balon gibi havayla dolarlar."],
+sci:["Lungs move oxygen from the air into your blood and push carbon dioxide out. Inside are millions of tiny air sacs called alveoli.","Лёгкие передают кислород из воздуха в кровь и выводят углекислый газ. Внутри них миллионы крошечных пузырьков, их называют альвеолами.","Akciğerler havadaki oksijeni kana geçirir ve karbondioksiti dışarı atar. İçlerinde alveol denen milyonlarca küçük hava kesesi vardır."]},
+stomach:{name:["Stomach","Желудок","Mide"],job:["The mixer","Миксер","Mikser"],
+easy:["Your stomach is a stretchy bag. It squeezes and mixes your food into a soft mush.","Желудок — мешочек, который умеет растягиваться. Он сжимается и перемешивает еду в мягкую кашицу.","Miden esneyen bir torba gibidir. Yemeği sıkar ve karıştırıp yumuşak bir lapa yapar."],
+sci:["The stomach makes strong acid and enzymes that start breaking food down. A thick layer of mucus protects its own walls.","Желудок выделяет сильную кислоту и ферменты, которые начинают расщеплять еду. Толстый слой слизи защищает его стенки.","Mide, yemeği parçalamaya başlayan güçlü bir asit ve enzimler üretir. Kalın bir mukus tabakası midenin kendi duvarlarını korur."]},
+intestines:{name:["Intestines","Кишечник","Bağırsaklar"],job:["The food tube","Трубка для еды","Besin tüpü"],
+easy:["Your intestines are a long, folded tube. They take the good parts of food into your body.","Кишечник — длинная свёрнутая трубка. Он забирает из еды всё полезное для тела.","Bağırsakların uzun ve kıvrımlı bir tüptür. Besinlerin yararlı kısımlarını vücuduna alır."],
+sci:["The small intestine is about 6 metres long in adults. Tiny finger-like villi pass nutrients into the blood, and the large intestine takes back water.","Тонкая кишка у взрослого длиной около 6 метров. Крошечные ворсинки передают питательные вещества в кровь, а толстая кишка забирает воду.","Yetişkinlerde ince bağırsak yaklaşık 6 metre uzunluğundadır. Parmak gibi küçük villuslar besinleri kana geçirir, kalın bağırsak ise suyu geri alır."]},
+liver:{name:["Liver","Печень","Karaciğer"],job:["Cleaner and storeroom","Чистильщик и кладовая","Temizleyici ve depo"],
+easy:["Your liver is a big organ under your ribs. It cleans your blood and stores energy.","Печень — большой орган под рёбрами. Она очищает кровь и хранит запас энергии.","Karaciğerin kaburgalarının altında büyük bir organdır. Kanını temizler ve enerji depolar."],
+sci:["The liver is the largest organ inside the body and does hundreds of jobs. It makes bile to digest fat and can regrow lost parts.","Печень — самый большой внутренний орган, у неё сотни задач. Она делает жёлчь для переваривания жира и может отрастить потерянные части.","Karaciğer vücudun içindeki en büyük organdır ve yüzlerce iş yapar. Yağları sindirmek için safra yapar ve kaybettiği parçaları yeniden büyütebilir."]},
+kidneys:{name:["Kidneys","Почки","Böbrekler"],job:["Water filters","Фильтры для воды","Su filtreleri"],
+easy:["You have two kidneys, shaped like beans. They clean your blood and make pee.","У тебя две почки, похожие на фасолины. Они очищают кровь и делают мочу.","İki böbreğin var, fasulye şeklindeler. Kanını temizler ve çişi yaparlar."],
+sci:["Each kidney has about a million tiny filters called nephrons. Together they clean all your blood many times a day and remove waste as urine.","В каждой почке около миллиона крошечных фильтров, их называют нефронами. Вместе они много раз в день очищают всю кровь и выводят отходы с мочой.","Her böbrekte nefron denen yaklaşık bir milyon küçük filtre vardır. Birlikte bütün kanı günde birçok kez temizler ve atıkları idrarla atarlar."]},
+bones:{name:["Skeleton","Скелет","İskelet"],job:["The frame","Каркас","Vücudun çatısı"],
+easy:["Your skeleton is made of bones. It holds you up and protects your brain and heart.","Скелет состоит из костей. Он держит тело и защищает мозг и сердце.","İskeletin kemiklerden yapılmıştır. Seni dik tutar, beynini ve kalbini korur."],
+sci:["Adults have 206 bones, but babies are born with about 270 to 300. Some join together as you grow. Bones are alive and make blood cells.","У взрослого 206 костей, а малыш рождается примерно с 270–300. Пока ты растёшь, некоторые срастаются. Кости живые и делают клетки крови.","Yetişkinlerde 206 kemik vardır, bebekler ise yaklaşık 270 ile 300 kemikle doğar. Büyüdükçe bazıları birleşir. Kemikler canlıdır ve kan hücreleri yapar."]},
+muscles:{name:["Muscles","Мышцы","Kaslar"],job:["The movers","Двигатели","Hareket ettiriciler"],
+easy:["Muscles pull on your bones to make you move. They help you run, jump and smile.","Мышцы тянут кости, и ты двигаешься. Они помогают бегать, прыгать и улыбаться.","Kaslar kemiklerini çekerek seni hareket ettirir. Koşmana, zıplamana ve gülümsemene yardım ederler."],
+sci:["You have more than 600 muscles. Muscles can only pull, not push, so they often work in pairs. Your heart is a muscle that never rests.","У тебя больше 600 мышц. Мышцы умеют только тянуть, а не толкать, поэтому часто работают парами. Сердце — мышца, которая никогда не отдыхает.","Vücudunda 600'den fazla kas vardır. Kaslar sadece çekebilir, itemez, bu yüzden çoğu zaman çiftler hâlinde çalışır. Kalbin hiç dinlenmeyen bir kastır."]},
+skin:{name:["Skin","Кожа","Deri"],job:["The raincoat","Защитный плащ","Koruyucu kalkan"],
+easy:["Skin covers your whole body. It keeps germs and water out and helps you feel touch.","Кожа покрывает всё тело. Она не пускает внутрь микробов и воду и помогает чувствовать прикосновения.","Deri bütün vücudunu kaplar. Mikropları ve suyu dışarıda tutar, dokunmayı hissetmene yardım eder."],
+sci:["Skin is the largest organ of the body. It sweats to cool you down, and its outer layer is replaced with new cells about every month.","Кожа — самый большой орган тела. Она потеет, чтобы тебя охладить, а её верхний слой обновляется примерно каждый месяц.","Deri vücudun en büyük organıdır. Seni serinletmek için terler ve dış tabakası yaklaşık her ay yeni hücrelerle yenilenir."]},
+eyes:{name:["Eyes","Глаза","Gözler"],job:["The cameras","Камеры","Kameralar"],
+easy:["Your eyes catch light so you can see. They see colours, shapes and movement.","Глаза ловят свет, и ты видишь. Они различают цвета, формы и движение.","Gözlerin ışığı yakalar, böylece görebilirsin. Renkleri, şekilleri ve hareketi görürler."],
+sci:["Light passes through the lens to the retina, which turns it into nerve signals. The picture lands upside down, and your brain flips it.","Свет проходит через хрусталик на сетчатку, а она превращает его в нервные сигналы. Картинка получается перевёрнутой, и мозг её переворачивает.","Işık mercekten geçip retinaya ulaşır, retina onu sinir sinyallerine çevirir. Görüntü ters düşer ve beynin onu düzeltir."]},
+ears:{name:["Ears","Уши","Kulaklar"],job:["The microphones","Микрофоны","Mikrofonlar"],
+easy:["Your ears catch sounds. They also help you keep your balance.","Уши ловят звуки. А ещё они помогают держать равновесие.","Kulakların sesleri yakalar. Dengeni korumana da yardım ederler."],
+sci:["Sound makes your eardrum shake, and three tiny bones pass the shaking on. The stirrup in your ear is the smallest bone in your body.","Звук заставляет дрожать барабанную перепонку, а три крошечные косточки передают дрожь дальше. Стремечко в ухе — самая маленькая кость тела.","Ses kulak zarını titretir ve üç küçük kemik bu titreşimi iletir. Kulaktaki üzengi kemiği vücudun en küçük kemiğidir."]}
+};
+const DNA={
+body:{name:["Body","Тело","Vücut"],
+easy:["Your body is made of trillions of tiny cells, too small to see.","Твоё тело состоит из триллионов крошечных клеток. Без микроскопа их не видно.","Vücudun trilyonlarca küçük hücreden yapılmıştır. Hücreler gözle görülemeyecek kadar küçüktür."]},
+cell:{name:["Cell","Клетка","Hücre"],
+easy:["A cell is a tiny living building block. Most cells have a nucleus in the middle.","Клетка — крошечный живой кирпичик. У большинства клеток внутри есть ядро.","Hücre küçük, canlı bir yapı taşıdır. Çoğu hücrenin içinde bir çekirdek vardır."]},
+nucleus:{name:["Nucleus","Ядро","Çekirdek"],
+easy:["The nucleus is the control room of the cell. It keeps 46 chromosomes.","Ядро — пульт управления клетки. В нём хранятся 46 хромосом.","Çekirdek hücrenin kontrol odasıdır. İçinde 46 kromozom saklanır."]},
+chromosome:{name:["Chromosome","Хромосома","Kromozom"],
+easy:["A chromosome is a very long thread of DNA, wound up tightly like thread on a spool.","Хромосома — очень длинная нить ДНК, туго смотанная, как нитки на катушке.","Kromozom, makaraya sarılmış ip gibi sıkıca sarılmış çok uzun bir DNA ipliğidir."]},
+dna:{name:["DNA","ДНК","DNA"],
+easy:["DNA is a twisted ladder called a double helix. Its steps use four letters: A, T, G and C.","ДНК — закрученная лесенка, её называют двойной спиралью. Её ступеньки записаны четырьмя буквами: A, T, G и C.","DNA, çift sarmal denen bükülmüş bir merdivendir. Basamakları dört harfle yazılır: A, T, G ve C."]},
+gene:{name:["Gene","Ген","Gen"],
+easy:["A gene is one instruction in your DNA, like part of the recipe for your eye colour.","Ген — одна инструкция в ДНК, например часть рецепта цвета твоих глаз.","Gen, DNA'ndaki tek bir talimattır. Örneğin göz renginin tarifinin bir parçası olabilir."]}
+};
+const BODYT={
+whatT:["What is your body made of?","Из чего состоит тело?","Vücudun nelerden oluşur?"],
+what:["Your body has organs, like the heart, lungs and brain. They work together in teams called systems, like the team that digests food.","В теле есть органы: сердце, лёгкие, мозг и другие. Они работают вместе командами, которые называются системами. Например, одна команда переваривает еду.","Vücudunda kalp, akciğerler ve beyin gibi organlar vardır. Organlar sistem denen takımlarda birlikte çalışır. Örneğin bir takım besinleri sindirir."],
+dnaT:["DNA: your instruction book","ДНК: твоя книга инструкций","DNA: talimat kitabın"],
+dna:["Almost every cell keeps a copy of DNA, the instruction book for building you. Half came from your mum and half from your dad.","Почти в каждой клетке есть копия ДНК. Это книга инструкций, по которой строится твоё тело. Половина досталась тебе от мамы, половина от папы.","Neredeyse her hücrende DNA'nın bir kopyası vardır. DNA seni yapmak için bir talimat kitabıdır. Yarısı annenden, yarısı babandan gelir."],
+sizeT:["Wow fact!","Ого!","İnanılmaz ama gerçek!"],
+size:["If you unwound all the DNA from just one of your cells, it would be about 2 metres long!","Если размотать всю ДНК из одной твоей клетки, получится нить длиной около 2 метров!","Tek bir hücrendeki bütün DNA'yı açıp uzatsan, yaklaşık 2 metre uzunluğunda olurdu!"]
+};
+/*TOPICS-END*/
 /*CELLS*/
 const ORGT={
 membrane:{name:["Cell membrane","Клеточная мембрана","Hücre zarı"],job:["The gate","Ворота","Kapı"],
@@ -1146,7 +1422,7 @@ function allTexts(){const out={};
 /*ENDDATA*/
 
 /* ---------- state ---------- */
-let S={topic:'elements',cells:{found:[],sorted:0},lab:[],lang:'en',stars:0,read:[],rf:true,slow:false,syl:true,sci:false,voice:{},claude:false,rec:false,found:[],mols:[],heavy:[0,0],log:{}};
+let S={topic:'zoom',cells:{found:[],sorted:0},lab:[],lang:'en',stars:0,read:[],rf:true,slow:false,syl:true,sci:false,voice:{},claude:false,rec:false,found:[],mols:[],heavy:[0,0],log:{}};
 try{const s=JSON.parse(localStorage.getItem('elx')||'null');if(s)S=Object.assign(S,s)}catch(e){}
 const hd=window.claude?.hot?.data; if(hd&&hd.lang)S=Object.assign(S,hd);
 if(!S._set&&!hd){const nl=(navigator.language||'en').slice(0,2);if(LOC[nl])S.lang=nl}
@@ -1913,6 +2189,230 @@ $('#c-card').addEventListener('click',e=>{const b=e.target.closest('button');if(
   if(b.dataset.s){const ans=CORGS.find(o=>o.id===CV.sortQ).where,t=LC(),m=$('#c-smsg');document.querySelectorAll('#c-sch button').forEach(x=>{x.disabled=true;x.classList.toggle('right',x.dataset.s===ans)});
     if(b.dataset.s===ans){m.textContent=t.sortOk;m.className='msg ok';S.cells.sorted++;cStar(1)}else{b.classList.add('no');m.textContent=fill(t.sortNo,{x:cWhere(ans)});m.className='msg bad'}
     setTimeout(()=>{cNewSort();renderCells()},1900)}});
+
+
+/* ---------- texts shared by the new topics ---------- */
+const TT={
+en:{zoomIn:'Zoom in',zoomOut:'Zoom out',open:'Explore this topic',planets:'Planets',daynight:'Day and night',seasons:'Seasons',moon:'Moon phases',order:'In order!',
+  dia:'Diameter',dist:'From the Sun',dayL:'One day',yearL:'One year',moonsL:'Moons',tempL:'Temperature',km:'km',mkm:'million km',hrs:'hours',days:'days',sizeNote:'The planets are drawn to their true sizes compared with each other.',
+  orderP:'Tap the planets in order, starting next to the Sun.',orderOk:'All eight in order!',orderNo:'Not that one. Which planet comes next?',
+  states:'Solid, liquid, gas',cycle:'Water cycle',msort:'Sort it!',warmer:'Warmer',colder:'Colder',water:'Water at {t} °C',msortP:'Solid, liquid or gas?',
+  organs:'Organs',dnaZ:'Zoom to DNA',bfind:'Find it!',findP:'Find:',next:'Next',yes:'Yes! Great reading!',no:'That is: {x}. Try again!',tapOrgan:'Tap a part of the body.',tapPlanet:'Tap a planet.',tapCycle:'Tap a part of the picture.',job:'Its job'},
+ru:{zoomIn:'Ближе',zoomOut:'Дальше',open:'Открыть тему',planets:'Планеты',daynight:'День и ночь',seasons:'Времена года',moon:'Фазы Луны',order:'По порядку!',
+  dia:'Диаметр',dist:'От Солнца',dayL:'Одни сутки',yearL:'Один год',moonsL:'Спутники',tempL:'Температура',km:'км',mkm:'млн км',hrs:'ч',days:'дней',sizeNote:'Планеты нарисованы в настоящем соотношении размеров.',
+  orderP:'Нажимай на планеты по порядку, начиная от Солнца.',orderOk:'Все восемь по порядку!',orderNo:'Не эта. Какая планета дальше?',
+  states:'Твёрдое, жидкость, газ',cycle:'Круговорот воды',msort:'Разложи!',warmer:'Теплее',colder:'Холоднее',water:'Вода при {t} °C',msortP:'Твёрдое, жидкость или газ?',
+  organs:'Органы',dnaZ:'До ДНК',bfind:'Найди!',findP:'Найди:',next:'Дальше',yes:'Да! Отлично прочитано!',no:'Это: {x}. Попробуй ещё!',tapOrgan:'Нажми на часть тела.',tapPlanet:'Нажми на планету.',tapCycle:'Нажми на часть картинки.',job:'Работа'},
+tr:{zoomIn:'Yaklaş',zoomOut:'Uzaklaş',open:'Konuyu aç',planets:'Gezegenler',daynight:'Gece ve gündüz',seasons:'Mevsimler',moon:"Ay'ın evreleri",order:'Sırala!',
+  dia:'Çap',dist:"Güneş'e uzaklık",dayL:'Bir gün',yearL:'Bir yıl',moonsL:'Uydular',tempL:'Sıcaklık',km:'km',mkm:'milyon km',hrs:'saat',days:'gün',sizeNote:'Gezegenler birbirlerine göre gerçek boyutlarında çizildi.',
+  orderP:"Gezegenlere Güneş'e en yakından başlayarak sırayla dokun.",orderOk:'Sekizi de sırayla!',orderNo:'O değil. Sırada hangi gezegen var?',
+  states:'Katı, sıvı, gaz',cycle:'Su döngüsü',msort:'Ayır!',warmer:'Isıt',colder:'Soğut',water:'{t} °C sıcaklıkta su',msortP:'Katı mı, sıvı mı, gaz mı?',
+  organs:'Organlar',dnaZ:"DNA'ya yolculuk",bfind:'Bul!',findP:'Bul:',next:'Sonraki',yes:'Evet! Harika okudun!',no:'Bu: {x}. Tekrar dene!',tapOrgan:'Vücudun bir bölümüne dokun.',tapPlanet:'Bir gezegene dokun.',tapCycle:'Resmin bir bölümüne dokun.',job:'Görevi'}};
+const TL=()=>TT[S.lang],LX=()=>({en:0,ru:1,tr:2})[S.lang];
+const tw=a=>a?a[LX()]:'';
+const nf=n=>Number(n).toLocaleString({en:'en-GB',ru:'ru-RU',tr:'tr-TR'}[S.lang]);
+const bigWord=w=>`<div class="word${useSyl()?' sy':''}">${useSyl()?sylText(w):esc(w)}</div>`;
+const modeBar=(id,items,cur)=>`<nav class="cmodes tmodes" id="${id}">${items.map(([k,icn,lab])=>`<button data-v="${k}" aria-pressed="${k===cur}"><svg class="ic" aria-hidden="true"><use href="#i-${icn}"/></svg><span>${esc(lab)}</span></button>`).join('')}</nav>`;
+const tStar=n=>{S.stars+=n;save();progress();toast('★ +'+n)};
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+
+/* ---------- topic: zoom of scales ---------- */
+const ZV={i:0};
+function zoomArt(id){
+  const P=(d,f,st,w)=>`<path d="${d}" fill="${f||'none'}" stroke="${st||'none'}" stroke-width="${w||0}"/>`;
+  switch(id){
+  case'galaxy':{let d='';for(let a=0;a<2;a++)for(let i=0;i<70;i++){const t=i/12,r=8+i*1.7,x=150+r*Math.cos(t+a*Math.PI),y=150+r*.55*Math.sin(t+a*Math.PI);d+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(2.6-i/40).toFixed(1)}" fill="#d0bfff"/>`}
+    return `<rect width="300" height="300" fill="#0b0e22"/><ellipse cx="150" cy="150" rx="40" ry="24" fill="#fff3bf"/>${d}`}
+  case'solar':return `<rect width="300" height="300" fill="#0b0e22"/>${[40,60,80,100,135,170].map(r=>`<ellipse cx="150" cy="150" rx="${r}" ry="${r*.45}" fill="none" stroke="#3b4170" stroke-width="1.5"/>`).join('')}<circle cx="150" cy="150" r="16" fill="#ffb300"/>${[[40,0,3,'#adb5bd'],[60,1,5,'#ffd8a8'],[80,2,5,'#4dabf7'],[100,3.5,4,'#e8590c'],[135,4.6,10,'#d9a066'],[170,.8,9,'#e9c46a']].map(([r,a,s,c])=>`<circle cx="${(150+r*Math.cos(a)).toFixed(1)}" cy="${(150+r*.45*Math.sin(a)).toFixed(1)}" r="${s}" fill="${c}"/>`).join('')}`;
+  case'earth':return `<rect width="300" height="300" fill="#0b0e22"/><circle cx="150" cy="150" r="110" fill="#1c7ed6"/>${P('M95 80c30-20 60-5 55 20s-40 25-35 55-30 20-40 0-10-55 20-75z','#51cf66')}${P('M180 140c25-10 45 5 40 30s-30 40-45 25-20-45 5-55z','#51cf66')}${P('M150 45c20 0 40 8 50 18-20 4-45 2-50-18z','#f8f9fa')}<circle cx="150" cy="150" r="110" fill="none" stroke="#a5d8ff" stroke-width="4"/>`;
+  case'child':return `<circle cx="150" cy="70" r="34" fill="#ffd8a8" stroke="#e8590c" stroke-width="3"/><rect x="112" y="106" width="76" height="96" rx="24" fill="#4dabf7"/><path d="M118 120l-34 60M182 120l34 60" stroke="#ffd8a8" stroke-width="16" stroke-linecap="round"/><path d="M132 200v70M168 200v70" stroke="#495057" stroke-width="20" stroke-linecap="round"/><circle cx="138" cy="66" r="4" fill="#212529"/><circle cx="162" cy="66" r="4" fill="#212529"/><path d="M138 84q12 8 24 0" fill="none" stroke="#212529" stroke-width="3"/>`;
+  case'hand':return `<path d="M110 250V150c0-10 16-10 16 0v40V90c0-12 18-12 18 0v95V80c0-12 18-12 18 0v105V95c0-12 18-12 18 0v115l14-30c6-12 22-6 18 6l-26 74c-8 20-24 30-46 30h-10c-20 0-38-16-38-40z" fill="#ffd8a8" stroke="#e8590c" stroke-width="4" stroke-linejoin="round"/>`;
+  case'hair':return `<rect width="300" height="300" fill="#f8f0e3"/>${[0,1,2].map(k=>`<path d="M${40+k*30} 300C${90+k*30} 200 ${40+k*30} 120 ${120+k*30} 0" fill="none" stroke="#5c3d2e" stroke-width="${22-k*4}" stroke-linecap="round"/>`).join('')}<path d="M210 40h70M210 34v12M280 34v12" stroke="#212529" stroke-width="3"/>`;
+  case'cell':return `<circle cx="150" cy="150" r="120" fill="#ffe3d6" stroke="#e8590c" stroke-width="8"/><circle cx="140" cy="140" r="45" fill="#d0bfff" stroke="#7048e8" stroke-width="5"/><circle cx="150" cy="135" r="13" fill="#7048e8"/><ellipse cx="85" cy="215" rx="26" ry="13" fill="#ff8787" stroke="#c92a2a" stroke-width="3" transform="rotate(-25 85 215)"/><ellipse cx="215" cy="95" rx="26" ry="13" fill="#ff8787" stroke="#c92a2a" stroke-width="3" transform="rotate(30 215 95)"/><path d="M190 200q25-15 50 0M195 214q20-12 40 0" fill="none" stroke="#f08c00" stroke-width="7" stroke-linecap="round"/>`;
+  case'bacteria':return `<rect x="60" y="110" width="180" height="80" rx="40" fill="#8ce99a" stroke="#2b8a3e" stroke-width="5"/>${[0,1,2,3,4].map(k=>`<path d="M${240} ${130+k*10}c20 -10 30 10 50 0" fill="none" stroke="#2b8a3e" stroke-width="3"/>`).join('')}<path d="M100 150c20-20 60 20 100 0" fill="none" stroke="#2b8a3e" stroke-width="3" stroke-dasharray="6 6"/>`;
+  case'dna':{let d='';for(let i=0;i<=24;i++){const y=20+i*11,x1=150+70*Math.sin(i/2.2),x2=150-70*Math.sin(i/2.2);d+=`<path d="M${x1.toFixed(1)} ${y}L${x2.toFixed(1)} ${y}" stroke="${['#e03131','#1c7ed6','#2f9e44','#f08c00'][i%4]}" stroke-width="5"/>`}
+    let a='',b='';for(let i=0;i<=48;i++){const y=20+i*5.5,t=i/4.4;a+=(i?'L':'M')+(150+70*Math.sin(t)).toFixed(1)+' '+y;b+=(i?'L':'M')+(150-70*Math.sin(t)).toFixed(1)+' '+y}
+    return d+`<path d="${a}" fill="none" stroke="#495057" stroke-width="7"/><path d="${b}" fill="none" stroke="#868e96" stroke-width="7"/>`}
+  case'molecule':return `<path d="M150 150L85 200M150 150L215 200" stroke="#ced4da" stroke-width="14"/><circle cx="150" cy="140" r="60" fill="#ff3b3b"/><circle cx="80" cy="205" r="38" fill="#f1f3f5" stroke="#adb5bd" stroke-width="3"/><circle cx="220" cy="205" r="38" fill="#f1f3f5" stroke="#adb5bd" stroke-width="3"/><text x="150" y="152" text-anchor="middle" font-size="34" font-weight="800" fill="#fff">O</text><text x="80" y="217" text-anchor="middle" font-size="28" font-weight="800">H</text><text x="220" y="217" text-anchor="middle" font-size="28" font-weight="800">H</text>`;
+  case'atom':return `${[0,60,120].map(a=>`<ellipse cx="150" cy="150" rx="120" ry="42" fill="none" stroke="#748ffc" stroke-width="4" transform="rotate(${a} 150 150)"/>`).join('')}<circle cx="150" cy="150" r="20" fill="#ff5a5a"/><circle cx="270" cy="150" r="9" fill="#4dabf7"/><circle cx="90" cy="46" r="9" fill="#4dabf7"/>`;
+  case'nucleus':{let d='';const pts=[[150,150],[118,140],[182,142],[150,112],[150,188],[122,176],[178,178],[128,108],[174,110],[100,160],[200,160],[150,150]];pts.forEach(([x,y],i)=>d+=`<circle cx="${x}" cy="${y}" r="30" fill="${i%2?'#ff6b6b':'#adb5bd'}" stroke="#fff" stroke-width="2"/>`);return d}
+  }return''}
+function renderZoom(){
+  const t=TL(),z=ZOOM[ZV.i],li=LX();
+  const exp=Math.floor(Math.log10(z.m)),sup=String(exp).replace('-','⁻').replace(/\d/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[c]);
+  $('#tp-zoom').innerHTML=`<h2 class="th">${esc(ZOOMT.title[li])}</h2>
+   <section class="tstage"><div class="tfig zfig"><svg viewBox="0 0 300 300" class="zart" role="img" aria-label="${esc(z.name[li])}">${zoomArt(z.id)}</svg>
+     <div class="zctrl"><button class="pill alt" id="z-out" ${ZV.i?'':'disabled'}><svg class="ic" aria-hidden="true"><use href="#i-zoom-out"/></svg>${esc(t.zoomOut)}</button><span class="zexp">10${sup} m</span><button class="pill" id="z-in" ${ZV.i<ZOOM.length-1?'':'disabled'}><svg class="ic" aria-hidden="true"><use href="#i-zoom-in"/></svg>${esc(t.zoomIn)}</button></div></div>
+   <div class="tcard"><div class="prompt">${bigWord(z.name[li])}<div class="zbig">${esc(z.big[li])}</div><div class="row"><button class="pill alt" data-say="${esc(z.name[li])}"><svg class="ic" aria-hidden="true"><use href="#i-volume-2"/></svg>${esc(L().listen)}</button><button class="pill" data-go-topic="${z.topic}">${esc(t.open)}</button></div></div>
+     ${factBox('z-easy','',z.easy[li])}
+     <ol class="zlad">${ZOOM.map((x,i)=>`<li><button data-zi="${i}" aria-pressed="${i===ZV.i}"><span>${esc(x.name[li])}</span><i style="width:${Math.max(4,(Math.log10(x.m)+15)/37*100).toFixed(0)}%"></i></button></li>`).join('')}</ol></div></section>
+   <p class="note">${esc(ZOOMT.hint[li])}</p>`;
+}
+$('#tp-zoom').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.id==='z-in'&&ZV.i<ZOOM.length-1){ZV.i++;renderZoom();$('.zart').classList.add('zin')}
+  else if(b.id==='z-out'&&ZV.i>0){ZV.i--;renderZoom();$('.zart').classList.add('zout')}
+  else if(b.dataset.zi){ZV.i=+b.dataset.zi;renderZoom()}
+  else if(b.dataset.goTopic)location.hash='t-'+b.dataset.goTopic});
+
+/* ---------- topic: space ---------- */
+const SPV={mode:'planets',sel:'',order:[],moonSel:-1};
+const PLANETS=['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune'];
+function planetArt(id,cx,cy,r){const c=SPACE[id].col;
+  let x=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${c}"/>`;
+  if(id==='jupiter')x+=[-.5,-.15,.25,.55].map(k=>`<rect x="${cx-r}" y="${(cy+k*r).toFixed(1)}" width="${2*r}" height="${(r*.12).toFixed(1)}" fill="#b07d4f" opacity=".7" clip-path="url(#cl-${id})"/>`).join('')+`<clipPath id="cl-${id}"><circle cx="${cx}" cy="${cy}" r="${r}"/></clipPath><ellipse cx="${cx+r*.35}" cy="${cy+r*.3}" rx="${r*.18}" ry="${r*.1}" fill="#c0392b"/>`;
+  if(id==='saturn')x=`<ellipse cx="${cx}" cy="${cy}" rx="${r*2.2}" ry="${r*.55}" fill="none" stroke="#d4b483" stroke-width="${r*.28}" opacity=".9"/>`+x+`<path d="M${cx-r*2.2} ${cy}A${r*2.2} ${r*.55} 0 0 0 ${cx+r*2.2} ${cy}" fill="none" stroke="#d4b483" stroke-width="${r*.28}"/>`;
+  if(id==='earth')x+=`<path d="M${cx-r*.5} ${cy-r*.3}q${r*.4} ${-r*.4} ${r*.7} 0t${r*.2} ${r*.6}" fill="#51cf66"/>`;
+  if(id==='uranus')x+=`<ellipse cx="${cx}" cy="${cy}" rx="${r*.25}" ry="${r*1.6}" fill="none" stroke="#a5f3fc" stroke-width="1.5"/>`;
+  return x}
+function spaceFigure(){
+  const t=TL(),li=LX();
+  if(SPV.mode==='planets'||SPV.mode==='order'){
+    const k=70/71492;let x=60,items='';const H=240,cy=150;
+    const rs=PLANETS.map(p=>Math.max(1.6,SPACE[p].d/2*k));
+    PLANETS.forEach((p,i)=>{const r=rs[i];const extra=p==='saturn'?r*1.25:0;x+=r+extra+(i<4?22:12);const done=SPV.order.includes(p);
+      items+=`<g class="org pl${SPV.sel===p?' sel':''}${done?' done':''}" data-p="${p}">${planetArt(p,x,cy,r)}<circle cx="${x}" cy="${cy}" r="${Math.max(r,16)}" fill="transparent"/><text class="lbl" x="${x}" y="${i<4&&i%2?cy-Math.max(r,10)-12:cy+Math.max(r,10)+22}" text-anchor="middle">${esc(SPACE[p].name[li])}</text></g>`;
+      x+=r+extra+12});
+    const W=x+20;
+    return `<svg viewBox="0 0 ${W.toFixed(0)} ${H}" role="img"><rect width="${W.toFixed(0)}" height="${H}" fill="#0b0e22" rx="10"/><g class="org" data-p="sun"><circle cx="-640" cy="${cy}" r="680" fill="#ffb300"/></g>${items}</svg><p class="note">${esc(t.sizeNote)}</p>`}
+  if(SPV.mode==='daynight')return `<svg viewBox="0 0 400 260" role="img"><rect width="400" height="260" fill="#0b0e22" rx="10"/><circle cx="20" cy="130" r="60" fill="#ffb300"/>${[0,1,2,3,4].map(i=>`<path d="M90 ${70+i*30}h60" stroke="#ffe066" stroke-width="3" stroke-dasharray="8 6"/>`).join('')}
+    <clipPath id="ecl"><circle cx="260" cy="130" r="90"/></clipPath><circle cx="260" cy="130" r="90" fill="#1c7ed6"/><g clip-path="url(#ecl)"><g class="spinx"><path d="M200 90c30-20 60-5 55 20s-40 25-35 55-30 20-40 0-10-55 20-75zM300 140c25-10 45 5 40 30s-30 40-45 25-20-45 5-55z" fill="#51cf66"/></g><rect x="260" y="40" width="90" height="180" fill="#0b0e22" opacity=".6"/></g><circle cx="260" cy="130" r="90" fill="none" stroke="#a5d8ff" stroke-width="3"/></svg>`;
+  if(SPV.mode==='seasons'){const pos=[[200,40],[350,130],[200,220],[50,130]];
+    return `<svg viewBox="0 0 400 260" role="img"><rect width="400" height="260" fill="#0b0e22" rx="10"/><ellipse cx="200" cy="130" rx="150" ry="90" fill="none" stroke="#3b4170" stroke-width="2"/><circle cx="200" cy="130" r="30" fill="#ffb300"/>${pos.map(([x,y])=>`<g transform="rotate(23 ${x} ${y})"><circle cx="${x}" cy="${y}" r="18" fill="#1c7ed6"/><path d="M${x} ${y-28}V${y+28}" stroke="#fff" stroke-width="2"/><path d="M${x-18} ${y}h36" stroke="#51cf66" stroke-width="2"/></g>`).join('')}</svg>`}
+  if(SPV.mode==='moon'){let g='';for(let i=0;i<8;i++){const cx=50+(i%4)*100,cy=i<4?60:180,r=32,f=i/8,lit=Math.cos(f*2*Math.PI),sw=f<.5?1:0;
+      const rx=Math.abs(lit)*r;const d=`M${cx} ${cy-r}A${r} ${r} 0 0 ${sw} ${cx} ${cy+r}A${rx.toFixed(1)} ${r} 0 0 ${lit>0?1-sw:sw} ${cx} ${cy-r}Z`;
+      g+=`<g class="org${SPV.moonSel===i?' sel':''}" data-ph="${i}"><circle cx="${cx}" cy="${cy}" r="${r}" fill="#343a40"/>${i===0?'':i===4?`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#fff3bf"/>`:`<path d="${d}" fill="#fff3bf"/>`}<text class="lbl" x="${cx}" y="${cy+r+18}" text-anchor="middle" style="font-size:13px">${SPACET.phases[li][i].split(" ").map((w,j)=>`<tspan x="${cx}" dy="${j?15:0}">${esc(w)}</tspan>`).join("")}</text></g>`}
+    return `<svg viewBox="0 0 400 270" role="img"><rect width="400" height="270" fill="#0b0e22" rx="10"/>${g}</svg>`}
+  return''}
+function spaceCard(){
+  const t=TL(),li=LX();
+  if(SPV.mode==='order'){const n=SPV.order.length;return `<div class="prompt"><span class="qp">${esc(t.orderP)}</span><div class="word">${n} / 8</div></div><div class="msg" id="sp-msg"></div>${n===8?`<button class="pill alt" id="sp-again">${esc(t.next)}</button>`:''}`}
+  if(SPV.mode==='daynight')return factBox('sp-t',SPACET.dayT[li],SPACET.day[li]);
+  if(SPV.mode==='seasons')return factBox('sp-t',SPACET.seasonT[li],SPACET.season[li]);
+  if(SPV.mode==='moon')return factBox('sp-t',SPACET.moonT[li],SPACET.moon[li]);
+  if(!SPV.sel)return `<div class="prompt"><div class="word" style="font-size:clamp(24px,3vw,32px)">${esc(t.tapPlanet)}</div></div>`+factBox('sp-t',SPACET.sysT[li],SPACET.sys[li]);
+  const p=SPACE[SPV.sel],row=(k,v)=>`<div><span>${esc(k)}</span><b>${v}</b></div>`;
+  return `<div class="prompt">${bigWord(p.name[li])}<div class="job"><b>${esc(p.nick[li])}</b></div><div class="row"><button class="pill" data-say="${esc(p.name[li])}"><svg class="ic" aria-hidden="true"><use href="#i-volume-2"/></svg>${esc(L().listen)}</button></div></div>
+   <div class="stats">${row(t.dia,nf(p.d)+' '+t.km)}${p.au?row(t.dist,nf(Math.round(p.au*149.6))+' '+t.mkm):''}${row(t.dayL,(p.day>=48?nf(Math.round(p.day/24))+' '+t.days:nf(Math.round(p.day*10)/10)+' '+t.hrs))}${p.year?row(t.yearL,nf(Math.round(p.year*10)/10)+' '+t.days):''}${row(t.moonsL,nf(p.moons))}${row(t.tempL,(p.temp>0?'+':'')+p.temp+' °C')}</div>
+   ${factBox('sp-e','',p.easy[li])}${S.sci?factBox('sp-s',L().sciL,p.sci[li]):''}`}
+function renderSpace(){const t=TL();
+  $('#tp-space').innerHTML=modeBar('sp-modes',[['planets','orbit',t.planets],['daynight','sun',t.daynight],['seasons','leaf',t.seasons],['moon','moon',t.moon],['order','rocket',t.order]],SPV.mode)+
+   `<section class="tstage"><div class="tfig" id="sp-fig">${spaceFigure()}</div><div class="tcard">${spaceCard()}</div></section>`}
+$('#tp-space').addEventListener('click',e=>{const t=TL();
+  const mb=e.target.closest('#sp-modes button');if(mb){SPV.mode=mb.dataset.v;SPV.sel='';SPV.order=[];renderSpace();return}
+  if(e.target.closest('#sp-again')){SPV.order=[];renderSpace();return}
+  const ph=e.target.closest('[data-ph]');if(ph){SPV.moonSel=+ph.dataset.ph;renderSpace();say('',SPACET.phases[LX()][SPV.moonSel]);return}
+  const g=e.target.closest('[data-p]');if(!g)return;const p=g.dataset.p;
+  if(SPV.mode==='order'){const want=PLANETS[SPV.order.length];if(!want)return;
+    if(p===want){SPV.order.push(p);say('',SPACE[p].name[LX()]);if(SPV.order.length===8)tStar(3);renderSpace();if(SPV.order.length===8){$('#sp-msg').textContent=t.orderOk;$('#sp-msg').className='msg ok'}}
+    else{const m=$('#sp-msg');m.textContent=t.orderNo;m.className='msg bad'}return}
+  SPV.sel=p;renderSpace();say('',SPACE[p].name[LX()])});
+
+/* ---------- topic: matter ---------- */
+const MV={mode:'states',temp:-15,sel:'',parts:null,raf:0,last:'',sortQ:null};
+function mState(T){return T<0?'solid':T<100?'liquid':'gas'}
+function mStart(){
+  const cv=$('#m-cv');if(!cv)return;const ctx=cv.getContext('2d');cancelAnimationFrame(MV.raf);
+  const W=cv.width=cv.clientWidth*2,H=cv.height=cv.clientHeight*2,N=64,r=W/34;
+  if(!MV.parts){MV.parts=[];const cols=8;for(let i=0;i<N;i++){const lx=W*.2+(i%cols)*(r*2.3),ly=H-r*1.5-Math.floor(i/cols)*(r*2.3);MV.parts.push({x:lx,y:ly,lx,ly,vx:0,vy:0})}}
+  const step=()=>{MV.raf=requestAnimationFrame(step);if($('#tp-matter').hidden||MV.mode!=='states')return;
+    const T=MV.temp,st=mState(T),sp=(T+40)/40;ctx.clearRect(0,0,W,H);
+    for(const p of MV.parts){
+      if(st==='solid'){p.x+=(p.lx-p.x)*.2+(Math.random()-.5)*sp*1.2;p.y+=(p.ly-p.y)*.2+(Math.random()-.5)*sp*1.2;p.vx=p.vy=0}
+      else{const v=st==='gas'?sp*3:sp*1.1;p.vx+=(Math.random()-.5)*v;p.vy+=(Math.random()-.5)*v+(st==='liquid'?.25:0);const lim=st==='gas'?v*4:v*1.6;p.vx=Math.max(-lim,Math.min(lim,p.vx));p.vy=Math.max(-lim,Math.min(lim,p.vy));
+        p.x+=p.vx;p.y+=p.vy;const top=st==='gas'?r:H*.48;
+        if(p.x<r){p.x=r;p.vx=Math.abs(p.vx)}if(p.x>W-r){p.x=W-r;p.vx=-Math.abs(p.vx)}if(p.y>H-r){p.y=H-r;p.vy=-Math.abs(p.vy)}if(p.y<top){p.y=top;p.vy=Math.abs(p.vy)}}
+      ctx.beginPath();ctx.arc(p.x,p.y,r*.9,0,7);ctx.fillStyle=st==='solid'?'#a5d8ff':st==='liquid'?'#339af0':'#d0ebff';ctx.fill();
+      ctx.beginPath();ctx.arc(p.x-r*.35,p.y-r*.55,r*.32,0,7);ctx.arc(p.x+r*.35,p.y-r*.55,r*.32,0,7);ctx.fillStyle='#fff';ctx.fill()}};
+  step()}
+function matterFigure(){
+  const t=TL(),li=LX();
+  if(MV.mode==='cycle'){const G=(id,inner)=>`<g class="org${MV.sel===id?' sel':''}" data-cy="${id}">${inner}</g>`;
+    return `<svg viewBox="0 0 400 280" role="img"><rect width="400" height="280" fill="#d0ebff" rx="10"/><circle cx="50" cy="45" r="28" fill="#ffd43b"/><path d="M240 280L330 110L400 190V280Z" fill="#8ce99a" stroke="#2b8a3e" stroke-width="3"/><path d="M0 230Q100 210 200 235T400 240V280H0Z" fill="#339af0"/>
+      ${G('evap',`<path d="M60 225c-8-15 8-25 0-40s8-25 0-40M100 225c-8-15 8-25 0-40s8-25 0-40M140 225c-8-15 8-25 0-40s8-25 0-40" fill="none" stroke="#1c7ed6" stroke-width="4" stroke-dasharray="6 6"/><path d="M52 150l8-14 8 14M92 150l8-14 8 14M132 150l8-14 8 14" fill="none" stroke="#1c7ed6" stroke-width="4"/>`)}
+      ${G('cond',`<path d="M150 90a28 28 0 0 1 52-14a24 24 0 0 1 44 12a20 20 0 0 1-4 40H160a22 22 0 0 1-10-38z" fill="#fff" stroke="#868e96" stroke-width="3"/>`)}
+      ${G('prec',[0,1,2,3,4,5].map(k=>`<path d="M${255+k*14} ${140+(k%2)*8}l-6 22" stroke="#1971c2" stroke-width="4" stroke-linecap="round"/>`).join('')+`<path d="M250 88a24 24 0 0 1 44-10a20 20 0 0 1 36 10a18 18 0 0 1-4 34H262a20 20 0 0 1-12-34z" fill="#adb5bd" stroke="#495057" stroke-width="3"/>`)}
+      ${G('coll',`<path d="M330 200C300 215 280 230 250 235S200 240 190 240" fill="none" stroke="#1c7ed6" stroke-width="10" stroke-linecap="round"/>`)}</svg>`}
+  if(MV.mode==='sort'){const q=MV.sortQ;return `<div class="msq"><div class="word">${esc(q.w)}</div></div>`}
+  const st=mState(MV.temp);
+  return `<div class="mbox"><canvas id="m-cv" aria-label="${esc(MATTER[st].name[li])}"></canvas><div class="mtherm"><div class="mt"><i style="height:${((MV.temp+30)/160*100).toFixed(0)}%"></i></div><b>${MV.temp} °C</b></div></div>
+    <div class="row mrow"><button class="pill alt" id="m-cool"><svg class="ic" aria-hidden="true"><use href="#i-snowflake"/></svg>${esc(t.colder)}</button><input type="range" id="m-temp" min="-30" max="130" step="5" value="${MV.temp}" aria-label="°C"><button class="pill" id="m-heat"><svg class="ic" aria-hidden="true"><use href="#i-thermometer"/></svg>${esc(t.warmer)}</button></div>`}
+function matterCard(){
+  const t=TL(),li=LX();
+  if(MV.mode==='cycle'){if(!MV.sel)return `<div class="prompt"><div class="word" style="font-size:clamp(24px,3vw,32px)">${esc(t.tapCycle)}</div></div>`+factBox('m-c',MATTERT.cycleT[li],MATTERT.cycle[li]);
+    const c=CYCLE[MV.sel];return `<div class="prompt">${bigWord(c.name[li])}</div>`+factBox('m-ce','',c.easy[li])}
+  if(MV.mode==='sort')return `<div class="prompt"><span class="qp">${esc(t.msortP)}</span></div><div class="choices" id="m-sch">${['solid','liquid','gas'].map(k=>`<button data-ms="${k}">${esc(MATTER[k].name[li])}</button>`).join('')}</div><div class="msg" id="m-smsg"></div>`;
+  const st=mState(MV.temp),m=MATTER[st],ch=MV.last&&CHANGE[MV.last];
+  return `<div class="prompt"><span class="qp">${esc(fill(t.water,{t:MV.temp}))}</span>${bigWord(m.name[li])}<div class="mex">${m.ex[li].map(x=>`<span>${esc(x)}</span>`).join('')}</div></div>
+    ${ch?`<div class="fact mchange"><b class="fbt">→ ${esc(ch.name[li])}</b><div class="words" id="m-ch" data-text="${esc(ch.easy[li])}">${wordsHTML(ch.easy[li])}</div></div>`:''}
+    ${factBox('m-se','',m.easy[li])}${S.sci?factBox('m-ss',L().sciL,m.sci[li]):''}`}
+function renderMatter(){const t=TL(),li=LX();
+  $('#tp-matter').innerHTML=modeBar('m-modes',[['states','thermometer',t.states],['cycle','cloud-rain',t.cycle],['sort','shield',t.msort]],MV.mode)+
+   `<section class="tstage"><div class="tfig">${matterFigure()}</div><div class="tcard">${matterCard()}</div></section><section class="cintro">${factBox('m-what',MATTERT.whatT[li],MATTERT.what[li])}${factBox('m-part',MATTERT.partT[li],MATTERT.part[li])}${factBox('m-heat',MATTERT.heatT[li],MATTERT.heat[li])}</section>`;
+  if(MV.mode==='states')mStart()}
+function mSetTemp(v){const before=mState(MV.temp);MV.temp=Math.max(-30,Math.min(130,v));const after=mState(MV.temp);
+  if(before!==after){const k=before+'>'+after;MV.last={'solid>liquid':'melt','liquid>solid':'freeze','liquid>gas':'boil','gas>liquid':'cond','solid>gas':'subl','gas>solid':'depo'}[k]||''}
+  const keepParts=MV.parts;renderMatter();MV.parts=keepParts;if(before!==after)say('',MATTER[after].name[LX()])}
+function mNewSort(){const pool=[];['solid','liquid','gas'].forEach(k=>MATTER[k].ex[LX()].forEach(w=>pool.push({w,k})));let q;do q=pick(pool);while(MV.sortQ&&q.w===MV.sortQ.w);MV.sortQ=q}
+$('#tp-matter').addEventListener('click',e=>{const t=TL();
+  const mb=e.target.closest('#m-modes button');if(mb){MV.mode=mb.dataset.v;MV.sel='';if(MV.mode==='sort')mNewSort();renderMatter();return}
+  const b=e.target.closest('button');
+  if(b&&b.id==='m-heat'){mSetTemp(MV.temp+10);return}if(b&&b.id==='m-cool'){mSetTemp(MV.temp-10);return}
+  if(b&&b.dataset.ms){const ok=b.dataset.ms===MV.sortQ.k,m=$('#m-smsg');document.querySelectorAll('#m-sch button').forEach(x=>{x.disabled=true;x.classList.toggle('right',x.dataset.ms===MV.sortQ.k)});
+    if(ok){m.textContent=t.yes;m.className='msg ok';tStar(1)}else{b.classList.add('no');m.textContent=MATTER[MV.sortQ.k].name[LX()];m.className='msg bad'}
+    setTimeout(()=>{mNewSort();renderMatter()},1700);return}
+  const c=e.target.closest('[data-cy]');if(c){MV.sel=c.dataset.cy;renderMatter();say('',CYCLE[MV.sel].name[LX()])}});
+$('#tp-matter').addEventListener('input',e=>{if(e.target.id==='m-temp')mSetTemp(+e.target.value)});
+
+/* ---------- topic: human body and DNA ---------- */
+const BV={mode:'organs',sel:'',find:null,dz:0};
+const ORGS_B=Object.keys(BODY);
+function bodySVG(){const G=(id,inner,extra='')=>`<g class="org${BV.sel===id&&BV.mode==='organs'?' sel':''}" data-b="${id}" ${extra}>${inner}</g>`;
+  return `<svg viewBox="0 0 300 520" role="img" class="bsvg${BV.sel&&BV.mode==='organs'?' focus':''}">
+   ${G('skin',`<path d="M150 20a50 50 0 0 1 50 50c0 25-12 42-26 50h40c22 0 34 14 36 36l14 140c2 14-18 18-22 4l-18-120v320c0 14-22 14-24 0l-16-170h-8l-16 170c-2 14-24 14-24 0V180l-18 120c-4 14-24 10-22-4l14-140c2-22 14-36 36-36h40c-14-8-26-25-26-50a50 50 0 0 1 50-50z" fill="#ffe8cc" stroke="#e8590c" stroke-width="4"/>`,'style="pointer-events:stroke"')}
+   ${G('muscles',`<path d="M74 170l-8 70c10 6 20 4 24-6l6-66zM226 170l8 70c-10 6-20 4-24-6l-6-66zM118 360l4 90h22l2-90zM182 360l-4 90h-22l-2-90z" fill="#ffa8a8" stroke="#c92a2a" stroke-width="2.5"/>`)}
+   ${G('bones',`<path d="M128 150h44M124 162q26 6 52 0M122 174q28 6 56 0M122 186q28 6 56 0M124 198q26 6 52 0M150 140v160M120 300h60M134 300v160M166 300v160M84 160l-12 110M216 160l12 110" fill="none" stroke="#f8f9fa" stroke-width="7" stroke-linecap="round"/><path d="M128 150h44M124 162q26 6 52 0M122 174q28 6 56 0M122 186q28 6 56 0M124 198q26 6 52 0M150 140v160M120 300h60M134 300v160M166 300v160M84 160l-12 110M216 160l12 110" fill="none" stroke="#adb5bd" stroke-width="2.5" stroke-linecap="round"/>`)}
+   ${G('brain',`<path d="M112 58c0-24 18-36 38-36s38 12 38 36c0 6-4 10-10 10h-56c-6 0-10-4-10-10z" fill="#fcc2d7" stroke="#c2255c" stroke-width="3"/><path d="M130 40q6 8 0 16M150 32q6 10 0 22M170 40q-6 8 0 16" fill="none" stroke="#c2255c" stroke-width="2"/>`)}
+   ${G('eyes',`<circle cx="134" cy="82" r="8" fill="#fff" stroke="#1c7ed6" stroke-width="3"/><circle cx="166" cy="82" r="8" fill="#fff" stroke="#1c7ed6" stroke-width="3"/><circle cx="134" cy="82" r="3.5" fill="#1c7ed6"/><circle cx="166" cy="82" r="3.5" fill="#1c7ed6"/>`)}
+   ${G('ears',`<path d="M100 72q-12 10 0 26M200 72q12 10 0 26" fill="#ffd8a8" stroke="#e8590c" stroke-width="5" stroke-linecap="round"/>`)}
+   ${G('lungs',`<path d="M140 150c-26 0-34 30-34 60s8 40 20 40 16-8 16-30v-60c0-6-2-10-2-10zM160 150c26 0 34 30 34 60s-8 40-20 40-16-8-16-30v-60c0-6 2-10 2-10z" fill="#ffc9c9" stroke="#e03131" stroke-width="3"/>`)}
+   ${G('heart',`<path d="M160 196c0-10 14-14 20-4 6-10 20-6 20 4 0 14-20 24-20 30 0-6-20-16-20-30z" fill="#e03131" stroke="#a61e1e" stroke-width="2"/>`)}
+   ${G('liver',`<path d="M110 256c20-12 60-12 66 0 2 10-10 18-30 20-20 2-40 0-38-20z" fill="#a0522d" stroke="#6b2f12" stroke-width="2.5"/>`)}
+   ${G('stomach',`<path d="M172 258c18-4 28 8 26 22-2 16-18 24-34 20-8-2-10-10-4-14 10-4 16-8 14-16-2-6-10-8-2-12z" fill="#ffa94d" stroke="#d9480f" stroke-width="2.5"/>`)}
+   ${G('kidneys',`<path d="M116 296c-8 2-10 18-2 24 6 4 12-2 10-8-2-6 2-10-8-16zM184 296c8 2 10 18 2 24-6 4-12-2-10-8 2-6-2-10 8-16z" fill="#c92a2a" stroke="#7d1414" stroke-width="2"/>`)}
+   ${G('intestines',`<path d="M124 310q26-10 52 0q8 10-6 16q-20 6-40 0q-12 8 0 16q20 8 44 0q10 8-2 16q-24 8-46 0" fill="none" stroke="#f783ac" stroke-width="9" stroke-linecap="round"/>`)}
+  </svg>`}
+const DNAK=['body','cell','nucleus','chromosome','dna','gene'];
+function dnaArt(k){switch(k){
+  case'body':return `<circle cx="150" cy="60" r="26" fill="#ffd8a8" stroke="#e8590c" stroke-width="3"/><rect x="120" y="90" width="60" height="90" rx="20" fill="#4dabf7"/><path d="M135 180v80M165 180v80" stroke="#495057" stroke-width="16" stroke-linecap="round"/><circle cx="150" cy="130" r="14" fill="none" stroke="#e03131" stroke-width="3" stroke-dasharray="4 4"/>`;
+  case'cell':return `<circle cx="150" cy="150" r="110" fill="#ffe3d6" stroke="#e8590c" stroke-width="7"/><circle cx="150" cy="150" r="46" fill="#d0bfff" stroke="#7048e8" stroke-width="5"/><circle cx="150" cy="150" r="56" fill="none" stroke="#e03131" stroke-width="3" stroke-dasharray="5 5"/>`;
+  case'nucleus':return `<circle cx="150" cy="150" r="115" fill="#d0bfff" stroke="#7048e8" stroke-width="6"/>${[[110,110,20],[180,120,-30],[130,190,50],[195,185,10],[150,150,80]].map(([x,y,a])=>`<path d="M${x-16} ${y-22}L${x+16} ${y+22}M${x+16} ${y-22}L${x-16} ${y+22}" stroke="#5f3dc4" stroke-width="9" stroke-linecap="round" transform="rotate(${a} ${x} ${y})"/>`).join('')}`;
+  case'chromosome':return `<path d="M100 60L200 240M200 60L100 240" stroke="#7048e8" stroke-width="40" stroke-linecap="round"/><circle cx="150" cy="150" r="16" fill="#e03131"/>`;
+  case'dna':return zoomArt('dna');
+  case'gene':return zoomArt('dna')+`<rect x="70" y="105" width="160" height="70" fill="none" stroke="#ffd43b" stroke-width="6" rx="10"/>`}return''}
+function bodyFigure(){if(BV.mode==='dna'){const k=DNAK[BV.dz];return `<svg viewBox="0 0 300 300" class="zart" role="img">${dnaArt(k)}</svg><div class="zctrl"><button class="pill alt" id="d-prev" ${BV.dz?'':'disabled'}>‹</button><span class="zexp">${BV.dz+1} / ${DNAK.length}</span><button class="pill" id="d-next" ${BV.dz<DNAK.length-1?'':'disabled'}>›</button></div>`}return bodySVG()}
+function bodyCard(){const t=TL(),li=LX();
+  if(BV.mode==='dna'){const d=DNA[DNAK[BV.dz]];return `<div class="prompt">${bigWord(d.name[li])}</div>`+factBox('b-dz','',d.easy[li])+(BV.dz===DNAK.length-1?factBox('b-dna',BODYT.dnaT[li],BODYT.dna[li])+factBox('b-size',BODYT.sizeT[li],BODYT.size[li]):'')}
+  if(BV.mode==='find')return `<div class="prompt"><span class="qp">${esc(t.findP)}</span>${bigWord(BODY[BV.find].name[li])}</div><div class="msg" id="b-msg"></div><button class="pill alt" id="b-next">${esc(t.next)}</button>`;
+  if(!BV.sel)return `<div class="prompt"><div class="word" style="font-size:clamp(24px,3vw,32px)">${esc(t.tapOrgan)}</div></div>`+factBox('b-what',BODYT.whatT[li],BODYT.what[li])+`<div class="list">${ORGS_B.map(k=>`<button data-bs="${k}">${esc(BODY[k].name[li])}</button>`).join('')}</div>`;
+  const o=BODY[BV.sel];
+  return `<div class="prompt">${bigWord(o.name[li])}<div class="job"><span class="qp">${esc(t.job)}:</span><b>${esc(o.job[li])}</b></div><div class="row"><button class="pill" data-say="${esc(o.name[li])}"><svg class="ic" aria-hidden="true"><use href="#i-volume-2"/></svg>${esc(L().listen)}</button></div></div>`
+   +factBox('b-e','',o.easy[li])+(S.sci?factBox('b-s',L().sciL,o.sci[li]):'')+`<div class="list">${ORGS_B.map(k=>`<button data-bs="${k}" aria-pressed="${k===BV.sel}">${esc(BODY[k].name[li])}</button>`).join('')}</div>`}
+function renderBody(){const t=TL();
+  $('#tp-body').innerHTML=modeBar('b-modes',[['organs','heart-pulse',t.organs],['dna','dna',t.dnaZ],['find','microscope',t.bfind]],BV.mode)+
+   `<section class="tstage"><div class="tfig bfig">${bodyFigure()}</div><div class="tcard">${bodyCard()}</div></section>`}
+function bNewFind(){let q;do q=pick(ORGS_B);while(q===BV.find);BV.find=q}
+$('#tp-body').addEventListener('click',e=>{const t=TL();
+  const mb=e.target.closest('#b-modes button');if(mb){BV.mode=mb.dataset.v;BV.sel='';if(BV.mode==='find')bNewFind();renderBody();return}
+  const b=e.target.closest('button');
+  if(b&&b.id==='d-next'){BV.dz=Math.min(DNAK.length-1,BV.dz+1);renderBody();say('',DNA[DNAK[BV.dz]].name[LX()]);return}
+  if(b&&b.id==='d-prev'){BV.dz=Math.max(0,BV.dz-1);renderBody();return}
+  if(b&&b.id==='b-next'){bNewFind();renderBody();return}
+  if(b&&b.dataset.bs){BV.sel=b.dataset.bs;renderBody();say('',BODY[BV.sel].name[LX()]);return}
+  const g=e.target.closest('[data-b]');if(!g)return;const id=g.dataset.b;
+  if(BV.mode==='find'){const m=$('#b-msg');if(id===BV.find){tStar(1);m.textContent=t.yes;m.className='msg ok';say('',BODY[id].name[LX()]);setTimeout(()=>{bNewFind();renderBody()},1500)}else{m.textContent=fill(t.no,{x:BODY[id].name[LX()]});m.className='msg bad'}return}
+  BV.mode='organs';BV.sel=id;renderBody();say('',BODY[id].name[LX()])});
+
+Object.assign(TOPIC_RENDER,{zoom:renderZoom,space:renderSpace,matter:renderMatter,body:renderBody});
 
 /* ---------- sheet panels ---------- */
 let panel='';

@@ -1,5 +1,5 @@
 // Offline support: the page is network-first, everything else cache-first.
-const CORE = 'elx-core-v2';
+const CORE = 'elx-core-v3';
 const FILES = ['./', 'index.html', 'vendor/three.min.js', 'vendor/peerjs.min.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png'];
 self.addEventListener('install', e => e.waitUntil(caches.open(CORE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())));
 self.addEventListener('activate', e => e.waitUntil(
