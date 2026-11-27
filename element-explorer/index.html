@@ -506,7 +506,7 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
   .panel h2{font-size:26px}.step{grid-template-columns:minmax(0,1fr) 56px 56px 56px;padding-left:var(--s3)}.step button{height:52px}.step b{font-size:26px}
   .atomb{width:66px;height:66px;font-size:22px}.atomb small{font-size:11px;max-width:58px}.palette{gap:var(--s2)}
   }
-@media(max-width:640px){#mbuild h2,#mbuild .goal{order:-2}#mbuild .mmsg{order:-1}#mbuild .bmsg:empty{display:none}}
+@media(max-width:640px){#mbuild h2,#mbuild .goal,#mbuild #m-desc{order:-2}#mbuild .mmsg{order:-1}#mbuild .bmsg:empty{display:none}}
 #m-formula{white-space:normal;text-align:left;height:auto;min-height:44px}
 @media(max-width:640px){.sheet[data-p=build] .vcap span,.sheet[data-p=mbuild] .vcap span{display:none}.sheet[data-p=build] .vcap b,.sheet[data-p=mbuild] .vcap b{font-size:17px}.sheet[data-p=build] .vcap,.sheet[data-p=mbuild] .vcap{bottom:var(--s2);left:var(--s3)}
   .sheet[data-p=build] .panel h2,.sheet[data-p=mbuild] .panel h2{display:none}.build .bmsg:empty{display:none}
@@ -636,10 +636,10 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
     <div class="panel" id="mbuild" hidden>
       <h2 id="m-title"></h2>
       <div class="goal"><span class="qp" id="m-goalL"></span><span class="qword" id="m-goal"></span><span class="gb"><button class="pill alt" id="m-formula"></button><button class="pill alt" id="m-new"></button></span></div>
+      <div class="fact" id="m-desc"><div class="words" id="m-words"></div><div class="row" id="m-along"></div></div>
       <div class="palette" id="m-pal"></div>
       <div class="tray" id="m-tray"></div>
       <div class="bmsg mmsg" id="m-msg" aria-live="polite"></div>
-      <div class="fact" id="m-desc" hidden><div class="words" id="m-words"></div></div>
     </div>
     <div class="panel" id="home" hidden>
       <h2 id="h-title"></h2><p class="help" id="h-note" style="margin-top:calc(-1*var(--s2))"></p>
@@ -2796,10 +2796,13 @@ function renderMB(){
   const tr=Object.entries(MB.tray).filter(([,n])=>n>0);
   $('#m-tray').innerHTML=tr.length?tr.map(([e,n])=>`<button data-r="${e}"><i style="--c:${hex(e)}"></i>${e} × ${n} <span aria-hidden="true">−</span></button>`).join(''):`<span class="help">${esc(t.trayEmpty)}</span>`;
   const ok=Object.keys(need).every(e=>MB.tray[e]===need[e])&&tr.every(([e])=>need[e]);
-  if(ok){m.textContent=t.goalDone.split(/[!.]/)[0]+'!';m.className='bmsg ok';
-    const txt=`${g.n[S.lang]}. ${g.d[S.lang]}`;$('#m-desc').hidden=false;renderWords($('#m-words'),txt);showMol(g);
-    if(!MB.done){MB.done=true;S.stars+=2;if(!S.mols.includes(g.f))S.mols.push(g.f);save();progress();toast('★ +2');say(`mol/${S.lang}/${g.f}`,txt)}}
-  else{$('#m-desc').hidden=true;const over=tr.find(([e,n])=>!need[e]||n>need[e]);m.textContent=over?fill(t.tooMany,{x:nm(zOf(over[0]))}):'';m.className='bmsg';drawLoose()}
+  /* the text comes first: read about it, then build it */
+  const box=$('#m-words'),k=g.f+'/'+S.lang+'/'+useSyl();
+  if(box.dataset.k!==k){box.dataset.k=k;renderWords(box,g.d[S.lang]);
+    $('#m-along').innerHTML=`<button class="along" data-along="m-words"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span>${esc(t.along)}</span></button>`}
+  if(ok){m.textContent=t.goalDone.split(/[!.]/)[0]+'!';m.className='bmsg ok';showMol(g);
+    if(!MB.done){MB.done=true;S.stars+=2;if(!S.mols.includes(g.f))S.mols.push(g.f);save();progress();toast('★ +2');say('',m.textContent+' '+g.n[S.lang])}}
+  else{const over=tr.find(([e,n])=>!need[e]||n>need[e]);m.textContent=over?fill(t.tooMany,{x:nm(zOf(over[0]))}):'';m.className='bmsg';drawLoose()}
   {const pool=S.sci?MB_EASY.concat(MB_SCI):MB_EASY;$('#m-goalL').textContent=t.molGoal+' · '+pool.filter(f=>(S.mols||[]).includes(f)).length+'/'+pool.length}
 }
 function drawLoose(tray=MB.tray,title=MB.goal.n[S.lang]+' ?'){
