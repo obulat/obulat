@@ -682,6 +682,8 @@ const useSyl=()=>S.syl&&S.lang!=='en';
 const sylHTML=w=>syllables(w,S.lang).map(x=>`<span class="s">${esc(x)}</span>`).join('');
 const sylText=w=>w.split(/(\s+)/).map(p=>/\s/.test(p)?p:sylHTML(p)).join('');
 function setWord(el,w){el.classList.toggle('sy',useSyl());el.innerHTML=useSyl()?sylText(w):esc(w)}
+/* a sticker marks an element whose name the child has read: via "I read it!", building its atom, or finding it by name in the quiz */
+function addSticker(z){if(S.read.includes(z))return false;S.read.push(z);logEv(z,4);const el=document.querySelector(`.el[data-z="${z}"]`);if(el)el.classList.add('got');progress();return true}
 const logEv=(z,i)=>{const v=S.log[z]||(S.log[z]=[0,0,0,0,0]);if(i===4)v[4]=Date.now();else v[i]++;save()};
 
 /* ---------- speech ---------- */
@@ -792,7 +794,7 @@ function answer(z,b){
   const m=$('#q-msg');
   if(z===quiz.z){b.classList.add('right');S.stars+=quiz.tries?1:2;save();progress();
     const y=L().yes;m.textContent=y[Math.floor(Math.random()*y.length)];m.className='qmsg ok';
-    logEv(z,3);say(`name/${S.lang}/${z}`,nm(z));setTimeout(()=>{b.classList.remove('right');if(mode==='quiz')newQ()},1800)}
+    logEv(z,3);if(quiz.type==='name'&&addSticker(z))setTimeout(()=>toast('★ '+L().sticker),300);say(`name/${S.lang}/${z}`,nm(z));setTimeout(()=>{b.classList.remove('right');if(mode==='quiz')newQ()},1800)}
   else{quiz.tries++;logEv(quiz.z,1);b.classList.remove('wrong');void b.offsetWidth;b.classList.add('wrong');m.textContent=L().no;m.className='qmsg bad';$('#q-hint').hidden=false}
 }
 $('#q-hint').onclick=()=>{logEv(quiz.z,2);say(`name/${S.lang}/${quiz.z}`,nm(quiz.z))};
@@ -871,7 +873,7 @@ function setRead(got,keep){
 }
 $('#listen').onclick=()=>{if(!S.read.includes(cur))logEv(cur,0);karaoke($('#ename'),nm(cur),`name/${S.lang}/${cur}`)};
 $('#iread').onclick=()=>{
-  if(!S.read.includes(cur)){S.read.push(cur);S.stars+=1;logEv(cur,4);toast('★ '+L().sticker);renderTable()}
+  if(addSticker(cur)){S.stars+=1;save();progress();toast('★ '+L().sticker)}
   setRead(true,true);clearTimeout(rfTimer);$('#listen').disabled=false;$('#listenL').textContent=L().listen;
   karaoke($('#ename'),nm(cur),`name/${S.lang}/${cur}`);
 };
@@ -983,7 +985,7 @@ function openBuild(){
   showPanel('build',true);cur=0;clearTimeout(rfTimer);
   B.drawn=false;if(!B.goal)newGoal();else renderBuild();$('#sheet').scrollTop=0;
 }
-function newGoal(){const max=S.sci?36:10;let g;do g=1+Math.floor(Math.random()*max);while(g===B.goal);B.goal=g;B.done=false;setWord($('#b-goal'),nm(g));renderBuild()}
+function newGoal(){const max=S.sci?36:10;let g;do g=1+Math.floor(Math.random()*max);while(g===B.goal);B.goal=g;B.done=false;B.p=B.n=B.e=0;setWord($('#b-goal'),nm(g));renderBuild()}
 function renderBuild(){
   const t=L(),z=B.p,tile=$('#b-tile'),m=$('#b-msg');
   $('#b-p').textContent=B.p;$('#b-n').textContent=B.n;$('#b-e').textContent=B.e;
@@ -991,7 +993,7 @@ function renderBuild(){
     const ch=B.p-B.e;$('#b-stat').textContent=`${t.massNo}: ${B.p+B.n} · ${ch?fill(t.ion,{c:(ch>0?'+':'−')+Math.abs(ch)}):t.neutral}`}
   else{tile.className='bigtile';$('#b-tN').textContent='';$('#b-tS').textContent='?';$('#b-name').className='name';$('#b-name').textContent='';$('#b-stat').textContent=t.none}
   const iso=ISO[z]||[Math.round(+MASS[z-1])-z],nOk=iso.includes(B.n);
-  if(z===B.goal&&B.e===z&&nOk){m.textContent=t.goalDone+(B.n!==iso[0]?' '+fill(t.isotope,{x:nm(z),a:z+B.n}):'');m.className='bmsg ok';if(!B.done){B.done=true;S.stars+=2;save();progress();toast('★ +2');say(`name/${S.lang}/${z}`,nm(z))}}
+  if(z===B.goal&&B.e===z&&nOk){m.textContent=t.goalDone+(B.n!==iso[0]?' '+fill(t.isotope,{x:nm(z),a:z+B.n}):'');m.className='bmsg ok';if(!B.done){B.done=true;S.stars+=2;const ns=addSticker(z);save();progress();toast(ns?'★ +2 · '+t.sticker:'★ +2');say(`name/${S.lang}/${z}`,nm(z))}}
   else{m.textContent=z!==B.goal?'':B.e!==z?t.goalHint:fill(t.nHint,{n:iso[0]});m.className='bmsg'}
   drawAtom(B.p,B.n,B.e,z?`${t.atom}: ${nm(z)}`:t.buildTitle,fill(t.atomSub,{p:B.p,ne:B.n,e:B.e}),B.drawn);B.drawn=true;
 }
