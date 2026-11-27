@@ -20,16 +20,17 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;touch-
 button:focus-visible{outline:3px solid var(--star);outline-offset:2px}
 .c-alk{--c:#ff6b6b}.c-ae{--c:#ffa94d}.c-tm{--c:#ffd43b}.c-ptm{--c:#a9e34b}.c-mtl{--c:#63e6be}.c-nm{--c:#4dabf7}.c-hal{--c:#b197fc}.c-ng{--c:#f783ac}.c-lan{--c:#ffc078}.c-act{--c:#e599f7}
 /* header */
-.top{background:var(--brand);color:#fff;margin-top:calc(-1*env(safe-area-inset-top,0px));padding:calc(env(safe-area-inset-top,0px) + var(--s4)) max(4vw,16px,env(safe-area-inset-right,0px)) var(--s4) max(4vw,16px,env(safe-area-inset-left,0px))}
+.top{position:sticky;top:0;z-index:10;transition:transform .25s;background:var(--brand);color:#fff;margin-top:calc(-1*env(safe-area-inset-top,0px));padding:calc(env(safe-area-inset-top,0px) + var(--s3)) max(4vw,16px,env(safe-area-inset-right,0px)) var(--s3) max(4vw,16px,env(safe-area-inset-left,0px))}
+.top.away{transform:translateY(-100%)}
 .topin{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s5);justify-content:space-between}
-h1{margin:0;font-size:clamp(28px,3.6vw,40px);font-weight:800;line-height:1.05;letter-spacing:-.02em}
+h1{margin:0;font-size:clamp(24px,3vw,34px);font-weight:800;line-height:1.05;letter-spacing:-.02em}
 .ctrls{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center}
 .seg{display:flex;gap:2px;background:rgba(255,255,255,.14);border-radius:var(--r2);padding:3px}
-.seg button{padding:0 var(--s4);border-radius:4px;font-weight:700;min-height:42px;white-space:nowrap}
+.seg button{padding:0 var(--s3);border-radius:4px;font-weight:700;font-size:15px;min-height:36px;white-space:nowrap}
 .seg button[aria-pressed=true]{background:#fff;color:var(--brand)}
-.stars{display:flex;align-items:center;gap:var(--s2);background:#fff;color:var(--tink);border-radius:var(--r2);padding:0 var(--s4);min-height:48px;font-weight:800;font-size:20px;font-variant-numeric:tabular-nums}
-.stars svg{width:24px;height:24px;fill:var(--star)}
-.gear{width:48px;height:48px;border-radius:var(--r2);background:rgba(255,255,255,.14);display:grid;place-items:center}
+.stars{display:flex;align-items:center;gap:var(--s2);background:#fff;color:var(--tink);border-radius:var(--r2);padding:0 var(--s3);min-height:42px;font-weight:800;font-size:18px;font-variant-numeric:tabular-nums}
+.stars svg{width:20px;height:20px;fill:var(--star)}
+.gear{width:42px;height:42px;border-radius:var(--r2);background:rgba(255,255,255,.14);display:grid;place-items:center}
 .gear svg{width:22px;height:22px;fill:#fff}
 main{padding:var(--s5) max(4vw,16px,env(safe-area-inset-right,0px)) var(--s6) max(4vw,16px,env(safe-area-inset-left,0px));display:grid;gap:var(--s5)}
 /* shared controls */
@@ -42,6 +43,7 @@ main{padding:var(--s5) max(4vw,16px,env(safe-area-inset-right,0px)) var(--s6) ma
 .help{color:var(--mute);font-size:15px;margin:0}
 .help b{color:var(--ink)}
 /* prompt bars: quiz and game goals share one layout */
+.quiz{position:sticky;top:var(--hdr,0px);z-index:5;transition:top .25s;box-shadow:0 0 0 1px var(--line),0 6px 12px rgba(0,0,0,.06)}
 .quiz,.goal{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:var(--s4);row-gap:var(--s1);background:var(--soft);border-radius:var(--r3);padding:var(--s3) var(--s4) var(--s3) var(--s5)}
 .quiz .qp,.goal .qp,.quiz .qword,.goal .qword{grid-column:1}
 .qbtns,.gb{grid-column:2;grid-row:1/3;display:flex;flex-wrap:wrap;gap:var(--s2);justify-content:flex-end}
@@ -51,8 +53,10 @@ main{padding:var(--s5) max(4vw,16px,env(safe-area-inset-right,0px)) var(--s6) ma
 .goal .qword{font-size:clamp(30px,4vw,44px)}
 /* games row */
 .shelf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
-.game{display:flex;align-items:center;gap:var(--s3);border-radius:var(--r2);padding:var(--s3) var(--s4);background:var(--g);color:var(--tink);text-align:left;font-weight:700;font-size:clamp(16px,1.6vw,19px);line-height:1.2;min-height:64px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--g) 70%,#000)}
-.game span:first-child{font-size:28px;line-height:1}
+.game{display:flex;align-items:center;gap:var(--s2);border-radius:var(--r2);padding:0 var(--s3);background:var(--g);color:var(--tink);text-align:left;font-weight:700;font-size:15px;line-height:1.15;min-height:46px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--g) 70%,#000)}
+.ic{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.game .ic{width:22px;height:22px}
+.ls{display:none}
 .g1{--g:#ffd43b}.g2{--g:#63e6be}.g3{--g:#ffa94d}.g4{--g:#b197fc}
 /* the table */
 .scroll{overflow-x:auto;padding-bottom:var(--s1)}
@@ -61,8 +65,15 @@ main{padding:var(--s5) max(4vw,16px,env(safe-area-inset-right,0px)) var(--s6) ma
 .el:active{transform:scale(.93)}
 .el small{position:absolute;top:3px;left:5px;font-size:11px;font-weight:600;opacity:.8;font-variant-numeric:tabular-nums}
 .el b{font-size:clamp(14px,38cqi,28px);font-weight:700;line-height:1;letter-spacing:-.01em}
-.el i{font-style:normal;font-size:clamp(9px,13cqi,12px);font-weight:600;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-@container (max-width:64px){.el i{display:none}}
+.el i{font-style:normal;font-size:clamp(8px,14cqi,12px);font-weight:600;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@container (max-width:42px){.el i{display:none}}
+.pt{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.tip{position:fixed;z-index:30;pointer-events:none;display:flex;align-items:baseline;gap:var(--s2);background:var(--ink);color:var(--bg);border-radius:var(--r2);padding:var(--s2) var(--s3);box-shadow:0 6px 18px rgba(0,0,0,.25);white-space:nowrap}
+.tip small{font-size:13px;opacity:.75}
+.tip b{font-size:18px}
+.tip span{font-family:var(--read);font-size:22px;font-weight:700}
+.tip .sy .s:nth-child(odd){color:light-dark(#9cc3ff,#1d5fd0)}
+.tip .sy .s:nth-child(even){color:light-dark(#ffa3c0,#d02f63)}
 @container (max-width:46px){.el small{position:static;font-size:10px;line-height:1;margin-bottom:2px}.el b{font-size:15px}}
 .el.ph{opacity:.6;font-size:12px;font-weight:600}
 .el.got::after{content:"";position:absolute;top:-6px;right:-6px;width:18px;height:18px;background:var(--star);clip-path:polygon(50% 0,63% 35%,100% 38%,71% 60%,80% 98%,50% 77%,20% 98%,29% 60%,0 38%,37% 35%)}
@@ -83,13 +94,16 @@ main{padding:var(--s5) max(4vw,16px,env(safe-area-inset-right,0px)) var(--s6) ma
 .bar i{display:block;height:100%;background:var(--star);transition:width .4s}
 /* full-screen sheet */
 .sheet{position:fixed;inset:0;z-index:20;background:var(--bg);overflow-y:auto;padding:0 max(4vw,16px,env(safe-area-inset-right,0px)) calc(var(--s6) + env(safe-area-inset-bottom,0px)) max(4vw,16px,env(safe-area-inset-left,0px))}
-.sbar{position:sticky;top:0;z-index:2;background:var(--bg);display:flex;align-items:center;gap:var(--s2);padding:calc(env(safe-area-inset-top,0px) + var(--s3)) 0 var(--s3);margin-bottom:var(--s2);border-bottom:1px solid var(--line)}
+.sheet{--sbh:74px}
+.sheet.barup{--sbh:12px}
+.sbar{position:sticky;top:0;z-index:2;transition:transform .25s;background:var(--bg);display:flex;align-items:center;gap:var(--s2);padding:calc(env(safe-area-inset-top,0px) + var(--s3)) 0 var(--s3);margin-bottom:var(--s2);border-bottom:1px solid var(--line)}
 .sbar .nav{display:flex;gap:var(--s2)}
 .sl{background:var(--soft);margin-left:auto}
 .sl button[aria-pressed=true]{background:var(--brand);color:#fff}
-.sbar .nav button{width:44px;height:44px;border-radius:var(--r2);box-shadow:inset 0 0 0 1.5px var(--line);font-size:24px;font-weight:700;line-height:1}
+.sheet.barup .sbar{transform:translateY(-110%)}
+.sbar .nav button{width:40px;height:40px;border-radius:var(--r2);box-shadow:inset 0 0 0 1.5px var(--line);font-size:24px;font-weight:700;line-height:1}
 .dgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:var(--s6);align-items:start;padding-top:var(--s3)}
-.view{position:sticky;top:84px;height:calc(100svh - 108px);min-height:380px;border-radius:var(--r3);overflow:hidden;background:radial-gradient(circle at 50% 42%,#25306c,#0a0d20 75%);touch-action:none;user-select:none}
+.view{position:sticky;top:var(--sbh);transition:top .25s;height:calc(100svh - 108px);min-height:380px;border-radius:var(--r3);overflow:hidden;background:radial-gradient(circle at 50% 42%,#25306c,#0a0d20 75%);touch-action:none;user-select:none}
 .sheet.noview .dgrid{grid-template-columns:minmax(0,1fr);max-width:1000px;margin:0 auto}
 .sheet.noview .view{display:none}
 .view canvas{position:absolute;inset:0;width:100%!important;height:100%!important}
@@ -170,9 +184,12 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
 .tray button{display:flex;align-items:center;gap:var(--s2);background:var(--bg);box-shadow:inset 0 0 0 1.5px var(--line);border-radius:var(--r2);padding:0 var(--s3);font-weight:700;font-size:18px;min-height:44px}
 .tray i{width:18px;height:18px;border-radius:50%;background:var(--c);display:inline-block;box-shadow:0 0 0 1.5px var(--line)}
 /* find it at home */
-.homegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--s3)}
+.homegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(200px,42vw),1fr));gap:var(--s3)}
 .hcard{box-shadow:inset 0 0 0 1.5px var(--line);border-radius:var(--r3);padding:var(--s4);display:grid;gap:var(--s3);grid-template-rows:auto auto 1fr auto;align-content:start}
-.hcard .em{font-size:48px;line-height:1}
+.hcard .em{width:52px;height:52px;border-radius:var(--r2);background:var(--soft);display:grid;place-items:center;color:var(--brand)}
+.hcard .em .ic{width:30px;height:30px}
+.homes button{display:inline-flex;align-items:center;gap:var(--s2)}
+.homes .ic{width:20px;height:20px;color:var(--brand)}
 .hcard .it{font-family:var(--read);font-size:25px;font-weight:700;line-height:1.15;text-align:left;min-height:44px}
 .hcard .els{display:flex;flex-wrap:wrap;gap:var(--s1);align-content:start}
 .hcard .els button{display:flex;align-items:center;gap:6px;border-radius:var(--r1);padding:2px var(--s2);font-weight:600;font-size:14px;min-height:40px;box-shadow:inset 0 0 0 1px var(--line)}
@@ -184,7 +201,7 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
 .hpick{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s3)}
 .hpick button{border-radius:var(--r2);padding:var(--s4);background:var(--c);color:var(--tink);display:grid;justify-items:center;gap:var(--s1);box-shadow:inset 0 0 0 1.5px var(--edge)}
 .hpick b{font-size:46px;font-weight:700;line-height:1}
-.hpick span{font-family:var(--read);font-size:22px;font-weight:700;overflow-wrap:anywhere}
+.hpick button>span{font-family:var(--read);font-size:22px;font-weight:700;overflow-wrap:anywhere;background:var(--bg);color:var(--ink);border-radius:var(--r1);padding:2px var(--s3);margin:var(--s1) 0;max-width:100%}
 .hpick small{font-size:15px;font-weight:600;min-height:21px;font-variant-numeric:tabular-nums}
 #w-next{justify-self:start}
 /* grown-ups */
@@ -207,7 +224,7 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
 @media(max-width:760px){.shelf{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.under{grid-template-columns:minmax(0,1fr)}.bigtile{width:84px;height:94px}.bigtile b{font-size:40px}.namecard{gap:var(--s4)}.quiz,.goal{grid-template-columns:minmax(0,1fr);padding:var(--s3) var(--s4)}.qbtns,.gb{grid-column:1;grid-row:auto;justify-content:flex-start;margin-top:var(--s2)}.fact{padding:var(--s4)}.grown section{padding:var(--s4)}.vrow{grid-template-columns:minmax(0,1fr) auto}.vrow b{grid-column:1/-1}}
 /* phones: in the building games the 3D model stays pinned at the top while the controls scroll under it */
-@media(max-width:899px){.sheet[data-p=build] .view,.sheet[data-p=mbuild] .view{position:sticky;top:69px;z-index:1;height:30svh;min-height:200px;box-shadow:0 6px 0 var(--bg)}.sheet[data-p=build] .vhint,.sheet[data-p=mbuild] .vhint{display:none}}
+@media(max-width:899px){.sheet[data-p=build] .view,.sheet[data-p=mbuild] .view{position:sticky;top:var(--sbh);z-index:1;height:30svh;min-height:200px;box-shadow:0 6px 0 var(--bg)}.sheet[data-p=build] .vhint,.sheet[data-p=mbuild] .vhint{display:none}}
 @media(max-width:640px){.build .made,.build .bmsg{order:1}.build .steps{order:2}.build .bigtile,.made .bigtile{width:64px;height:72px}.made .bigtile b{font-size:30px}.made .bigtile small{font-size:13px;top:4px;left:6px}.made .name{font-size:34px}
   .panel h2{font-size:26px}.step{grid-template-columns:minmax(0,1fr) 56px 56px 56px;padding-left:var(--s3)}.step button{height:52px}.step b{font-size:26px}
   .atomb{width:66px;height:66px;font-size:22px}.atomb small{font-size:11px;max-width:58px}.palette{gap:var(--s2)}
@@ -216,17 +233,23 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
 @media(max-width:640px){.sheet[data-p=build] .vcap span,.sheet[data-p=mbuild] .vcap span{display:none}.sheet[data-p=build] .vcap b,.sheet[data-p=mbuild] .vcap b{font-size:17px}.sheet[data-p=build] .vcap,.sheet[data-p=mbuild] .vcap{bottom:var(--s2);left:var(--s3)}
   .sheet[data-p=build] .panel h2,.sheet[data-p=mbuild] .panel h2{display:none}.build .bmsg:empty{display:none}
   .build .goal,.quiz{grid-template-columns:minmax(0,1fr) auto}.build .gb,.quiz .qbtns{grid-column:2;grid-row:1/3;margin-top:0;flex-direction:column;align-items:stretch}
-  .quiz{position:sticky;top:0;z-index:5;box-shadow:0 0 0 1px var(--line),0 6px 12px rgba(0,0,0,.08)}.quiz .qword{font-size:34px}}
+.quiz .qword{font-size:34px}}
+@media(max-width:899px){.sheet,.sheet.barup{--sbh:8px}.sheet .sbar,.sheet.barup .sbar{position:relative;transform:none}}
+@media(max-width:600px){.topin{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;grid-template-areas:"t t s g" "l m m m";gap:var(--s2)}.ctrls{display:contents}h1{grid-area:t;align-self:center}#langs{grid-area:l}#modes{grid-area:m;justify-self:start}.stars{grid-area:s}.gear{grid-area:g}
+  .hcard{padding:var(--s3)}.hcard .it{font-size:21px}.hcard .em{width:44px;height:44px}}
+@media(max-width:600px){.lf{display:none}.ls{display:inline}.topin{gap:var(--s2)}.ctrls{gap:6px}.shelf{gap:var(--s2)}}
 @media(max-width:420px){#t-back{display:none}#back{width:44px;padding:0}.sl button{padding:0 10px}.sbar{gap:6px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
-<header class="top">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-atom" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1" /> <path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z" /> <path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z" /></symbol><symbol id="i-flask-conical" viewBox="0 0 24 24"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2" /> <path d="M8.5 2h7" /> <path d="M7 16h10" /></symbol><symbol id="i-house" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol><symbol id="i-scale" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" /> <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" /> <path d="M7 21h10" /> <path d="M12 3v18" /> <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2" /></symbol><symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" /></symbol><symbol id="i-battery-full" viewBox="0 0 24 24"><rect width="16" height="10" x="2" y="7" rx="2" ry="2" /> <line x1="22" x2="22" y1="11" y2="13" /> <line x1="6" x2="6" y1="11" y2="13" /> <line x1="10" x2="10" y1="11" y2="13" /> <line x1="14" x2="14" y1="11" y2="13" /></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /></symbol><symbol id="i-wind" viewBox="0 0 24 24"><path d="M12.8 19.6A2 2 0 1 0 14 16H2" /> <path d="M17.5 8a2.5 2.5 0 1 1 2 4H2" /> <path d="M9.8 4.4A2 2 0 1 1 11 8H2" /></symbol><symbol id="i-sprout" viewBox="0 0 24 24"><path d="M7 20h10" /> <path d="M10 20c5.5-2.5.8-6.4 3-10" /> <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" /> <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" /></symbol><symbol id="i-cup-soda" viewBox="0 0 24 24"><path d="m6 8 1.75 12.28a2 2 0 0 0 2 1.72h4.54a2 2 0 0 0 2-1.72L18 8" /> <path d="M5 8h14" /> <path d="M7 15a6.47 6.47 0 0 1 5 0 6.47 6.47 0 0 0 5 0" /> <path d="m12 8 1-6h2" /></symbol><symbol id="i-tree-palm" viewBox="0 0 24 24"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4" /> <path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3" /> <path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35" /> <path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14" /></symbol><symbol id="i-laptop" viewBox="0 0 24 24"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16" /></symbol><symbol id="i-egg" viewBox="0 0 24 24"><path d="M12 22c6.23-.05 7.87-5.57 7.5-10-.36-4.34-3.95-9.96-7.5-10-3.55.04-7.14 5.66-7.5 10-.37 4.43 1.27 9.95 7.5 10z" /></symbol><symbol id="i-banana" viewBox="0 0 24 24"><path d="M4 13c3.5-2 8-2 10 2a5.5 5.5 0 0 1 8 5" /> <path d="M5.15 17.89c5.52-1.52 8.65-6.89 7-12C11.55 4 11.5 2 13 2c3.22 0 5 5.5 5 8 0 6.5-4.2 12-10.49 12C5.11 22 2 22 2 20c0-1.5 1.14-1.55 3.15-2.11Z" /></symbol><symbol id="i-milk" viewBox="0 0 24 24"><path d="M8 2h8" /> <path d="M9 2v2.789a4 4 0 0 1-.672 2.219l-.656.984A4 4 0 0 0 7 10.212V20a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9.789a4 4 0 0 0-.672-2.219l-.656-.984A4 4 0 0 1 15 4.788V2" /> <path d="M7 15a6.472 6.472 0 0 1 5 0 6.47 6.47 0 0 0 5 0" /></symbol><symbol id="i-cooking-pot" viewBox="0 0 24 24"><path d="M2 12h20" /> <path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" /> <path d="m4 8 16-4" /> <path d="m8.86 6.78-.45-1.81a2 2 0 0 1 1.45-2.43l1.94-.48a2 2 0 0 1 2.43 1.46l.45 1.8" /></symbol><symbol id="i-magnet" viewBox="0 0 24 24"><path d="m6 15-4-4 6.75-6.77a7.79 7.79 0 0 1 11 11L13 22l-4-4 6.39-6.36a2.14 2.14 0 0 0-3-3L6 15" /> <path d="m5 8 4 4" /> <path d="m12 15 4 4" /></symbol><symbol id="i-coins" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6" /> <path d="M18.09 10.37A6 6 0 1 1 10.34 18" /> <path d="M7 6h1v4" /> <path d="m16.71 13.88.7.71-2.82 2.82" /></symbol><symbol id="i-cable" viewBox="0 0 24 24"><path d="M17 21v-2a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1" /> <path d="M19 15V6.5a1 1 0 0 0-7 0v11a1 1 0 0 1-7 0V9" /> <path d="M21 21v-2h-4" /> <path d="M3 5h4V3" /> <path d="M7 5a1 1 0 0 1 1 1v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1V3" /></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /> <path d="M12 2v2" /> <path d="M12 20v2" /> <path d="m4.93 4.93 1.41 1.41" /> <path d="m17.66 17.66 1.41 1.41" /> <path d="M2 12h2" /> <path d="M20 12h2" /> <path d="m6.34 17.66-1.41 1.41" /> <path d="m19.07 4.93-1.41 1.41" /></symbol><symbol id="i-cylinder" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3" /> <path d="M3 5v14a9 3 0 0 0 18 0V5" /></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /></symbol><symbol id="i-gem" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 13L2 9Z" /> <path d="M11 3 8 9l4 13 4-13-3-6" /> <path d="M2 9h20" /></symbol><symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" /> <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" /></symbol><symbol id="i-shell" viewBox="0 0 24 24"><path d="M14 11a2 2 0 1 1-4 0 4 4 0 0 1 8 0 6 6 0 0 1-12 0 8 8 0 0 1 16 0 10 10 0 1 1-20 0 11.93 11.93 0 0 1 2.42-7.22 2 2 0 1 1 3.16 2.44" /></symbol><symbol id="i-alarm-smoke" viewBox="0 0 24 24"><path d="M11 21c0-2.5 2-2.5 2-5" /> <path d="M16 21c0-2.5 2-2.5 2-5" /> <path d="m19 8-.8 3a1.25 1.25 0 0 1-1.2 1H7a1.25 1.25 0 0 1-1.2-1L5 8" /> <path d="M21 3a1 1 0 0 1 1 1v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a1 1 0 0 1 1-1z" /> <path d="M6 21c0-2.5 2-2.5 2-5" /></symbol><symbol id="i-paint-bucket" viewBox="0 0 24 24"><path d="m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11Z" /> <path d="m5 2 5 5" /> <path d="M2 13h15" /> <path d="M22 20a2 2 0 1 1-4 0c0-1.6 1.7-2.4 2-4 .3 1.6 2 2.4 2 4Z" /></symbol><symbol id="i-wheat" viewBox="0 0 24 24"><path d="M2 22 16 8" /> <path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" /> <path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" /> <path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" /> <path d="M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z" /> <path d="M11.47 17.47 13 19l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L5 19l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" /> <path d="M15.47 13.47 17 15l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L9 15l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" /> <path d="M19.47 9.47 21 11l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L13 11l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" /></symbol><symbol id="i-balloon" viewBox="0 0 24 24"><ellipse cx="12" cy="9" rx="6" ry="7"/><path d="M12 16l-1.5 2h3z"/><path d="M12 18c0 2-2 2-2 4"/></symbol><symbol id="i-tube" viewBox="0 0 24 24"><path d="M7 3h10l-1.5 12h-7z"/><path d="M10 15v3h4v-3"/><path d="M11 18v3h2v-3"/><path d="M9.5 7h5"/></symbol><symbol id="i-salt" viewBox="0 0 24 24"><path d="M8 10h8l-1.2 11H9.2z"/><path d="M8 10a4 4 0 0 1 8 0"/><path d="M11 5.5h.01M13 5.5h.01M12 4h.01"/></symbol><symbol id="i-tap" viewBox="0 0 24 24"><path d="M3 9h10a4 4 0 0 1 4 4v2"/><path d="M3 13h9"/><path d="M8 9V5"/><path d="M5 5h6"/><path d="M17 19v.01M17 22v.01"/></symbol><symbol id="i-mirror" viewBox="0 0 24 24"><ellipse cx="12" cy="10" rx="6" ry="8"/><path d="M12 18v3"/><path d="M8.5 21h7"/><path d="M10 6.5 8.5 9"/></symbol><symbol id="i-tooth" viewBox="0 0 24 24"><path d="M7.5 3C5 3 4 5 4 7c0 3 2 4.5 2 8.5 0 3.5 1 5.5 2.5 5.5 1.7 0 1.7-4.5 3.5-4.5s1.8 4.5 3.5 4.5c1.5 0 2.5-2 2.5-5.5 0-4 2-5.5 2-8.5 0-2-1-4-3.5-4-2 0-2.8 1-4.5 1S9.5 3 7.5 3z"/></symbol></svg>
+<!-- Icons: Lucide (ISC licence, lucide.dev) plus a few drawn to match -->
+<header class="top" id="top">
   <div class="topin">
     <h1 id="t-title">Element Explorer</h1>
     <div class="ctrls">
       <div class="seg" id="langs" role="group" aria-label="Language">
-        <button data-l="en">English</button><button data-l="ru">Русский</button><button data-l="tr">Türkçe</button>
+        <button data-l="en"><span class="lf">English</span><span class="ls">EN</span></button><button data-l="ru"><span class="lf">Русский</span><span class="ls">RU</span></button><button data-l="tr"><span class="lf">Türkçe</span><span class="ls">TR</span></button>
       </div>
       <div class="seg" id="modes" role="group">
         <button data-m="table" id="t-table">Table</button><button data-m="quiz" id="t-quiz">Find it!</button>
@@ -239,10 +262,10 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
 
 <main>
   <nav class="shelf" id="shelf">
-    <button class="game g1" data-go="build"><span>⚛️</span><span id="gs1"></span></button>
-    <button class="game g2" data-go="molecule"><span>🧪</span><span id="gs2"></span></button>
-    <button class="game g3" data-go="home"><span>🏠</span><span id="gs3"></span></button>
-    <button class="game g4" data-go="heavy"><span>⚖️</span><span id="gs4"></span></button>
+    <button class="game g1" data-go="build"><svg class="ic" aria-hidden="true"><use href="#i-atom"/></svg><span id="gs1"></span></button>
+    <button class="game g2" data-go="molecule"><svg class="ic" aria-hidden="true"><use href="#i-flask-conical"/></svg><span id="gs2"></span></button>
+    <button class="game g3" data-go="home"><svg class="ic" aria-hidden="true"><use href="#i-house"/></svg><span id="gs3"></span></button>
+    <button class="game g4" data-go="heavy"><svg class="ic" aria-hidden="true"><use href="#i-scale"/></svg><span id="gs4"></span></button>
   </nav>
   <section class="quiz" id="quiz" hidden aria-live="polite">
     <span class="qp" id="q-prompt"></span>
@@ -257,6 +280,7 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
   </div>
 </main>
 
+<div id="tip" class="tip" hidden></div>
 <section class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="ename">
   <div class="sbar">
     <button class="pill alt" id="back">← <span id="t-back">Table</span></button>
@@ -393,7 +417,7 @@ function shellsOf(z){const s=[];configOf(z).forEach(x=>{s[x.n-1]=(s[x.n-1]||0)+x
 const SUP=d=>String(d).replace(/\d/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[c]);
 function configText(z){const ng=[86,54,36,18,10,2].find(g=>g<z),all=configOf(z),f=x=>x.n+x.l+SUP(x.k);
   return ng?`[${SYM[ng-1]}] `+all.slice(configOf(ng).length).map(f).join(' '):all.map(f).join(' ')}
-/* syllables: Turkish rule (one consonant before a vowel starts the syllable); Russian school rule (open syllables, sonorant or й closes, ь/ъ stay left) */
+/* syllables for reading: Turkish rule (the consonant right before a vowel starts the syllable); Russian reading rule (a lone consonant starts the next syllable, in a group all but the last stay with the previous one, ь/ъ stay with their consonant) */
 const VOW={ru:'аеёиоуыэюяАЕЁИОУЫЭЮЯ',tr:'aeıioöuüâîûAEIİOÖUÜÂÎÛ'};
 function syllables(w,lang){
   const V=VOW[lang];if(!V)return[w];
@@ -401,10 +425,7 @@ function syllables(w,lang){
   if(vi.length<2)return[w];
   const cuts=vi.slice(0,-1).map((a,j)=>{const b=vi[j+1],lo=w.slice(a+1,b).toLowerCase(),n=lo.length;let k=0;
     if(lang==='tr')k=n?n-1:0;
-    else{if(lo[0]==='й')k=1;
-      else if('рлмн'.includes(lo[0])&&n>1){let i=1;while(i<n&&'ьъ'.includes(lo[i]))i++;if(i<n&&!'рлмнй'.includes(lo[i]))k=i}
-      for(let i=0;i<n-1;i++)if(lo[i]===lo[i+1]&&!'ьъй'.includes(lo[i])){k=i+1;break}
-      const sg=Math.max(lo.lastIndexOf('ь'),lo.lastIndexOf('ъ'));if(sg>=0&&sg+1<n)k=Math.max(k,sg+1)}
+    else{const us=[];for(const ch of w.slice(a+1,b)){if('ьъЬЪ'.includes(ch)&&us.length)us[us.length-1]+=ch;else us.push(ch)}k=us.length>1?us.slice(0,-1).join('').length:0}
     return a+1+k});
   const out=[];let p=0;cuts.forEach(c=>{out.push(w.slice(p,c));p=c});out.push(w.slice(p));return out.filter(Boolean);
 }
@@ -611,17 +632,17 @@ Object.assign(T.ru,{gBuild:'Собери атом',gMol:'Собери молек
 Object.assign(T.tr,{gBuild:'Atom yap',gMol:'Molekül yap',gHome:'Evde bul',gHeavy:'Hangisi ağır?',molT:'Molekül yap',molGoal:'Yap:',showF:'Formülü göster',trayEmpty:'Atomları buraya eklemek için onlara dokun.',tooMany:'Eyvah, fazla {x} var!',homeT:'Evdeki elementler',homeNote:'Bunları evde bul. Her birinin içinde bir element var!',foundIt:'Buldum!',found:'Bulundu',newHunt:'Yeni av',atHome:'Evde',heavyQ:'Hangi atom daha ağır?',heavyNo:'Tam değil. Teraziye bak!',surprise:'Sürpriz! Protonu daha az ama nötronu daha fazla.',sciL:'Kâşifler için',repH:'İlerleme',readH:'Okuma',voiceH:'Sesler',claude:'Claude sesini kullan (varsa)',recMode:'Kayıt modu: adları ve bilgileri kendi sesinizle kaydedin',recName:'Adı kaydet',recFact:'Bilgiyi kaydet',recStop:'Dur',recRedo:'Yeniden kaydet',recDel:'Kayıtları sil',recL:'Yetişkin:',recNo:'Kayıt, mikrofon izniyle ayrı uygulamada (web adresinden veya dosyadan açıldığında) çalışır.',recOk:'Kayıtlar bu cihazda kalır. Açın, bir element seçin, Kaydet’e dokunun, konuşun, Dur’a dokunun.',test:'Dene',noVoiceShort:'Ses yüklü değil',packN:'Ses paketi: {n} kayıt yüklendi.',packNone:'Ses paketi yok, cihazın sesi kullanılıyor.',packSave:'Sesleri çevrimdışı kullanım için kaydet',packSaved:'Çevrimdışı kullanım için kaydedildi.',rStickers:'Çıkartmalar',rWeek:'Bu hafta okunan',rStars:'Yıldızlar',rQuiz:'“Bul!” başarısı',rMols:'Yapılan moleküller',rHome:'Evde bulunanlar',rHeavy:'Terazi: doğru',rTricky:'Zor adlar (yanlışlar, ipuçları, okumadan önce dinleme):',rNone:'Henüz zor ad yok.',voiceHelp:'<b>Daha iyi sesler.</b> En doğal ses, hazır kayıtlardan oluşan ses paketiyle gelir (projedeki VOICES.md dosyasına bakın). Paket yoksa cihazın sesi kullanılır: iPad’de Ayarlar → Erişilebilirlik → Sesli İçerik → Sesler’e gidin, Rusça (Milena, Yuri) veya Türkçe (Yelda, Cem) seçip Geliştirilmiş sürümü indirin, sonra sayfayı yenileyin. Bilgisayarda Microsoft Edge’de doğal Rusça ve Türkçe sesler vardır (Svetlana, Dmitry, Emel, Ahmet).'});
 const H=(z,e,en,ru,tr)=>({z,e,n:{en,ru,tr}});
 const HOME=[
-H([1,8],'💧','Water','Вода','Su'),H([2],'🎈','Balloon','Воздушный шарик','Balon'),H([3],'🔋','Battery','Батарейка','Pil'),
-H([6],'✏️','Pencil','Карандаш','Kurşun kalem'),H([7,8,18],'🌬️','Air','Воздух','Hava'),H([8,6],'🪴','House plant','Комнатное растение','Saksı bitkisi'),
-H([9],'🪥','Toothpaste','Зубная паста','Diş macunu'),H([11,17,53],'🧂','Salt','Соль','Tuz'),H([13],'🥤','Drink can','Банка от напитка','İçecek kutusu'),
-H([14],'🏖️','Sand','Песок','Kum'),H([14,29],'💻','Computer','Компьютер','Bilgisayar'),H([16],'🥚','Egg','Яйцо','Yumurta'),
-H([19],'🍌','Banana','Банан','Muz'),H([20],'🥛','Milk','Молоко','Süt'),H([26],'🍳','Frying pan','Сковородка','Tava'),
-H([26],'🧲','Fridge magnet','Магнит на холодильнике','Buzdolabı mıknatısı'),H([28,29],'🪙','Coin','Монета','Madeni para'),
-H([29],'🔌','Electric cable','Провод','Elektrik kablosu'),H([24],'🚰','Shiny tap','Блестящий кран','Parlak musluk'),
-H([30,22],'🧴','Sunscreen','Солнцезащитный крем','Güneş kremi'),H([47,13],'🪞','Mirror','Зеркало','Ayna'),H([50,26],'🥫','Tin can','Консервная банка','Konserve kutusu'),
-H([74,18],'💡','Old light bulb','Старая лампочка','Eski ampul'),H([79],'💍','Gold ring','Золотое кольцо','Altın yüzük'),H([12],'🥬','Spinach','Шпинат','Ispanak'),
-H([20,6],'🐚','Seashell','Ракушка','Deniz kabuğu'),H([95],'🚨','Smoke detector','Датчик дыма','Duman dedektörü'),H([22],'🎨','White paint','Белая краска','Beyaz boya'),
-H([6],'🍞','Bread','Хлеб','Ekmek'),H([15,20],'🦷','Teeth','Зубы','Dişler')];
+H([1,8],'droplet','Water','Вода','Su'),H([2],'balloon','Balloon','Воздушный шарик','Balon'),H([3],'battery-full','Battery','Батарейка','Pil'),
+H([6],'pencil','Pencil','Карандаш','Kurşun kalem'),H([7,8,18],'wind','Air','Воздух','Hava'),H([8,6],'sprout','House plant','Комнатное растение','Saksı bitkisi'),
+H([9],'tube','Toothpaste','Зубная паста','Diş macunu'),H([11,17,53],'salt','Salt','Соль','Tuz'),H([13],'cup-soda','Drink can','Банка от напитка','İçecek kutusu'),
+H([14],'tree-palm','Sand','Песок','Kum'),H([14,29],'laptop','Computer','Компьютер','Bilgisayar'),H([16],'egg','Egg','Яйцо','Yumurta'),
+H([19],'banana','Banana','Банан','Muz'),H([20],'milk','Milk','Молоко','Süt'),H([26],'cooking-pot','Frying pan','Сковородка','Tava'),
+H([26],'magnet','Fridge magnet','Магнит на холодильнике','Buzdolabı mıknatısı'),H([28,29],'coins','Coin','Монета','Madeni para'),
+H([29],'cable','Electric cable','Провод','Elektrik kablosu'),H([24],'tap','Shiny tap','Блестящий кран','Parlak musluk'),
+H([30,22],'sun','Sunscreen','Солнцезащитный крем','Güneş kremi'),H([47,13],'mirror','Mirror','Зеркало','Ayna'),H([50,26],'cylinder','Tin can','Консервная банка','Konserve kutusu'),
+H([74,18],'lightbulb','Old light bulb','Старая лампочка','Eski ampul'),H([79],'gem','Gold ring','Золотое кольцо','Altın yüzük'),H([12],'leaf','Spinach','Шпинат','Ispanak'),
+H([20,6],'shell','Seashell','Ракушка','Deniz kabuğu'),H([95],'alarm-smoke','Smoke detector','Датчик дыма','Duman dedektörü'),H([22],'paint-bucket','White paint','Белая краска','Beyaz boya'),
+H([6],'wheat','Bread','Хлеб','Ekmek'),H([15,20],'tooth','Teeth','Зубы','Dişler')];
 function factText(z,l){const fi={en:0,ru:1,tr:2}[l],t=T[l],F=FACT[z]||FACT_MORE[z];if(F)return F[fi];let f=t.gen(NAMES[l][z-1],catOf(z),stateOf(z));if(z>=93)f+=' '+t.synth;return f}
 /* every text that can be pre-recorded, keyed the way the app looks clips up */
 function allTexts(){const out={};
@@ -738,6 +759,7 @@ function highlight(c,keep){
 $('#legend').addEventListener('click',e=>{const b=e.target.closest('button');if(b)highlight(b.dataset.c)});
 function progress(){const n=S.read.length;$('#progL').textContent=fill(L().prog,{n});$('#progBar').style.width=(n/118*100)+'%';$('#starN').textContent=S.stars}
 $('#ptable').addEventListener('click',e=>{
+  if(lp.done){lp.done=false;e.preventDefault();return}
   const b=e.target.closest('.el[data-z]');if(!b)return;const z=+b.dataset.z;
   if(mode==='quiz')return answer(z,b);
   location.hash='el-'+z;
@@ -806,7 +828,7 @@ function openEl(z,keep){
   renderWords($('#factWords'),factText(z,S.lang));
   const sf=S.sci&&FACT_SCI[z];$('#sciBox').hidden=!sf;if(sf)renderWords($('#sciWords'),FACT_SCI[z][fi]);
   const hs=HOME.map((h,i)=>[h,i]).filter(([h])=>h.z.includes(z));$('#t-home2').hidden=$('#homes').hidden=!hs.length;
-  $('#homes').innerHTML=hs.map(([h,i])=>`<button data-h="${i}">${h.e} ${esc(h.n[S.lang])}</button>`).join('');
+  $('#homes').innerHTML=hs.map(([h,i])=>`<button data-h="${i}"><svg class="ic" aria-hidden="true"><use href="#i-${h.e}"/></svg>${esc(h.n[S.lang])}</button>`).join('');
   $('#recrow').hidden=!S.rec;if(S.rec)updRec();
   $('#stats').innerHTML=[[t.n,z],[t.mass,(z>=93||[43,61,84,85,86,87,88,89].includes(z))?`≈ ${mass}`:mass],[t.p,z,'p'],[t.ne,'≈ '+ne],[t.e,z,'e'],[t.st,t.S[st]]].concat(S.sci?(([r,cc])=>[[t.grp,r>8?'f':cc],[t.per,r>8?r-3:r],[t.outer,sh[sh.length-1]],[t.cfg,configText(z),'wide']])(pos(z)):[]).map(([k,v,cl])=>`<div class="${cl||''}"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('');
   $('#shells').innerHTML=sh.map(n=>`<span>${n}</span>`).join('');
@@ -960,11 +982,37 @@ function renderBuild(){
 $('#build').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k,lim={p:118,n:180,e:118}[k];B[k]=Math.max(0,Math.min(lim,B[k]+(+b.dataset.d)));renderBuild()});
 $('#b-new').onclick=newGoal;
 
+/* ---------- names on hover or long press ---------- */
+const tip=$('#tip'),lp={t:0,done:false,x:0,y:0};
+function showTip(el){
+  if(mode==='quiz')return false;const z=+el.dataset.z,r=el.getBoundingClientRect();
+  tip.innerHTML=`<small>${z}</small><b>${SYM[z-1]}</b><span class="${useSyl()?'sy':''}">${useSyl()?sylText(nm(z)):esc(nm(z))}</span>`;tip.hidden=false;
+  const w=tip.offsetWidth,h=tip.offsetHeight;let x=Math.max(8,Math.min(innerWidth-w-8,r.left+r.width/2-w/2)),y=r.top-h-8;if(y<8)y=r.bottom+8;
+  tip.style.left=x+'px';tip.style.top=y+'px';return true}
+const hideTip=()=>{tip.hidden=true};
+const ptb=$('#ptable');
+ptb.addEventListener('pointerover',e=>{if(e.pointerType!=='mouse')return;const el=e.target.closest('.el[data-z]');el?showTip(el):hideTip()});
+ptb.addEventListener('pointerleave',hideTip);
+ptb.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;const el=e.target.closest('.el[data-z]');if(!el)return;
+  lp.done=false;lp.x=e.clientX;lp.y=e.clientY;clearTimeout(lp.t);lp.t=setTimeout(()=>{if(showTip(el)){lp.done=true;try{navigator.vibrate&&navigator.vibrate(12)}catch(_){}}},450)});
+ptb.addEventListener('pointermove',e=>{if(Math.hypot(e.clientX-lp.x,e.clientY-lp.y)>10)clearTimeout(lp.t)});
+['pointerup','pointercancel'].forEach(n=>ptb.addEventListener(n,()=>{clearTimeout(lp.t);if(lp.done)setTimeout(hideTip,1400)}));
+ptb.addEventListener('contextmenu',e=>e.preventDefault());
+addEventListener('scroll',hideTip,{passive:true});$('.scroll').addEventListener('scroll',hideTip,{passive:true});
+
+/* ---------- top bars slide away while scrolling down ---------- */
+{const top=$('#top');let ly=scrollY;
+ const setH=()=>document.documentElement.style.setProperty('--hdr',top.classList.contains('away')?'0px':top.offsetHeight+'px');
+ addEventListener('scroll',()=>{const y=scrollY;if(y>ly+4&&y>top.offsetHeight)top.classList.add('away');else if(y<ly-4)top.classList.remove('away');ly=y;setH()},{passive:true});
+ const ro=new ResizeObserver(setH);ro.observe(top);
+ const sh=$('#sheet');let sy=0;
+ sh.addEventListener('scroll',()=>{const y=sh.scrollTop;if(y>sy+4&&y>60)sh.classList.add('barup');else if(y<sy-4)sh.classList.remove('barup');sy=y},{passive:true});}
+
 /* ---------- sheet panels ---------- */
 let panel='';
 function showPanel(name,view){panel=name;const sh=$('#sheet');sh.dataset.p=name;sh.hidden=false;document.body.style.overflow='hidden';sh.classList.toggle('noview',!view);
   ['info','build','mbuild','home','heavy','grown'].forEach(p=>{$('#'+p).hidden=p!==name});$('#nav').hidden=name!=='info';if(!view)V.on=false;
-  markModes(name==='info'?mode:'');sh.scrollTop=0}
+  markModes(name==='info'?mode:'');sh.scrollTop=0;sh.classList.remove('barup');hideTip()}
 $('#shelf').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)location.hash=b.dataset.go});
 const zOf=e=>SYM.indexOf(e)+1;
 const hex=e=>'#'+(CPK[e]??0xff5fa2).toString(16).padStart(6,'0');
@@ -1016,7 +1064,7 @@ function openHome(){showPanel('home',false);if(!HM.list)newHunt();else renderHom
 function newHunt(){const idx=shuffle(HOME.map((_,i)=>i)),nf=idx.filter(i=>!S.found.includes(i));HM.list=(nf.length>=6?nf:idx).slice(0,6);renderHome()}
 function renderHome(){const t=L();
   $('#h-grid').innerHTML=HM.list.map(i=>{const h=HOME[i],f=S.found.includes(i),w=h.n[S.lang];
-    return `<div class="hcard${f?' found':''}"><div class="em" aria-hidden="true">${h.e}</div><button class="it${useSyl()?' sy':''}" data-hs="${i}">${useSyl()?sylText(w):esc(w)}</button><div class="els">${h.z.map(z=>`<button class="c-${catOf(z)}" data-el="${z}">${SYM[z-1]} · ${esc(nm(z))}</button>`).join('')}</div><button class="pill fb${f?' alt':''}" data-f="${i}">${f?'★ '+esc(t.found):esc(t.foundIt)}</button></div>`}).join('')}
+    return `<div class="hcard${f?' found':''}"><div class="em"><svg class="ic" aria-hidden="true"><use href="#i-${h.e}"/></svg></div><button class="it${useSyl()?' sy':''}" data-hs="${i}">${useSyl()?sylText(w):esc(w)}</button><div class="els">${h.z.map(z=>`<button class="c-${catOf(z)}" data-el="${z}">${SYM[z-1]} · ${esc(nm(z))}</button>`).join('')}</div><button class="pill fb${f?' alt':''}" data-f="${i}">${f?'★ '+esc(t.found):esc(t.foundIt)}</button></div>`}).join('')}
 $('#h-grid').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
   if(b.dataset.el){location.hash='el-'+b.dataset.el;return}
   if(b.dataset.hs){say(`home/${S.lang}/${b.dataset.hs}`,HOME[b.dataset.hs].n[S.lang]);return}
