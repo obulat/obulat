@@ -22,9 +22,12 @@ button:focus-visible{outline:3px solid var(--star);outline-offset:2px}
 /* header */
 .top{position:sticky;top:0;z-index:10;transition:transform .25s;background:var(--brand);color:#fff;margin-top:calc(-1*env(safe-area-inset-top,0px));padding:calc(env(safe-area-inset-top,0px) + var(--s3)) max(4vw,16px,env(safe-area-inset-right,0px)) var(--s3) max(4vw,16px,env(safe-area-inset-left,0px))}
 .top.away{transform:translateY(-100%)}
-.topin{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s5);justify-content:space-between}
+.topin{display:flex;align-items:center;gap:var(--s3)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 h1{margin:0;font-size:clamp(24px,3vw,34px);font-weight:800;line-height:1.05;letter-spacing:-.02em}
-.ctrls{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center}
+.ctrls{display:flex;gap:var(--s2);align-items:center;flex:none;margin-left:auto}
+.lang{display:flex;align-items:center;gap:6px;height:42px;padding:0 var(--s3);border-radius:var(--r2);background:rgba(255,255,255,.14);color:#fff;font-weight:800;font-size:15px}
+.lang .ic{width:20px;height:20px}
 .seg{display:flex;gap:2px;background:rgba(255,255,255,.14);border-radius:var(--r2);padding:3px}
 .seg button{padding:0 var(--s3);border-radius:4px;font-weight:700;font-size:15px;min-height:36px;white-space:nowrap}
 .seg button[aria-pressed=true]{background:#fff;color:var(--brand)}
@@ -54,8 +57,7 @@ main{padding:var(--s5) max(4vw,16px,env(safe-area-inset-right,0px)) var(--s6) ma
 .quiz:has(.qmsg:not(:empty)) .qp{display:none}
 .qclue{grid-column:1/-1;font-size:18px;font-weight:600;display:flex;align-items:baseline;gap:var(--s2)}
 .qclue i{flex:none;align-self:center;width:18px;height:18px;border-radius:var(--r1);background:var(--c);box-shadow:inset 0 0 0 1px var(--edge)}
-.findbar{display:flex}
-#tp-elements.finding #shelf,#tp-elements.finding #findbar{display:none}
+#tp-elements.finding #shelf{display:none}
 #tp-elements.finding .pt{margin-inline:auto}
 .qmsg:empty{display:none}
 .qmsg.ok,.bmsg.ok{color:#2b8a3e}.qmsg.bad{color:#c92a2a}
@@ -63,8 +65,9 @@ main{padding:var(--s5) max(4vw,16px,env(safe-area-inset-right,0px)) var(--s6) ma
 .panel{container-type:inline-size}
 @container (max-width:600px){.quiz,.goal{grid-template-columns:minmax(0,1fr)}.qbtns,.gb{grid-column:1;grid-row:auto;justify-content:flex-start;margin-top:var(--s2)}}
 /* games row */
-.shelf{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--s3)}
-@media(max-width:1100px){.shelf{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.shelf{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.shelf .game,.shelf #q-start{flex:none;min-height:42px;font-size:14px;padding:0 10px;gap:6px;white-space:nowrap}
+
 .game{display:flex;align-items:center;gap:var(--s2);border-radius:var(--r2);padding:0 var(--s3);background:var(--g);color:var(--tink);text-align:left;font-weight:700;font-size:15px;line-height:1.15;min-height:46px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--g) 70%,#000)}
 .ic{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .game .ic{width:22px;height:22px}
@@ -128,6 +131,7 @@ main{padding:var(--s5) max(4vw,16px,env(safe-area-inset-right,0px)) var(--s6) ma
 .sbar{position:sticky;top:0;z-index:2;transition:transform .25s;background:var(--bg);display:flex;align-items:center;gap:var(--s2);padding:calc(env(safe-area-inset-top,0px) + var(--s3)) 0 var(--s3);margin-bottom:var(--s2);border-bottom:1px solid var(--line)}
 .sbar .nav{display:flex;gap:var(--s2)}
 .sl{background:var(--soft);margin-left:auto}
+.sheet:not([data-p=info]):not([data-p=grown]) #langs2{display:none}
 .sl button[aria-pressed=true]{background:var(--brand);color:#fff}
 .sheet.barup .sbar{transform:translateY(-110%)}
 .sbar .nav button{width:40px;height:40px;border-radius:var(--r2);box-shadow:inset 0 0 0 1.5px var(--line);font-size:24px;font-weight:700;line-height:1}
@@ -261,6 +265,10 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
 .tabs{display:flex;gap:var(--s2);overflow-x:auto;padding:var(--s3) max(4vw,16px,env(safe-area-inset-right,0px)) 0 max(4vw,16px,env(safe-area-inset-left,0px));scrollbar-width:none}
 .tabs button{display:flex;align-items:center;gap:var(--s2);flex:none;border-radius:var(--r2);padding:0 var(--s4);min-height:44px;font-weight:700;box-shadow:inset 0 0 0 1.5px var(--line)}
 .tabs button[aria-pressed=true]{background:var(--ink);color:var(--bg);box-shadow:none}
+.top .tabs{flex:1 1 auto;min-width:0;padding:0;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 20px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 20px),transparent)}
+.top .tabs button{color:#fff;background:rgba(255,255,255,.12);box-shadow:none;min-height:42px;padding:0 var(--s3)}
+.top .tabs button[aria-pressed=true]{background:#fff;color:var(--brand)}
+.top .tabs button:last-child{margin-right:20px}
 .tp{display:grid;gap:var(--s5)}
 #tp-cells .fact{justify-items:start}
 #tp-cells .cmodes{display:flex;flex-wrap:wrap;gap:var(--s2)}
@@ -534,7 +542,7 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
 .toast{position:fixed;left:50%;bottom:calc(var(--s6) + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--star);color:var(--tink);font-weight:800;font-size:21px;padding:var(--s3) var(--s5);border-radius:var(--r2);z-index:40;box-shadow:0 4px 14px rgba(0,0,0,.18);animation:up .3s}
 @keyframes up{from{transform:translate(-50%,20px);opacity:0}}
 @media(max-width:899px){.dgrid{grid-template-columns:minmax(0,1fr);gap:var(--s5)}.view{position:relative;top:0;height:46svh;min-height:300px}}
-@media(max-width:760px){.shelf{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 @media(max-width:640px){.under{grid-template-columns:minmax(0,1fr)}.bigtile{width:84px;height:94px}.bigtile b{font-size:40px}.namecard{gap:var(--s4)}.quiz,.goal{grid-template-columns:minmax(0,1fr);padding:var(--s3) var(--s4)}.qbtns,.gb{grid-column:1;grid-row:auto;justify-content:flex-start;margin-top:var(--s2)}.fact{padding:var(--s4)}.grown section{padding:var(--s4)}.vrow{grid-template-columns:minmax(0,1fr) auto}.vrow b{grid-column:1/-1}}
 /* phones: in the building games the 3D model stays pinned at the top while the controls scroll under it */
 @media(max-width:899px){.sheet[data-p=build] .view,.sheet[data-p=mbuild] .view{position:sticky;top:var(--sbh);z-index:1;height:30svh;min-height:200px;box-shadow:0 6px 0 var(--bg)}.sheet[data-p=build] .vhint,.sheet[data-p=mbuild] .vhint{display:none}}
@@ -549,7 +557,12 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
   .build .goal,.quiz{grid-template-columns:minmax(0,1fr) auto}.build .gb,.quiz .qbtns{grid-column:2;grid-row:1/3;margin-top:0;flex-direction:column;align-items:stretch}
 .quiz .qword{font-size:34px}}
 @media(max-width:899px){.sheet,.sheet.barup{--sbh:8px}.sheet .sbar,.sheet.barup .sbar{position:relative;transform:none}}
-@media(max-width:600px){.topin{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;grid-template-areas:"t t s g" "l m m m";gap:var(--s2)}.ctrls{display:contents}h1{grid-area:t;align-self:center}#langs{grid-area:l}#modes{grid-area:m;justify-self:start}.stars{grid-area:s}.gear{grid-area:g}
+@media(max-width:1180px){.top .tabs button:not([aria-pressed=true]) span{display:none}}
+/* phones: title and controls on one row, all topic icons on a full-width row under them; game chips scroll sideways */
+@media(max-width:600px){.topin{flex-wrap:wrap;row-gap:var(--s2)}.top h1.vh{position:static;width:auto;height:auto;clip-path:none;font-size:22px}
+  .top .tabs{order:2;flex:1 0 100%;-webkit-mask-image:none;mask-image:none}.top .tabs button{flex:1;justify-content:center;padding:0}.top .tabs button span{display:none}.top .tabs button:last-child{margin-right:0}
+  .shelf{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1*max(4vw,16px));padding-inline:max(4vw,16px)}}
+@media(max-width:600px){.top{padding-top:calc(env(safe-area-inset-top,0px) + var(--s2));padding-bottom:var(--s2)}.lang .ic{display:none}.stars{padding:0 var(--s2)}
   .hcard{padding:var(--s3)}.hcard .it{font-size:21px}.hcard .em{width:44px;height:44px}}
 @media(max-width:760px){.key{justify-self:start;max-width:calc(100vw - 2*max(4vw,16px) - 2*41px - 14px);gap:var(--s2);padding:0}.kf{max-width:100%}}
 @media(max-width:600px){.lf{display:none}.ls{display:inline}.topin{gap:var(--s2)}.ctrls{gap:6px}.shelf{gap:var(--s2)}}
@@ -561,21 +574,20 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
 <!-- Icons: Lucide (ISC licence, lucide.dev) plus a few drawn to match -->
 <header class="top" id="top">
   <div class="topin">
-    <h1 id="t-title">Element Explorer</h1>
+    <h1 id="t-title" class="vh">Element Explorer</h1>
+    <nav class="tabs" id="tabs"><button data-t="zoom"><svg class="ic" aria-hidden="true"><use href="#i-zoom-in"/></svg><span id="tab-zoom"></span></button><button data-t="elements"><svg class="ic" aria-hidden="true"><use href="#i-atom"/></svg><span id="tab-elements"></span></button><button data-t="cells"><svg class="ic" aria-hidden="true"><use href="#i-microscope"/></svg><span id="tab-cells"></span></button><button data-t="space"><svg class="ic" aria-hidden="true"><use href="#i-orbit"/></svg><span id="tab-space"></span></button><button data-t="matter"><svg class="ic" aria-hidden="true"><use href="#i-thermometer"/></svg><span id="tab-matter"></span></button><button data-t="body"><svg class="ic" aria-hidden="true"><use href="#i-heart-pulse"/></svg><span id="tab-body"></span></button><button data-t="puzzles"><svg class="ic" aria-hidden="true"><use href="#i-puzzle"/></svg><span id="tab-puzzles"></span></button></nav>
     <div class="ctrls">
-      <div class="seg" id="langs" role="group" aria-label="Language">
-        <button data-l="en"><span class="lf">English</span><span class="ls">EN</span></button><button data-l="ru"><span class="lf">Русский</span><span class="ls">RU</span></button><button data-l="tr"><span class="lf">Türkçe</span><span class="ls">TR</span></button>
-      </div>
+      <button class="lang" id="langBtn" aria-label="Language"><svg class="ic" aria-hidden="true"><use href="#i-globe"/></svg><b id="langL">EN</b></button>
       <div class="stars" aria-live="polite"><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7.5.6-5.7 4.9 1.8 7.4L12 18l-6.6 3.9 1.8-7.4L1.5 9.6 9 9z"/></svg><b id="starN">0</b></div>
       <button class="gear" id="gearBtn" aria-label="Settings"><svg viewBox="0 0 24 24"><path d="M19.4 13a7.5 7.5 0 000-2l2.1-1.6-2-3.5-2.5 1a7 7 0 00-1.7-1L15 3.3h-4l-.4 2.6a7 7 0 00-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 000 2l-2.1 1.6 2 3.5 2.5-1a7 7 0 001.7 1l.4 2.6h4l.4-2.6a7 7 0 001.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z" transform="translate(-1 0)"/></svg></button>
     </div>
   </div>
 </header>
-<nav class="tabs" id="tabs"><button data-t="zoom"><svg class="ic" aria-hidden="true"><use href="#i-zoom-in"/></svg><span id="tab-zoom"></span></button><button data-t="elements"><svg class="ic" aria-hidden="true"><use href="#i-atom"/></svg><span id="tab-elements"></span></button><button data-t="cells"><svg class="ic" aria-hidden="true"><use href="#i-microscope"/></svg><span id="tab-cells"></span></button><button data-t="space"><svg class="ic" aria-hidden="true"><use href="#i-orbit"/></svg><span id="tab-space"></span></button><button data-t="matter"><svg class="ic" aria-hidden="true"><use href="#i-thermometer"/></svg><span id="tab-matter"></span></button><button data-t="body"><svg class="ic" aria-hidden="true"><use href="#i-heart-pulse"/></svg><span id="tab-body"></span></button><button data-t="puzzles"><svg class="ic" aria-hidden="true"><use href="#i-puzzle"/></svg><span id="tab-puzzles"></span></button></nav>
 
 <main>
 <div class="tp" id="tp-elements">
   <nav class="shelf" id="shelf">
+    <button class="pill" id="q-start"><svg class="ic" aria-hidden="true"><use href="#i-scan-eye"/></svg><span id="t-quiz">Find it!</span></button>
     <button class="game g1" data-go="build"><svg class="ic" aria-hidden="true"><use href="#i-atom"/></svg><span id="gs1"></span></button>
     <button class="game g2" data-go="molecule"><svg class="ic" aria-hidden="true"><use href="#i-flask-conical"/></svg><span id="gs2"></span></button>
     <button class="game g3" data-go="home"><svg class="ic" aria-hidden="true"><use href="#i-house"/></svg><span id="gs3"></span></button>
@@ -583,7 +595,6 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
     <button class="game g5" data-go="duel"><svg class="ic" aria-hidden="true"><use href="#i-swords"/></svg><span id="gs5"></span></button>
     <button class="game g6" data-go="lab"><svg class="ic" aria-hidden="true"><use href="#i-test-tubes"/></svg><span id="gs6"></span></button>
   </nav>
-  <div class="findbar" id="findbar"><button class="pill" id="q-start"><svg class="ic" aria-hidden="true"><use href="#i-scan-eye"/></svg><span id="t-quiz">Find it!</span></button></div>
   <section class="quiz" id="quiz" hidden aria-live="polite">
     <span class="qp" id="q-prompt"></span>
     <div class="qword" id="q-word"></div>
@@ -1791,11 +1802,13 @@ $('#q-skip').onclick=newQ;
 function setMode(m){mode=m;KEY.f='';$('#quiz').hidden=m!=='quiz';$('#tp-elements').classList.toggle('finding',m==='quiz');renderKey();
   if(m==='quiz'){newQ();scrollTo(0,0);fitTable();$('#q-skip').focus({preventScroll:true})}else{highlight('');fitTable()}}
 const markModes=()=>{};
+const LANGS=['en','ru','tr'];
+$('#langBtn').onclick=()=>{S.lang=LANGS[(LANGS.indexOf(S.lang)+1)%LANGS.length];save();applyLang()};
 
 /* ---------- language & settings ---------- */
 function applyLang(){
   const t=L();document.documentElement.lang=S.lang;
-  document.querySelectorAll('#langs button,#langs2 button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===S.lang));
+  document.querySelectorAll('#langs2 button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===S.lang));$('#langL').textContent=S.lang.toUpperCase();
   $('#t-title').textContent=t.title;$('#t-table').textContent=t.table;$('#t-quiz').textContent=t.quiz;$('#t-syl').textContent=t.syl;$('#t-sci').textContent=t.sci;
   const TX={gs1:'gBuild',gs2:'gMol',gs3:'gHome',gs4:'gHeavy','m-title':'molT','m-goalL':'molGoal','m-new':'newGoal','h-title':'homeT','h-note':'homeNote','h-new':'newHunt','w-title':'heavyQ','w-next':'skip','t-sciL':'sciL','along2L':'along','t-home2':'atHome','t-fontH':'fontH','fontNote':'fontNote','t-fontLoad':'fontLoad','fontClear':'fontClear','arHint':'arHint','arExit':'arExit','gs5':'gDuel','gs6':'gLab','lab-title':'labT','lab-intro':'labIntro','lab-empty':'labEmpty','shellsHelp':'sxHelp','t-nat':'nat','t-repH':'repH','t-readH':'readH','t-voiceH':'voiceH','t-claude':'claude','t-recMode':'recMode','t-recL':'recL','packSave':'packSave'};
   Object.entries(TX).forEach(([id,k])=>{const el=document.getElementById(id);if(el)el.textContent=t[k]});
@@ -1804,11 +1817,11 @@ function applyLang(){
   $('#q-prompt').textContent=t.prompt;$('#q-hintL').textContent=t.hint;$('#q-skip').textContent=t.skip;
   $('#t-shells').textContent=t.shells;$('#t-mols').textContent=t.mols;$('#alongL').textContent=t.along;$('#vhint').textContent=t.drag;
   renderTable();voiceNotes();
-  TOPIC_IDS.forEach(x=>{const e=$('#tab-'+x);if(e)e.textContent=t['tab_'+x]});if(S.topic&&TOPIC_RENDER[S.topic])TOPIC_RENDER[S.topic]();
+  TOPIC_IDS.forEach(x=>{const e=$('#tab-'+x);if(e){e.textContent=t['tab_'+x];e.parentNode.title=t['tab_'+x];e.parentNode.setAttribute('aria-label',t['tab_'+x])}});if(S.topic&&TOPIC_RENDER[S.topic])TOPIC_RENDER[S.topic]();
   if(quiz.z){showQ();showClue()}
   if(!$('#sheet').hidden){if(panel==='build'){setWord($('#b-goal'),nm(B.goal));renderBuild()}else if(panel==='info'&&cur)openEl(cur,true);else if(panel==='mbuild')renderMB();else if(panel==='home')renderHome();else if(panel==='heavy')renderHeavy();else if(panel==='grown')renderGrown();else if(panel==='shellsx')renderShells();else if(panel==='duel')renderDuel();else if(panel==='lab')renderLab()}
 }
-['#langs','#langs2'].forEach(id=>$(id).addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;S.lang=b.dataset.l;save();applyLang()}));
+['#langs2'].forEach(id=>$(id).addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;S.lang=b.dataset.l;save();applyLang()}));
 $('#gearBtn').onclick=()=>{location.hash='grown'};
 $('#optRF').checked=S.rf;$('#optSlow').checked=S.slow;
 $('#optRF').onchange=e=>{S.rf=e.target.checked;save()};
