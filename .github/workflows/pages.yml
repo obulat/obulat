@@ -23,6 +23,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Check the app's script parses
+        # one stray quote in a translation blanks the whole app, so fail before deploying
+        run: |
+          sed -n '/^<script>$/,/^<\/script>$/p' element-explorer/index.html | sed '1d;$d' > "$RUNNER_TEMP/app.js"
+          node --check "$RUNNER_TEMP/app.js"
       - name: Assemble the site
         run: |
           mkdir -p _site/element-explorer
