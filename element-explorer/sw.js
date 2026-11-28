@@ -1,6 +1,6 @@
 // Offline support: the page is network-first, everything else cache-first.
-const CORE = 'elx-core-v3';
-const FILES = ['./', 'index.html', 'vendor/three.min.js', 'vendor/peerjs.min.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png'];
+const CORE = 'elx-core-v4';
+const FILES = ['./', 'index.html', 'vendor/three.min.js', 'vendor/peerjs.min.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'fonts/ys-text-regular.woff2', 'fonts/ys-text-bold.woff2'];
 self.addEventListener('install', e => e.waitUntil(caches.open(CORE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())));
 self.addEventListener('activate', e => e.waitUntil(
   caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('elx-core') && k !== CORE).map(k => caches.delete(k)))).then(() => self.clients.claim())));
