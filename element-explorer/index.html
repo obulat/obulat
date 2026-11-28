@@ -260,7 +260,8 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
 .ucon .ic{width:30px;height:30px}
 .usecard small{display:block;color:var(--mute);font-size:14px;font-weight:600}
 .usecard b{font-family:var(--read);font-size:22px;font-weight:700}
-@font-face{font-family:TTKB;src:url(fonts/ttkb.ttf) format("truetype");font-display:swap}
+/* TTKB Dik Temel Abece, the Turkish school print. Only its Bold cut is bundled, for all weights: the "Body" cut reads too thin and spaced out. No local(): installed TTKB cuts can answer to the Bold name */
+@font-face{font-family:TTKB;src:url(fonts/ttkb.ttf) format("truetype");font-weight:400 700;font-display:swap}
 @font-face{font-family:"YS Text";src:local("YS Text"),local("YS Text Regular"),local("Yandex Sans Text"),local("YandexSansText-Regular"),url(fonts/ys-text-regular.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"YS Text";src:local("YS Text Bold"),local("Yandex Sans Text Bold"),local("YandexSansText-Bold"),url(fonts/ys-text-bold.woff2) format("woff2");font-weight:700;font-display:swap}
 :root:not([lang=ru]){--read:TTKB,Andika,Onest,system-ui,sans-serif}
