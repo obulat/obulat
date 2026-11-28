@@ -13,7 +13,7 @@ downloaded "Enhanced" voices from web pages. So the voice pack is the best fix.
 ## Make a voice pack on your Mac (about 10 minutes)
 
 ```sh
-cd element-explorer
+cd science-explorer
 brew install ffmpeg            # only needed for the say / piper engines
 python3 -m venv .venv && source .venv/bin/activate
 pip install edge-tts
@@ -63,7 +63,7 @@ because the page can't use the microphone.
 ## Use it offline on the iPad
 
 The app is published by GitHub Pages at
-**https://obulat.github.io/obulat/element-explorer/** (the workflow in
+**https://obulat.github.io/obulat/science-explorer/** (the workflow in
 `.github/workflows/pages.yml` republishes it on every push to `master`).
 Open it in Safari, then Share → Add to Home Screen. The app caches itself, and
 Grown-ups → "Save voices for offline use" downloads the whole voice pack.
