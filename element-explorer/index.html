@@ -335,6 +335,43 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
 .tp .msg{font-size:20px;font-weight:700;min-height:30px}
 .tp .msg.ok{color:#2b8a3e}.tp .msg.bad{color:#c92a2a}
 .tp .choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2)}
+.exnav{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.exnav button{width:44px;height:44px;display:grid;place-items:center;border-radius:var(--r2);background:var(--bg);box-shadow:inset 0 0 0 1.5px var(--line)}
+.exnav button.seen{background:#ebfbee}
+.exnav button[aria-pressed=true]{box-shadow:inset 0 0 0 3px var(--brand)}
+.exnav .ic{width:22px;height:22px}
+.exs,.exzoom{width:100%;max-width:520px;height:auto;background:#fff;border-radius:var(--r3)}
+.exs .lcd{fill:#69db7c;font:700 16px ui-monospace,monospace;text-anchor:middle}
+.exl{font:700 14px var(--ui);fill:#495057}
+.exs.ask .a{display:none}
+.exs.done .b{display:none}
+.exs.go .b{animation:exOut .8s 1.1s forwards}
+.exs.go .a{opacity:0;animation:exIn .9s 1.5s forwards}
+.exs.bal.go .beam{animation:exTilt 1s 1.6s forwards}
+.exs.bal.done .beam{transform:rotate(-9deg)}
+.exs .beam{transform-box:view-box;transform-origin:200px 79px}
+.exs .bub{animation:exBub 1.6s ease-in infinite}
+@keyframes exOut{to{opacity:0}}
+@keyframes exIn{to{opacity:1}}
+@keyframes exTilt{to{transform:rotate(-9deg)}}
+@keyframes exBub{0%{transform:translateY(0);opacity:1}90%{opacity:1}100%{transform:translateY(-60px);opacity:0}}
+@media(prefers-reduced-motion:reduce){.exs.go .b{animation-duration:.01s}.exs.go .a{animation-duration:.01s}.exs .bub{animation:none}}
+.tp .exch{grid-template-columns:minmax(0,1fr)}
+.tp .exch button{min-height:52px;text-align:left;padding:var(--s2) var(--s3);font-family:var(--read);font-size:19px;font-weight:700;border-radius:var(--r2);box-shadow:inset 0 0 0 1.5px var(--line)}
+.tp .exch button.right,.pal.right .bub{box-shadow:inset 0 0 0 4px #2b8a3e}
+.tp .exch button.no,.pal.no .bub{box-shadow:inset 0 0 0 4px #c92a2a}
+.whofig{display:grid;gap:var(--s4);width:100%}
+.whosit{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--s3);align-items:center;background:#fff;border-radius:var(--r3);padding:var(--s3)}
+.whosit>.ic{width:40px;height:40px;color:var(--brand)}
+.whosit .words{font-size:clamp(20px,2.4vw,26px)}
+.pals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2);align-items:end}
+.pal{display:grid;gap:var(--s2);justify-items:center;text-align:center}
+.pal .bub{position:relative;background:#fff;border-radius:var(--r3);padding:var(--s2) var(--s3);font-family:var(--read);font-size:clamp(15px,1.9vw,19px);line-height:1.3;box-shadow:inset 0 0 0 2px var(--pc);width:100%}
+.pal .bub::after{content:'';position:absolute;left:50%;bottom:-9px;margin-left:-9px;border:9px solid transparent;border-bottom:0;border-top-color:var(--pc)}
+.pal .who{display:grid;justify-items:center;font-weight:700;color:var(--pc)}
+.pal .who .ic{width:44px;height:44px}
+@media(max-width:600px){.pals{grid-template-columns:minmax(0,1fr)}.pal{grid-template-columns:56px minmax(0,1fr);justify-items:stretch;text-align:left}.pal .who{order:-1}.pal .bub::after{display:none}}
+
 .tp .choices button{min-height:56px;border-radius:var(--r2);font-family:var(--read);font-weight:700;font-size:19px;box-shadow:inset 0 0 0 1.5px var(--line)}
 .tp .choices button.right{box-shadow:inset 0 0 0 4px #2b8a3e}.tp .choices button.no{box-shadow:inset 0 0 0 4px #c92a2a}
 .tp .fact{justify-items:start}
@@ -1188,7 +1225,7 @@ part:["In a solid, particles sit close together and wiggle in place. In a liquid
 heatT:["Heating and cooling","Нагревание и охлаждение","Isınma ve soğuma"],
 heat:["Heating makes particles move faster, so a solid can melt and a liquid can turn into gas. Cooling slows them down, so a gas can turn into liquid and a liquid can freeze.","Нагревание заставляет частицы двигаться быстрее: твёрдое тело может расплавиться, а жидкость стать газом. Охлаждение замедляет их: газ может стать жидкостью, а жидкость замёрзнуть.","Isıtınca tanecikler daha hızlı hareket eder; katı eriyebilir, sıvı gaza dönüşebilir. Soğutunca yavaşlarlar; gaz sıvıya dönüşebilir, sıvı donabilir."],
 cycleT:["The water cycle","Круговорот воды","Su döngüsü"],
-cycle:["Water evaporates, forms clouds, falls as rain or snow and collects in rivers and seas. The same water has gone round and round like this for billions of years, so you may drink water a dinosaur once drank!","Вода испаряется, собирается в облака, выпадает дождём или снегом и стекает в реки и моря. Одна и та же вода ходит по этому кругу миллиарды лет, так что, может быть, ты пьёшь воду, которую когда-то пил динозавр!","Su buharlaşır, bulut olur, yağmur ya da kar olarak yağar ve nehirlerde, denizlerde toplanır. Aynı su milyarlarca yıldır bu döngüde dolaşıyor; belki de bir zamanlar bir dinozorun içtiği suyu içiyorsun!"]}
+cycle:["Water evaporates into invisible vapour. High up the vapour cools into tiny drops that make clouds. The drops fall as rain or snow and collect in rivers and seas. The same water has gone round and round like this for billions of years, so you may drink water a dinosaur once drank!","Вода испаряется и становится невидимым паром. Высоко в небе пар остывает и превращается в крошечные капельки, из них получаются облака. Капли выпадают дождём или снегом и стекают в реки и моря. Одна и та же вода ходит по этому кругу миллиарды лет, так что, может быть, ты пьёшь воду, которую когда-то пил динозавр!","Su buharlaşıp görünmez buhara dönüşür. Yükseklerde buhar soğur ve bulutları oluşturan minicik damlacıklara dönüşür. Damlalar yağmur ya da kar olarak yağar ve nehirlerde, denizlerde toplanır. Aynı su milyarlarca yıldır bu döngüde dolaşıyor; belki de bir zamanlar bir dinozorun içtiği suyu içiyorsun!"]}
 ;
 const BODY={
 brain:{name:["Brain","Мозг","Beyin"],job:["The boss","Главный командир","Komutan"],
@@ -2405,17 +2442,17 @@ $('#c-card').addEventListener('click',e=>{const b=e.target.closest('button');if(
 
 /* ---------- texts shared by the new topics ---------- */
 const TT={
-en:{zoomIn:'Zoom in',zoomOut:'Zoom out',open:'Explore this topic',planets:'Planets',daynight:'Day and night',seasons:'Seasons',moon:'Moon phases',order:'In order!',
+en:{exps:'Experiments',who:'Who is right?',exThink:'What do you think? Pick an answer, then watch.',exRight:'You were right!',exWrong:'Let\'s see what really happens.',exLook:'Look at the molecules',exBack:'Back to the experiment',exNext:'Next',whoP:'Read what they say. Tap the one who is right.',whoRight:'Yes, that is right!',whoWrong:'Not quite. The one who is right:',gU:'g',pals:['Cat','Dog','Rabbit'],zoomIn:'Zoom in',zoomOut:'Zoom out',open:'Explore this topic',planets:'Planets',daynight:'Day and night',seasons:'Seasons',moon:'Moon phases',order:'In order!',
   dia:'Diameter',dist:'From the Sun',dayL:'One day',yearL:'One year',moonsL:'Moons',tempL:'Temperature',km:'km',mkm:'million km',hrs:'hours',days:'days',sizeNote:'The planets are drawn to their true sizes compared with each other.',
   orderP:'Tap the planets in order, starting next to the Sun.',orderOk:'All eight in order!',orderNo:'Not that one. Which planet comes next?',
   states:'Solid, liquid, gas',cycle:'Water cycle',msort:'Sort it!',warmer:'Warmer',colder:'Colder',water:'Water at {t} °C',msortP:'Solid, liquid or gas?',
   organs:'Organs',dnaZ:'Zoom to DNA',bfind:'Find it!',findP:'Find:',next:'Next',yes:'Yes! Great reading!',no:'That is: {x}. Try again!',tapOrgan:'Tap a part of the body.',tapPlanet:'Tap a planet.',tapCycle:'Tap a part of the picture.',job:'Its job'},
-ru:{zoomIn:'Ближе',zoomOut:'Дальше',open:'Открыть тему',planets:'Планеты',daynight:'День и ночь',seasons:'Времена года',moon:'Фазы Луны',order:'По порядку!',
+ru:{exps:'Опыты',who:'Кто прав?',exThink:'Как ты думаешь? Выбери ответ, а потом посмотри.',exRight:'Верно, так и есть!',exWrong:'Посмотрим, что будет на самом деле.',exLook:'Посмотреть на молекулы',exBack:'Назад к опыту',exNext:'Дальше',whoP:'Прочитай, что они говорят. Нажми на того, кто прав.',whoRight:'Да, это правильно!',whoWrong:'Не совсем. Прав:',gU:'г',pals:['Кот','Пёс','Кролик'],zoomIn:'Ближе',zoomOut:'Дальше',open:'Открыть тему',planets:'Планеты',daynight:'День и ночь',seasons:'Времена года',moon:'Фазы Луны',order:'По порядку!',
   dia:'Диаметр',dist:'От Солнца',dayL:'Одни сутки',yearL:'Один год',moonsL:'Спутники',tempL:'Температура',km:'км',mkm:'млн км',hrs:'ч',days:'дней',sizeNote:'Планеты нарисованы в настоящем соотношении размеров.',
   orderP:'Нажимай на планеты по порядку, начиная от Солнца.',orderOk:'Все восемь по порядку!',orderNo:'Не эта. Какая планета дальше?',
   states:'Твёрдое, жидкость, газ',cycle:'Круговорот воды',msort:'Разложи!',warmer:'Теплее',colder:'Холоднее',water:'Вода при {t} °C',msortP:'Твёрдое, жидкость или газ?',
   organs:'Органы',dnaZ:'До ДНК',bfind:'Найди!',findP:'Найди:',next:'Дальше',yes:'Да! Отлично прочитано!',no:'Это: {x}. Попробуй ещё!',tapOrgan:'Нажми на часть тела.',tapPlanet:'Нажми на планету.',tapCycle:'Нажми на часть картинки.',job:'Работа'},
-tr:{zoomIn:'Yaklaş',zoomOut:'Uzaklaş',open:'Konuyu aç',planets:'Gezegenler',daynight:'Gece ve gündüz',seasons:'Mevsimler',moon:"Ay'ın evreleri",order:'Sırala!',
+tr:{exps:'Deneyler',who:'Kim haklı?',exThink:'Sence ne olacak? Bir cevap seç, sonra izle.',exRight:'Doğru tahmin!',exWrong:'Bakalım gerçekte ne olacak.',exLook:'Moleküllere bak',exBack:'Deneye dön',exNext:'Sonraki',whoP:'Ne dediklerini oku. Haklı olana dokun.',whoRight:'Evet, doğru!',whoWrong:'Tam değil. Haklı olan:',gU:'g',pals:['Kedi','Köpek','Tavşan'],zoomIn:'Yaklaş',zoomOut:'Uzaklaş',open:'Konuyu aç',planets:'Gezegenler',daynight:'Gece ve gündüz',seasons:'Mevsimler',moon:"Ay'ın evreleri",order:'Sırala!',
   dia:'Çap',dist:"Güneş'e uzaklık",dayL:'Bir gün',yearL:'Bir yıl',moonsL:'Uydular',tempL:'Sıcaklık',km:'km',mkm:'milyon km',hrs:'saat',days:'gün',sizeNote:'Gezegenler birbirlerine göre gerçek boyutlarında çizildi.',
   orderP:"Gezegenlere Güneş'e en yakından başlayarak sırayla dokun.",orderOk:'Sekizi de sırayla!',orderNo:'O değil. Sırada hangi gezegen var?',
   states:'Katı, sıvı, gaz',cycle:'Su döngüsü',msort:'Ayır!',warmer:'Isıt',colder:'Soğut',water:'{t} °C sıcaklıkta su',msortP:'Katı mı, sıvı mı, gaz mı?',
@@ -2520,7 +2557,7 @@ $('#tp-space').addEventListener('click',e=>{const t=TL();
   SPV.sel=p;renderSpace();say('',SPACE[p].name[LX()])});
 
 /* ---------- topic: matter ---------- */
-const MV={mode:'states',temp:-15,sel:'',parts:null,raf:0,last:'',sortQ:null};
+const MV={mode:'states',temp:-15,sel:'',parts:null,raf:0,last:'',sortQ:null,ex:0,exPick:null,exGo:false,exZoom:false,who:0,whoPick:null};
 function mState(T){return T<0?'solid':T<100?'liquid':'gas'}
 function mStart(){
   const cv=$('#m-cv');if(!cv)return;const ctx=cv.getContext('2d');cancelAnimationFrame(MV.raf);
@@ -2538,6 +2575,7 @@ function mStart(){
   step()}
 function matterFigure(){
   const t=TL(),li=LX();
+  if(MV.mode==='exp')return exFigure();if(MV.mode==='who')return whoFigure();
   if(MV.mode==='cycle'){const G=(id,inner)=>`<g class="org${MV.sel===id?' sel':''}" data-cy="${id}">${inner}</g>`;
     return `<svg viewBox="0 0 400 280" role="img"><rect width="400" height="280" fill="#d0ebff" rx="10"/><circle cx="50" cy="45" r="28" fill="#ffd43b"/><path d="M240 280L330 110L400 190V280Z" fill="#8ce99a" stroke="#2b8a3e" stroke-width="3"/><path d="M0 230Q100 210 200 235T400 240V280H0Z" fill="#339af0"/>
       ${G('evap',`<path d="M60 225c-8-15 8-25 0-40s8-25 0-40M100 225c-8-15 8-25 0-40s8-25 0-40M140 225c-8-15 8-25 0-40s8-25 0-40" fill="none" stroke="#1c7ed6" stroke-width="4" stroke-dasharray="6 6"/><path d="M52 150l8-14 8 14M92 150l8-14 8 14M132 150l8-14 8 14" fill="none" stroke="#1c7ed6" stroke-width="4"/>`)}
@@ -2550,6 +2588,7 @@ function matterFigure(){
     <div class="row mrow"><button class="pill alt" id="m-cool"><svg class="ic" aria-hidden="true"><use href="#i-snowflake"/></svg>${esc(t.colder)}</button><input type="range" id="m-temp" min="-30" max="130" step="5" value="${MV.temp}" aria-label="°C"><button class="pill" id="m-heat"><svg class="ic" aria-hidden="true"><use href="#i-thermometer"/></svg>${esc(t.warmer)}</button></div>`}
 function matterCard(){
   const t=TL(),li=LX();
+  if(MV.mode==='exp')return exCard();if(MV.mode==='who')return whoCard();
   if(MV.mode==='cycle'){if(!MV.sel)return `<div class="prompt"><div class="word" style="font-size:clamp(24px,3vw,32px)">${esc(t.tapCycle)}</div></div>`+factBox('m-c',MATTERT.cycleT[li],MATTERT.cycle[li]);
     const c=CYCLE[MV.sel];return `<div class="prompt">${bigWord(c.name[li])}</div>`+factBox('m-ce','',c.easy[li])}
   if(MV.mode==='sort')return `<div class="prompt"><span class="qp">${esc(t.msortP)}</span></div><div class="choices" id="m-sch">${['solid','liquid','gas'].map(k=>`<button data-ms="${k}">${esc(MATTER[k].name[li])}</button>`).join('')}</div><div class="msg" id="m-smsg"></div>`;
@@ -2557,8 +2596,152 @@ function matterCard(){
   return `<div class="prompt"><span class="qp">${esc(fill(t.water,{t:MV.temp}))}</span>${bigWord(m.name[li])}<div class="mex">${m.ex[li].map(x=>`<span>${esc(x)}</span>`).join('')}</div></div>
     ${ch?`<div class="fact mchange"><b class="fbt">→ ${esc(ch.name[li])}</b><div class="words" id="m-ch" data-text="${esc(ch.easy[li])}">${wordsHTML(ch.easy[li])}</div></div>`:''}
     ${factBox('m-se','',m.easy[li])}${S.sci?factBox('m-ss',L().sciL,m.sci[li]):''}`}
+/* ---------- Matter: experiments (predict, watch, look at the molecules) and "Who is right?" cartoons ----------
+   Each one targets a misconception that research on children's ideas about matter keeps finding. */
+const SAME3=[["More","Больше","Daha fazla"],["The same","Столько же","Aynı"],["Less","Меньше","Daha az"]];
+const EXP=[
+{id:'ice',ic:'scale',zk:'ice',
+ q:["Ice in a closed bag sits on a scale. The ice melts. What will the scale show?","Лёд в закрытом пакете лежит на весах. Лёд тает. Что покажут весы?","Kapalı bir poşetteki buz terazide duruyor. Buz eriyor. Terazi ne gösterecek?"],
+ opts:SAME3,ans:1,
+ res:["The scale shows the same: 120 g.","Весы показывают столько же: 120 г.","Terazi aynısını gösteriyor: 120 g."],
+ why:["The water molecules did not go anywhere. There are just as many as before. In ice they sat in rows; now they slide past each other.","Молекулы воды никуда не делись. Их столько же, сколько было. Во льду они стояли рядами, а теперь скользят друг мимо друга.","Su molekülleri hiçbir yere gitmedi. Önceki kadar çoklar. Buzda sıra sıra duruyorlardı; şimdi birbirlerinin yanından kayıyorlar."],
+ zl:[["Ice","Лёд","Buz"],["Water","Вода","Su"]]},
+{id:'sugar',ic:'candy',zk:'sugar',
+ q:["A glass of water and two sugar cubes are on a scale. We drop the sugar into the water and stir. What will the scale show?","На весах стакан воды и два кусочка сахара. Бросаем сахар в воду и размешиваем. Что покажут весы?","Terazide bir bardak su ve iki küp şeker var. Şekeri suya atıp karıştırıyoruz. Terazi ne gösterecek?"],
+ opts:SAME3,ans:1,
+ res:["The same: 250 g. You cannot see the sugar, but the water tastes sweet.","Столько же: 250 г. Сахара не видно, но вода стала сладкой.","Aynı: 250 g. Şeker görünmüyor ama su tatlı oldu."],
+ why:["Sugar did not disappear. Its molecules spread out between the water molecules. They are too small to see, so the water looks clear.","Сахар не исчез. Его молекулы разошлись между молекулами воды. Они такие маленькие, что их не видно, поэтому вода прозрачная.","Şeker yok olmadı. Molekülleri su moleküllerinin arasına dağıldı. Görülemeyecek kadar küçükler, bu yüzden su berrak görünür."],
+ zl:[["Before","До","Önce"],["After","После","Sonra"]]},
+{id:'balloon',ic:'balloon',zk:'air',
+ q:["Two blown-up balloons hang on a balance, and it is level. We pop one balloon. What will happen?","На палочке-весах висят два надутых шарика, весы ровные. Лопнем один шарик. Что будет?","Bir terazi çubuğunda iki şişirilmiş balon asılı ve terazi dengede. Bir balonu patlatıyoruz. Ne olacak?"],
+ opts:[["The full balloon goes down","Целый шарик опустится","Dolu balon aşağı iner"],["It stays level","Весы останутся ровными","Terazi dengede kalır"],["The popped balloon goes down","Лопнувший шарик опустится","Patlayan balon aşağı iner"]],ans:0,
+ res:["The side with the full balloon goes down.","Сторона с целым шариком опускается.","Dolu balonun olduğu taraf aşağı iner."],
+ why:["Air has weight! In a blown-up balloon the air is squeezed, so there is more of it than in the same space around. When the air comes out, that side gets lighter.","Воздух что-то весит! В надутом шарике воздух сжат, его там больше, чем в таком же месте вокруг. Когда воздух выходит, эта сторона становится легче.","Havanın ağırlığı vardır! Şişirilmiş balonda hava sıkışmıştır, bu yüzden çevredeki aynı boşluktan daha fazla hava vardır. Hava çıkınca o taraf hafifler."],
+ zl:[["Inside the balloon","В шарике","Balonun içinde"],["Air in the room","Воздух в комнате","Odadaki hava"]]},
+{id:'jars',ic:'sun',zk:'jars',
+ q:["Two jars of water stand on a sunny windowsill. One is open, one has a lid. Which one will have less water after a week?","На солнечном окне стоят две банки с водой. Одна открыта, другая закрыта крышкой. В какой через неделю станет меньше воды?","Güneşli bir pencere kenarında iki kavanoz su duruyor. Biri açık, diğerinin kapağı var. Bir hafta sonra hangisinde daha az su olacak?"],
+ opts:[["The open jar","В открытой","Açık kavanozda"],["The closed jar","В закрытой","Kapalı kavanozda"],["They stay the same","Одинаково","İkisi de aynı kalır"]],ans:0,
+ res:["The open jar has less water. The closed jar has the same, and its lid is covered in drops.","В открытой банке воды меньше. В закрытой столько же, а на крышке появились капли.","Açık kavanozda su azaldı. Kapalı kavanozda aynı kaldı ve kapağında damlalar oluştu."],
+ why:["Water did not vanish. Its molecules flew off into the air as invisible vapour. In the closed jar they hit the lid and gathered into drops again.","Вода не пропала. Её молекулы улетели в воздух невидимым паром. В закрытой банке они долетели до крышки и снова собрались в капли.","Su yok olmadı. Molekülleri görünmez buhar olarak havaya uçtu. Kapalı kavanozda kapağa çarpıp yeniden damlalar oluşturdular."],
+ zl:[["Open jar","Открытая","Açık"],["Closed jar","Закрытая","Kapalı"]]},
+{id:'glass',ic:'glass-water',zk:'glass',
+ q:["A glass of blue juice with ice soon has drops on the outside. Where do the drops come from?","Стакан синего сока со льдом скоро покрывается каплями снаружи. Откуда взялись капли?","Buzlu mavi meyve suyu bardağının dışında kısa sürede damlalar oluşur. Damlalar nereden geliyor?"],
+ opts:[["Juice leaked through the glass","Сок просочился через стекло","Meyve suyu camdan sızdı"],["Vapour from the air","Пар из воздуха","Havadaki buhardan"],["The glass is sweating","Стакан вспотел","Bardak terledi"]],ans:1,
+ res:["Look closely: the drops are clear, not blue. So they are not juice.","Посмотри внимательно: капли прозрачные, а не синие. Значит, это не сок.","Dikkatli bak: damlalar mavi değil, şeffaf. Demek ki meyve suyu değiller."],
+ why:["Air always has invisible water vapour in it. When vapour touches the cold glass, it cools down and turns back into tiny drops of water.","В воздухе всегда есть невидимый водяной пар. Когда пар касается холодного стекла, он остывает и снова становится капельками воды.","Havada her zaman görünmez su buharı vardır. Buhar soğuk cama değince soğur ve yeniden minik su damlalarına dönüşür."],
+ zl:[["Vapour in the air","Пар в воздухе","Havadaki buhar"],["On the cold glass","На холодном стекле","Soğuk camda"]]},
+{id:'boil',ic:'flame',zk:'bubble',
+ q:["Water is boiling in a pot. Big bubbles rise up. What is inside the bubbles?","В кастрюле кипит вода. Поднимаются большие пузыри. Что внутри пузырей?","Tencerede su kaynıyor. Büyük kabarcıklar yükseliyor. Kabarcıkların içinde ne var?"],
+ opts:[["Air","Воздух","Hava"],["Water vapour","Водяной пар","Su buharı"],["Heat","Тепло","Isı"]],ans:1,
+ res:["The bubbles are full of water vapour. They pop at the top, and the vapour goes into the air.","Пузыри полны водяного пара. Наверху они лопаются, и пар уходит в воздух.","Kabarcıklar su buharıyla dolu. Yukarıda patlarlar ve buhar havaya karışır."],
+ why:["When water is very hot, its molecules move so fast that they jump apart right inside the water. That makes a bubble of water gas: vapour.","Когда вода очень горячая, её молекулы двигаются так быстро, что разлетаются прямо внутри воды. Так получается пузырь из воды-газа, то есть пара.","Su çok ısındığında molekülleri o kadar hızlı hareket eder ki suyun içinde birbirinden ayrılırlar. Böylece gaz hâlindeki sudan, yani buhardan bir kabarcık oluşur."],
+ zl:[["Hot water","Горячая вода","Sıcak su"],["Inside a bubble","Внутри пузыря","Kabarcığın içi"]]},
+{id:'melt',ic:'snowflake',zk:'ice',
+ q:["An ice cube melts into water. What happens to the water molecules themselves?","Кубик льда тает и становится водой. Что происходит с самими молекулами воды?","Bir buz küpü eriyip su oluyor. Su moleküllerinin kendisine ne oluyor?"],
+ opts:[["They get bigger","Становятся больше","Büyürler"],["They melt too","Тоже тают","Onlar da erir"],["They stay the same and just move differently","Остаются такими же, просто двигаются по-другому","Aynı kalırlar, sadece farklı hareket ederler"]],ans:2,
+ res:["The molecules are exactly the same. Only the way they move has changed.","Молекулы точно такие же. Изменилось только то, как они двигаются.","Moleküller tamamen aynı. Sadece hareket etme biçimleri değişti."],
+ why:["Molecules do not melt, grow or get soft. In ice they hold on to their neighbours and only wiggle. In water they move faster and slide past each other.","Молекулы не тают, не растут и не становятся мягкими. Во льду они держатся за соседей и только дрожат. В воде они двигаются быстрее и скользят друг мимо друга.","Moleküller erimez, büyümez ya da yumuşamaz. Buzda komşularına tutunur ve sadece titrerler. Suda daha hızlı hareket eder ve birbirlerinin yanından kayarlar."],
+ zl:[["Ice","Лёд","Buz"],["Water","Вода","Su"]]},
+{id:'kettle',ic:'coffee',zk:'kettle',
+ q:["A white cloud rises above a boiling kettle. What is it?","Над кипящим чайником поднимается белое облачко. Что это?","Kaynayan çaydanlığın üstünde beyaz bir bulut yükseliyor. Bu nedir?"],
+ opts:[["Water vapour, a gas","Водяной пар, газ","Su buharı, bir gaz"],["Tiny drops of water","Крошечные капельки воды","Minicik su damlacıkları"],["Smoke","Дым","Duman"]],ans:1,
+ res:["Tiny drops of water. Look: right at the spout there is a clear gap. That is the real vapour, and it is invisible.","Это крошечные капельки воды. Посмотри: прямо у носика есть прозрачный промежуток. Там настоящий пар, и он невидимый.","Bunlar minicik su damlacıkları. Bak: tam ağzın önünde şeffaf bir boşluk var. Gerçek buhar orada ve görünmez."],
+ why:["Vapour leaves the spout, cools in the air and turns into tiny drops. Clouds in the sky are made the same way, from tiny drops.","Пар выходит из носика, остывает в воздухе и превращается в крошечные капельки. Облака в небе получаются так же, из крошечных капелек.","Buhar ağızdan çıkar, havada soğur ve minicik damlacıklara dönüşür. Gökyüzündeki bulutlar da aynı şekilde, minicik damlacıklardan oluşur."],
+ zl:[["At the spout: vapour","У носика: пар","Ağızda: buhar"],["In the cloud: drops","В облачке: капельки","Bulutta: damlacıklar"]]}];
+const WHO=[
+{ic:'cloud-rain',sit:["A puddle on the pavement has dried up. Where did the water go?","Лужа на асфальте высохла. Куда делась вода?","Kaldırımdaki su birikintisi kurudu. Su nereye gitti?"],
+ says:[["It soaked into the pavement.","Она впиталась в асфальт.","Kaldırımın içine çekildi."],["It turned into invisible vapour and went into the air.","Она превратилась в невидимый пар и ушла в воздух.","Görünmez buhara dönüştü ve havaya karıştı."],["It just disappeared.","Она просто исчезла.","Öylece yok oldu."]],ans:1,
+ why:["Water does not just disappear. Its molecules fly off into the air one by one. The air is full of invisible water vapour.","Вода не может просто исчезнуть. Её молекулы по одной улетают в воздух. В воздухе полно невидимого водяного пара.","Su öylece yok olmaz. Molekülleri tek tek havaya uçar. Hava görünmez su buharıyla doludur."]},
+{ic:'wind',sit:["Does air weigh anything?","Весит ли воздух что-нибудь?","Havanın ağırlığı var mı?"],
+ says:[["No, air weighs nothing.","Нет, воздух ничего не весит.","Hayır, havanın ağırlığı yoktur."],["Air pulls things up, so it weighs less than nothing.","Воздух тянет вверх, поэтому весит меньше, чем ничего.","Hava her şeyi yukarı çeker, bu yüzden ağırlığı sıfırdan azdır."],["Yes, but very little.","Весит, но совсем чуть-чуть.","Evet, ama çok az."]],ans:2,
+ why:["Air is made of molecules, and every molecule has a tiny weight. The air in a small bedroom weighs about as much as a ten-year-old child!","Воздух состоит из молекул, а у каждой молекулы есть крошечный вес. Воздух в маленькой комнате весит примерно как десятилетний ребёнок!","Hava moleküllerden oluşur ve her molekülün minicik bir ağırlığı vardır. Küçük bir yatak odasındaki hava, yaklaşık on yaşında bir çocuk kadar ağırdır!"]},
+{ic:'cup-soda',sit:["A cold can of juice from the fridge gets covered in drops.","Холодная банка сока из холодильника покрылась каплями.","Buzdolabından çıkan soğuk meyve suyu kutusu damlalarla kaplandı."],
+ says:[["Juice leaked through the can.","Сок просочился через банку.","Meyve suyu kutudan sızdı."],["The can is sweating, like a person.","Банка вспотела, как человек.","Kutu insan gibi terledi."],["Vapour from the air cooled on the cold can and turned into drops.","Пар из воздуха остыл на холодной банке и стал каплями.","Havadaki buhar soğuk kutuda soğudu ve damlalara dönüştü."]],ans:2,
+ why:["A can has no holes, and cans do not sweat. The water came from the air around the can.","В банке нет дырочек, и банки не потеют. Вода пришла из воздуха вокруг банки.","Kutuda delik yoktur ve kutular terlemez. Su, kutunun etrafındaki havadan geldi."]},
+{ic:'atom',sit:["What is between the molecules of air?","Что находится между молекулами воздуха?","Havanın molekülleri arasında ne var?"],
+ says:[["More air.","Ещё воздух.","Daha fazla hava."],["Nothing. It is empty.","Ничего. Там пусто.","Hiçbir şey. Orası boş."],["Water.","Вода.","Su."]],ans:1,
+ why:["Air is the molecules themselves. Between them there is just empty space, and there is much more space than molecules.","Воздух — это и есть молекулы. Между ними просто пустое место, и пустоты там гораздо больше, чем молекул.","Hava, moleküllerin kendisidir. Aralarında sadece boşluk vardır ve boşluk, moleküllerden çok daha fazladır."]},
+{ic:'soup',sit:["We put salt in hot soup and stirred. Now we cannot see it.","Мы положили соль в горячий суп и размешали. Теперь её не видно.","Sıcak çorbaya tuz koyup karıştırdık. Artık görünmüyor."],
+ says:[["The salt disappeared.","Соль исчезла.","Tuz yok oldu."],["The salt melted, like ice.","Соль растаяла, как лёд.","Tuz buz gibi eridi."],["The salt is still there. It spread out in the soup, so the soup tastes salty.","Соль осталась. Она разошлась по супу, поэтому суп солёный.","Tuz hâlâ orada. Çorbanın içine dağıldı, bu yüzden çorba tuzlu."]],ans:2,
+ why:["This is called dissolving, not melting. Melting is when heat turns a solid into a liquid. In dissolving, tiny bits of salt spread out between the water molecules.","Это называется растворением, а не таянием. Таяние — это когда от тепла твёрдое становится жидким. При растворении крошечные частички соли расходятся между молекулами воды.","Buna erime değil, çözünme denir. Erimede ısı katıyı sıvıya çevirir. Çözünmede minicik tuz parçacıkları su moleküllerinin arasına dağılır."]},
+{ic:'balloon',sit:["A balloon left in the sun got bigger. Why?","Шарик на солнце стал больше. Почему?","Güneşte kalan balon büyüdü. Neden?"],
+ says:[["Each air molecule got bigger.","Каждая молекула воздуха раздулась.","Her hava molekülü büyüdü."],["The molecules moved faster and pushed harder on the walls.","Молекулы стали двигаться быстрее и сильнее толкать стенки.","Moleküller daha hızlı hareket etti ve duvarlara daha güçlü itti."],["New air got into the balloon.","В шарик зашёл новый воздух.","Balona yeni hava girdi."]],ans:1,
+ why:["Molecules never grow. Warmth makes them move faster, they hit the balloon harder, and it stretches.","Молекулы никогда не растут. От тепла они двигаются быстрее, сильнее бьют в стенки шарика, и он растягивается.","Moleküller asla büyümez. Isı onları hızlandırır, balonun duvarlarına daha sert çarparlar ve balon gerilir."]},
+{ic:'cloud',sit:["What is a cloud made of?","Из чего состоит облако?","Bulut neyden oluşur?"],
+ says:[["Water vapour.","Из водяного пара.","Su buharından."],["Smoke.","Из дыма.","Dumandan."],["Tiny drops of water or bits of ice.","Из крошечных капелек воды или льдинок.","Minicik su damlacıklarından ya da buz parçacıklarından."]],ans:2,
+ why:["Water vapour is invisible. We see clouds because the vapour has cooled and turned into tiny drops or ice crystals.","Водяной пар невидим. Мы видим облака, потому что пар остыл и превратился в крошечные капельки или льдинки.","Su buharı görünmezdir. Bulutları görürüz çünkü buhar soğuyup minicik damlacıklara ya da buz kristallerine dönüşmüştür."]}];
+const PALS=[['cat','#f59f00'],['dog','#7950f2'],['rabbit','#e64980']];
+
+/* drawing helpers: all scenes share a 400x260 box; .b is before, .a is after */
+const exScale=(cx,txt)=>`<rect x="${cx-105}" y="196" width="210" height="10" rx="4" fill="#adb5bd"/><rect x="${cx-95}" y="206" width="190" height="40" rx="8" fill="#dee2e6" stroke="#868e96" stroke-width="2"/><rect x="${cx-44}" y="213" width="88" height="26" rx="4" fill="#212529"/><text x="${cx}" y="232" class="lcd">${txt}</text>`;
+const exMol=(x,y,r=9,c='#339af0')=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${c}"/><circle cx="${x-r*.45}" cy="${y-r*.6}" r="${r*.38}" fill="#fff"/><circle cx="${x+r*.45}" cy="${y-r*.6}" r="${r*.38}" fill="#fff"/>`;
+const exAir=(x,y)=>`<circle cx="${x-4}" cy="${y}" r="6" fill="#9775fa"/><circle cx="${x+4}" cy="${y}" r="6" fill="#9775fa"/>`;
+const exSug=(x,y)=>`<polygon points="${[0,1,2,3,4,5].map(k=>`${(x+10*Math.cos(k*1.047)).toFixed(1)},${(y+10*Math.sin(k*1.047)).toFixed(1)}`).join(' ')}" fill="#ff922b"/>`;
+function exScene(e,li){const g=L().gU||'g';
+  switch(e.id){
+  case 'ice':return `<path d="M140 196Q128 120 160 98H240Q272 120 260 196Z" fill="#f1f8ff" stroke="#74c0fc" stroke-width="3"/><rect x="185" y="88" width="30" height="12" rx="3" fill="#74c0fc"/>
+    <g class="b">${[[165,165],[205,158],[184,132],[222,180],[170,184]].map(([x,y])=>`<rect x="${x}" y="${y}" width="26" height="22" rx="4" fill="#a5d8ff" stroke="#4dabf7" stroke-width="2"/><rect x="${x+4}" y="${y+4}" width="8" height="5" rx="2" fill="#fff"/>`).join('')}</g>
+    <g class="a"><path d="M137 196Q133 170 136 164H264Q267 170 263 196Z" fill="#4dabf7"/></g>${exScale(200,'120 '+g)}`;
+  case 'sugar':return `<path d="M165 196L156 92H244L235 196Z" fill="#f8f9fa" stroke="#495057" stroke-width="3"/><path d="M163 194L158 118H242L237 194Z" fill="#a5d8ff"/>
+    <g class="b"><rect x="262" y="172" width="22" height="22" rx="3" fill="#fff" stroke="#adb5bd" stroke-width="2"/><rect x="290" y="172" width="22" height="22" rx="3" fill="#fff" stroke="#adb5bd" stroke-width="2"/></g>
+    <g class="a"><path d="M226 60L200 170" stroke="#868e96" stroke-width="6" stroke-linecap="round"/><ellipse cx="198" cy="174" rx="9" ry="5" fill="#868e96"/></g>${exScale(220,'250 '+g)}`;
+  case 'balloon':{const bal=(x,c)=>`<path d="M${x} 80V118" stroke="#495057" stroke-width="2"/><ellipse cx="${x}" cy="152" rx="30" ry="36" fill="${c}"/><path d="M${x-5} 190l5-4 5 4z" fill="${c}"/><ellipse cx="${x-10}" cy="138" rx="7" ry="11" fill="#fff" opacity=".5"/>`;
+    return `<rect x="194" y="80" width="12" height="160" rx="3" fill="#868e96"/><rect x="150" y="236" width="100" height="12" rx="4" fill="#495057"/>
+    <g class="beam"><rect x="60" y="74" width="280" height="10" rx="4" fill="#495057"/><circle cx="200" cy="79" r="8" fill="#212529"/>${bal(90,'#ff6b6b')}
+      <g class="b">${bal(310,'#4dabf7')}</g><g class="a"><path d="M310 80V112" stroke="#495057" stroke-width="2"/><path d="M300 112l6 10-8 6 10 4M318 114l-4 12 9 3" fill="none" stroke="#4dabf7" stroke-width="5" stroke-linecap="round"/></g></g>`}
+  case 'jars':{const jar=(x,lid,lvl)=>`<rect x="${x-50}" y="92" width="100" height="130" rx="12" fill="#f8f9fa" stroke="#495057" stroke-width="3"/>${lid?`<rect x="${x-54}" y="80" width="108" height="14" rx="4" fill="#868e96"/>`:''}<rect x="${x-46}" y="${lvl}" width="92" height="${218-lvl}" rx="8" fill="#4dabf7"/>`;
+    return `<circle cx="40" cy="40" r="22" fill="#ffd43b"/><rect x="40" y="222" width="320" height="10" rx="4" fill="#ced4da"/>
+    <g class="b">${jar(120,0,112)}${jar(280,1,112)}</g><g class="a">${jar(120,0,165)}${jar(280,1,112)}${[0,1,2,3,4,5].map(k=>`<circle cx="${244+k*14}" cy="${100+(k%2)*3}" r="4" fill="#d0ebff" stroke="#4dabf7" stroke-width="1.5"/>`).join('')}</g>`}
+  case 'glass':return `<path d="M150 210L140 70H260L250 210Z" fill="#f8f9fa" stroke="#495057" stroke-width="3"/><path d="M148 208L143 100H257L252 208Z" fill="#4263eb"/>
+    ${[[160,108],[200,112],[225,104]].map(([x,y])=>`<rect x="${x}" y="${y}" width="24" height="20" rx="4" fill="#e7f5ff" opacity=".9"/>`).join('')}
+    <g class="a">${[[138,120],[136,150],[139,180],[262,110],[264,145],[261,175],[140,95],[259,190]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="5" ry="7" fill="#fff" stroke="#74c0fc" stroke-width="2"/>`).join('')}
+      <circle cx="330" cy="120" r="44" fill="#fff" stroke="#495057" stroke-width="4"/><path d="M362 152L388 182" stroke="#495057" stroke-width="8" stroke-linecap="round"/><ellipse cx="330" cy="120" rx="16" ry="22" fill="#fff" stroke="#74c0fc" stroke-width="3"/><path d="M267 135L290 125" stroke="#495057" stroke-width="2" stroke-dasharray="4 4"/></g>`;
+  case 'boil':return `<path d="M150 236q10-26 0-40M200 236q10-30 0-46M250 236q10-26 0-40" stroke="#fd7e14" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <rect x="100" y="100" width="200" height="100" rx="10" fill="#ced4da" stroke="#495057" stroke-width="3"/><rect x="80" y="100" width="24" height="10" rx="4" fill="#495057"/><rect x="296" y="100" width="24" height="10" rx="4" fill="#495057"/><rect x="106" y="118" width="188" height="78" rx="6" fill="#74c0fc"/>
+    <g class="a">${[[140,185,7],[180,170,10],[220,188,6],[255,175,9],[160,150,8],[235,140,7]].map(([x,y,r],k)=>`<circle class="bub" style="animation-delay:${k*.35}s" cx="${x}" cy="${y}" r="${r}" fill="#e7f5ff" stroke="#fff" stroke-width="2"/>`).join('')}</g>`;
+  case 'melt':return `<ellipse cx="200" cy="205" rx="120" ry="16" fill="#e9ecef"/><g class="b"><rect x="160" y="130" width="80" height="70" rx="10" fill="#a5d8ff" stroke="#4dabf7" stroke-width="3"/><rect x="170" y="140" width="24" height="10" rx="4" fill="#fff"/></g><g class="a"><ellipse cx="200" cy="200" rx="80" ry="10" fill="#4dabf7"/></g>`;
+  case 'kettle':return `<path d="M120 210V140Q120 110 160 108H220Q260 110 260 140V210Z" fill="#ff8787" stroke="#495057" stroke-width="3"/><path d="M150 108Q190 70 230 108" fill="none" stroke="#495057" stroke-width="6"/><path d="M258 150L310 118L318 126L262 172Z" fill="#ff8787" stroke="#495057" stroke-width="3"/>
+    <g class="a">${[[350,96,14],[366,82,18],[384,70,16],[372,58,14],[392,50,12],[356,72,12]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="#dee2e6" stroke-width="2" opacity=".95"/>`).join('')}
+      <path d="M330 112L330 196" stroke="#adb5bd" stroke-width="2" stroke-dasharray="3 4"/><text x="330" y="214" class="exl" text-anchor="middle">${esc(e.zl[0][li])}</text><text x="398" y="30" class="exl" text-anchor="end">${esc(e.zl[1][li])}</text></g>`}
+  return ''}
+/* the same molecules before and after, side by side */
+function exZoom(e,li){const P=(x,y,s)=>s.map(([a,b])=>[x+a,y+b]);
+  const grid=[0,1,2].flatMap(r=>[0,1,2,3].map(c=>[c*36,r*36])),jumble=[[4,6],[40,0],[70,14],[110,4],[12,42],[52,38],[90,48],[120,36],[0,80],[38,74],[78,86],[116,76]];
+  const spread=[[6,10],[96,0],[40,52],[130,40],[10,108],[84,96],[122,118]],dense=[[0,0],[24,6],[48,0],[72,8],[96,0],[120,6],[6,26],[30,30],[54,24],[78,30],[102,26],[126,30],[12,52],[40,56],[66,50],[92,56],[118,52]];
+  const L1=(x,y,arr,f)=>P(x,y,arr).map(([a,b])=>f(a,b)).join('');let A='',B='';
+  switch(e.zk){
+  case 'ice':A=L1(42,90,grid,(a,b)=>exMol(a,b,12));B=L1(232,96,jumble,(a,b)=>exMol(a,b,12));break;
+  case 'sugar':A=L1(40,110,[[0,0],[34,20],[70,0],[104,22],[10,50],[50,56],[90,50]],(a,b)=>exMol(a,b,11))+L1(120,64,[[0,0],[22,6],[10,24]],exSug);
+    B=L1(232,96,[[0,0],[34,22],[70,0],[104,22],[10,54],[50,60],[90,52],[128,58]],(a,b)=>exMol(a,b,11))+L1(250,96,[[0,24],[68,42],[106,0]],exSug);break;
+  case 'air':A=L1(40,80,dense,exAir);B=L1(236,80,spread,exAir);break;
+  case 'jars':A=`<rect x="20" y="170" width="170" height="30" fill="#a5d8ff"/>`+L1(32,184,[[0,0],[34,0],[68,0],[102,0],[136,0]],(a,b)=>exMol(a,b,10))+L1(50,80,[[0,0],[70,28],[110,-10]],(a,b)=>exMol(a,b,10))+[[58,120],[128,140],[168,104]].map(([x,y])=>`<path d="M${x} ${y}v-18" stroke="#495057" stroke-width="2" marker-end="url(#exArr)"/>`).join('');
+    B=`<rect x="212" y="52" width="176" height="10" fill="#868e96"/><rect x="212" y="170" width="176" height="30" fill="#a5d8ff"/>`+L1(222,184,[[0,0],[34,0],[68,0],[102,0],[136,0]],(a,b)=>exMol(a,b,10))+L1(270,74,[[0,0],[20,4],[10,20],[34,16]],(a,b)=>exMol(a,b,10));break;
+  case 'glass':A=L1(40,80,spread,(a,b)=>exMol(a,b,10));B=`<rect x="212" y="40" width="22" height="170" fill="#4263eb"/><rect x="234" y="40" width="6" height="170" fill="#dee2e6"/>`+L1(256,100,[[0,0],[2,22],[22,10],[20,32],[0,44],[40,24]],(a,b)=>exMol(a,b,10))+L1(320,70,[[0,0],[40,90]],(a,b)=>exMol(a,b,10));break;
+  case 'bubble':A=L1(34,74,dense.slice(0,15).concat([[20,78],[60,82],[100,80]]),(a,b)=>exMol(a,b,10));
+    B=L1(224,74,dense.filter(([a,b])=>!((a-60)**2+(b-40)**2<52*52)).concat([[0,80],[40,84],[130,84]]),(a,b)=>exMol(a,b,10))+`<circle cx="286" cy="116" r="44" fill="#e7f5ff" stroke="#74c0fc" stroke-width="2"/>`+L1(266,102,[[0,0],[40,10],[16,36]],(a,b)=>exMol(a,b,9));break;
+  case 'kettle':A=L1(40,80,spread,(a,b)=>exMol(a,b,10));B=[[236,80],[316,100],[256,160],[336,166]].map(([x,y])=>L1(x,y,[[0,0],[18,2],[8,16],[-8,12]],(a,b)=>exMol(a,b,9))).join('');break}
+  return `<svg viewBox="0 0 400 230" role="img" class="exzoom"><defs><marker id="exArr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#495057"/></marker></defs>
+    <rect x="10" y="30" width="185" height="190" rx="12" fill="#f8f9fa" stroke="#ced4da" stroke-width="2"/><rect x="205" y="30" width="185" height="190" rx="12" fill="#f8f9fa" stroke="#ced4da" stroke-width="2"/>
+    <text x="102" y="20" class="exl" text-anchor="middle">${esc(e.zl[0][li])}</text><text x="297" y="20" class="exl" text-anchor="middle">${esc(e.zl[1][li])}</text>${A}${B}</svg>`}
+function exFigure(){const t=TL(),li=LX(),e=EXP[MV.ex],ph=MV.exPick==null?'ask':MV.exGo?'go':'done';
+  return `<div class="exnav">${EXP.map((x,i)=>`<button data-exi="${i}" aria-pressed="${i===MV.ex}" aria-label="${i+1}"${(S.mexp||[]).includes(x.id)?' class="seen"':''}><svg class="ic" aria-hidden="true"><use href="#i-${x.ic}"/></svg></button>`).join('')}</div>`+
+   (MV.exZoom?exZoom(e,li):`<svg viewBox="0 0 400 260" role="img" class="exs ${ph}${e.id==='balloon'?' bal':''}">${exScene(e,li)}</svg>`)+
+   (MV.exPick!=null?`<button class="pill alt" id="m-exz"><svg class="ic" aria-hidden="true"><use href="#i-${MV.exZoom?'image':'zoom-in'}"/></svg>${esc(MV.exZoom?t.exBack:t.exLook)}</button>`:'')}
+function exCard(){const t=TL(),li=LX(),e=EXP[MV.ex],p=MV.exPick;
+  const ch=e.opts.map((o,i)=>`<button data-exo="${i}" ${p!=null?'disabled':''} class="${p!=null&&i===e.ans?'right':p===i?'no':''}">${esc(o[li])}</button>`).join('');
+  return factBox('m-exq','',e.q[li])+`<div class="choices exch">${ch}</div>`+
+   (p==null?`<p class="note">${esc(t.exThink)}</p>`:`<div class="msg ${p===e.ans?'ok':'bad'}">${esc(p===e.ans?t.exRight:t.exWrong)}</div>`+factBox('m-exr','',e.res[li]+' '+e.why[li])+`<div class="row"><button class="pill" id="m-exn">${esc(t.exNext)}</button></div>`)}
+function whoFigure(){const li=LX(),w=WHO[MV.who],p=MV.whoPick,t=TL();
+  return `<div class="whofig"><div class="whosit"><svg class="ic" aria-hidden="true"><use href="#i-${w.ic}"/></svg><div class="words" id="m-whos" data-text="${esc(w.sit[li])}">${wordsHTML(w.sit[li])}</div></div>
+   <div class="pals">${w.says.map((s,i)=>`<button class="pal${p!=null&&i===w.ans?' right':p===i?' no':''}" data-who="${i}" ${p!=null?'disabled':''} style="--pc:${PALS[i][1]}"><span class="bub">${esc(s[li])}</span><span class="who"><svg class="ic" aria-hidden="true"><use href="#i-${PALS[i][0]}"/></svg>${esc(t.pals[i])}</span></button>`).join('')}</div></div>`}
+function whoCard(){const t=TL(),li=LX(),w=WHO[MV.who],p=MV.whoPick;
+  return `<div class="prompt"><span class="qp">${esc(t.whoP)}</span></div><button class="along" data-along="m-whos"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span>${esc(L().along)}</span></button>`+
+   (p==null?'':`<div class="msg ${p===w.ans?'ok':'bad'}">${esc(p===w.ans?t.whoRight:t.whoWrong+' '+t.pals[w.ans])}</div>`+factBox('m-whow','',w.why[li])+`<div class="row"><button class="pill" id="m-whon">${esc(t.exNext)}</button></div>`)}
+function exPick(i){const e=EXP[MV.ex];MV.exPick=i;MV.exGo=true;MV.exZoom=false;S.mexp=S.mexp||[];if(!S.mexp.includes(e.id))S.mexp.push(e.id);tStar(i===e.ans?2:1);renderMatter();if(innerWidth<900)$('#tp-matter .exs').scrollIntoView({behavior:'smooth',block:'center'});
+  clearTimeout(MV.exT);MV.exT=setTimeout(()=>{MV.exGo=false},3200)}
+
 function renderMatter(){const t=TL(),li=LX();
-  $('#tp-matter').innerHTML=modeBar('m-modes',[['states','thermometer',t.states],['cycle','cloud-rain',t.cycle],['sort','shield',t.msort]],MV.mode)+
+  $('#tp-matter').innerHTML=modeBar('m-modes',[['states','thermometer',t.states],['cycle','cloud-rain',t.cycle],['exp','flask-conical',t.exps],['who','smile',t.who],['sort','shield',t.msort]],MV.mode)+
    `<section class="tstage"><div class="tfig">${matterFigure()}</div><div class="tcard">${matterCard()}</div></section><section class="cintro">${factBox('m-what',MATTERT.whatT[li],MATTERT.what[li])}${factBox('m-part',MATTERT.partT[li],MATTERT.part[li])}${factBox('m-heat',MATTERT.heatT[li],MATTERT.heat[li])}</section>`;
   if(MV.mode==='states')mStart()}
 function mSetTemp(v){const before=mState(MV.temp);MV.temp=Math.max(-30,Math.min(130,v));const after=mState(MV.temp);
@@ -2568,6 +2751,12 @@ function mNewSort(){const pool=[];['solid','liquid','gas'].forEach(k=>MATTER[k].
 $('#tp-matter').addEventListener('click',e=>{const t=TL();
   const mb=e.target.closest('#m-modes button');if(mb){MV.mode=mb.dataset.v;MV.sel='';if(MV.mode==='sort')mNewSort();renderMatter();return}
   const b=e.target.closest('button');
+  if(b&&b.dataset.exi){MV.ex=+b.dataset.exi;MV.exPick=null;MV.exZoom=false;renderMatter();return}
+  if(b&&b.dataset.exo){exPick(+b.dataset.exo);return}
+  if(b&&b.id==='m-exz'){MV.exZoom=!MV.exZoom;MV.exGo=false;renderMatter();return}
+  if(b&&b.id==='m-exn'){const seen=S.mexp||[],nx=EXP.findIndex((x,i)=>i>MV.ex&&!seen.includes(x.id));MV.ex=nx>=0?nx:(MV.ex+1)%EXP.length;MV.exPick=null;MV.exZoom=false;renderMatter();return}
+  if(b&&b.dataset.who){const i=+b.dataset.who,w=WHO[MV.who];MV.whoPick=i;tStar(i===w.ans?2:1);renderMatter();if(innerWidth<900)$('#tp-matter .tcard .msg').scrollIntoView({behavior:'smooth',block:'center'});say('',w.says[w.ans][LX()]);return}
+  if(b&&b.id==='m-whon'){MV.who=(MV.who+1)%WHO.length;MV.whoPick=null;renderMatter();return}
   if(b&&b.id==='m-heat'){mSetTemp(MV.temp+10);return}if(b&&b.id==='m-cool'){mSetTemp(MV.temp-10);return}
   if(b&&b.dataset.ms){const ok=b.dataset.ms===MV.sortQ.k,m=$('#m-smsg');document.querySelectorAll('#m-sch button').forEach(x=>{x.disabled=true;x.classList.toggle('right',x.dataset.ms===MV.sortQ.k)});
     if(ok){m.textContent=t.yes;m.className='msg ok';tStar(1)}else{b.classList.add('no');m.textContent=MATTER[MV.sortQ.k].name[LX()];m.className='msg bad'}
