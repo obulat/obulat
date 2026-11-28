@@ -64,6 +64,14 @@ main{padding:var(--s5) max(4vw,16px,env(safe-area-inset-right,0px)) var(--s6) ma
 .quiz .qp,.goal .qp,.quiz .qword,.goal .qword{grid-column:1}
 .qbtns,.gb{grid-column:2;grid-row:1/3;display:flex;flex-wrap:wrap;gap:var(--s2);justify-content:flex-end}
 .qmsg{grid-column:1/-1;font-size:19px;font-weight:700}
+/* "right" or "not this one" replaces the prompt line, so the bar keeps its height */
+.quiz .qmsg{grid-row:1;grid-column:1}
+.quiz:has(.qmsg:not(:empty)) .qp{display:none}
+.qclue{grid-column:1/-1;font-size:18px;font-weight:600;display:flex;align-items:baseline;gap:var(--s2)}
+.qclue i{flex:none;align-self:center;width:18px;height:18px;border-radius:var(--r1);background:var(--c);box-shadow:inset 0 0 0 1px var(--edge)}
+.findbar{display:flex}
+#tp-elements.finding #shelf,#tp-elements.finding #findbar{display:none}
+#tp-elements.finding .pt{margin-inline:auto}
 .qmsg:empty{display:none}
 .qmsg.ok,.bmsg.ok{color:#2b8a3e}.qmsg.bad{color:#c92a2a}
 .goal .qword{font-size:clamp(30px,4vw,44px);overflow-wrap:break-word}
@@ -573,9 +581,6 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
       <div class="seg" id="langs" role="group" aria-label="Language">
         <button data-l="en"><span class="lf">English</span><span class="ls">EN</span></button><button data-l="ru"><span class="lf">Русский</span><span class="ls">RU</span></button><button data-l="tr"><span class="lf">Türkçe</span><span class="ls">TR</span></button>
       </div>
-      <div class="seg" id="modes" role="group">
-        <button data-m="table" id="t-table">Table</button><button data-m="quiz" id="t-quiz">Find it!</button>
-      </div>
       <div class="stars" aria-live="polite"><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7.5.6-5.7 4.9 1.8 7.4L12 18l-6.6 3.9 1.8-7.4L1.5 9.6 9 9z"/></svg><b id="starN">0</b></div>
       <button class="gear" id="gearBtn" aria-label="Settings"><svg viewBox="0 0 24 24"><path d="M19.4 13a7.5 7.5 0 000-2l2.1-1.6-2-3.5-2.5 1a7 7 0 00-1.7-1L15 3.3h-4l-.4 2.6a7 7 0 00-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 000 2l-2.1 1.6 2 3.5 2.5-1a7 7 0 001.7 1l.4 2.6h4l.4-2.6a7 7 0 001.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z" transform="translate(-1 0)"/></svg></button>
     </div>
@@ -593,10 +598,12 @@ h3{margin:var(--s2) 0 calc(-1*var(--s2));font-size:19px;font-weight:700}
     <button class="game g5" data-go="duel"><svg class="ic" aria-hidden="true"><use href="#i-swords"/></svg><span id="gs5"></span></button>
     <button class="game g6" data-go="lab"><svg class="ic" aria-hidden="true"><use href="#i-test-tubes"/></svg><span id="gs6"></span></button>
   </nav>
+  <div class="findbar" id="findbar"><button class="pill" id="q-start"><svg class="ic" aria-hidden="true"><use href="#i-scan-eye"/></svg><span id="t-quiz">Find it!</span></button></div>
   <section class="quiz" id="quiz" hidden aria-live="polite">
     <span class="qp" id="q-prompt"></span>
     <div class="qword" id="q-word"></div>
-    <div class="qbtns"><button class="pill alt" id="q-hint" hidden></button><button class="pill" id="q-skip"></button></div>
+    <div class="qbtns"><button class="pill alt" id="q-hint"><svg class="ic" aria-hidden="true"><use href="#i-lightbulb"/></svg><span id="q-hintL"></span></button><button class="pill" id="q-skip"></button><button class="pill alt" id="q-exit"><svg class="ic" aria-hidden="true"><use href="#i-grid-3x3"/></svg><span id="t-table">Table</span></button></div>
+    <div class="qclue" id="q-clue" hidden></div>
     <div class="qmsg" id="q-msg"></div>
   </section>
   <div class="scroll"><div class="pt" id="ptable"></div></div>
@@ -1595,11 +1602,11 @@ const molsFor=z=>MOLS.filter(m=>m.a.some(a=>a[0]===SYM[z-1]));
 
 /* ---------- interface text ---------- */
 const T={
-en:{title:'Science Explorer',table:'Table',quiz:'Find it!',back:'Table',listen:'Listen',wait:'Read it first…',iread:'I read it!',again:'Read again',noteFirst:'Try to read the name yourself. Then tap “I read it!” to check.',noteDone:'This sticker is yours! Tap any word to hear it.',along:'Read along',shells:'Electron shells',mols:'See it in 3D',noNg:'Noble gases like to be alone, so they almost never join molecules.',noMol:'No simple molecule to show for this one yet. Spin the atom!',atom:'Atom',n:'Atomic number',mass:'Atomic mass',p:'Protons',ne:'Neutrons',e:'Electrons',st:'At room temperature',S:{s:'Solid',l:'Liquid',g:'Gas',u:'Unknown'},prompt:'Find this element in the table:',hint:'Hear it',skip:'Next',yes:['Yes! Great reading!','Correct! You found it!','Super! Well read!'],no:'Not this one. Read the name again!',prog:'{n} of 118 stickers',drag:'Drag to spin · pinch to zoom',settings:'For grown-ups',rf:'Read first: “Listen” unlocks after a few seconds',slow:'Slow, clear voice',reset:'Reset stars and stickers',sure:'Tap again to reset',noVoice:'This device has no English voice. You can add one in the device’s settings.',noSpeech:'This browser cannot read aloud.',atomSub:'{p} protons and {ne} neutrons in the middle, {e} electrons around',molSub:'{n} atoms',synth:'Scientists make it in laboratories.',sticker:'New sticker!',noGL:'The 3D view needs WebGL and an internet connection.',ph:'see below',
+en:{title:'Science Explorer',table:'Table',quiz:'Find it!',back:'Table',listen:'Listen',wait:'Read it first…',iread:'I read it!',again:'Read again',noteFirst:'Try to read the name yourself. Then tap “I read it!” to check.',noteDone:'This sticker is yours! Tap any word to hear it.',along:'Read along',shells:'Electron shells',mols:'See it in 3D',noNg:'Noble gases like to be alone, so they almost never join molecules.',noMol:'No simple molecule to show for this one yet. Spin the atom!',atom:'Atom',n:'Atomic number',mass:'Atomic mass',p:'Protons',ne:'Neutrons',e:'Electrons',st:'At room temperature',S:{s:'Solid',l:'Liquid',g:'Gas',u:'Unknown'},prompt:'Find this element in the table:',hint:'Hint',hCat:'One of the {c}: the bright cells.',hP:'It has {n} {pw}: find that number.',pw:['proton','protons'],hSym:'Its symbol starts with “{s}”.',skip:'Next',yes:['Yes! Great reading!','Correct! You found it!','Super! Well read!'],no:'Not this one. Read the name again!',prog:'{n} of 118 stickers',drag:'Drag to spin · pinch to zoom',settings:'For grown-ups',rf:'Read first: “Listen” unlocks after a few seconds',slow:'Slow, clear voice',reset:'Reset stars and stickers',sure:'Tap again to reset',noVoice:'This device has no English voice. You can add one in the device’s settings.',noSpeech:'This browser cannot read aloud.',atomSub:'{p} protons and {ne} neutrons in the middle, {e} electrons around',molSub:'{n} atoms',synth:'Scientists make it in laboratories.',sticker:'New sticker!',noGL:'The 3D view needs WebGL and an internet connection.',ph:'see below',
  gen:(nm,c,st)=>`${nm} is ${/^[aeiou]/.test(CAT.en[c][0])?'an':'a'} ${CAT.en[c][0]}.`+(st==='u'?'':` At room temperature it is ${{s:'a solid',l:'a liquid',g:'a gas'}[st]}.`)},
-ru:{title:'Мир науки',table:'Таблица',quiz:'Найди!',back:'Таблица',listen:'Послушать',wait:'Сначала прочитай…',iread:'Прочитано!',again:'Ещё раз',noteFirst:'Попробуй прочитать название сам. Потом нажми «Прочитано!», чтобы проверить.',noteDone:'Эта наклейка уже твоя! Нажми на любое слово, чтобы его услышать.',along:'Читать вместе',shells:'Электронные оболочки',mols:'Посмотри в 3D',noNg:'Благородные газы любят быть одни и почти не входят в молекулы.',noMol:'Простой молекулы для него пока нет. Покрути атом!',atom:'Атом',n:'Порядковый номер',mass:'Атомная масса',p:'Протоны',ne:'Нейтроны',e:'Электроны',st:'При комнатной температуре',S:{s:'Твёрдое',l:'Жидкость',g:'Газ',u:'Неизвестно'},prompt:'Найди этот элемент в таблице:',hint:'Послушать',skip:'Дальше',yes:['Да! Отлично прочитано!','Верно! Вот он!','Супер! Молодец!'],no:'Не этот. Прочитай название ещё раз!',prog:'Наклеек: {n} из 118',drag:'Крути пальцем · щипок меняет размер',settings:'Для взрослых',rf:'Сначала читать: «Послушать» открывается через несколько секунд',slow:'Медленный, чёткий голос',reset:'Сбросить звёзды и наклейки',sure:'Нажмите ещё раз для сброса',noVoice:'На этом устройстве нет русского голоса. Его можно добавить в настройках устройства.',noSpeech:'Этот браузер не умеет читать вслух.',atomSub:'В центре: протоны — {p}, нейтроны — {ne}. Вокруг: электроны — {e}',molSub:'Атомов: {n}',synth:'Его получают учёные в лабораториях.',sticker:'Новая наклейка!',noGL:'Для 3D нужен WebGL и интернет.',ph:'см. ниже',
+ru:{title:'Мир науки',table:'Таблица',quiz:'Найди!',back:'Таблица',listen:'Послушать',wait:'Сначала прочитай…',iread:'Прочитано!',again:'Ещё раз',noteFirst:'Попробуй прочитать название сам. Потом нажми «Прочитано!», чтобы проверить.',noteDone:'Эта наклейка уже твоя! Нажми на любое слово, чтобы его услышать.',along:'Читать вместе',shells:'Электронные оболочки',mols:'Посмотри в 3D',noNg:'Благородные газы любят быть одни и почти не входят в молекулы.',noMol:'Простой молекулы для него пока нет. Покрути атом!',atom:'Атом',n:'Порядковый номер',mass:'Атомная масса',p:'Протоны',ne:'Нейтроны',e:'Электроны',st:'При комнатной температуре',S:{s:'Твёрдое',l:'Жидкость',g:'Газ',u:'Неизвестно'},prompt:'Найди этот элемент в таблице:',hint:'Подсказка',hCat:'Это {c}, ищи среди ярких клеток.',hP:'У него {n} {pw}: найди это число в уголке.',pw:['протон','протона','протонов'],hSym:'Его символ начинается на «{s}».',skip:'Дальше',yes:['Да! Отлично прочитано!','Верно! Вот он!','Супер! Молодец!'],no:'Не этот. Прочитай название ещё раз!',prog:'Наклеек: {n} из 118',drag:'Крути пальцем · щипок меняет размер',settings:'Для взрослых',rf:'Сначала читать: «Послушать» открывается через несколько секунд',slow:'Медленный, чёткий голос',reset:'Сбросить звёзды и наклейки',sure:'Нажмите ещё раз для сброса',noVoice:'На этом устройстве нет русского голоса. Его можно добавить в настройках устройства.',noSpeech:'Этот браузер не умеет читать вслух.',atomSub:'В центре: протоны — {p}, нейтроны — {ne}. Вокруг: электроны — {e}',molSub:'Атомов: {n}',synth:'Его получают учёные в лабораториях.',sticker:'Новая наклейка!',noGL:'Для 3D нужен WebGL и интернет.',ph:'см. ниже',
  gen:(nm,c,st)=>`${nm} — ${CAT.ru[c][0]}.`+(st==='u'?'':` При комнатной температуре это ${{s:'твёрдое вещество',l:'жидкость',g:'газ'}[st]}.`)},
-tr:{title:'Bilim Kâşifi',table:'Tablo',quiz:'Bul!',back:'Tablo',listen:'Dinle',wait:'Önce kendin oku…',iread:'Okudum!',again:'Tekrar',noteFirst:'Adını önce kendin okumayı dene. Sonra kontrol etmek için “Okudum!” düğmesine dokun.',noteDone:'Bu çıkartma artık senin! Duymak için herhangi bir kelimeye dokun.',along:'Birlikte oku',shells:'Elektron katmanları',mols:'3D olarak bak',noNg:'Soy gazlar yalnız kalmayı sever, neredeyse hiç molekül oluşturmazlar.',noMol:'Bunun için henüz basit bir molekül yok. Atomu döndür!',atom:'Atom',n:'Atom numarası',mass:'Atom kütlesi',p:'Proton',ne:'Nötron',e:'Elektron',st:'Oda sıcaklığında',S:{s:'Katı',l:'Sıvı',g:'Gaz',u:'Bilinmiyor'},prompt:'Bu elementi tabloda bul:',hint:'Dinle',skip:'Sonraki',yes:['Evet! Harika okudun!','Doğru! Buldun!','Süper! Aferin!'],no:'Bu değil. Adını bir daha oku!',prog:'118 çıkartmadan {n} tanesi',drag:'Döndürmek için sürükle · iki parmakla yakınlaştır',settings:'Yetişkinler için',rf:'Önce oku: “Dinle” birkaç saniye sonra açılır',slow:'Yavaş ve net ses',reset:'Yıldızları ve çıkartmaları sıfırla',sure:'Sıfırlamak için tekrar dokunun',noVoice:'Bu cihazda Türkçe ses yok. Cihaz ayarlarından eklenebilir.',noSpeech:'Bu tarayıcı sesli okuyamıyor.',atomSub:'Ortada {p} proton ve {ne} nötron, çevresinde {e} elektron',molSub:'{n} atom',synth:'Bilim insanları onu laboratuvarlarda üretir.',sticker:'Yeni çıkartma!',noGL:'3D görünüm için WebGL ve internet gerekir.',ph:'aşağıda',
+tr:{title:'Bilim Kâşifi',table:'Tablo',quiz:'Bul!',back:'Tablo',listen:'Dinle',wait:'Önce kendin oku…',iread:'Okudum!',again:'Tekrar',noteFirst:'Adını önce kendin okumayı dene. Sonra kontrol etmek için “Okudum!” düğmesine dokun.',noteDone:'Bu çıkartma artık senin! Duymak için herhangi bir kelimeye dokun.',along:'Birlikte oku',shells:'Elektron katmanları',mols:'3D olarak bak',noNg:'Soy gazlar yalnız kalmayı sever, neredeyse hiç molekül oluşturmazlar.',noMol:'Bunun için henüz basit bir molekül yok. Atomu döndür!',atom:'Atom',n:'Atom numarası',mass:'Atom kütlesi',p:'Proton',ne:'Nötron',e:'Elektron',st:'Oda sıcaklığında',S:{s:'Katı',l:'Sıvı',g:'Gaz',u:'Bilinmiyor'},prompt:'Bu elementi tabloda bul:',hint:'İpucu',hCat:'Bu bir {c}, parlak hücrelere bak.',hP:'{n} protonu var: köşedeki sayıya bak.',pw:['',''],hSym:'Sembolü “{s}” ile başlıyor.',skip:'Sonraki',yes:['Evet! Harika okudun!','Doğru! Buldun!','Süper! Aferin!'],no:'Bu değil. Adını bir daha oku!',prog:'118 çıkartmadan {n} tanesi',drag:'Döndürmek için sürükle · iki parmakla yakınlaştır',settings:'Yetişkinler için',rf:'Önce oku: “Dinle” birkaç saniye sonra açılır',slow:'Yavaş ve net ses',reset:'Yıldızları ve çıkartmaları sıfırla',sure:'Sıfırlamak için tekrar dokunun',noVoice:'Bu cihazda Türkçe ses yok. Cihaz ayarlarından eklenebilir.',noSpeech:'Bu tarayıcı sesli okuyamıyor.',atomSub:'Ortada {p} proton ve {ne} nötron, çevresinde {e} elektron',molSub:'{n} atom',synth:'Bilim insanları onu laboratuvarlarda üretir.',sticker:'Yeni çıkartma!',noGL:'3D görünüm için WebGL ve internet gerekir.',ph:'aşağıda',
  gen:(nm,c,st)=>`${nm}, ${CAT.tr[c][1].toLocaleLowerCase('tr')} grubundadır.`+(st==='u'?'':` Oda sıcaklığında ${{s:'katıdır',l:'sıvıdır',g:'gazdır'}[st]}.`)}};
 Object.assign(T.en,{build:'Build',buildTitle:'Build an atom',goalL:'Build this atom:',newGoal:'Another one',none:'Add a proton to start!',neutral:'neutral atom',ion:'ion, charge {c}',massNo:'Mass number',goalDone:'You built it! Protons, neutrons and electrons are all right.',isotope:'This is {x}-{a}, a rarer isotope: the same element with a different number of neutrons.',nHint:'Right element and electrons! Now the neutrons: the most common atom of this element has {n}.',goalHint:'Right element! Now make the electrons equal the protons.',syl:'Split words into syllables (Russian, Turkish)',sci:'More science (for older kids)',cfg:'Electron configuration',grp:'Group',per:'Period',outer:'Outer electrons',qSym:'Find the element with this symbol:',qP:'Find the element with this many protons:'});
 Object.assign(T.ru,{build:'Собери',buildTitle:'Собери атом',goalL:'Собери этот атом:',newGoal:'Другой',none:'Добавь протон, чтобы начать!',neutral:'нейтральный атом',ion:'ион, заряд {c}',massNo:'Массовое число',goalDone:'Получилось! Протоны, нейтроны и электроны — всё верно.',isotope:'Это {x}-{a}, более редкий изотоп: тот же элемент, но другое число нейтронов.',nHint:'Элемент и электроны верные! Теперь нейтроны: в самом частом атоме этого элемента их {n}.',goalHint:'Элемент верный! Теперь пусть электронов будет столько же, сколько протонов.',syl:'Делить слова на слоги (русский, турецкий)',sci:'Больше науки (для детей постарше)',cfg:'Электронная конфигурация',grp:'Группа',per:'Период',outer:'Внешние электроны',qSym:'Найди элемент с этим символом:',qP:'Найди элемент, у которого столько протонов:'});
@@ -1769,22 +1776,36 @@ $('#ptable').addEventListener('click',e=>{
 /* ---------- quiz ---------- */
 const POOL=[...Array(36)].map((_,i)=>i+1).concat([47,50,53,78,79,80,82,92]);
 function newQ(){const pool=S.sci?SYM.map((_,i)=>i+1):POOL;let z;do z=pool[Math.floor(Math.random()*pool.length)];while(z===quiz.z);
-  quiz={z,tries:0,type:S.sci?['name','sym','p'][Math.floor(Math.random()*3)]:'name'};
-  showQ();$('#q-msg').textContent='';$('#q-msg').className='qmsg';$('#q-hint').hidden=true}
+  quiz={z,tries:0,h:0,type:S.sci?['name','sym','p'][Math.floor(Math.random()*3)]:'name'};
+  highlight('');showQ();$('#q-msg').textContent='';$('#q-msg').className='qmsg';$('#q-clue').hidden=true;fitTable()}
+/* each tap on Hint gives the next clue: the element's family (its cells light up), then its protons, then its name read aloud */
+const PLR={};
+function plural(n,forms){const r=(PLR[S.lang]||(PLR[S.lang]=new Intl.PluralRules(S.lang))).select(n);return forms.length>2?forms[r==='one'?0:r==='few'?1:2]:forms[r==='one'?0:1]}
+function showClue(){const t=L(),q=quiz,c=catOf(q.z),el=$('#q-clue');if(!q.h){el.hidden=true;return}
+  let txt=fill(t.hCat,{c:CAT[S.lang][c][S.lang==='en'?1:0].toLocaleLowerCase(S.lang)});
+  if(q.h>1)txt+=' '+(q.type==='p'?fill(t.hSym,{s:SYM[q.z-1][0]}):fill(t.hP,{n:q.z,pw:plural(q.z,t.pw)}));
+  el.innerHTML=`<i class="c-${c}"></i><span>${esc(txt)}</span>`;el.hidden=false;fitTable()}
+function hint(){const q=quiz;q.h++;logEv(q.z,2);if(q.h===1)highlight(catOf(q.z),true);showClue();if(q.h>=3)say(`name/${S.lang}/${q.z}`,nm(q.z))}
 function showQ(){const t=L(),q=quiz,w=$('#q-word');$('#q-prompt').textContent=q.type==='sym'?t.qSym:q.type==='p'?t.qP:t.prompt;
   if(q.type==='name')setWord(w,nm(q.z));else{w.classList.remove('sy');w.textContent=q.type==='sym'?SYM[q.z-1]:q.z}}
 function answer(z,b){
   const m=$('#q-msg');
-  if(z===quiz.z){b.classList.add('right');S.stars+=quiz.tries?1:2;save();progress();
+  if(z===quiz.z){b.classList.add('right');S.stars+=quiz.tries||quiz.h?1:2;save();progress();
     const y=L().yes;m.textContent=y[Math.floor(Math.random()*y.length)];m.className='qmsg ok';
     logEv(z,3);if(quiz.type==='name'&&addSticker(z))setTimeout(()=>toast('★ '+L().sticker),300);say(`name/${S.lang}/${z}`,nm(z));setTimeout(()=>{b.classList.remove('right');if(mode==='quiz')newQ()},1800)}
-  else{quiz.tries++;logEv(quiz.z,1);b.classList.remove('wrong');void b.offsetWidth;b.classList.add('wrong');m.textContent=L().no;m.className='qmsg bad';$('#q-hint').hidden=false}
+  else{quiz.tries++;logEv(quiz.z,1);b.classList.remove('wrong');void b.offsetWidth;b.classList.add('wrong');m.textContent=L().no;m.className='qmsg bad';fitTable()}
 }
-$('#q-hint').onclick=()=>{logEv(quiz.z,2);say(`name/${S.lang}/${quiz.z}`,nm(quiz.z))};
+$('#q-hint').onclick=hint;
+$('#q-start').onclick=()=>setMode('quiz');
+$('#q-exit').onclick=()=>setMode('table');
+/* while finding, the whole table should fit under the prompt, but never so narrow that the cells hide the names (18 cells of 47px with their gaps) */
+function fitTable(){const pt=$('#ptable');pt.style.maxWidth='';if(mode!=='quiz')return;
+  for(let i=0;i<3;i++){const avail=innerHeight-pt.getBoundingClientRect().top-window.scrollY-12,h=pt.offsetHeight;if(h<=avail)break;const w=Math.max(900,Math.floor(pt.offsetWidth*avail/h));if(w>=pt.offsetWidth)break;pt.style.maxWidth=w+'px'}}
+addEventListener('resize',()=>{if(mode==='quiz')fitTable()});
 $('#q-skip').onclick=newQ;
-function setMode(m){mode=m;KEY.f='';$('#quiz').hidden=m!=='quiz';document.querySelectorAll('#modes button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));renderKey();if(m==='quiz'){newQ();$('#quiz').scrollIntoView({block:'nearest'})}}
-const markModes=m=>document.querySelectorAll('#modes button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
-$('#modes').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.m==='build'){location.hash='build';return}setMode(b.dataset.m)});
+function setMode(m){mode=m;KEY.f='';$('#quiz').hidden=m!=='quiz';$('#tp-elements').classList.toggle('finding',m==='quiz');renderKey();
+  if(m==='quiz'){newQ();scrollTo(0,0);fitTable();$('#q-skip').focus({preventScroll:true})}else{highlight('');fitTable()}}
+const markModes=()=>{};
 
 /* ---------- language & settings ---------- */
 function applyLang(){
@@ -1795,11 +1816,11 @@ function applyLang(){
   Object.entries(TX).forEach(([id,k])=>{const el=document.getElementById(id);if(el)el.textContent=t[k]});
   $('#b-title').textContent=t.buildTitle;$('#b-goalL').textContent=t.goalL;$('#b-new').textContent=t.newGoal;$('#b-lp').textContent=t.p;$('#b-ln').textContent=t.ne;$('#b-le').textContent=t.e;$('#t-back').textContent=t.back;
   $('#t-settings').textContent=t.settings;$('#t-rf').textContent=t.rf;$('#t-slow').textContent=t.slow;$('#resetBtn').textContent=t.reset;
-  $('#q-prompt').textContent=t.prompt;$('#q-hint').textContent=t.hint;$('#q-skip').textContent=t.skip;
+  $('#q-prompt').textContent=t.prompt;$('#q-hintL').textContent=t.hint;$('#q-skip').textContent=t.skip;
   $('#t-shells').textContent=t.shells;$('#t-mols').textContent=t.mols;$('#alongL').textContent=t.along;$('#vhint').textContent=t.drag;
   renderTable();voiceNotes();
   TOPIC_IDS.forEach(x=>{const e=$('#tab-'+x);if(e)e.textContent=t['tab_'+x]});if(S.topic&&TOPIC_RENDER[S.topic])TOPIC_RENDER[S.topic]();
-  if(quiz.z)showQ();
+  if(quiz.z){showQ();showClue()}
   if(!$('#sheet').hidden){if(panel==='build'){setWord($('#b-goal'),nm(B.goal));renderBuild()}else if(panel==='info'&&cur)openEl(cur,true);else if(panel==='mbuild')renderMB();else if(panel==='home')renderHome();else if(panel==='heavy')renderHeavy();else if(panel==='grown')renderGrown();else if(panel==='shellsx')renderShells();else if(panel==='duel')renderDuel();else if(panel==='lab')renderLab()}
 }
 ['#langs','#langs2'].forEach(id=>$(id).addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;S.lang=b.dataset.l;save();applyLang()}));
@@ -2311,7 +2332,7 @@ const TOPIC_RENDER={cells:()=>renderCells()};
 function setTopic(t){if(!TOPIC_IDS.includes(t))t='elements';S.topic=t;save();
   TOPIC_IDS.forEach(x=>{const el=$('#tp-'+x);if(el)el.hidden=x!==t});
   document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===t));
-  $('#modes').hidden=t!=='elements';if(t!=='elements'&&mode==='quiz')setMode('table');
+  if(t!=='elements'&&mode==='quiz')setMode('table');
   if(TOPIC_RENDER[t])TOPIC_RENDER[t]()}
 $('#tabs').addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(b)location.hash='t-'+b.dataset.t});
 
